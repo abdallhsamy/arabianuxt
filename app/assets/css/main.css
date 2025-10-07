@@ -1,1 +1,77 @@
 @import "tailwindcss";
+
+@theme {
+    /* 🎨 Base Colors */
+    --color-bg: #09090B;
+    --color-surface: #111113;
+    --color-panel: #18181B;
+
+    --color-text-primary: #F4F4F5;
+    --color-text-secondary: #A1A1AA;
+    --color-border: #27272A;
+
+    /* 🌈 Gradients */
+    --gradient-primary: linear-gradient(135deg, #6366F1, #EC4899, #F472B6);
+    --gradient-accent: linear-gradient(135deg, #22D3EE, #3B82F6);
+    --gradient-success: linear-gradient(135deg, #4ADE80, #22C55E);
+    --gradient-warning: linear-gradient(135deg, #FACC15, #F97316);
+    --gradient-error: linear-gradient(135deg, #FB7185, #F43F5E);
+
+    --color-overlay: rgba(255,255,255,0.05);
+    --color-glass: rgba(255,255,255,0.08);
+}
+
+:root,
+.dark {
+    color-scheme: dark;
+    --bg: var(--color-bg);
+    --surface: var(--color-surface);
+    --panel: var(--color-panel);
+    --text-primary: var(--color-text-primary);
+    --text-secondary: var(--color-text-secondary);
+    --border: var(--color-border);
+    --overlay: var(--color-overlay);
+}
+
+/* 🧊 Glass Effect */
+@utility bg-glass {
+    background: var(--color-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* 🌈 Gradient Text */
+@utility text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+}
+
+/* 🪄 Fancy Buttons */
+@utility btn-primary {
+    background-image: var(--gradient-primary);
+    color: white;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.75rem;
+    transition: all 0.25s ease;
+
+    &:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+    }
+}
+
+/* 🧱 Card Component */
+@utility card {
+    background-color: var(--panel);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    &:hover {
+        border-color: #3B82F6;
+        box-shadow: 0 0 40px rgba(59,130,246,0.1);
+    }
+}
