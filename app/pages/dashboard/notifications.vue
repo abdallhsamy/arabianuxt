@@ -1,41 +1,36 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Bell, Mail, MessageSquare, Shield } from 'lucide-vue-next'
+import { ref, computed } from 'vue'
+import NotificationItem from "~/components/Ui/User/NotificationItem.vue";
 
-const notifications = ref([
-  { icon: Bell, label: 'Push Notifications', enabled: true },
-  { icon: Mail, label: 'Email Alerts', enabled: false },
-  { icon: MessageSquare, label: 'Message Mentions', enabled: true },
-  { icon: Shield, label: 'Security Warnings', enabled: true },
+type Notification = { id: string; type: 'system'|'billing'|'security'; text: string; read: boolean; time: string }
+
+const filter = ref<'all'|'system'|'billing'|'security'>('all')
+const notification = ref<Notification[]>([
+  { id: 'n1', type: 'system', text: 'New dashboard update v1.4 deployed.', read: false, time: '2m ago' },
+  { id: 'n2', type: 'billing', text: 'Invoice INV-2025-0042 paid.', read: true, time: '1d ago' },
+  { id: 'n3', type: 'security', text: 'New device login detected.', read: false, time: '5h ago' },
 ])
+
+const filtered = computed(() => filter.value === 'all' ? notification.value : notification.value.filter(n => n.type === filter.value))
+const markAll = (): void => notification.value.forEach(n => n.read = true)
 </script>
 
 <template>
-  <section>
-    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400 mb-6">
-      Notifications
-    </h1>
+  <section class="space-y-8">
+    <div class="flex items-center justify-between">
+      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">Notifications</h1>
+      <button class="text-sm text-cyan-300 hover:text-white" @click="markAll">Mark all as read</button>
+    </div>
 
-    <div class="rounded-2xl bg-[rgba(15,17,23,0.92)] backdrop-blur-xl border border-white/10 p-6 space-y-5">
-      <div
-          v-for="n in notifications"
-          :key="n.label"
-          class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-all"
-      >
-        <div class="flex items-center gap-3">
-          <component :is="n.icon" class="w-5 h-5 text-cyan-400" />
-          <span class="text-white font-medium">{{ n.label }}</span>
-        </div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" v-model="n.enabled" class="sr-only peer" />
-          <div
-              class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:bg-gradient-to-r peer-checked:from-indigo-500 peer-checked:to-fuchsia-500 transition-all"
-          ></div>
-          <div
-              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition-all peer-checked:translate-x-5"
-          ></div>
-        </label>
-      </div>
+    <div class="flex gap-3 text-sm">
+      <button v-for="t in ['all','system','billing','security']" :key="t" class="px-3 py-1.5 rounded-xl capitalize"
+              :class="t===filter ? 'bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 text-white' : 'bg-white/10 text-gray-300 hover:bg-white/15'"
+              @click="filter=t as any">{{ t }}</button>
+    </div>
+
+    <div class="space-y-3">
+      <NotificationItem v-for="n in filtered" :key="n.id" :n="n" />
+      <p v-if="!filtered.length" class="text-gray-400 text-sm text-center py-6">No notifications</p>
     </div>
   </section>
 </template>
