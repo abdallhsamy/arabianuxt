@@ -9,25 +9,18 @@ import {
   HeadphonesIcon, Cog, UserCheck, Eye
 } from 'lucide-vue-next';
 import { useRouter, useRoute } from '#imports';
+import { useSidebar } from '~/composables/useSidebar';
 
 const router = useRouter();
 const route = useRoute();
 
-const isExpanded = ref(false);
-const isMobile = ref(false);
-
-const checkViewport = (): void => {
-  isMobile.value = window.innerWidth < 768;
-};
+// Use shared sidebar state
+const { isExpanded, isMobile, checkViewport, toggleSidebar, setExpanded } = useSidebar();
 
 onMounted(() => {
   checkViewport();
   window.addEventListener('resize', checkViewport);
 });
-
-const toggleSidebar = (): void => {
-  isExpanded.value = !isExpanded.value;
-};
 
 const menuItems = [
   // Main Dashboard
@@ -107,13 +100,13 @@ const navigate = (to: string): void => {
   <!-- 🧭 Desktop Sidebar -->
   <aside
       v-if="!isMobile"
-      class="fixed top-6 left-6 z-50 flex flex-col items-center rounded-2xl transition-all duration-500 overflow-hidden backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.2)] h-[calc(100vh-3rem)]"
+      class="fixed top-6 left-6 z-40 flex flex-col items-center rounded-2xl transition-all duration-500 overflow-hidden backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.2)] h-[calc(100vh-3rem)]"
       :class="[
       isExpanded ? 'w-56' : 'w-16',
       'bg-gradient-to-br from-[#0f0f11]/95 via-[#141417]/95 to-[#0a0a0c]/95'
     ]"
-      @mouseenter="isExpanded = true"
-      @mouseleave="isExpanded = false"
+      @mouseenter="setExpanded(true)"
+      @mouseleave="setExpanded(false)"
   >
     <!-- Header -->
     <div class="flex items-center justify-between w-full p-3 border-b border-white/10">
@@ -204,7 +197,7 @@ const navigate = (to: string): void => {
   <!-- 📱 Mobile Bottom Nav -->
   <nav
       v-else
-      class="fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-gradient-to-t from-[#0a0a0c]/90 to-[#141417]/90 flex justify-around items-center py-2 border-t border-white/10 overflow-x-auto"
+      class="fixed bottom-0 left-0 right-0 z-40 backdrop-blur-lg bg-gradient-to-t from-[#0a0a0c]/90 to-[#141417]/90 flex justify-around items-center py-2 border-t border-white/10 overflow-x-auto"
   >
     <button
         v-for="item in menuItems.slice(0, 8)"
