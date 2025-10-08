@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
-import { Home, BarChart3, Users, Settings, Crown } from 'lucide-vue-next';
+import { 
+  Home, BarChart3, Users, Settings, Crown, 
+  Activity, Shield, FileText, Zap, Calendar, 
+  CreditCard, AlertTriangle, Heart, Plug, 
+  BookOpen, ScrollText, Bell, Building2, 
+  Lock, User, Sparkles, Palette, 
+  HeadphonesIcon, Cog, UserCheck, Eye
+} from 'lucide-vue-next';
 import { useRouter, useRoute } from '#imports';
 
 const router = useRouter();
@@ -23,10 +30,58 @@ const toggleSidebar = (): void => {
 };
 
 const menuItems = [
+  // Main Dashboard
   { icon: Home, label: 'Dashboard', to: '/dashboard' },
+  
+  // Analytics & Monitoring
   { icon: BarChart3, label: 'Analytics', to: '/dashboard/analytics' },
-  { icon: Users, label: 'Users', to: '/dashboard/users' },
+  { icon: Activity, label: 'Health', to: '/dashboard/health' },
+  { icon: ScrollText, label: 'Logs', to: '/dashboard/logs' },
+  { icon: AlertTriangle, label: 'Errors', to: '/dashboard/errors' },
+  
+  // AI & Automation
+  { icon: Sparkles, label: 'AI Playground', to: '/dashboard/ai-playground' },
+  { icon: Zap, label: 'Assistant', to: '/dashboard/assistant' },
+  { icon: BookOpen, label: 'Prompt Library', to: '/dashboard/prompt-library' },
+  { icon: Zap, label: 'Automation Rules', to: '/dashboard/automation-rules' },
+  
+  // Security & Access
+  { icon: Shield, label: 'Security', to: '/dashboard/security' },
+  { icon: UserCheck, label: 'Access Control', to: '/dashboard/access-control' },
+  { icon: Eye, label: 'Audit Logs', to: '/dashboard/audit-logs' },
+  
+  // Team & Organization
+  { icon: Users, label: 'Team', to: '/dashboard/team' },
+  { icon: Building2, label: 'Organization', to: '/dashboard/organization' },
+  { icon: User, label: 'Profile', to: '/dashboard/profile' },
+  
+  // Support & Communication
+  { icon: HeadphonesIcon, label: 'Support', to: '/dashboard/support' },
+  { icon: Bell, label: 'Notifications', to: '/dashboard/notifications' },
+  { icon: Calendar, label: 'Calendar', to: '/dashboard/calendar' },
+  
+  // Knowledge & Integrations
+  { icon: BookOpen, label: 'Knowledge Base', to: '/dashboard/knowledge-base' },
+  { icon: Plug, label: 'Integrations', to: '/dashboard/integrations' },
+  
+  // System & Settings
+  { icon: Cog, label: 'System', to: '/dashboard/system' },
   { icon: Settings, label: 'Settings', to: '/dashboard/settings' },
+  { icon: Palette, label: 'Theme Customizer', to: '/dashboard/theme-customizer' },
+  { icon: Lock, label: 'Privacy', to: '/dashboard/privacy' },
+  { icon: CreditCard, label: 'Billing', to: '/dashboard/billing' },
+];
+
+// Group separators for better organization
+const menuGroups = [
+  { items: menuItems.slice(0, 1), label: 'Main' },
+  { items: menuItems.slice(1, 5), label: 'Analytics' },
+  { items: menuItems.slice(5, 9), label: 'AI & Automation' },
+  { items: menuItems.slice(9, 12), label: 'Security' },
+  { items: menuItems.slice(12, 15), label: 'Team' },
+  { items: menuItems.slice(15, 18), label: 'Support' },
+  { items: menuItems.slice(18, 20), label: 'Knowledge' },
+  { items: menuItems.slice(20), label: 'System' },
 ];
 
 const mainMargin = computed(() =>
@@ -52,9 +107,8 @@ const navigate = (to: string): void => {
   <!-- 🧭 Desktop Sidebar -->
   <aside
       v-if="!isMobile"
-      class="fixed top-6 left-6 z-50 flex flex-col items-center rounded-2xl transition-all duration-500 overflow-hidden backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.2)]"
+      class="fixed top-6 left-6 z-50 flex flex-col items-center rounded-2xl transition-all duration-500 overflow-hidden backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.2)] h-[calc(100vh-3rem)]"
       :class="[
-          // h-[calc(100vh-3rem)]
       isExpanded ? 'w-56' : 'w-16',
       'bg-gradient-to-br from-[#0f0f11]/95 via-[#141417]/95 to-[#0a0a0c]/95'
     ]"
@@ -79,40 +133,51 @@ const navigate = (to: string): void => {
     </div>
 
     <!-- Nav -->
-    <nav class="flex flex-col w-full mt-2">
-      <button
-          v-for="item in menuItems"
-          :key="item.label"
-          class="relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group overflow-hidden"
-          :class="!isExpanded && 'mx-auto'"
-          @click="navigate(item.to)"
-      >
-        <!-- Active Glow Border -->
-        <div
-            v-if="route.path === item.to"
-            class="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 opacity-40 blur-md animate-gradient-flow"
-        />
-
-        <!-- Icon -->
-        <component
-            :is="item.icon"
-            class="w-5 h-5 shrink-0 z-10 transition-all duration-300"
-            :class="route.path === item.to
-            ? 'text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]'
-            : 'text-gray-400 group-hover:text-fuchsia-400 group-hover:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]'"
-        />
-
-        <!-- Label -->
-        <span
-            class="z-10 font-medium text-sm transition-opacity duration-300"
-            :class="[
-            isExpanded ? 'opacity-100' : 'opacity-0 hidden',
-            route.path === item.to ? 'text-white' : 'text-gray-400'
-          ]"
+    <nav class="flex flex-col w-full mt-2 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+      <template v-for="group in menuGroups" :key="group.label">
+        <!-- Group Separator -->
+        <div 
+          v-if="isExpanded && group.label !== 'Main'" 
+          class="px-3 py-2 mt-2 first:mt-0"
         >
-          {{ item.label }}
-        </span>
-      </button>
+          <div class="h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
+        </div>
+        
+        <!-- Group Items -->
+        <button
+            v-for="item in group.items"
+            :key="item.label"
+            class="relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group overflow-hidden"
+            :class="!isExpanded && 'mx-auto'"
+            @click="navigate(item.to)"
+        >
+          <!-- Active Glow Border -->
+          <div
+              v-if="route.path === item.to"
+              class="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 opacity-40 blur-md animate-gradient-flow"
+          />
+
+          <!-- Icon -->
+          <component
+              :is="item.icon"
+              class="w-5 h-5 shrink-0 z-10 transition-all duration-300"
+              :class="route.path === item.to
+              ? 'text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]'
+              : 'text-gray-400 group-hover:text-fuchsia-400 group-hover:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]'"
+          />
+
+          <!-- Label -->
+          <span
+              class="z-10 font-medium text-sm transition-opacity duration-300"
+              :class="[
+              isExpanded ? 'opacity-100' : 'opacity-0 hidden',
+              route.path === item.to ? 'text-white' : 'text-gray-400'
+            ]"
+          >
+            {{ item.label }}
+          </span>
+        </button>
+      </template>
     </nav>
 
     <!-- Upgrade -->
@@ -139,12 +204,12 @@ const navigate = (to: string): void => {
   <!-- 📱 Mobile Bottom Nav -->
   <nav
       v-else
-      class="fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-gradient-to-t from-[#0a0a0c]/90 to-[#141417]/90 flex justify-around items-center py-2 border-t border-white/10"
+      class="fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-gradient-to-t from-[#0a0a0c]/90 to-[#141417]/90 flex justify-around items-center py-2 border-t border-white/10 overflow-x-auto"
   >
     <button
-        v-for="item in menuItems"
+        v-for="item in menuItems.slice(0, 8)"
         :key="item.label"
-        class="flex flex-col items-center gap-1 transition-all duration-300"
+        class="flex flex-col items-center gap-1 transition-all duration-300 min-w-0 flex-shrink-0 px-2"
         :class="[
         route.path === item.to
           ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]'
@@ -153,7 +218,7 @@ const navigate = (to: string): void => {
         @click="navigate(item.to)"
     >
       <component :is="item.icon" class="w-5 h-5" />
-      <span class="text-xs">{{ item.label }}</span>
+      <span class="text-xs whitespace-nowrap">{{ item.label }}</span>
     </button>
   </nav>
 </template>
