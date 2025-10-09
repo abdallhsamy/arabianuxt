@@ -6,6 +6,7 @@ const props = defineProps<{ schema: PlaygroundSchema }>()
 
 // Load component dynamically
 const componentMap: Record<string, any> = {
+  'Ui/Common/UiAccordion.vue': () => import('~/components/Ui/Common/UiAccordion.vue'),
   'Ui/Common/UiAlert.vue': () => import('~/components/Ui/Common/UiAlert.vue'),
   'Ui/Common/UiBadge.vue': () => import('~/components/Ui/Common/UiBadge.vue'),
   'Ui/Common/UiCard.vue': () => import('~/components/Ui/Common/UiCard.vue'),

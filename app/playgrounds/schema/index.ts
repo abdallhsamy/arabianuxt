@@ -1,3 +1,4 @@
+import { accordionSchema } from "./accordion.schema";
 import { alertSchema } from "./alert.schema";
 import { badgeSchema } from "./badge.schema";
 import { buttonSchema } from "./button.schema";
@@ -11,6 +12,7 @@ import { tabsSchema } from "./tabs.schema";
 import { tooltipSchema } from "./tooltip.schema";
 
 export {
+    accordionSchema,
     alertSchema,
     badgeSchema,
     buttonSchema,
