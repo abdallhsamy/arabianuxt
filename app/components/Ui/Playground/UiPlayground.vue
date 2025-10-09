@@ -9,6 +9,7 @@ const componentMap: Record<string, any> = {
   'Ui/Common/UiButton.vue': () => import('~/components/Ui/Common/UiButton.vue'),
   'Ui/Common/UiSelect.vue': () => import('~/components/Ui/Common/UiSelect.vue'),
   'Ui/Common/UiSwitch.vue': () => import('~/components/Ui/Common/UiSwitch.vue'),
+  'Ui/Common/UiCard.vue': () => import('~/components/Ui/Common/UiCard.vue'),
 }
 
 const Component = defineAsyncComponent(componentMap[props.schema.component])
