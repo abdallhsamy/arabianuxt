@@ -2203,6 +2203,11 @@ csstype@^3.1.3:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
 
+date-fns@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-3.6.0.tgz#f20ca4fe94f8b754951b24240676e8618c0206bf"
+  integrity sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==
+
 db0@^0.3.2:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/db0/-/db0-0.3.4.tgz#fb109b0d9823ba1f787a4a3209fa1f3cf9ae9cf9"
@@ -3268,6 +3273,18 @@ mocked-exports@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/mocked-exports/-/mocked-exports-0.1.1.tgz#6916efea9a9dd0f4abd6a0a72526f56a76c966ea"
   integrity sha512-aF7yRQr/Q0O2/4pIXm6PZ5G+jAd7QS4Yu8m+WEeEHGnbo+7mE36CbLSDQiXYV8bVL3NfmdeqPJct0tUlnjVSnA==
+
+moment-hijri@^2.30.0:
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/moment-hijri/-/moment-hijri-2.30.0.tgz#d2a09176b6056be902cd04fa689117ef1b45ad75"
+  integrity sha512-A3Ss8ASkhkT160laK9gXv+Yle0jA6eg92o8Uw78mU3OlUyaWjW2ntMd04kutawFb01KR0GIeJ8lqgIABGbWj7g==
+  dependencies:
+    moment "^2.30.1"
+
+moment@^2.30.1:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
 
 mrmime@^2.0.0:
   version "2.0.1"
@@ -4895,7 +4912,17 @@ vue-router@^4.5.1:
   dependencies:
     "@vue/devtools-api" "^6.6.4"
 
-vue@^3.5.21, vue@^3.5.22:
+vue3-hijri-gregorian-datepicker@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vue3-hijri-gregorian-datepicker/-/vue3-hijri-gregorian-datepicker-2.0.3.tgz#909d6cc43612de357243e176d59f417b2ec5bf8a"
+  integrity sha512-5NQOlQ48jiYVLB9kbPCLIAiOb9W7fw+V8uGsA6ueKWtbA/H6mD/XYqJdRotRXFppoqpj9kCtmbZ2EVTTjhWoRg==
+  dependencies:
+    date-fns "^3.6.0"
+    moment "^2.30.1"
+    moment-hijri "^2.30.0"
+    vue "^3.4.37"
+
+vue@^3.4.37, vue@^3.5.21, vue@^3.5.22:
   version "3.5.22"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.5.22.tgz#2b8ddb94ee4b640ef12fe7f6efe1cf16f3b582e7"
   integrity sha512-toaZjQ3a/G/mYaLSbV+QsQhIdMo9x5rrqIpYRObsJ6T/J+RyCSFwN2LHNVH9v8uIcljDNa3QzPVdv3Y6b9hAJQ==

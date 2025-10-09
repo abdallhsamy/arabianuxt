@@ -16,7 +16,8 @@
     "nuxt": "^4.1.2",
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.22",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vue3-hijri-gregorian-datepicker": "^2.0.3"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
