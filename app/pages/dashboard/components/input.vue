@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import UiInput from '~/components/Ui/Form/UiInput.vue'
-import { Mail, Lock } from 'lucide-vue-next'
+import { Copy, Mail, Lock } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 const email = ref('')
 const password = ref('')
+const otp = ref('')
 </script>
 
 <template>
@@ -70,6 +71,53 @@ const password = ref('')
         variant="filled"
         placeholder="Smooth glass fill"
     />
+
+    <h1 class="page-title">Input with Prefix & Suffix Slots</h1>
+
+    <!-- Email Input with Prefix Icon -->
+    <UiInput
+        v-model="email"
+        label="Email Address"
+        placeholder="user@example.com"
+        :parent-theme="'dark'"
+    >
+      <template #prefix>
+        <Mail class="w-4 h-4" />
+      </template>
+      <template #suffix>
+        <Copy class="w-4 h-4 cursor-pointer hover:text-fuchsia-400" />
+      </template>
+    </UiInput>
+
+    <!-- OTP Input with Suffix Action -->
+    <UiInput
+        v-model="otp"
+        label="Verification Code"
+        placeholder="••••••"
+        :parent-theme="'gradient'"
+    >
+      <template #suffix>
+        <button
+            class="text-xs text-fuchsia-400 hover:text-fuchsia-300 font-medium"
+            @click="alert('Code resent!')"
+        >
+          Resend
+        </button>
+      </template>
+    </UiInput>
+
+    <!-- Password Input with Prefix Icon -->
+    <UiInput
+        v-model="email"
+        type="password"
+        label="Password"
+        password-toggle
+        :parent-theme="'dark'"
+    >
+      <template #prefix>
+        <Lock class="w-4 h-4" />
+      </template>
+    </UiInput>
   </section>
 </template>
 
