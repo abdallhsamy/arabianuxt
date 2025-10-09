@@ -67,7 +67,7 @@ const items = [
 </template>
 
 <style scoped>
-@reference "~/assets/css/main.css";
+@reference "tailwindcss";
 .page-title {
   @apply text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400;
 }
