@@ -2,6 +2,7 @@ import { alertSchema } from "./alert.schema";
 import { badgeSchema } from "./badge.schema";
 import { buttonSchema } from "./button.schema";
 import { cardSchema } from "./card.schema";
+import { dropdownSchema } from "./dropdown.schema";
 import { modalSchema } from "./modal.schema";
 import { selectSchema } from "./select.schema";
 import { stepperSchema } from "./stepper.schema";
@@ -14,6 +15,7 @@ export {
     badgeSchema,
     buttonSchema,
     cardSchema,
+    dropdownSchema,
     modalSchema,
     selectSchema,
     stepperSchema,

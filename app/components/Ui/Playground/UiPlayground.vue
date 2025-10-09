@@ -9,6 +9,7 @@ const componentMap: Record<string, any> = {
   'Ui/Common/UiAlert.vue': () => import('~/components/Ui/Common/UiAlert.vue'),
   'Ui/Common/UiBadge.vue': () => import('~/components/Ui/Common/UiBadge.vue'),
   'Ui/Common/UiCard.vue': () => import('~/components/Ui/Common/UiCard.vue'),
+  'Ui/Common/UiDropdown.vue': () => import('~/components/Ui/Common/UiDropdown.vue'),
   'Ui/Common/UiModal.vue': () => import('~/components/Ui/Common/UiModal.vue'),
   'Ui/Common/UiSelect.vue': () => import('~/components/Ui/Common/UiSelect.vue'),
   'Ui/Common/UiStepper.vue': () => import('~/components/Ui/Common/UiStepper.vue'),
