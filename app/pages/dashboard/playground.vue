@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import UiPlayground from '~/components/Ui/Playground/UiPlayground.vue'
-import { selectSchema } from "~/playgrounds/schema/select"
-import { buttonSchema } from "~/playgrounds/schema/button";
+import { selectSchema } from "~/playgrounds/schema/select.schema"
+import { buttonSchema } from "~/playgrounds/schema/button.schema";
+import { switchSchema } from "~/playgrounds/schema/switch.schema";
 import type {PlaygroundSchema} from "~/components/Ui/Playground/UiPlayground.type";
 
 const schemas: PlaygroundSchema[] = [
-    buttonSchema,
-    selectSchema,
+  buttonSchema,
+  selectSchema,
+  switchSchema
 ]
 </script>
 

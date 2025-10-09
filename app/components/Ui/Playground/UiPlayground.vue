@@ -8,9 +8,10 @@ const props = defineProps<{ schema: PlaygroundSchema }>()
 const componentMap: Record<string, any> = {
   'Ui/Common/UiButton.vue': () => import('~/components/Ui/Common/UiButton.vue'),
   'Ui/Common/UiSelect.vue': () => import('~/components/Ui/Common/UiSelect.vue'),
+  'Ui/Common/UiSwitch.vue': () => import('~/components/Ui/Common/UiSwitch.vue'),
 }
 
-const Comp = defineAsyncComponent(componentMap[props.schema.component])
+const Component = defineAsyncComponent(componentMap[props.schema.component])
 
 // Reactive prop values
 const values = ref<Record<string, any>>(
@@ -65,7 +66,7 @@ const codeSnippet = computed(() => {
     <!-- Preview Panel -->
     <div class="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl flex flex-col items-center justify-center text-center space-y-6">
       <h2 class="text-gray-300 font-semibold text-lg">Live Preview</h2>
-      <component :is="Comp" v-bind="values" />
+      <component :is="Component" v-bind="values" />
       <div class="w-full">
         <p class="text-gray-400 text-sm mb-2">Generated Code:</p>
         <pre
