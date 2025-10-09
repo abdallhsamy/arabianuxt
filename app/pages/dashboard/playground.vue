@@ -3,6 +3,7 @@ import UiPlayground from '~/components/Ui/Playground/UiPlayground.vue'
 import type {PlaygroundSchema} from "~/components/Ui/Playground/UiPlayground.type";
 import {
   alertSchema,
+  badgeSchema,
   selectSchema,
   buttonSchema,
   switchSchema,
@@ -11,6 +12,7 @@ import {
 
 const schemas: PlaygroundSchema[] = [
   alertSchema,
+  badgeSchema,
   buttonSchema,
   selectSchema,
   switchSchema,
