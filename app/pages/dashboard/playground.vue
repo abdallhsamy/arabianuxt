@@ -11,6 +11,7 @@ import {
   stepperSchema,
   switchSchema,
   tabsSchema,
+  tooltipSchema,
 } from "~/playgrounds/schema";
 
 const schemas: PlaygroundSchema[] = [
@@ -23,6 +24,7 @@ const schemas: PlaygroundSchema[] = [
   stepperSchema,
   switchSchema,
   tabsSchema,
+  tooltipSchema,
 ]
 </script>
 

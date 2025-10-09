@@ -7,6 +7,7 @@ import { selectSchema } from "./select.schema";
 import { stepperSchema } from "./stepper.schema";
 import { switchSchema } from "./switch.schema";
 import { tabsSchema } from "./tabs.schema";
+import { tooltipSchema } from "./tooltip.schema";
 
 export {
     alertSchema,
@@ -17,5 +18,6 @@ export {
     selectSchema,
     stepperSchema,
     switchSchema,
-    tabsSchema
+    tabsSchema,
+    tooltipSchema,
 }

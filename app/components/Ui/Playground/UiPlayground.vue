@@ -14,6 +14,7 @@ const componentMap: Record<string, any> = {
   'Ui/Common/UiStepper.vue': () => import('~/components/Ui/Common/UiStepper.vue'),
   'Ui/Common/UiSwitch.vue': () => import('~/components/Ui/Common/UiSwitch.vue'),
   'Ui/Common/UiTabs.vue': () => import('~/components/Ui/Common/UiTabs.vue'),
+  'Ui/Common/UiTooltip.vue': () => import('~/components/Ui/Common/UiTooltip.vue'),
 }
 
 const Component = defineAsyncComponent(componentMap[props.schema.component])
