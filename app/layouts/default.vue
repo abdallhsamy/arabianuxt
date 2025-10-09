@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import Sidebar from '~/components/Ui/Dashboard/Sidebar.vue'
 import Topbar from '~/components/Layout/Topbar.vue'
+import Toaster from '~/components/Ui/Common/Toaster.vue'
+import { useToaster } from '~/composables/useToaster'
+
+const toaster = useToaster()
+
 </script>
 
 <template>
@@ -28,6 +33,8 @@ import Topbar from '~/components/Layout/Topbar.vue'
     <div
         class="pointer-events-none -z-20 absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
     />
+
+    <Toaster id="global-toaster" position="top-right" />
   </div>
 </template>
 
