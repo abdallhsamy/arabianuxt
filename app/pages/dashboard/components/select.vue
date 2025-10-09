@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import UiSelect from '~/components/Ui/Common/UiSelect.vue'
+import UiSelect from '~/components/Ui/Form/UiSelect.vue'
 import { ref } from 'vue'
 
-const country = ref(null)
-const asyncSelect = ref(null)
+const country = ref('')
+const color = ref('')
 
-const options = [
+const countries = [
   { label: 'Saudi Arabia', value: 'sa' },
   { label: 'United Arab Emirates', value: 'ae' },
-  { label: 'Egypt', value: 'eg' },
   { label: 'Kuwait', value: 'kw' },
+  { label: 'Qatar', value: 'qa' },
+  { label: 'Egypt', value: 'eg' },
+]
+const colors = [
+  { label: 'Fuchsia', value: 'fuchsia' },
+  { label: 'Emerald', value: 'emerald' },
+  { label: 'Cyan', value: 'cyan' },
+  { label: 'Rose', value: 'rose' },
 ]
 </script>
 
@@ -17,12 +24,32 @@ const options = [
   <section class="space-y-10">
     <h1 class="page-title">Select Component Examples</h1>
 
-    <div class="grid gap-6 md:grid-cols-2">
-      <UiSelect label="Country" v-model="country" :options="options" searchable clearable />
-      <UiSelect label="Disabled" :options="options" disabled />
-      <UiSelect label="Async Options" v-model="asyncSelect" :options="options" async-options />
-      <UiSelect label="Loading" :options="options" loading />
-    </div>
+    <!-- Simple select -->
+    <UiSelect
+        v-model="country"
+        label="Country"
+        :options="countries"
+        placeholder="Select your country"
+    />
+
+    <!-- Searchable -->
+    <UiSelect
+        v-model="color"
+        label="Favorite Color"
+        :options="colors"
+        searchable
+        :parent-theme="'gradient'"
+        message="Choose your theme color"
+    />
+
+    <!-- Error state -->
+    <UiSelect
+        v-model="country"
+        label="Required Field"
+        :options="countries"
+        state="error"
+        message="This field is required."
+    />
   </section>
 </template>
 

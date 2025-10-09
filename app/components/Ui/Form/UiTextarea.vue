@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, onMounted } from 'vue'
 import { CheckCircle2, AlertTriangle, AlertOctagon } from 'lucide-vue-next'
 
 export interface UiTextareaProps {
@@ -15,6 +15,8 @@ export interface UiTextareaProps {
   disabled?: boolean
   readonly?: boolean
   parentTheme?: 'dark' | 'light' | 'gradient'
+  size?: 'sm' | 'md' | 'lg'
+  resize?: 'none' | 'vertical' | 'horizontal' | 'both'
 }
 
 const props = withDefaults(defineProps<UiTextareaProps>(), {
@@ -25,12 +27,22 @@ const props = withDefaults(defineProps<UiTextareaProps>(), {
   autoResize: true,
   disabled: false,
   readonly: false,
+  size: 'md',
+  resize: 'vertical', // ✅ user can resize vertically by default
 })
 
 const emit = defineEmits(['update:modelValue'])
 const textareaRef = ref<HTMLTextAreaElement>()
 const isFocused = ref(false)
 
+// --- Shared sizing system ---
+const s = computed(() => ({
+  sm: { font: 'text-sm', pad: 'py-2' },
+  md: { font: 'text-sm', pad: 'py-2.5' },
+  lg: { font: 'text-base', pad: 'py-3' },
+}[props.size]))
+
+// --- Border classes per validation state ---
 const borderClass = computed(() => {
   switch (props.state) {
     case 'success': return 'border-emerald-400 focus:ring-emerald-500/40'
@@ -40,6 +52,7 @@ const borderClass = computed(() => {
   }
 })
 
+// --- Icons per validation state (type-safe) ---
 const stateIcon = computed(() => {
   switch (props.state) {
     case 'success': return CheckCircle2
@@ -49,24 +62,24 @@ const stateIcon = computed(() => {
   }
 })
 
+// --- Floating label ---
 const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
 
-const resizeTextarea = () => {
+// --- Auto-resize logic (optional) ---
+const resizeTextarea = (): void => {
   if (props.autoResize && textareaRef.value) {
     textareaRef.value.style.height = 'auto'
     textareaRef.value.style.height = textareaRef.value.scrollHeight + 'px'
   }
 }
-
 watch(() => props.modelValue, resizeTextarea)
 onMounted(() => nextTick(resizeTextarea))
 </script>
 
 <template>
   <div class="flex flex-col gap-1.5 w-full">
-    <!-- Wrapper -->
     <div
-        class="relative rounded-xl backdrop-blur-xl transition-all border focus-within:ring-2"
+        class="relative rounded-xl backdrop-blur-xl border transition-all focus-within:ring-2"
         :class="[
         borderClass,
         props.variant === 'default' && 'bg-white/5',
@@ -75,10 +88,10 @@ onMounted(() => nextTick(resizeTextarea))
         props.disabled && 'opacity-50 pointer-events-none',
       ]"
     >
-      <!-- Floating Label -->
+      <!-- Floating label -->
       <label
           v-if="props.label"
-          class="absolute left-3 select-none pointer-events-none transition-all duration-300"
+          class="absolute left-3 transition-all duration-300 pointer-events-none select-none"
           :class="[
           shouldFloat
             ? [
@@ -88,16 +101,9 @@ onMounted(() => nextTick(resizeTextarea))
                   : props.parentTheme === 'light'
                   ? 'bg-black/70 border-white/20 text-white'
                   : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
-                isFocused
-                  ? 'shadow-[0_0_8px_rgba(255,255,255,0.15)]'
-                  : 'shadow-[0_0_4px_rgba(0,0,0,0.3)]',
-                props.state === 'success' && 'text-emerald-300',
-                props.state === 'warning' && 'text-amber-300',
-                props.state === 'error' && 'text-rose-300',
               ]
-            : 'top-3 text-gray-400 text-sm',
+            : ['top-3 text-gray-400', s.font],
         ]"
-          style="text-shadow: 0 1px 3px rgba(0,0,0,0.8);"
       >
         {{ props.label }}
       </label>
@@ -109,7 +115,9 @@ onMounted(() => nextTick(resizeTextarea))
           :disabled="props.disabled"
           :readonly="props.readonly"
           :placeholder="shouldFloat ? props.placeholder : ''"
-          class="w-full bg-transparent resize-none outline-none px-3 pt-4 pb-3 text-gray-100 text-sm min-h-[3rem]"
+          :style="{ resize: props.resize }"
+          class="w-full bg-transparent outline-none px-3 pt-4 text-gray-100 min-h-[3rem]"
+          :class="[s.font, s.pad]"
           :value="props.modelValue"
           @focus="isFocused = true"
           @blur="isFocused = false"
@@ -117,7 +125,7 @@ onMounted(() => nextTick(resizeTextarea))
           emit('update:modelValue', ($event.target as HTMLTextAreaElement).value);
           resizeTextarea();
         "
-      ></textarea>
+      />
 
       <!-- State Icon -->
       <component
@@ -132,8 +140,8 @@ onMounted(() => nextTick(resizeTextarea))
       />
     </div>
 
-    <!-- Message + Counter -->
-    <div class="flex items-center justify-between text-xs mt-0.5">
+    <!-- Message & Counter -->
+    <div class="flex justify-between text-xs mt-0.5">
       <p
           v-if="props.message"
           :class="{

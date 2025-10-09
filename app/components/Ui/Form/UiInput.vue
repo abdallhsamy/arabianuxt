@@ -15,6 +15,7 @@ export interface UiInputProps {
   clearable?: boolean
   passwordToggle?: boolean
   parentTheme?: 'dark' | 'light' | 'gradient'
+  size?: 'sm' | 'md' | 'lg'
 }
 
 const props = withDefaults(defineProps<UiInputProps>(), {
@@ -22,6 +23,7 @@ const props = withDefaults(defineProps<UiInputProps>(), {
   variant: 'default',
   state: 'none',
   parentTheme: 'dark',
+  size: 'md',
   disabled: false,
   readonly: false,
   clearable: false,
@@ -36,6 +38,12 @@ const isFocused = ref(false)
 const inputType = computed(() =>
     props.passwordToggle ? (showPassword.value ? 'text' : 'password') : props.type
 )
+
+const s = computed(() => ({
+  sm: { h: 'h-10', font: 'text-sm' },
+  md: { h: 'h-11', font: 'text-sm' },
+  lg: { h: 'h-12', font: 'text-base' },
+}[props.size]))
 
 const borderClass = computed(() => {
   switch (props.state) {
@@ -55,11 +63,7 @@ const stateIcon = computed(() => {
   }
 })
 
-const clear = () => {
-  emit('update:modelValue', '')
-  emit('clear')
-}
-
+const clear = () => { emit('update:modelValue', ''); emit('clear') }
 const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
 </script>
 
@@ -68,6 +72,7 @@ const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
     <div
         class="relative flex items-center rounded-xl backdrop-blur-xl transition-all border focus-within:ring-2"
         :class="[
+        s.h,
         borderClass,
         props.variant === 'default' && 'bg-white/5',
         props.variant === 'outlined' && 'bg-transparent',
@@ -75,72 +80,49 @@ const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
         props.disabled && 'opacity-50 pointer-events-none',
       ]"
     >
-      <!-- Prefix slot -->
-      <div v-if="$slots.prefix" class="flex items-center pl-3 pr-2 text-gray-400">
-        <slot name="prefix" />
-      </div>
+      <!-- Floating label -->
+      <label
+          v-if="props.label"
+          class="absolute left-3 transition-all duration-300 pointer-events-none select-none"
+          :class="[
+          shouldFloat
+            ? [
+                '-top-2 translate-y-0 text-xs font-medium px-2 rounded-md border backdrop-blur-md',
+                props.parentTheme === 'gradient'
+                  ? 'bg-gradient-to-r from-fuchsia-500/40 to-cyan-500/40 border-transparent text-white'
+                  : props.parentTheme === 'light'
+                  ? 'bg-black/70 border-white/20 text-white'
+                  : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
+              ]
+            : ['top-1/2 -translate-y-1/2 text-gray-400', s.font],
+        ]"
+      >
+        {{ props.label }}
+      </label>
 
-      <!-- Input wrapper -->
-      <div class="relative flex-1">
-        <!-- Floating label -->
-        <label
-            v-if="props.label"
-            class="absolute left-3 select-none pointer-events-none transition-all duration-300"
-            :class="[
-            shouldFloat
-              ? [
-                  '-top-2 text-xs font-medium px-2 rounded-md border backdrop-blur-md',
-                  props.parentTheme === 'gradient'
-                    ? 'bg-gradient-to-r from-fuchsia-500/40 to-cyan-500/40 border-transparent text-white'
-                    : props.parentTheme === 'light'
-                    ? 'bg-black/70 border-white/20 text-white'
-                    : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
-                  isFocused
-                    ? 'shadow-[0_0_8px_rgba(255,255,255,0.15)]'
-                    : 'shadow-[0_0_4px_rgba(0,0,0,0.3)]',
-                  props.state === 'success' && 'text-emerald-300',
-                  props.state === 'warning' && 'text-amber-300',
-                  props.state === 'error' && 'text-rose-300',
-                ]
-              : 'top-3 text-gray-400 text-sm',
-          ]"
-            style="text-shadow: 0 1px 3px rgba(0,0,0,0.8);"
-        >
-          {{ props.label }}
-        </label>
+      <input
+          ref="inputRef"
+          :type="inputType"
+          :disabled="props.disabled"
+          :readonly="props.readonly"
+          class="flex-1 bg-transparent outline-none px-3 text-gray-100 truncate"
+          :class="[s.font]"
+          :placeholder="shouldFloat ? props.placeholder : ''"
+          :value="props.modelValue"
+          @focus="isFocused = true"
+          @blur="isFocused = false"
+          @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      />
 
-        <!-- Input field -->
-        <input
-            ref="inputRef"
-            v-bind="$attrs"
-            :type="inputType"
-            :disabled="props.disabled"
-            :readonly="props.readonly"
-            class="w-full bg-transparent outline-none px-3 pt-4 pb-2 text-gray-100 text-sm"
-            :placeholder="shouldFloat ? props.placeholder : ''"
-            :value="props.modelValue"
-            @focus="isFocused = true"
-            @blur="isFocused = false"
-            @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-        />
-      </div>
-
-      <!-- Password toggle -->
       <button
           v-if="props.passwordToggle"
           type="button"
-          class="text-gray-400 hover:text-gray-200 transition px-2"
+          class="text-gray-400 hover:text-gray-200 px-2"
           @click="showPassword = !showPassword"
       >
         <component :is="showPassword ? EyeOff : Eye" class="w-4 h-4" />
       </button>
 
-      <!-- Suffix slot -->
-      <div v-if="$slots.suffix" class="flex items-center pr-3 pl-2 text-gray-400">
-        <slot name="suffix" />
-      </div>
-
-      <!-- State icon -->
       <component
           v-if="stateIcon"
           :is="stateIcon"
@@ -153,7 +135,6 @@ const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
       />
     </div>
 
-    <!-- Helper message -->
     <p
         v-if="props.message"
         class="text-xs mt-0.5"
