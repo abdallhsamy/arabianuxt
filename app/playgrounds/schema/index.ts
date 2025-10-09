@@ -5,6 +5,7 @@ import { cardSchema } from "./card.schema";
 import { modalSchema } from "./modal.schema";
 import { selectSchema } from "./select.schema";
 import { switchSchema } from "./switch.schema";
+import { tabsSchema } from "./tabs.schema";
 
 export {
     alertSchema,
@@ -13,5 +14,6 @@ export {
     cardSchema,
     modalSchema,
     selectSchema,
-    switchSchema
+    switchSchema,
+    tabsSchema
 }

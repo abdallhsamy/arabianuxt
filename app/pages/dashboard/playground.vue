@@ -9,6 +9,7 @@ import {
   modalSchema,
   selectSchema,
   switchSchema,
+  tabsSchema,
 } from "~/playgrounds/schema";
 
 const schemas: PlaygroundSchema[] = [
@@ -19,6 +20,7 @@ const schemas: PlaygroundSchema[] = [
   modalSchema,
   selectSchema,
   switchSchema,
+  tabsSchema,
 ]
 </script>
 
