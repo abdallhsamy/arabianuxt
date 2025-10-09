@@ -1,24 +1,75 @@
 <script setup lang="ts">
-import UiInput from '~/components/Ui/Common/UiInput.vue'
-import { Search, Mail, Lock } from 'lucide-vue-next'
+import UiInput from '~/components/Ui/Form/UiInput.vue'
+import { Mail, Lock } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 const email = ref('')
 const password = ref('')
-const search = ref('')
 </script>
 
 <template>
   <section class="space-y-10">
     <h1 class="page-title">Input Component Examples</h1>
 
-    <div class="grid gap-6 md:grid-cols-2">
-      <UiInput label="Email" type="email" v-model="email" placeholder="you@example.com" :icon="Mail" hint="We'll never share your email." />
-      <UiInput label="Password" type="password" v-model="password" placeholder="Enter password" clearable />
-      <UiInput label="Search" type="search" v-model="search" placeholder="Search..." :icon="Search" />
-      <UiInput label="Disabled" disabled placeholder="Disabled input" />
-      <UiInput label="Error Example" error="Invalid input" placeholder="Error field" />
-    </div>
+    <!-- Default Input -->
+    <UiInput
+        v-model="email"
+        label="Email"
+        placeholder="Enter your email"
+        :icon="Mail"
+        message="We'll never share your email."
+    />
+
+    <!-- Password Input -->
+    <UiInput
+        v-model="password"
+        label="Password"
+        type="password"
+        placeholder="Enter your password"
+        password-toggle
+        :icon="Lock"
+    />
+
+    <!-- Success -->
+    <UiInput
+        v-model="email"
+        label="Valid Email"
+        placeholder="example@domain.com"
+        state="success"
+        message="Looks good!"
+    />
+
+    <!-- Warning -->
+    <UiInput
+        v-model="email"
+        label="Unverified Email"
+        state="warning"
+        message="Please verify your email."
+    />
+
+    <!-- Error -->
+    <UiInput
+        v-model="email"
+        label="Invalid Email"
+        state="error"
+        message="Please enter a valid email address."
+    />
+
+    <!-- Outlined Variant -->
+    <UiInput
+        v-model="email"
+        label="Outlined Input"
+        variant="outlined"
+        placeholder="Focus to see border highlight"
+    />
+
+    <!-- Filled Variant -->
+    <UiInput
+        v-model="email"
+        label="Filled Input"
+        variant="filled"
+        placeholder="Smooth glass fill"
+    />
   </section>
 </template>
 
