@@ -1,23 +1,13 @@
 <script setup lang="ts">
 import { ref, computed, defineAsyncComponent } from 'vue'
-
-interface PlaygroundSchema {
-  component: string
-  title: string
-  props: {
-    key: string
-    type: 'string' | 'boolean' | 'enum'
-    label?: string
-    options?: string[]
-    default?: any
-  }[]
-}
+import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 const props = defineProps<{ schema: PlaygroundSchema }>()
 
 // Load component dynamically
 const componentMap: Record<string, any> = {
   'Ui/Common/UiButton.vue': () => import('~/components/Ui/Common/UiButton.vue'),
+  'Ui/Common/UiSelect.vue': () => import('~/components/Ui/Common/UiSelect.vue'),
 }
 
 const Comp = defineAsyncComponent(componentMap[props.schema.component])
