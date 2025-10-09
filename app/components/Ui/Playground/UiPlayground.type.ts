@@ -3,7 +3,7 @@ export type PlaygroundSchema = {
     title: string;
     props: {
         key: string;
-        type: 'string' | 'boolean' | 'enum';
+        type: 'string' | 'boolean' | 'enum' | 'number';
         label?: string;
         options?: string[];
         default?: any;
