@@ -4,19 +4,21 @@ import type {PlaygroundSchema} from "~/components/Ui/Playground/UiPlayground.typ
 import {
   alertSchema,
   badgeSchema,
-  selectSchema,
   buttonSchema,
-  switchSchema,
   cardSchema,
+  modalSchema,
+  selectSchema,
+  switchSchema,
 } from "~/playgrounds/schema";
 
 const schemas: PlaygroundSchema[] = [
   alertSchema,
   badgeSchema,
   buttonSchema,
+  cardSchema,
+  modalSchema,
   selectSchema,
   switchSchema,
-  cardSchema,
 ]
 </script>
 

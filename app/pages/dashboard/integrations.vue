@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { KeyRound, RefreshCw, Check, PlugZap, Link as LinkIcon, Unplug, Globe } from 'lucide-vue-next'
-import Modal from '~/components/Ui/Common/Modal.vue'
+import UiModal from '~/components/Ui/Common/UiModal.vue'
 
 const apiKey = ref('sk-live-********-A1B2')
 const showKey = ref(false)
@@ -108,12 +108,12 @@ const testPing = (w: Webhook): void => {
       </div>
     </div>
 
-    <!-- Regenerate Modal -->
-    <Modal v-model:open="regenOpen" title="Regenerate API Key" confirm-text="Regenerate">
+    <!-- Regenerate UiModal -->
+    <UiModal v-model:open="regenOpen" title="Regenerate API Key" confirm-text="Regenerate">
       <p class="text-gray-300">
         Regenerating invalidates the current key immediately. Clients using the old key will fail until updated.
       </p>
-    </Modal>
+    </UiModal>
   </section>
 </template>
 

@@ -120,7 +120,7 @@ const badgePriority = (p: Ticket['priority']): string => ({
       </DataTable>
     </GradientCard>
 
-    <!-- Ticket Chat Modal -->
+    <!-- Ticket Chat UiModal -->
     <TicketModal
         v-model:open="modalOpen"
         :ticket-id="activeTicketId"

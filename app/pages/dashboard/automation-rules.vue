@@ -56,7 +56,7 @@ const addRule = (): void => {
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- UiModal -->
     <div v-if="open" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
       <div class="w-full max-w-lg p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#22D3EE_0%,#8B5CF6_60%,#EC4899_100%)] animate-rotate-gradient">
         <div class="rounded-2xl bg-[rgba(15,17,23,0.96)] border border-white/10 p-6">

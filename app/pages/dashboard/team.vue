@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { UserPlus, Trash2, Shield, BadgeCheck } from 'lucide-vue-next'
-import Modal from '~/components/Ui/Common/Modal.vue'
+import UiModal from '~/components/Ui/Common/UiModal.vue'
 
 type Member = { id: string; name: string; email: string; role: 'Owner'|'Admin'|'Member' }
 const members = ref<Member[]>([
@@ -73,8 +73,8 @@ const roleBadge = (r: Member['role']): string => ({
       </div>
     </div>
 
-    <!-- Invite Modal -->
-    <Modal v-model:open="inviteOpen" title="Invite a New Member" confirm-text="Send Invite" @confirm="invite">
+    <!-- Invite UiModal -->
+    <UiModal v-model:open="inviteOpen" title="Invite a New Member" confirm-text="Send Invite" @confirm="invite">
       <div class="space-y-3">
         <input v-model="inviteName" class="input-dark w-full" placeholder="Full name" />
         <input v-model="inviteEmail" class="input-dark w-full" placeholder="Email address" />
@@ -84,7 +84,7 @@ const roleBadge = (r: Member['role']): string => ({
           <option>Owner</option>
         </select>
       </div>
-    </Modal>
+    </UiModal>
   </section>
 </template>
 

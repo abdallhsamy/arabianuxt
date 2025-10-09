@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { CreditCard, FileText, Download, CheckCircle2, AlertTriangle, Plus } from 'lucide-vue-next'
-import Modal from '~/components/Ui/Common/Modal.vue'
+import UiModal from '~/components/Ui/Common/UiModal.vue'
 
 type Invoice = {
   id: string
@@ -97,8 +97,8 @@ const currency = (n: number): string => `$${n.toFixed(2)}`
       </div>
     </div>
 
-    <!-- Add Card Modal -->
-    <Modal v-model:open="addCardOpen" title="Update Payment Method" confirm-text="Save Card">
+    <!-- Add Card UiModal -->
+    <UiModal v-model:open="addCardOpen" title="Update Payment Method" confirm-text="Save Card">
       <div class="space-y-3">
         <input class="input-dark w-full" placeholder="Cardholder Name" />
         <input class="input-dark w-full" placeholder="Card Number" />
@@ -107,7 +107,7 @@ const currency = (n: number): string => `$${n.toFixed(2)}`
           <input class="input-dark w-full" placeholder="CVC" />
         </div>
       </div>
-    </Modal>
+    </UiModal>
   </section>
 </template>
 
