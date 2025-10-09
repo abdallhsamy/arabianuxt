@@ -11,6 +11,7 @@ const componentMap: Record<string, any> = {
   'Ui/Common/UiCard.vue': () => import('~/components/Ui/Common/UiCard.vue'),
   'Ui/Common/UiModal.vue': () => import('~/components/Ui/Common/UiModal.vue'),
   'Ui/Common/UiSelect.vue': () => import('~/components/Ui/Common/UiSelect.vue'),
+  'Ui/Common/UiStepper.vue': () => import('~/components/Ui/Common/UiStepper.vue'),
   'Ui/Common/UiSwitch.vue': () => import('~/components/Ui/Common/UiSwitch.vue'),
   'Ui/Common/UiTabs.vue': () => import('~/components/Ui/Common/UiTabs.vue'),
 }

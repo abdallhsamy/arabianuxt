@@ -8,6 +8,7 @@ import {
   cardSchema,
   modalSchema,
   selectSchema,
+  stepperSchema,
   switchSchema,
   tabsSchema,
 } from "~/playgrounds/schema";
@@ -19,6 +20,7 @@ const schemas: PlaygroundSchema[] = [
   cardSchema,
   modalSchema,
   selectSchema,
+  stepperSchema,
   switchSchema,
   tabsSchema,
 ]
