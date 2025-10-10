@@ -1,17 +1,25 @@
 <script setup lang="ts">
-export interface Crumb { label: string; to?: string }
-export interface UiBreadcrumbProps { items: Crumb[] }
-const props = defineProps<UiBreadcrumbProps>()
+export interface BreadcrumbItem {
+  label: string
+  to?: string
+  icon?: any
+}
+
+defineProps<{ items: BreadcrumbItem[] }>()
 </script>
 
 <template>
-  <nav class="text-sm text-gray-400" aria-label="Breadcrumb">
-    <ol class="flex items-center gap-2">
-      <li v-for="(c,i) in props.items" :key="i" class="flex items-center gap-2">
-        <NuxtLink v-if="c.to && i < props.items.length - 1" :to="c.to" class="hover:text-fuchsia-300">{{ c.label }}</NuxtLink>
-        <span v-else class="text-gray-200">{{ c.label }}</span>
-        <span v-if="i < props.items.length - 1" class="opacity-50">/</span>
-      </li>
-    </ol>
+  <nav aria-label="breadcrumb" class="flex items-center gap-2 text-sm text-gray-300">
+    <template v-for="(item, i) in items" :key="i">
+      <a
+          v-if="item.to"
+          :href="item.to"
+          class="hover:text-fuchsia-400 transition-colors"
+      >
+        {{ item.label }}
+      </a>
+      <span v-else class="text-gray-400">{{ item.label }}</span>
+      <span v-if="i < items.length - 1" class="text-gray-500 mx-1">/</span>
+    </template>
   </nav>
 </template>

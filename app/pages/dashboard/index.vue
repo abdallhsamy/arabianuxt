@@ -24,6 +24,20 @@ import UiToastAdvanced from '~/components/Ui/Feedback/UiToastAdvanced.vue'
 import UiNotificationDrawer from '~/components/Ui/Feedback/UiNotificationDrawer.vue'
 import UiCommandPalette from '~/components/Ui/Nav/UiCommandPalette.vue'
 
+import UiBreadcrumb from '~/components/Ui/Nav/UiBreadcrumb.vue'
+import UiPagination from '~/components/Ui/Nav/UiPagination.vue'
+import UiProgressBar from '~/components/Ui/Data/UiProgressBar.vue'
+import UiTimeline from '~/components/Ui/Data/UiTimeline.vue'
+import UiConfirmDialog from '~/components/Ui/Feedback/UiConfirmDialog.vue'
+
+const currentPage = ref(1)
+const confirmOpen = ref(false)
+const events = [
+  { title: 'User registered', description: 'New user joined', time: '2 min ago' },
+  { title: 'Server deployed', description: 'Version 2.1 released', time: '10 min ago' },
+  { title: 'Payment received', description: 'Stripe transaction', time: '30 min ago' },
+]
+
 // -------------------------------------------------------------------
 // Sidebar menu items
 // -------------------------------------------------------------------
@@ -230,7 +244,35 @@ const stattistics = [
     <UiToastAdvanced ref="toastRef" />
     <UiNotificationDrawer v-model="showDrawer" :items="notifications" />
     <UiCommandPalette v-model="showCmd" :commands="commands" />
+
+    <UiBreadcrumb :items="[
+      { label: 'Dashboard', to: '/dashboard' },
+      { label: 'Components', to: '#' },
+      { label: 'Demo' }
+    ]" />
+
+    <UiProgressBar :value="72" />
+    <UiTimeline :events="events" />
+    <UiPagination
+        v-model:page="currentPage"
+        :total="70" :per-page="10"
+    />
+
+    <button
+        class="mt-6 px-4 py-2 rounded bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white hover:opacity-90"
+        @click="confirmOpen = true"
+    >
+      Show Confirm Dialog
+    </button>
+
+    <UiConfirmDialog
+        v-model="confirmOpen"
+        title="Delete Record"
+        message="Are you sure you want to delete this record permanently?"
+        @confirm="console.log('Deleted!')"
+    />
   </section>
+
 </template>
 
 <style scoped>
