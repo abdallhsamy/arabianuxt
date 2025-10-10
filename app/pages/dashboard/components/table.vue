@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import UiTable, { type TableColumn } from '~/components/Ui/Data/UiTable.vue'
 
-/* ------------------ Data model ------------------ */
 interface User {
   id: number
   name: string
@@ -12,7 +11,6 @@ interface User {
   usage: number
 }
 
-/* ------------------ Fake data ------------------ */
 const rows = ref<User[]>(
     Array.from({ length: 125 }, (_, i) => ({
       id: i + 1,
@@ -24,29 +22,31 @@ const rows = ref<User[]>(
     }))
 )
 
-/* ------------------ Column definitions ------------------ */
 const cols: TableColumn<User>[] = [
-  { key: 'name', header: 'Name', sortable: true, searchable: true, width: 'w-48' },
-  { key: 'email', header: 'Email', sortable: true, searchable: true, width: 'w-60' },
-  { key: 'role', header: 'Role', sortable: true, searchable: true, width: 'w-28', align: 'center' },
+  { key: 'name', header: 'Name', sortable: true, filter: { type: 'text' } },
+  { key: 'email', header: 'Email', sortable: true, filter: { type: 'text' } },
   {
-    key: 'usage',
-    header: 'Usage %',
+    key: 'role',
+    header: 'Role',
     sortable: true,
-    searchable: false,
-    align: 'right',
-    accessor: (u) => `${u.usage}%`,
+    filter: {
+      type: 'select',
+      options: [
+        { label: 'Admin', value: 'Admin' },
+        { label: 'Editor', value: 'Editor' },
+        { label: 'Viewer', value: 'Viewer' },
+      ],
+    },
   },
+  { key: 'usage', header: 'Usage %', sortable: true, filter: { type: 'range' } },
   {
     key: 'createdAt',
     header: 'Created',
     sortable: true,
-    searchable: false,
     accessor: (u) => new Date(u.createdAt).toLocaleDateString(),
   },
 ]
 
-/* ------------------ Table state ------------------ */
 const page = ref(1)
 const pageSize = ref(10)
 const selected = ref<Array<string | number>>([])
@@ -54,11 +54,20 @@ const selected = ref<Array<string | number>>([])
 const onSelectionChange = (keys: Array<string | number>) => {
   selected.value = keys
 }
+
+/* --- new optional events --- */
+const onColumnOrderChange = (order: string[]) => {
+  console.log('New column order:', order)
+}
+
+const onColumnWidthChange = (widths: Record<string, number>) => {
+  console.log('New column widths:', widths)
+}
 </script>
 
 <template>
   <section class="p-8 space-y-6">
-    <h1 class="text-2xl font-bold text-gray-100">📊 UiTable – Full Demo</h1>
+    <h1 class="text-2xl font-bold text-gray-100">📊 UiTable – Advanced Demo</h1>
 
     <UiTable
         :rows="rows"
@@ -69,8 +78,9 @@ const onSelectionChange = (keys: Array<string | number>) => {
         :stickyHeader="true"
         :defaultSort="{ key: 'name', dir: 'asc' }"
         @selection-change="onSelectionChange"
+        @column-order-change="onColumnOrderChange"
+        @column-width-change="onColumnWidthChange"
     >
-      <!-- Custom cell slot -->
       <template #cell:role="{ value }">
         <span
             class="inline-flex items-center rounded-full border border-white/10 px-2 py-0.5 text-xs"
@@ -95,10 +105,3 @@ const onSelectionChange = (keys: Array<string | number>) => {
     </div>
   </section>
 </template>
-
-<style scoped>
-@reference "tailwindcss";
-section {
-  @apply max-w-7xl mx-auto;
-}
-</style>
