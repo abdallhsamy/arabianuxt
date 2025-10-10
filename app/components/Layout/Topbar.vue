@@ -73,7 +73,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
       >
         A
       </div>
-      <span class="text-white font-semibold tracking-wide hidden sm:block">Arabia Dashboard</span>
+      <span class="text-white font-semibold tracking-wide hidden sm:block">ArabiaNuxt Dashboard</span>
     </div>
 
     <!-- Search -->

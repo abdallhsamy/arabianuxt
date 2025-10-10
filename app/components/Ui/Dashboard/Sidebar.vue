@@ -6,7 +6,17 @@ import {
   CreditCard, AlertTriangle, Heart, Plug, 
   BookOpen, ScrollText, Bell, Building2, 
   Lock, User, Sparkles, Palette, 
-  HeadphonesIcon, Cog, UserCheck, Eye
+  HeadphonesIcon, Cog, UserCheck, Eye,
+  Square, MousePointer, Edit3, Play, 
+  MessageSquare, Mail, Layers, Code, 
+  Palette as PaletteIcon, Sliders, 
+  Table, Type, ToggleLeft, FileText as FileTextIcon,
+  AlertCircle, Badge, CreditCard as CreditCardIcon,
+  BarChart, Cpu, Droplets, Grip, 
+  Hash, Image, List, Maximize2,
+  Minus, Plus, RotateCcw, Search,
+  Settings as SettingsIcon, Shield as ShieldIcon,
+  Square as SquareIcon, Target, Wrench
 } from 'lucide-vue-next';
 import { useRouter, useRoute } from '#imports';
 import { useSidebar } from '~/composables/useSidebar';
@@ -37,6 +47,45 @@ const menuItems = [
   { icon: Zap, label: 'Assistant', to: '/dashboard/assistant' },
   { icon: BookOpen, label: 'Prompt Library', to: '/dashboard/prompt-library' },
   { icon: Zap, label: 'Automation Rules', to: '/dashboard/automation-rules' },
+  
+  // Development & Tools
+  { icon: Play, label: 'Playground', to: '/dashboard/playground' },
+  { icon: Edit3, label: 'Editor', to: '/dashboard/editor' },
+  { icon: Square, label: 'Blank', to: '/dashboard/blank' },
+  { icon: MessageSquare, label: 'Toaster Demo', to: '/dashboard/toaster-demo' },
+  
+  // UI Components
+  { icon: MousePointer, label: 'Buttons', to: '/dashboard/buttons' },
+  { icon: Layers, label: 'Components', to: '/dashboard/components' },
+  { icon: Layers, label: 'Components Index', to: '/dashboard/components/index' },
+  { icon: AlertCircle, label: 'Alert', to: '/dashboard/components/alert' },
+  { icon: Badge, label: 'Badge', to: '/dashboard/components/badge' },
+  { icon: CreditCardIcon, label: 'Card', to: '/dashboard/components/card' },
+  { icon: BarChart, label: 'Charts', to: '/dashboard/components/charts' },
+  { icon: Code, label: 'Dev Tools', to: '/dashboard/components/dev-tools' },
+  { icon: Table, label: 'Table', to: '/dashboard/components/table' },
+  { icon: Type, label: 'Input', to: '/dashboard/components/input' },
+  { icon: ToggleLeft, label: 'Switch', to: '/dashboard/components/switch' },
+  { icon: FileTextIcon, label: 'Textarea', to: '/dashboard/components/textarea' },
+  { icon: SettingsIcon, label: 'Settings', to: '/dashboard/components/settings' },
+  { icon: ShieldIcon, label: 'Security', to: '/dashboard/components/security' },
+  { icon: SquareIcon, label: 'Skeleton', to: '/dashboard/components/skeleton' },
+  { icon: Target, label: 'Stepper', to: '/dashboard/components/stepper' },
+  { icon: Wrench, label: 'Utilities', to: '/dashboard/components/utilities' },
+  { icon: Grip, label: 'Widgets', to: '/dashboard/components/widgets' },
+  { icon: Droplets, label: 'Advanced UI', to: '/dashboard/components/advanced-ui' },
+  { icon: Cpu, label: 'AI Tools', to: '/dashboard/components/ai-tools' },
+  { icon: Hash, label: 'Accordion', to: '/dashboard/components/accordion' },
+  { icon: Image, label: 'Dropdown', to: '/dashboard/components/dropdown' },
+  { icon: List, label: 'Form', to: '/dashboard/components/form' },
+  { icon: Maximize2, label: 'Modal', to: '/dashboard/components/modal' },
+  { icon: Minus, label: 'Select', to: '/dashboard/components/select' },
+  { icon: Plus, label: 'Tabs', to: '/dashboard/components/tabs' },
+  { icon: RotateCcw, label: 'Tooltip', to: '/dashboard/components/tooltip' },
+  { icon: Search, label: 'Interaction', to: '/dashboard/components/interaction' },
+  
+  // Communication
+  { icon: Mail, label: 'Mail', to: '/dashboard/mail' },
   
   // Security & Access
   { icon: Shield, label: 'Security', to: '/dashboard/security' },
@@ -70,11 +119,14 @@ const menuGroups = [
   { items: menuItems.slice(0, 1), label: 'Main' },
   { items: menuItems.slice(1, 5), label: 'Analytics' },
   { items: menuItems.slice(5, 9), label: 'AI & Automation' },
-  { items: menuItems.slice(9, 12), label: 'Security' },
-  { items: menuItems.slice(12, 15), label: 'Team' },
-  { items: menuItems.slice(15, 18), label: 'Support' },
-  { items: menuItems.slice(18, 20), label: 'Knowledge' },
-  { items: menuItems.slice(20), label: 'System' },
+  { items: menuItems.slice(9, 13), label: 'Development' },
+  { items: menuItems.slice(13, 41), label: 'UI Components' },
+  { items: menuItems.slice(41, 42), label: 'Communication' },
+  { items: menuItems.slice(42, 45), label: 'Security' },
+  { items: menuItems.slice(45, 48), label: 'Team' },
+  { items: menuItems.slice(48, 51), label: 'Support' },
+  { items: menuItems.slice(51, 53), label: 'Knowledge' },
+  { items: menuItems.slice(53), label: 'System' },
 ];
 
 const mainMargin = computed(() =>
