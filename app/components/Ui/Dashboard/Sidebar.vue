@@ -57,7 +57,6 @@ const menuItems = [
   // UI Components
   { icon: MousePointer, label: 'Buttons', to: '/dashboard/buttons' },
   { icon: Layers, label: 'Components', to: '/dashboard/components' },
-  { icon: Layers, label: 'Components Index', to: '/dashboard/components/index' },
   { icon: AlertCircle, label: 'Alert', to: '/dashboard/components/alert' },
   { icon: Badge, label: 'Badge', to: '/dashboard/components/badge' },
   { icon: CreditCardIcon, label: 'Card', to: '/dashboard/components/card' },
