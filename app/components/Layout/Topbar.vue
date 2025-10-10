@@ -54,7 +54,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
 <template>
 
   <header
-      class="fixed top-6 z-[60] transition-all duration-500
+      class="fixed top-6 z-10 transition-all duration-500
            bg-[rgba(15,17,23,0.65)] backdrop-blur-2xl border border-white/10
            rounded-2xl shadow-[0_0_30px_rgba(236,72,153,0.1)]
            flex items-center justify-between px-6 py-3
