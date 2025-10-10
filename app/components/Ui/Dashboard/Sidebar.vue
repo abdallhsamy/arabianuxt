@@ -66,8 +66,6 @@ const menuItems = [
   { icon: Type, label: 'Input', to: '/dashboard/components/input' },
   { icon: ToggleLeft, label: 'Switch', to: '/dashboard/components/switch' },
   { icon: FileTextIcon, label: 'Textarea', to: '/dashboard/components/textarea' },
-  { icon: SettingsIcon, label: 'Settings', to: '/dashboard/components/settings' },
-  { icon: ShieldIcon, label: 'Security', to: '/dashboard/components/security' },
   { icon: SquareIcon, label: 'Skeleton', to: '/dashboard/components/skeleton' },
   { icon: Target, label: 'Stepper', to: '/dashboard/components/stepper' },
   { icon: Wrench, label: 'Utilities', to: '/dashboard/components/utilities' },
@@ -107,7 +105,7 @@ const menuItems = [
   
   // System & Settings
   { icon: Cog, label: 'System', to: '/dashboard/system' },
-  { icon: Settings, label: 'Settings', to: '/dashboard/settings' },
+  { icon: Settings, label: 'Settings', to: '/dashboard/components/settings' },
   { icon: Palette, label: 'Theme Customizer', to: '/dashboard/theme-customizer' },
   { icon: Lock, label: 'Privacy', to: '/dashboard/privacy' },
   { icon: CreditCard, label: 'Billing', to: '/dashboard/billing' },
