@@ -193,7 +193,7 @@ const stattistics = [
         <UiWidgetContainer title="Bar Chart">
           <UiChartBar
               :labels="['Q1', 'Q2', 'Q3', 'Q4']"
-              :dataset="[3, 6, 4, 8]"
+              :datasets="[{ label: 'Sales', data: [3, 6, 4, 8], color: '#06b6d4' }]"
           />
         </UiWidgetContainer>
 
