@@ -1,37 +1,43 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import UiSkeleton from '~/components/Ui/Feedback/UiSkeleton.vue'
+import UiSkeletonGroup from '~/components/Ui/Feedback/UiSkeletonGroup.vue'
+
+const loading = ref(true)
+
+/* simulate API load */
+onMounted(() => {
+  setTimeout(() => (loading.value = false), 2500)
+})
 </script>
 
 <template>
   <section class="p-8 space-y-10 text-gray-100">
-    <h1 class="text-2xl font-bold">✨ UiSkeleton Examples</h1>
+    <h1 class="text-2xl font-bold">✨ UiSkeleton + UiSkeletonGroup</h1>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- Text -->
-      <div>
-        <h2 class="font-semibold mb-2">Text (3 lines)</h2>
-        <UiSkeleton variant="text" :lines="3" />
-      </div>
+    <!-- SkeletonGroup Example -->
+    <UiSkeletonGroup :loading="loading" @loaded="console.log('Loaded!')">
+      <template #skeletons>
+        <div class="space-y-4">
+          <UiSkeleton variant="text" :lines="3" />
+          <UiSkeleton variant="rect" height="80px" />
+          <UiSkeleton variant="button" width="120px" />
+        </div>
+      </template>
 
-      <!-- Circle -->
-      <div>
-        <h2 class="font-semibold mb-2">Circle / Avatar</h2>
-        <UiSkeleton variant="circle" width="64px" />
-        <UiSkeleton variant="avatar" width="64px" class="mt-3" />
+      <!-- Actual content -->
+      <div class="space-y-3">
+        <h2 class="text-xl font-semibold">Loaded Data</h2>
+        <p>
+          This content replaces the skeletons automatically when loading
+          finishes. The transition is smooth and glassy ✨.
+        </p>
+        <button
+            class="px-4 py-2 rounded-lg bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white hover:opacity-90 transition"
+        >
+          Fancy Loaded Button
+        </button>
       </div>
-
-      <!-- Rect -->
-      <div>
-        <h2 class="font-semibold mb-2">Rect / Card</h2>
-        <UiSkeleton variant="rect" width="100%" height="100px" />
-        <UiSkeleton variant="card" class="mt-4" />
-      </div>
-
-      <!-- Button -->
-      <div>
-        <h2 class="font-semibold mb-2">Button</h2>
-        <UiSkeleton variant="button" width="120px" />
-      </div>
-    </div>
+    </UiSkeletonGroup>
   </section>
 </template>
