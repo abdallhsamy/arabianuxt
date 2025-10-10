@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import UiTable, { type TableColumn } from '~/components/Ui/Data/UiTable.vue'
 
+/* ------------------ Data model ------------------ */
 interface User {
   id: number
   name: string
@@ -11,18 +12,22 @@ interface User {
   usage: number
 }
 
+/* ------------------ Fake data ------------------ */
+const roles = ['Admin', 'Editor', 'Viewer'] as const
+
 const rows = ref<User[]>(
-    Array.from({ length: 125 }, (_, i) => ({
+    Array.from({ length: 125 }, (_, i): User => ({
       id: i + 1,
       name: `User ${i + 1}`,
       email: `user${i + 1}@example.com`,
-      role: (['Admin', 'Editor', 'Viewer'] as const)[i % 3],
-      createdAt: new Date(Date.now() - i * 86400000).toISOString(),
+      role: roles[i % roles.length] as User['role'],
+      createdAt: new Date(Date.now() - i * 86_400_000).toISOString(),
       usage: Math.round(Math.random() * 100),
     }))
 )
 
-const cols: TableColumn<User>[] = [
+/* ------------------ Columns ------------------ */
+const cols = ref<TableColumn<User>[]>([
   { key: 'name', header: 'Name', sortable: true, filter: { type: 'text' } },
   { key: 'email', header: 'Email', sortable: true, filter: { type: 'text' } },
   {
@@ -31,11 +36,7 @@ const cols: TableColumn<User>[] = [
     sortable: true,
     filter: {
       type: 'select',
-      options: [
-        { label: 'Admin', value: 'Admin' },
-        { label: 'Editor', value: 'Editor' },
-        { label: 'Viewer', value: 'Viewer' },
-      ],
+      options: roles.map(r => ({ label: r, value: r })),
     },
   },
   { key: 'usage', header: 'Usage %', sortable: true, filter: { type: 'range' } },
@@ -43,61 +44,99 @@ const cols: TableColumn<User>[] = [
     key: 'createdAt',
     header: 'Created',
     sortable: true,
-    accessor: (u) => new Date(u.createdAt).toLocaleDateString(),
+    accessor: (u: User) =>
+        new Date(u.createdAt).toLocaleDateString(undefined, {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        }),
   },
-]
+])
 
+/* ------------------ Table state ------------------ */
 const page = ref(1)
 const pageSize = ref(10)
 const selected = ref<Array<string | number>>([])
 
+/* ------------------ Persistence helpers ------------------ */
+const LS_KEY_ORDER = 'ui-table-order'
+const LS_KEY_WIDTHS = 'ui-table-widths'
+
+const persistedOrder = ref<string[] | null>(null)
+const persistedWidths = ref<Record<string, number> | null>(null)
+
+/* Restore saved settings */
+onMounted(() => {
+  try {
+    const order = localStorage.getItem(LS_KEY_ORDER)
+    const widths = localStorage.getItem(LS_KEY_WIDTHS)
+    if (order) persistedOrder.value = JSON.parse(order)
+    if (widths) persistedWidths.value = JSON.parse(widths)
+  } catch {
+    /* ignore corrupted JSON */
+  }
+})
+
+/* Event handlers */
 const onSelectionChange = (keys: Array<string | number>) => {
   selected.value = keys
 }
 
-/* --- new optional events --- */
-const onColumnOrderChange = (order: string[]) => {
-  console.log('New column order:', order)
+const onColumnOrderChange = (order: string[]): void => {
+  localStorage.setItem(LS_KEY_ORDER, JSON.stringify(order))
+  persistedOrder.value = order
 }
 
-const onColumnWidthChange = (widths: Record<string, number>) => {
-  console.log('New column widths:', widths)
+const onColumnWidthChange = (widths: Record<string, number>): void => {
+  localStorage.setItem(LS_KEY_WIDTHS, JSON.stringify(widths))
+  persistedWidths.value = widths
 }
+
+/* Watchers to re-sync on change (if another tab modifies LS) */
+watch(persistedOrder, v => {
+  if (v) localStorage.setItem(LS_KEY_ORDER, JSON.stringify(v))
+})
+watch(persistedWidths, v => {
+  if (v) localStorage.setItem(LS_KEY_WIDTHS, JSON.stringify(v))
+})
 </script>
 
 <template>
   <section class="p-8 space-y-6">
-    <h1 class="text-2xl font-bold text-gray-100">📊 UiTable – Advanced Demo</h1>
+    <h1 class="text-2xl font-bold text-gray-100">
+      📊 UiTable — Persistent Demo
+    </h1>
 
     <UiTable
         :rows="rows"
-        :columns="cols"
-        v-model:page="page"
-        v-model:pageSize="pageSize"
-        :selectable="true"
-        :stickyHeader="true"
-        :defaultSort="{ key: 'name', dir: 'asc' }"
-        @selection-change="onSelectionChange"
-        @column-order-change="onColumnOrderChange"
-        @column-width-change="onColumnWidthChange"
+        :columns="cols as any"
+    v-model:page="page"
+    v-model:pageSize="pageSize"
+    :selectable="true"
+    :stickyHeader="true"
+    :defaultSort="{ key: 'name', dir: 'asc' }"
+    :keyOrder="persistedOrder ?? undefined"
+    :widths="persistedWidths ?? undefined"
+    @selection-change="onSelectionChange"
+    @column-order-change="onColumnOrderChange"
+    @column-width-change="onColumnWidthChange"
     >
-      <template #cell:role="{ value }">
+    <template #cell:role="{ value }">
         <span
             class="inline-flex items-center rounded-full border border-white/10 px-2 py-0.5 text-xs"
             :class="{
             'bg-rose-500/20 text-rose-200': value === 'Admin',
             'bg-amber-500/20 text-amber-200': value === 'Editor',
-            'bg-emerald-500/20 text-emerald-200': value === 'Viewer'
+            'bg-emerald-500/20 text-emerald-200': value === 'Viewer',
           }"
         >
           {{ value }}
         </span>
-      </template>
+    </template>
 
-      <!-- Optional: override empty slot -->
-      <template #empty>
-        <div class="py-6 text-gray-400">No users found.</div>
-      </template>
+    <template #empty>
+      <div class="py-6 text-gray-400">No users found.</div>
+    </template>
     </UiTable>
 
     <div class="text-sm text-gray-400">
@@ -105,3 +144,10 @@ const onColumnWidthChange = (widths: Record<string, number>) => {
     </div>
   </section>
 </template>
+
+<style scoped>
+@reference "tailwindcss";
+section {
+  @apply max-w-7xl mx-auto;
+}
+</style>
