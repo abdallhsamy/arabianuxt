@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { Bell, Search, User, LogOut, Lock, Settings } from 'lucide-vue-next'
+import { Bell, Search, User, LogOut, Lock, Settings, Github, Linkedin } from 'lucide-vue-next'
 import { useSidebar } from '~/composables/useSidebar'
 
 const search = ref('')
@@ -89,6 +89,28 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
 
     <!-- Right icons -->
     <div class="flex items-center gap-4 relative">
+      <!-- Social Icons -->
+      <div class="flex items-center gap-2">
+        <a
+            href="https://github.com/abdallhsamy/arabianuxt"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors"
+            title="GitHub"
+        >
+          <Github class="w-5 h-5" />
+        </a>
+        <a
+            href="https://www.linkedin.com/in/abdallah-samy/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors"
+            title="LinkedIn"
+        >
+          <Linkedin class="w-5 h-5" />
+        </a>
+      </div>
+
       <!-- Notifications -->
       <div class="relative" @click.stop="toggleDropdown('notif')">
         <button
