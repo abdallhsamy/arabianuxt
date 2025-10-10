@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import UiBadge from '~/components/Ui/Common/UiBadge.vue'
 import { Check, AlertCircle, Bell, Star } from 'lucide-vue-next'
+import UiBadge from "~/components/Ui/Display/UiBadge.vue";
 </script>
 
 <template>
