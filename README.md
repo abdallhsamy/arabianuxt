@@ -59,3 +59,114 @@ yarn install
 
 # 3. Run dev server
 yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🧩 Structure
+
+```bash
+app/
+ ├─ components/Ui/
+ │   ├─ Form/
+ │   ├─ Dashboard/
+ │   ├─ Common/
+ │   └─ Editor/
+ ├─ layouts/
+ │   ├─ default.vue
+ │   ├─ auth.vue
+ ├─ pages/
+ │   ├─ index.vue        # Landing
+ │   ├─ dashboard/
+ │   └─ auth/
+ ├─ store/
+ │   └─ useUserStore.ts
+ ├─ assets/
+ │   └─ css/main.css
+```
+
+---
+
+## 🧠 AI Integration
+
+The rich editor includes a pluggable AI handler:
+
+```ts
+const aiHandler = async ({ action, text }) => {
+  const res = await $fetch('/api/ai', { method: 'POST', body: { action, text } })
+  return res.result
+}
+```
+
+Connect it to:
+
+-   OpenAI / Anthropic
+
+-   Local Ollama
+
+-   Your custom backend
+
+
+---
+
+## 🧪 Tests
+
+```bash
+yarn test
+```
+
+---
+
+## 🤝 Contributing
+
+1.  Fork this repository
+
+2.  Create your feature branch:  
+    `git checkout -b feature/awesome-feature`
+
+3.  Commit changes:  
+    `git commit -m "feat: add awesome feature"`
+
+4.  Push branch:  
+    `git push origin feature/awesome-feature`
+
+5.  Open a Pull Request
+
+
+All contributions are welcome — UI fixes, docs, new components, or AI enhancements.
+
+---
+
+## 🧭 Roadmap
+
+-    Docs site with component playground
+
+-    i18n (Arabic / English)
+
+-    CLI starter (`npx create-arabianuxt`)
+
+-    Theme Builder (light/dark/brand palettes)
+
+-    VS Code Snippets extension
+
+-    AI Assistant plugin (Nuxt module)
+
+
+---
+
+## 🧑‍🚀 Author
+
+**Abdallah Samy** — Technical Consultant & Software Engineer
+
+-   🌐 [LinkedIn](https://www.linkedin.com/in/abdallah-samy/)
+
+-   💻 [GitHub](https://github.com/abdallhsamy)
+
+
+---
+
+## 🪄 License
+
+MIT © Abdallah Samy
