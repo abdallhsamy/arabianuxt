@@ -5,7 +5,6 @@ import UiSkeletonGroup from '~/components/Ui/Feedback/UiSkeletonGroup.vue'
 
 const loading = ref(true)
 
-/* simulate API load */
 onMounted(() => {
   setTimeout(() => (loading.value = false), 2500)
 })
@@ -13,29 +12,43 @@ onMounted(() => {
 
 <template>
   <section class="p-8 space-y-10 text-gray-100">
-    <h1 class="text-2xl font-bold">✨ UiSkeleton + UiSkeletonGroup</h1>
+    <h1 class="text-2xl font-bold">✨ UiSkeleton Animation Variants</h1>
 
-    <!-- SkeletonGroup Example -->
-    <UiSkeletonGroup :loading="loading" @loaded="console.log('Loaded!')">
+    <!-- Shimmer -->
+    <div>
+      <h2 class="font-semibold mb-2">Shimmer (default)</h2>
+      <UiSkeleton variant="rect" width="100%" height="60px" animation="shimmer" />
+    </div>
+
+    <!-- Pulse -->
+    <div>
+      <h2 class="font-semibold mb-2">Pulse</h2>
+      <UiSkeleton variant="rect" width="100%" height="60px" animation="pulse" />
+    </div>
+
+    <!-- Disabled -->
+    <div>
+      <h2 class="font-semibold mb-2">Static (no animation)</h2>
+      <UiSkeleton variant="rect" width="100%" height="60px" :animation="false" />
+    </div>
+
+    <!-- Group Example -->
+    <UiSkeletonGroup :loading="loading">
       <template #skeletons>
         <div class="space-y-4">
-          <UiSkeleton variant="text" :lines="3" />
-          <UiSkeleton variant="rect" height="80px" />
-          <UiSkeleton variant="button" width="120px" />
+          <UiSkeleton variant="text" :lines="3" animation="pulse" />
+          <UiSkeleton variant="rect" height="100px" animation="shimmer" />
+          <UiSkeleton variant="button" width="120px" animation="pulse" />
         </div>
       </template>
 
-      <!-- Actual content -->
       <div class="space-y-3">
         <h2 class="text-xl font-semibold">Loaded Data</h2>
-        <p>
-          This content replaces the skeletons automatically when loading
-          finishes. The transition is smooth and glassy ✨.
-        </p>
+        <p>Skeletons above fade out smoothly after loading.</p>
         <button
             class="px-4 py-2 rounded-lg bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white hover:opacity-90 transition"
         >
-          Fancy Loaded Button
+          Continue
         </button>
       </div>
     </UiSkeletonGroup>

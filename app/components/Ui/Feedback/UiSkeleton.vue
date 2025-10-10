@@ -9,12 +9,14 @@ export type SkeletonVariant =
     | 'card'
     | 'button'
 
+export type SkeletonAnimation = 'shimmer' | 'pulse' | false
+
 export interface UiSkeletonProps {
   variant?: SkeletonVariant
   width?: string | number
   height?: string | number
   radius?: string | number
-  animated?: boolean
+  animation?: SkeletonAnimation
   lines?: number
   dark?: boolean
 }
@@ -24,19 +26,10 @@ const props = withDefaults(defineProps<UiSkeletonProps>(), {
   width: '100%',
   height: undefined,
   radius: '0.5rem',
-  animated: true,
+  animation: 'shimmer',
   lines: 1,
   dark: true,
 })
-
-const style = computed(() => ({
-  width: typeof props.width === 'number' ? `${props.width}px` : props.width,
-  height:
-      typeof props.height === 'number'
-          ? `${props.height}px`
-          : props.height || variantDefaults.value.height,
-  borderRadius: typeof props.radius === 'number' ? `${props.radius}px` : props.radius,
-}))
 
 const variantDefaults = computed(() => {
   switch (props.variant) {
@@ -55,13 +48,33 @@ const variantDefaults = computed(() => {
   }
 })
 
-const classes = computed(() => [
-  'relative overflow-hidden select-none',
-  props.dark
+const style = computed(() => ({
+  width: typeof props.width === 'number' ? `${props.width}px` : props.width,
+  height:
+      typeof props.height === 'number'
+          ? `${props.height}px`
+          : props.height || variantDefaults.value.height,
+  borderRadius: typeof props.radius === 'number' ? `${props.radius}px` : props.radius,
+}))
+
+const classes = computed(() => {
+  const base = props.dark
       ? 'bg-white/10 text-gray-100'
-      : 'bg-gray-200 text-gray-800',
-  props.animated ? 'animate-skeleton-shimmer' : '',
-])
+      : 'bg-gray-200 text-gray-800'
+
+  const anim =
+      props.animation === 'shimmer'
+          ? 'animate-skeleton-shimmer'
+          : props.animation === 'pulse'
+              ? 'animate-skeleton-pulse'
+              : ''
+
+  return [
+    'relative overflow-hidden select-none',
+    base,
+    anim,
+  ]
+})
 </script>
 
 <template>
@@ -78,6 +91,7 @@ const classes = computed(() => [
 </template>
 
 <style scoped>
+/* ============ SHIMMER ANIMATION ============ */
 @keyframes skeleton-shimmer {
   0% {
     background-position: -200% 0;
@@ -96,5 +110,19 @@ const classes = computed(() => [
   );
   background-size: 200% 100%;
   animation: skeleton-shimmer 1.6s infinite linear;
+}
+
+/* ============ PULSE ANIMATION ============ */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-skeleton-pulse {
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
 }
 </style>
