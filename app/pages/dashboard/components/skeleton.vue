@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 import UiSkeleton from '~/components/Ui/Feedback/UiSkeleton.vue'
 import UiSkeletonGroup from '~/components/Ui/Feedback/UiSkeletonGroup.vue'
 
@@ -7,6 +7,14 @@ const loading = ref(true)
 
 onMounted(() => {
   setTimeout(() => (loading.value = false), 2500)
+})
+
+const theme = ref<'default' | 'fancy'>('default')
+const toggleTheme = () => {
+  theme.value = theme.value === 'default' ? 'fancy' : 'default'
+}
+watchEffect(() => {
+  document.documentElement.setAttribute('data-theme', theme.value)
 })
 </script>
 
@@ -62,5 +70,17 @@ onMounted(() => {
         </button>
       </div>
     </UiSkeletonGroup>
+
+    <div class="space-y-4">
+      <UiSkeleton variant="rect" height="60px" />
+      <UiSkeleton variant="rect" height="60px" intensity="strong" />
+    </div>
+
+    <button
+        class="mt-6 px-4 py-2 rounded bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white"
+        @click="toggleTheme"
+    >
+      Toggle Fancy Theme
+    </button>
   </section>
 </template>

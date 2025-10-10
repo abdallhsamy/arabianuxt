@@ -42,9 +42,16 @@
     --skeleton-radius: 0.5rem;
     --skeleton-speed: 1.6s;
 }
+
 .dark {
     --skeleton-bg: rgb(255 255 255 / 0.05);
     --skeleton-light: rgb(255 255 255 / 0.10);
+}
+
+[data-theme='fancy'] {
+    --skeleton-bg: rgb(236 72 153 / 0.10);    /* fuchsia-500 */
+    --skeleton-light: rgb(34 211 238 / 0.25); /* cyan-400 */
+    --skeleton-speed: 1.2s;
 }
 
 /* 🧊 Glass Effect */

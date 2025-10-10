@@ -10,7 +10,6 @@ export type SkeletonVariant =
     | 'button'
 
 export type SkeletonAnimation = 'shimmer' | 'pulse' | false
-export type SkeletonIntensity = 'subtle' | 'medium' | 'strong'
 
 export interface UiSkeletonProps {
   variant?: SkeletonVariant
@@ -18,29 +17,25 @@ export interface UiSkeletonProps {
   height?: string | number
   radius?: string | number
   animation?: SkeletonAnimation
-  intensity?: SkeletonIntensity
-  speed?: number // in seconds, affects both shimmer & pulse
+  speed?: number | string
   lines?: number
-  dark?: boolean
+  intensity?: 'subtle' | 'medium' | 'strong'
 }
 
 const props = withDefaults(defineProps<UiSkeletonProps>(), {
   variant: 'text',
   width: '100%',
-  height: undefined,
-  radius: '0.5rem',
+  radius: undefined,
   animation: 'shimmer',
-  intensity: 'medium',
-  speed: 1.6,
+  speed: undefined,
   lines: 1,
-  dark: true,
+  intensity: 'medium',
 })
 
-/* ---------- variant defaults ---------- */
+/* Variant-based defaults */
 const variantDefaults = computed(() => {
   switch (props.variant) {
     case 'circle':
-      return { height: props.width ?? '3rem' }
     case 'avatar':
       return { height: props.width ?? '3rem', radius: '9999px' }
     case 'button':
@@ -54,38 +49,34 @@ const variantDefaults = computed(() => {
   }
 })
 
-/* ---------- style ---------- */
+/* Style layer */
 const style = computed(() => ({
   width: typeof props.width === 'number' ? `${props.width}px` : props.width,
   height:
       typeof props.height === 'number'
           ? `${props.height}px`
           : props.height || variantDefaults.value.height,
-  borderRadius: typeof props.radius === 'number' ? `${props.radius}px` : props.radius,
-  '--skeleton-speed': `${props.speed}s`,
+  borderRadius:
+      props.radius ??
+      variantDefaults.value.radius ??
+      'var(--skeleton-radius, 0.5rem)',
   '--skeleton-intensity': intensityAlpha.value,
+  '--skeleton-speed':
+      typeof props.speed === 'number' ? `${props.speed}s` : props.speed ?? 'var(--skeleton-speed, 1.6s)',
 }))
 
-/* ---------- intensity mapping ---------- */
+/* Intensity mapping */
 const intensityAlpha = computed(() => {
   switch (props.intensity) {
-    case 'subtle':
-      return 0.05
-    case 'medium':
-      return 0.1
-    case 'strong':
-      return 0.2
-    default:
-      return 0.1
+    case 'subtle': return 0.05
+    case 'medium': return 0.10
+    case 'strong': return 0.20
+    default: return 0.10
   }
 })
 
-/* ---------- classes ---------- */
+/* Dynamic class builder */
 const classes = computed(() => {
-  const base = props.dark
-      ? 'bg-white/10 text-gray-100'
-      : 'bg-gray-200 text-gray-800'
-
   const anim =
       props.animation === 'shimmer'
           ? 'animate-skeleton-shimmer'
@@ -95,7 +86,7 @@ const classes = computed(() => {
 
   return [
     'relative overflow-hidden select-none',
-    base,
+    'bg-[var(--skeleton-bg)]',
     anim,
   ]
 })
@@ -108,44 +99,31 @@ const classes = computed(() => {
         :key="n"
         :class="classes"
         :style="[style, { width: n === props.lines ? '80%' : style.width }]"
-    ></div>
+    />
   </div>
 
-  <div v-else :class="classes" :style="style"></div>
+  <div v-else :class="classes" :style="style" />
 </template>
 
 <style scoped>
-/* ============ SHIMMER ANIMATION ============ */
 @keyframes skeleton-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
-
 .animate-skeleton-shimmer {
-  background: linear-gradient(
+  background-image: linear-gradient(
       90deg,
-      rgba(255, 255, 255, var(--skeleton-intensity, 0.1)) 25%,
-      rgba(255, 255, 255, calc(var(--skeleton-intensity, 0.1) * 1.5)) 37%,
-      rgba(255, 255, 255, var(--skeleton-intensity, 0.1)) 63%
+      var(--skeleton-bg) 25%,
+      var(--skeleton-light) 37%,
+      var(--skeleton-bg) 63%
   );
   background-size: 200% 100%;
   animation: skeleton-shimmer var(--skeleton-speed, 1.6s) infinite linear;
 }
-
-/* ============ PULSE ANIMATION ============ */
 @keyframes skeleton-pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
-
 .animate-skeleton-pulse {
   animation: skeleton-pulse var(--skeleton-speed, 1.6s) ease-in-out infinite;
 }
