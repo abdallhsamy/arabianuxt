@@ -36,6 +36,17 @@
     --overlay: var(--color-overlay);
 }
 
+:root {
+    --skeleton-bg: rgb(255 255 255 / 0.08);
+    --skeleton-light: rgb(255 255 255 / 0.15);
+    --skeleton-radius: 0.5rem;
+    --skeleton-speed: 1.6s;
+}
+.dark {
+    --skeleton-bg: rgb(255 255 255 / 0.05);
+    --skeleton-light: rgb(255 255 255 / 0.10);
+}
+
 /* 🧊 Glass Effect */
 @utility bg-glass {
     background: var(--color-glass);

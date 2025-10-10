@@ -32,6 +32,16 @@ onMounted(() => {
       <UiSkeleton variant="rect" width="100%" height="60px" :animation="false" />
     </div>
 
+    <div>
+      <h2 class="font-semibold mb-2">Intensity & Speed</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <UiSkeleton variant="rect" height="50px" intensity="subtle" :speed="2" />
+        <UiSkeleton variant="rect" height="50px" intensity="medium" :speed="1.6" />
+        <UiSkeleton variant="rect" height="50px" intensity="strong" :speed="1" />
+      </div>
+    </div>
+
+
     <!-- Group Example -->
     <UiSkeletonGroup :loading="loading">
       <template #skeletons>
