@@ -35,6 +35,10 @@ const toaster = useToaster()
     />
 
     <Toaster id="global-toaster" position="top-right" />
+
+    <ClientOnly>
+      <UiChatFloating />
+    </ClientOnly>
   </div>
 </template>
 

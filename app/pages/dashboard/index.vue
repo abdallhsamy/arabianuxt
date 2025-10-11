@@ -103,7 +103,7 @@ const commands = [
     run: () => toastRef.value?.push({ text: 'Action executed!', type: 'info' }),
   },
 ]
-const stattistics = [
+const statistics = [
   { label: 'Revenue', value: '$124,000', change: '+12%' },
   { label: 'Active Users', value: '8,213', change: '+3.8%' },
   { label: 'Transactions', value: '42,567', change: '+6.1%' },
@@ -126,7 +126,7 @@ const stattistics = [
     <!-- Gradient Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div
-          v-for="item in stattistics"
+          v-for="item in statistics"
           :key="item.label"
           class="relative group overflow-hidden rounded-2xl p-[2px] transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(99,102,241,0.2)]"
       >
