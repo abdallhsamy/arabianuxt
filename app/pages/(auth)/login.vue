@@ -64,7 +64,7 @@ const handleLogin = async (): Promise<void> => {
               <button
                   type="button"
                   @click="showPassword = !showPassword"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                  class="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
               >
                 <component :is="showPassword ? EyeOff : Eye" class="w-5 h-5" />
               </button>
