@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { 
   Home, BarChart3, Users, Settings, Crown, 
-  Activity, Shield, FileText, Zap, Calendar, 
-  CreditCard, AlertTriangle, Heart, Plug, 
+  Activity, Shield, Zap, Calendar,
+  CreditCard, AlertTriangle, Plug,
   BookOpen, ScrollText, Bell, Building2, 
   Lock, User, Sparkles, Palette, 
   HeadphonesIcon, Cog, UserCheck, Eye,
   Square, MousePointer, Edit3, Play, 
   MessageSquare, Mail, Layers, Code, 
-  Palette as PaletteIcon, Sliders, 
   Table, Type, ToggleLeft, FileText as FileTextIcon,
   AlertCircle, Badge, CreditCard as CreditCardIcon,
   BarChart, Cpu, Droplets, Grip, 
   Hash, Image, List, Maximize2,
   Minus, Plus, RotateCcw, Search,
-  Settings as SettingsIcon, Shield as ShieldIcon,
   Square as SquareIcon, Target, Wrench,
   LogIn, UserPlus, KeyRound, Lock as LockIcon
 } from 'lucide-vue-next';
@@ -24,6 +22,7 @@ import { useSidebar } from '~/composables/useSidebar';
 
 const router = useRouter();
 const route = useRoute();
+const localePath = useLocalePath();
 
 // Use shared sidebar state
 const { isExpanded, isMobile, checkViewport, toggleSidebar, setExpanded } = useSidebar();
@@ -201,11 +200,11 @@ const navigate = (to: string): void => {
             :key="item.label"
             class="relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group overflow-hidden"
             :class="!isExpanded && 'mx-auto'"
-            @click="navigate(item.to)"
+            @click="navigate(localePath(item.to))"
         >
           <!-- Active Glow Border -->
           <div
-              v-if="route.path === item.to"
+              v-if="route.path === localePath(item.to)"
               class="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 opacity-40 blur-md animate-gradient-flow"
           />
 
@@ -213,7 +212,7 @@ const navigate = (to: string): void => {
           <component
               :is="item.icon"
               class="w-5 h-5 shrink-0 z-10 transition-all duration-300"
-              :class="route.path === item.to
+              :class="route.path === localePath(item.to)
               ? 'text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]'
               : 'text-gray-400 group-hover:text-fuchsia-400 group-hover:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]'"
           />
@@ -223,7 +222,7 @@ const navigate = (to: string): void => {
               class="z-10 font-medium text-sm transition-opacity duration-300"
               :class="[
               isExpanded ? 'opacity-100' : 'opacity-0 hidden',
-              route.path === item.to ? 'text-white' : 'text-gray-400'
+              route.path === localePath(item.to) ? 'text-white' : 'text-gray-400'
             ]"
           >
             {{ item.label }}
@@ -263,11 +262,11 @@ const navigate = (to: string): void => {
         :key="item.label"
         class="flex flex-col items-center gap-1 transition-all duration-300 min-w-0 flex-shrink-0 px-2"
         :class="[
-        route.path === item.to
+        route.path === localePath(item.to)
           ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]'
           : 'text-gray-400 hover:text-fuchsia-400 hover:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]'
       ]"
-        @click="navigate(item.to)"
+        @click="navigate(localePath(item.to))"
     >
       <component :is="item.icon" class="w-5 h-5" />
       <span class="text-xs whitespace-nowrap">{{ item.label }}</span>
