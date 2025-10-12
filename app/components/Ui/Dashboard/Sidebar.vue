@@ -20,11 +20,15 @@ import {
 import { useRouter, useRoute } from '#imports';
 import { useSidebar } from '~/composables/useSidebar';
 import { useI18n } from 'vue-i18n';
+import { LanguageDirections } from '~~/i18n/config';
 
 const router = useRouter();
 const route = useRoute();
 const localePath = useLocalePath();
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+// RTL support
+const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof LanguageDirections] === 'rtl');
 
 // Use shared sidebar state
 const { isExpanded, isMobile, checkViewport, toggleSidebar, setExpanded } = useSidebar();
@@ -137,18 +141,37 @@ const menuGroups = [
   { items: menuItems.slice(59), label: t('navigation.authentication') },
 ];
 
-const mainMargin = computed(() =>
-    isMobile.value ? '0' : isExpanded.value ? '14rem' : '4rem'
-);
+const mainMargin = computed(() => {
+  if (isMobile.value) return '0';
+  return isRTL.value 
+    ? (isExpanded.value ? '14rem' : '4rem')
+    : (isExpanded.value ? '14rem' : '4rem');
+});
 
 onMounted(() => {
   const main = document.querySelector('#main') as HTMLElement | null
-  if (main) main.style.marginLeft = mainMargin.value
+  if (main) {
+    if (isRTL.value) {
+      main.style.marginRight = mainMargin.value
+      main.style.marginLeft = '0'
+    } else {
+      main.style.marginLeft = mainMargin.value
+      main.style.marginRight = '0'
+    }
+  }
 });
 
-watch(mainMargin, (val) => {
+watch([mainMargin, isRTL], ([val, rtl]) => {
   const main = document.querySelector('#main') as HTMLElement | null
-  if (main) main.style.marginLeft = val
+  if (main) {
+    if (rtl) {
+      main.style.marginRight = val
+      main.style.marginLeft = '0'
+    } else {
+      main.style.marginLeft = val
+      main.style.marginRight = '0'
+    }
+  }
 });
 
 const navigate = (to: string): void => {
@@ -160,16 +183,17 @@ const navigate = (to: string): void => {
   <!-- 🧭 Desktop Sidebar -->
   <aside
       v-if="!isMobile"
-      class="fixed top-6 left-6 z-40 flex flex-col items-center rounded-2xl transition-all duration-500 overflow-hidden backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.2)] h-[calc(100vh-3rem)]"
+      class="fixed top-6 z-40 flex flex-col items-center rounded-2xl transition-all duration-500 overflow-hidden backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.2)] h-[calc(100vh-3rem)]"
       :class="[
       isExpanded ? 'w-56' : 'w-16',
-      'bg-gradient-to-br from-[#0f0f11]/95 via-[#141417]/95 to-[#0a0a0c]/95'
+      'bg-gradient-to-br from-[#0f0f11]/95 via-[#141417]/95 to-[#0a0a0c]/95',
+      isRTL ? 'right-6' : 'left-6'
     ]"
       @mouseenter="setExpanded(true)"
       @mouseleave="setExpanded(false)"
   >
     <!-- Header -->
-    <div class="flex items-center justify-between w-full p-3 border-b border-white/10">
+    <div class="flex items-center w-full p-3 border-b border-white/10" :class="isRTL ? 'flex-row-reverse' : 'justify-between'">
       <span
           class="font-bold text-lg whitespace-nowrap transition-opacity duration-300 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-cyan-400"
           :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden'"
@@ -201,7 +225,10 @@ const navigate = (to: string): void => {
             v-for="item in group.items"
             :key="item.label"
             class="relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group overflow-hidden"
-            :class="!isExpanded && 'mx-auto'"
+            :class="[
+              !isExpanded && 'mx-auto',
+              isRTL && 'flex-row-reverse'
+            ]"
             @click="navigate(localePath(item.to))"
         >
           <!-- Active Glow Border -->
@@ -237,7 +264,10 @@ const navigate = (to: string): void => {
     <div class="mt-auto mb-3 w-full px-3 flex justify-center z-10">
       <button
           class="relative flex items-center justify-center w-full gap-2 overflow-hidden rounded-xl transition-all duration-300"
-          :class="isExpanded ? 'px-3 py-2' : 'p-3 aspect-square'"
+          :class="[
+            isExpanded ? 'px-3 py-2' : 'p-3 aspect-square',
+            isRTL && 'flex-row-reverse'
+          ]"
       >
         <!-- Animated Gradient Background -->
         <span

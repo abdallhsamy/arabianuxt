@@ -3,8 +3,23 @@ import Sidebar from '~/components/Ui/Dashboard/Sidebar.vue'
 import Topbar from '~/components/Layout/Topbar.vue'
 import Toaster from '~/components/Ui/Common/Toaster.vue'
 import { useToaster } from '~/composables/useToaster'
+import { useI18n } from 'vue-i18n'
+import { LanguageDirections } from '~~/i18n/config'
 
 const toaster = useToaster()
+const { locale } = useI18n()
+
+// Set document direction based on current locale
+const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof LanguageDirections] === 'rtl')
+
+// Apply RTL direction to document
+onMounted(() => {
+  document.dir = isRTL.value ? 'rtl' : 'ltr'
+})
+
+watch(isRTL, (newIsRTL) => {
+  document.dir = newIsRTL ? 'rtl' : 'ltr'
+})
 
 </script>
 
@@ -25,7 +40,7 @@ const toaster = useToaster()
     <Sidebar />
 
     <!-- Main Content -->
-    <main id="main" class="transition-all mt-16 duration-300 p-8 md:pb-16">
+    <main id="main" class="transition-all mt-16 duration-300 p-8 md:pb-16" :class="{ 'rtl': isRTL }">
       <slot />
     </main>
 
@@ -51,5 +66,23 @@ const toaster = useToaster()
 .animate-gradient-flow {
   background-size: 200% 200%;
   animation: gradient-flow 15s ease infinite;
+}
+
+/* RTL Support */
+.rtl {
+  direction: rtl;
+}
+
+/* RTL-specific adjustments */
+:global(.rtl) {
+  text-align: right;
+}
+
+:global(.rtl) .text-left {
+  text-align: right;
+}
+
+:global(.rtl) .text-right {
+  text-align: left;
 }
 </style>

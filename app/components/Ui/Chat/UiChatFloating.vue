@@ -40,7 +40,7 @@ const send = async (): Promise<void> => {
 <template>
   <!-- Floating Button -->
   <button
-      class="fixed z-50 bottom-18 sm:bottom-4 right-4 w-12 h-12 p-4 rounded-full bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white shadow-lg hover:scale-105 transition"
+      class="fixed z-50 bottom-18 sm:bottom-4 ltr:right-4 rtl:left-4 w-12 h-12 p-4 rounded-full bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white shadow-lg hover:scale-105 transition"
       @click="open = !open"
   >
     <span class="absolute top-0 left-0 right-0 m-auto translate-y-1/2">
@@ -58,7 +58,7 @@ const send = async (): Promise<void> => {
   <transition name="fade">
     <div
         v-if="open"
-        class="fixed bottom-34 sm:bottom-20 right-6 w-[380px] max-w-[calc(100%-48px)] max-h-[580px] bg-black/80 border border-white/10 backdrop-blur-xl rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+        class="fixed bottom-34 sm:bottom-20 ltr:right-6 rtl:left-6 w-[380px] max-w-[calc(100%-48px)] max-h-[580px] bg-black/80 border border-white/10 backdrop-blur-xl rounded-2xl shadow-2xl flex flex-col overflow-hidden"
     >
       <!-- Header -->
       <div class="flex items-center justify-between border-b border-white/10 bg-white/5 px-3 py-2">
