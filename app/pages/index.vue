@@ -2,8 +2,8 @@
 import { useSeoMeta, useHead } from '#imports'
 import { useI18n } from 'vue-i18n'
 import { Github, Globe } from 'lucide-vue-next'
-import {AvailableLocales, LanguageDirections} from "~~/i18n/config";
-const { t, locale, setLocale } = useI18n()
+import {AvailableLocales} from "~~/i18n/config";
+const { t, locale } = useI18n()
 
 const switchLocalePath = useSwitchLocalePath()
 definePageMeta({ layout: 'empty' })
@@ -91,7 +91,7 @@ const features = [
       class="min-h-screen bg-gradient-to-br from-fuchsia-900 via-gray-900 to-black text-gray-100 flex flex-col items-center justify-center px-6 py-24 relative transition-all">
     <!-- Language Switch -->
     <NuxtLink
-        class="absolute top-6 right-6 flex items-center gap-2 text-sm bg-white/10 px-3 py-1.5 rounded-lg border border-white/15 hover:bg-white/15 transition"
+        class="absolute top-6 ltr:right-6 rtl:left-6 flex items-center gap-2 text-sm bg-white/10 px-3 py-1.5 rounded-lg border border-white/15 hover:bg-white/15 transition"
         :to="toggleLocale"
     >
       <Globe class="w-4 h-4" />
