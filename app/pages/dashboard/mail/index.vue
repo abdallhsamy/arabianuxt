@@ -118,7 +118,7 @@ const sendMail = () => {
         <button
             v-for="folder in ['inbox','sent','drafts','trash']"
             :key="folder"
-            class="w-full text-left px-3 py-2 rounded-lg text-sm capitalize"
+            class="w-full text-start px-3 py-2 rounded-lg text-sm capitalize"
             :class="selectedFolder===folder ? 'bg-white/10 text-fuchsia-400' : 'hover:bg-white/5'"
             @click="selectedFolder = folder"
         >
@@ -189,10 +189,10 @@ const sendMail = () => {
 
       <footer class="flex justify-end gap-2 p-3 border-t border-white/10">
         <button class="px-3 py-1.5 bg-white/10 rounded-md text-sm hover:bg-white/20">
-          <Archive class="w-4 h-4 inline-block mr-1" /> Archive
+          <Archive class="w-4 h-4 inline-block me-1" /> Archive
         </button>
         <button class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-md text-sm">
-          <Trash2 class="w-4 h-4 inline-block mr-1" /> Delete
+          <Trash2 class="w-4 h-4 inline-block me-1" /> Delete
         </button>
       </footer>
     </aside>

@@ -19,8 +19,8 @@ const show = ref(false)
           :class="{
           'bottom-full mb-2': props.position === 'top' || !props.position,
           'top-full mt-2': props.position === 'bottom',
-          'right-full mr-2': props.position === 'left',
-          'left-full ml-2': props.position === 'right'
+          'right-full me-2': props.position === 'left',
+          'left-full ms-2': props.position === 'right'
         }"
       >
         {{ props.text }}

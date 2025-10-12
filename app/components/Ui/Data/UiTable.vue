@@ -321,7 +321,7 @@ const toCSV = (): void => {
         />
       </div>
 
-      <div class="ml-auto flex items-center gap-2">
+      <div class="ms-auto flex items-center gap-2">
         <!-- Columns menu -->
         <details class="relative">
           <summary class="list-none select-none cursor-pointer rounded-lg border border-white/10 bg-white/5 text-gray-100 text-sm px-3 py-2">
@@ -405,7 +405,7 @@ const toCSV = (): void => {
               <!-- Filter trigger -->
               <button
                   v-if="col.filter"
-                  class="ml-1 text-xs text-gray-400 hover:text-fuchsia-300"
+                  class="ms-1 text-xs text-gray-400 hover:text-fuchsia-300"
                   @click.stop="toggleFilterMenu(col.key)"
                   aria-label="Open filter"
               >
@@ -529,7 +529,7 @@ const toCSV = (): void => {
     <!-- Footer -->
     <div class="mt-3 flex flex-wrap items-center gap-3 text-xs text-gray-400">
       <div>Page {{ internalPage }} of {{ pages }} • {{ totalRows }} rows</div>
-      <div class="ml-auto flex items-center gap-2">
+      <div class="ms-auto flex items-center gap-2">
         <label>Rows per page</label>
         <select
             class="rounded-lg bg-white/5 border border-white/10 text-sm text-gray-100 px-2 py-1 outline-none"

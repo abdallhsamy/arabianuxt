@@ -40,7 +40,7 @@ const unreadCount = computed<number>(() => props.items.filter(i => !i.read).leng
       <header class="p-4 border-b border-white/10 flex items-center gap-2">
         <h3 class="text-gray-100 font-semibold flex-1">
           {{ props.title || 'Notifications' }}
-          <span v-if="unreadCount" class="text-xs text-amber-300 ml-2">({{ unreadCount }} new)</span>
+          <span v-if="unreadCount" class="text-xs text-amber-300 ms-2">({{ unreadCount }} new)</span>
         </h3>
         <button
             class="text-xs rounded-md border border-white/10 bg-white/5 px-2 py-1 text-gray-200 hover:bg-white/10"
@@ -54,7 +54,7 @@ const unreadCount = computed<number>(() => props.items.filter(i => !i.read).leng
         >
           Clear
         </button>
-        <button class="ml-1 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-gray-200" @click="close">✕</button>
+        <button class="ms-1 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-gray-200" @click="close">✕</button>
       </header>
 
       <ul class="p-3 space-y-2 overflow-y-auto flex-1">

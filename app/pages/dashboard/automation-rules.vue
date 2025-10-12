@@ -68,7 +68,7 @@ const addRule = (): void => {
             <input v-model="form.action" class="input-dark" placeholder="Action (e.g., notify.slack(#security))" />
           </div>
           <div class="text-right mt-4">
-            <button class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white mr-2" @click="open = false">Cancel</button>
+            <button class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white me-2" @click="open = false">Cancel</button>
             <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110" @click="addRule">Add</button>
           </div>
         </div>

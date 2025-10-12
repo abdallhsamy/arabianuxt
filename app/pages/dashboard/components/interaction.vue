@@ -30,7 +30,7 @@ const items = [
       Open Search
     </button>
 
-    <UiTooltip text="Hover tooltip example"><span class="underline cursor-help">Hover me</span></UiTooltip>
+    <UiTooltip class="ms-4" text="Hover tooltip example"><span class="underline cursor-help">Hover me</span></UiTooltip>
 
     <UiSearchPanel v-model="searchOpen" :items="items" />
     <UiChatDock />

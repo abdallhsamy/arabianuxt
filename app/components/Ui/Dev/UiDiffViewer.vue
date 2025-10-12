@@ -51,7 +51,7 @@ const diff = computed<DiffLine[]>(() => {
           {{ d.a ?? '' }}{{ (d.a!=null || d.b!=null) ? '|' : '' }}{{ d.b ?? '' }}
         </span>
         <span class="opacity-60">{{ d.type==='add' ? '+' : d.type==='del' ? '-' : ' ' }}</span>
-        <span class="ml-2">{{ d.text }}</span>
+        <span class="ms-2">{{ d.text }}</span>
       </div>
     </div>
   </div>

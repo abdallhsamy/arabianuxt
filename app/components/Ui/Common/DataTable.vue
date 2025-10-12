@@ -15,7 +15,7 @@ const getKey = (row: Record<string, unknown>, index: number): string => {
   <div class="overflow-x-auto">
     <table class="w-full text-sm">
       <thead class="text-gray-400">
-      <tr class="text-left">
+      <tr class="text-start">
         <th v-for="h in headers" :key="h.key" class="py-2 font-medium" :class="h.class ?? ''">
           {{ h.label }}
         </th>

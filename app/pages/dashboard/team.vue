@@ -50,7 +50,12 @@ const roleBadge = (r: Member['role']): string => ({
       <div class="rounded-2xl bg-[rgba(15,17,23,0.92)] backdrop-blur-xl border border-white/10 p-6 overflow-x-auto">
         <table class="w-full text-sm">
           <thead class="text-gray-400">
-          <tr class="text-left"><th class="py-2">Name</th><th class="py-2">Email</th><th class="py-2">Role</th><th class="py-2 text-right">Actions</th></tr>
+          <tr class="text-start">
+            <th class="py-2">Name</th>
+            <th class="py-2">Email</th>
+            <th class="py-2">Role</th>
+            <th class="py-2 text-end">Actions</th>
+          </tr>
           </thead>
           <tbody class="divide-y divide-white/10">
           <tr v-for="m in members" :key="m.id" class="hover:bg-white/5 transition-colors">
@@ -62,7 +67,7 @@ const roleBadge = (r: Member['role']): string => ({
             <td class="py-3">
               <span class="px-2 py-1 rounded-full text-xs border" :class="roleBadge(m.role)">{{ m.role }}</span>
             </td>
-            <td class="py-3 text-right">
+            <td class="py-3 text-end">
               <button class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-rose-300 flex items-center gap-1" @click="removeMember(m.id)">
                 <Trash2 class="w-4 h-4" /> Remove
               </button>

@@ -42,7 +42,7 @@ const message =
       </div>
 
       <div class="mt-8 text-xs text-gray-500">
-        <AlertTriangle class="inline w-4 h-4 mr-1" />
+        <AlertTriangle class="inline w-4 h-4 me-1" />
         {{ new Date().toLocaleString() }}
       </div>
     </div>

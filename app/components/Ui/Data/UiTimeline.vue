@@ -16,7 +16,7 @@ defineProps<{ events: TimelineEvent[] }>()
           class="absolute -left-2 top-1 w-3 h-3 rounded-full"
           :class="event.color || 'bg-gradient-to-r from-fuchsia-500 to-cyan-500'"
       ></div>
-      <div class="ml-2">
+      <div class="ms-2">
         <p class="font-semibold text-gray-100">{{ event.title }}</p>
         <p v-if="event.description" class="text-sm text-gray-400">
           {{ event.description }}

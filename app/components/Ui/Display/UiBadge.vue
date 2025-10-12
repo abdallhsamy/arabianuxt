@@ -42,7 +42,7 @@ const colorMap = {
             : `bg-${props.color}-500/20 text-${props.color}-300`,
     ]"
   >
-    <component v-if="props.icon && !props.dot" :is="props.icon" class="w-3 h-3 mr-1" />
+    <component v-if="props.icon && !props.dot" :is="props.icon" class="w-3 h-3 me-1" />
     <span v-if="!props.dot">{{ props.label }}</span>
   </span>
 </template>

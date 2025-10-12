@@ -140,7 +140,7 @@ watch(() => isOpen.value, (open) => open && nextTick(() => dropdownRef.value?.fo
       </div>
 
       <ChevronDown
-          class="mr-3 text-gray-400 transition-transform duration-200"
+          class="me-3 text-gray-400 transition-transform duration-200"
           :class="[ s.caret, { 'rotate-180': isOpen } ]"
       />
     </div>
@@ -155,7 +155,7 @@ watch(() => isOpen.value, (open) => open && nextTick(() => dropdownRef.value?.fo
       >
         <!-- Search -->
         <div v-if="props.searchable" class="flex items-center px-3 py-2 border-b border-white/10">
-          <Search class="w-4 h-4 text-gray-400 mr-2" />
+          <Search class="w-4 h-4 text-gray-400 me-2" />
           <input
               v-model="searchQuery"
               type="text"

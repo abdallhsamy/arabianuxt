@@ -162,7 +162,7 @@ onUnmounted(() => {
         <span>{{ isLive ? 'Live Updating' : 'Paused' }}</span>
         <span
             :class="[
-            'ml-2 w-2.5 h-2.5 rounded-full animate-pulse',
+            'ms-2 w-2.5 h-2.5 rounded-full animate-pulse',
             isLive ? 'bg-green-400 shadow-[0_0_8px_2px_rgba(74,222,128,0.6)]' : 'bg-gray-400',
           ]"
         ></span>

@@ -118,7 +118,7 @@ const colorClass = computed(() => colors[props.color])
               <component v-if="item.icon" :is="item.icon" class="w-4 h-4 shrink-0" />
               <span class="truncate text-gray-100">{{ item.label }}</span>
             </div>
-            <span v-if="item.shortcut" class="text-xs text-gray-500 ml-3">{{ item.shortcut }}</span>
+            <span v-if="item.shortcut" class="text-xs text-gray-500 ms-3">{{ item.shortcut }}</span>
           </li>
         </ul>
       </div>

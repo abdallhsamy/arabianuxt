@@ -13,7 +13,7 @@ const isArray = (v: unknown): v is unknown[] => Array.isArray(v)
     <div class="cursor-pointer select-none mb-1" @click="open=!open">
       <span class="text-fuchsia-300">{{ rootKey || 'root' }}</span>
       <span class="text-gray-500"> — {{ isArray(value) ? 'Array' : isObject(value) ? 'Object' : typeof value }}</span>
-      <span class="ml-2 text-gray-400">{{ open ? '▾' : '▸' }}</span>
+      <span class="ms-2 text-gray-400">{{ open ? '▾' : '▸' }}</span>
     </div>
 
     <div v-if="open" class="pl-4 border-l border-white/10">

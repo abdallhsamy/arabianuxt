@@ -83,7 +83,7 @@ const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
       <!-- Floating label -->
       <label
           v-if="props.label"
-          class="absolute left-3 transition-all duration-300 pointer-events-none select-none"
+          class="absolute ltr:left-3 rtl:right-3 transition-all duration-300 pointer-events-none select-none"
           :class="[
           shouldFloat
             ? [
@@ -126,7 +126,7 @@ const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
       <component
           v-if="stateIcon"
           :is="stateIcon"
-          class="w-4 h-4 mr-3"
+          class="w-4 h-4 me-3"
           :class="{
           'text-emerald-400': props.state === 'success',
           'text-amber-400': props.state === 'warning',

@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 export interface UiTooltipProps {
   text: string
-  position?: 'top' | 'right' | 'bottom' | 'left'
+  position?: 'top' | 'right' | 'bottom' | 'left' | 'start' | 'end'
   trigger?: 'hover' | 'click' | 'focus'
   delay?: number
   arrow?: boolean
@@ -73,6 +73,8 @@ const colors: Record<string, string> = {
           position === 'bottom' && 'top-full mt-2 left-1/2 -translate-x-1/2',
           position === 'right' && 'left-full ml-2 top-1/2 -translate-y-1/2',
           position === 'left' && 'right-full mr-2 top-1/2 -translate-y-1/2',
+          position === 'start' && 'ltr:right-full rtl:left-full me-2 top-1/2 -translate-y-1/2',
+          position === 'end' && 'ltr:left-full rtl:right-full ms-2 top-1/2 -translate-y-1/2',
         ]"
       >
         {{ text }}
@@ -87,6 +89,8 @@ const colors: Record<string, string> = {
             position === 'bottom' && 'top-[-4px] left-1/2 -translate-x-1/2',
             position === 'right' && 'left-[-4px] top-1/2 -translate-y-1/2',
             position === 'left' && 'right-[-4px] top-1/2 -translate-y-1/2',
+            position === 'start' && 'ltr:right-[-4px] rtl:left-[-4px] top-1/2 -translate-y-1/2',
+            position === 'end' && 'ltr:left-[-4px] rtl:right-[-4px] top-1/2 -translate-y-1/2',
           ]"
         />
       </div>

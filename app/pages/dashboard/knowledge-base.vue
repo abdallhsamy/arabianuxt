@@ -45,7 +45,7 @@ const openArticle = (a: Article): void => { active.value = a }
             <button
                 v-for="c in cats" :key="c"
                 @click="category = c as any"
-                class="px-3 py-2 rounded-xl text-left"
+                class="px-3 py-2 rounded-xl text-start"
                 :class="category===c ? 'bg-gradient-to-r from-indigo-500/40 to-fuchsia-500/40 text-white ring-1 ring-white/10'
                                    : 'bg-white/5 text-gray-200 hover:bg-white/10'"
             >
@@ -56,7 +56,7 @@ const openArticle = (a: Article): void => { active.value = a }
           <div class="space-y-2 max-h-[40vh] overflow-y-auto pr-1">
             <button
                 v-for="a in filtered" :key="a.id"
-                class="w-full text-left px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-sm text-gray-200"
+                class="w-full text-start px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-sm text-gray-200"
                 @click="openArticle(a)"
             >
               {{ a.title }}

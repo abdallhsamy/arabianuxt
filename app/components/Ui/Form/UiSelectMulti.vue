@@ -141,7 +141,7 @@ const shouldFloat = computed<boolean>(() => isOpen.value || selectedValues.value
           class="absolute z-50 mt-1 w-full border border-white/10 rounded-xl backdrop-blur-xl bg-black/70 shadow-2xl max-h-64 overflow-auto"
       >
         <div v-if="props.searchable" class="flex items-center px-3 py-2 border-b border-white/10">
-          <Search class="w-4 h-4 text-gray-400 mr-2" />
+          <Search class="w-4 h-4 text-gray-400 me-2" />
           <input
               v-model="search"
               type="text"

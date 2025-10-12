@@ -15,7 +15,7 @@ const remove = (tag: string): void => emit('update:modelValue', props.modelValue
 <template>
   <div class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-2 flex items-center gap-2 flex-wrap">
     <span v-for="t in props.modelValue" :key="t" class="text-xs rounded-md border border-white/10 bg-white/10 px-2 py-0.5 text-gray-100">
-      {{ t }} <button class="ml-1 opacity-70 hover:opacity-100" @click="remove(t)">×</button>
+      {{ t }} <button class="ms-1 opacity-70 hover:opacity-100" @click="remove(t)">×</button>
     </span>
     <input v-model="text" :placeholder="props.placeholder" class="flex-1 bg-transparent outline-none text-gray-100" @keydown.enter.prevent="add" />
   </div>

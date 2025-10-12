@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<UiStatsCardProps>(), {
       <span :class="props.delta >= 0 ? 'text-emerald-300' : 'text-rose-300'">
         {{ props.delta >= 0 ? '+' : '' }}{{ props.delta }}%
       </span>
-      <span class="text-gray-400 ml-2">{{ props.hint }}</span>
+      <span class="text-gray-400 ms-2">{{ props.hint }}</span>
     </div>
   </div>
 </template>

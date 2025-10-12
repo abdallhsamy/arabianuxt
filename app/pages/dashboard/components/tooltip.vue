@@ -28,6 +28,16 @@ import UiButton from '~/components/Ui/Common/UiButton.vue'
         <UiButton label="Hover Left" />
       </UiTooltip>
 
+      <!-- Start -->
+      <UiTooltip text="Start Tooltip" position="start" color="emerald">
+        <UiButton label="Hover Start" />
+      </UiTooltip>
+
+      <!-- End -->
+      <UiTooltip text="End Tooltip" position="end" color="rose">
+        <UiButton label="Hover End" />
+      </UiTooltip>
+
       <!-- Click Trigger -->
       <UiTooltip text="Click me to toggle" trigger="click" color="amber">
         <UiButton label="Click Tooltip" />

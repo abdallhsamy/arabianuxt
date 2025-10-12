@@ -73,13 +73,13 @@ const renderIcon = (icon: any) => icon || LayoutDashboard
             <transition name="fade">
               <ul
                   v-if="openMap[it.label] && isExpanded"
-                  class="ml-7 mt-1 space-y-1 border-l border-white/10 pl-3"
+                  class="ms-7 mt-1 space-y-1 border-l border-white/10 pl-3"
               >
                 <li v-for="(ch, j) in it.children" :key="j">
                   <NuxtLink :to="ch.to || '#'" class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-white/10 text-gray-300">
                     <component :is="renderIcon(ch.icon)" class="w-3.5 h-3.5 text-gray-500" />
                     <span class="truncate">{{ ch.label }}</span>
-                    <span v-if="ch.badge" class="ml-auto text-[10px] rounded bg-white/10 px-1.5 border border-white/10">{{ ch.badge }}</span>
+                    <span v-if="ch.badge" class="ms-auto text-[10px] rounded bg-white/10 px-1.5 border border-white/10">{{ ch.badge }}</span>
                   </NuxtLink>
                 </li>
               </ul>

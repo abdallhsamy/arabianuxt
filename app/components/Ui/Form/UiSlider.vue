@@ -43,7 +43,7 @@ const onChange = (e: Event) => emit('change', Number((e.target as HTMLInputEleme
 
       <!-- Knob -->
       <div
-          class="absolute top-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.35)] w-4 h-4 -ml-2"
+          class="absolute top-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.35)] w-4 h-4 -ms-2"
           :style="{ left: pct + '%' }"
       />
       <!-- Value bubble -->

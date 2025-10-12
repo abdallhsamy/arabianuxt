@@ -91,7 +91,7 @@ onMounted(() => nextTick(resizeTextarea))
       <!-- Floating label -->
       <label
           v-if="props.label"
-          class="absolute left-3 transition-all duration-300 pointer-events-none select-none"
+          class="absolute ltr:left-3 rtl:right-3 transition-all duration-300 pointer-events-none select-none"
           :class="[
           shouldFloat
             ? [
@@ -131,7 +131,7 @@ onMounted(() => nextTick(resizeTextarea))
       <component
           v-if="stateIcon"
           :is="stateIcon"
-          class="absolute right-3 top-3 w-4 h-4"
+          class="absolute ltr:right-3 rtl:left-3 top-3 w-4 h-4"
           :class="{
           'text-emerald-400': props.state === 'success',
           'text-amber-400': props.state === 'warning',

@@ -94,7 +94,7 @@ const colorClass = computed(() => colors[props.color])
       <!-- Labels -->
       <div
           class="flex flex-col"
-          :class="vertical ? 'ml-4' : 'mt-3'"
+          :class="vertical ? 'ms-4' : 'mt-3'"
       >
         <span
             class="text-sm font-medium"

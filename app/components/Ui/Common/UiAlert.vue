@@ -99,7 +99,7 @@ const iconMap: Record<string, any> = {
       <button
           v-if="dismissible"
           @click="close"
-          class="absolute top-2 right-2 text-gray-400 hover:text-white transition"
+          class="absolute top-2 ltr:right-2 rtl:left-2 text-gray-400 hover:text-white transition"
           aria-label="Close"
       >
         <X class="w-4 h-4" />

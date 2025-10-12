@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<UiUserAvatarGroupProps>(), {
     <div
         v-for="(user, i) in props.users.slice(0, props.max)"
         :key="user.id"
-        class="border-2 border-gray-900 rounded-full overflow-hidden -ml-2 first:ml-0"
+        class="border-2 border-gray-900 rounded-full overflow-hidden -ms-2 first:ms-0"
         :style="{ width: props.size + 'px', height: props.size + 'px' }"
         :title="user.name"
     >
@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<UiUserAvatarGroupProps>(), {
 
     <div
         v-if="props.users.length > props.max"
-        class="ml-2 text-xs text-gray-400"
+        class="ms-2 text-xs text-gray-400"
     >
       +{{ props.users.length - props.max }}
     </div>

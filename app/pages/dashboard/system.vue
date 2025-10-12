@@ -59,7 +59,7 @@ const saveAll = (): void => {
             <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:bg-gradient-to-r peer-checked:from-indigo-500 peer-checked:to-fuchsia-500 transition-all"></div>
             <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition-all peer-checked:translate-x-5"></div>
           </label>
-          <span class="ml-3 text-sm text-white">{{ maintenance ? 'Enabled' : 'Disabled' }}</span>
+          <span class="ms-3 text-sm text-white">{{ maintenance ? 'Enabled' : 'Disabled' }}</span>
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ watch(query, () => {
               class="px-2 py-1 hover:bg-white/10 cursor-pointer rounded-md text-gray-300"
           >
             {{ i.title }}
-            <span v-if="i.category" class="text-gray-500 text-xs ml-2">({{ i.category }})</span>
+            <span v-if="i.category" class="text-gray-500 text-xs ms-2">({{ i.category }})</span>
           </li>
         </ul>
       </div>
