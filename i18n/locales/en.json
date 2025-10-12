@@ -1,0 +1,37 @@
+{
+  "public": {
+    "homePage": {
+      "title": "Arabianuxt",
+      "subtitle": "The elegant, production-ready Nuxt 4 + Tailwind v4 dashboard and UI kit.",
+      "description": "Designed for speed, security, and scalability — by Abdallah Samy.",
+      "openDashboard": "Open Dashboard",
+      "features": {
+        "nuxt": {
+          "title": "⚡ Nuxt 4 + Tailwind v4",
+          "desc": "Modern SSR, atomic CSS, and instant dev experience."
+        },
+        "ui": {
+          "title": "🎨 Arabia UI System",
+          "desc": "Beautiful glassmorphic components built with best practices."
+        },
+        "ai": {
+          "title": "🧠 AI-Powered Editing",
+          "desc": "Tiptap Pro editor with built-in slash commands & AI assistance."
+        },
+        "security": {
+          "title": "🔒 Secure by Design",
+          "desc": "Nuxt-Security, CSP, and DevSecOps-ready defaults."
+        },
+        "typed": {
+          "title": "🧩 Modular & Typed",
+          "desc": "Pinia setup syntax, full TypeScript, and composable architecture."
+        }
+      },
+      "footer": {
+        "by": "© {year} Abdallah Samy —",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+      }
+    }
+  }
+}
