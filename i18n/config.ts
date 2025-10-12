@@ -12,13 +12,21 @@ export const LanguageDirections: Record<AvailableLocale, LanguageDirection> = {
     [AvailableLocales.English]: 'ltr',
 }
 
+const IsoCodes = {
+    [AvailableLocales.Arabic]: 'ar-Eg',
+    [AvailableLocales.English]: 'en-US',
+} as const;
+
+export const IsoCode = (locale: AvailableLocale) => IsoCodes[locale];
+
 export const i18nConfig = {
     defaultLocale: AvailableLocales.English,
+    baseUrl: "https://arabianuxt.netlify.app/",
     locales: Object.entries(AvailableLocales).map(([key, code]) => ({
         code,
         name: key,
         file: `${code}.json`,
-        // iso:
+        language: IsoCodes[code as AvailableLocale],
         dir: LanguageDirections[code as AvailableLocale],
     })),
 }
