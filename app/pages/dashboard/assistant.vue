@@ -30,7 +30,7 @@ const send = async (): Promise<void> => {
 
     <div class="relative">
       <!-- Dock -->
-      <div class="fixed ltr:right-6 rtl:left-6 bottom-6 z-40">
+      <div class="fixed ltr:right-6 rtl:left-6 bottom-20 sm:bottom-6 z-40">
         <button
             @click="open = !open"
             class="rounded-full p-3 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 text-white shadow-lg hover:brightness-110 transition-all"
@@ -42,7 +42,7 @@ const send = async (): Promise<void> => {
 
       <!-- Panel -->
       <transition name="fade">
-        <div v-if="open" class="fixed ltr:right-6 rtl:left-6 bottom-20 z-40 w-[360px] max-h-[70vh] flex flex-col p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#8B5CF6_0%,#EC4899_60%,#22D3EE_100%)] animate-rotate-gradient">
+        <div v-if="open" class="fixed ltr:right-6 rtl:left-6 bottom-34 sm:bottom-20 z-40 w-[360px] max-h-[70vh] flex flex-col p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#8B5CF6_0%,#EC4899_60%,#22D3EE_100%)] animate-rotate-gradient">
           <div class="rounded-2xl bg-[rgba(15,17,23,0.96)] backdrop-blur-2xl border border-white/10 p-4 flex flex-col min-h-[320px] max-h-[70vh]">
             <div class="flex items-center gap-2 mb-3 text-white font-semibold"><Bot class="w-5 h-5 text-cyan-400" /> {{ t('pages.assistant.assistant') }}</div>
 
