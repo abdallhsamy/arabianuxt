@@ -112,12 +112,12 @@ const features = [
       </p>
 
       <div class="flex justify-center gap-4 pt-2">
-        <NuxtLink
+        <NuxtLinkLocale
             to="/dashboard"
             class="px-6 py-3 bg-gradient-to-r from-fuchsia-600 to-cyan-600 rounded-lg font-semibold hover:opacity-90 transition"
         >
           {{ t('public.homePage.openDashboard') }}
-        </NuxtLink>
+        </NuxtLinkLocale>
         <a
             href="https://github.com/abdallhsamy/arabianuxt"
             target="_blank"
