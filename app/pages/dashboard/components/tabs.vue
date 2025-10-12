@@ -3,64 +3,66 @@ import UiTabs from '~/components/Ui/Common/UiTabs.vue'
 import { Home, Settings, Bell, User } from 'lucide-vue-next'
 import { ref } from 'vue'
 
+const { t } = useI18n()
+
 const activeTab = ref('overview')
 const items = [
-  { id: 'overview', label: 'Overview', icon: Home },
-  { id: 'settings', label: 'Settings', icon: Settings },
-  { id: 'notifications', label: 'Notifications', icon: Bell },
-  { id: 'profile', label: 'Profile', icon: User },
+  { id: 'overview', label: t('pages.componentTabs.labels.overview'), icon: Home },
+  { id: 'settings', label: t('pages.componentTabs.labels.settings'), icon: Settings },
+  { id: 'notifications', label: t('pages.componentTabs.labels.notifications'), icon: Bell },
+  { id: 'profile', label: t('pages.componentTabs.labels.profile'), icon: User },
 ]
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Tabs Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentTabs.title') }}</h1>
 
     <!-- Underline Variant -->
     <UiTabs v-model="activeTab" :items="items" variant="underline" color="fuchsia">
       <template #overview>
-        <p class="text-gray-300">This is the overview section content.</p>
+        <p class="text-gray-300">{{ t('pages.componentTabs.content.overview') }}</p>
       </template>
       <template #settings>
-        <p class="text-gray-300">Here you can manage your app settings.</p>
+        <p class="text-gray-300">{{ t('pages.componentTabs.content.settings') }}</p>
       </template>
       <template #notifications>
-        <p class="text-gray-300">Notifications and alerts appear here.</p>
+        <p class="text-gray-300">{{ t('pages.componentTabs.content.notifications') }}</p>
       </template>
       <template #profile>
-        <p class="text-gray-300">Profile information and user data.</p>
+        <p class="text-gray-300">{{ t('pages.componentTabs.content.profile') }}</p>
       </template>
     </UiTabs>
 
     <!-- Pill Variant -->
     <UiTabs :items="items" variant="pill" color="cyan">
       <template #overview>
-        <p>Overview content inside a pill-style tab navigation.</p>
+        <p>{{ t('pages.componentTabs.contentPill.overview') }}</p>
       </template>
       <template #settings>
-        <p>Manage configurations and integrations here.</p>
+        <p>{{ t('pages.componentTabs.contentPill.settings') }}</p>
       </template>
       <template #notifications>
-        <p>All app notifications and alerts listed here.</p>
+        <p>{{ t('pages.componentTabs.contentPill.notifications') }}</p>
       </template>
       <template #profile>
-        <p>Edit your personal profile or update info.</p>
+        <p>{{ t('pages.componentTabs.contentPill.profile') }}</p>
       </template>
     </UiTabs>
 
     <!-- Vertical Layout -->
     <UiTabs :items="items" vertical variant="pill" color="emerald">
       <template #overview>
-        <p>Vertical tab layout is great for sidebar panels.</p>
+        <p>{{ t('pages.componentTabs.contentVertical.overview') }}</p>
       </template>
       <template #settings>
-        <p>Settings section content in vertical orientation.</p>
+        <p>{{ t('pages.componentTabs.contentVertical.settings') }}</p>
       </template>
       <template #notifications>
-        <p>Vertical mode keeps sections aligned with content.</p>
+        <p>{{ t('pages.componentTabs.contentVertical.notifications') }}</p>
       </template>
       <template #profile>
-        <p>Profile management inside vertical tabs.</p>
+        <p>{{ t('pages.componentTabs.contentVertical.profile') }}</p>
       </template>
     </UiTabs>
   </section>

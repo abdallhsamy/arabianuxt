@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { X } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 export interface UiModalProps {
   modelValue: boolean
@@ -103,7 +106,7 @@ const sizes: Record<string, string> = {
                 v-if="closable"
                 @click="close"
                 class="text-gray-400 hover:text-white transition"
-                aria-label="Close"
+                :aria-label="t('components.uiModal.closeLabel')"
             >
               <X class="w-5 h-5" />
             </button>

@@ -1,34 +1,37 @@
 <script setup lang="ts">
 import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { Check, X, ArrowRight, Bell } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Button Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentButton.title') }}</h1>
 
     <!-- Variants -->
     <div class="grid gap-4 md:grid-cols-3">
-      <UiButton label="Primary" variant="primary" />
-      <UiButton label="Secondary" variant="secondary" />
-      <UiButton label="Success" variant="success" />
-      <UiButton label="Danger" variant="danger" />
-      <UiButton label="Outline" variant="outline" />
-      <UiButton label="Glass" variant="glass" />
+      <UiButton :label="t('pages.buttons.variants.primary')" variant="primary" />
+      <UiButton :label="t('pages.buttons.variants.secondary')" variant="secondary" />
+      <UiButton :label="t('pages.buttons.variants.success')" variant="success" />
+      <UiButton :label="t('pages.buttons.variants.danger')" variant="danger" />
+      <UiButton :label="t('pages.buttons.variants.outline')" variant="outline" />
+      <UiButton :label="t('pages.buttons.variants.glass')" variant="glass" />
     </div>
 
     <!-- With Icons -->
     <div class="grid gap-4 md:grid-cols-3">
-      <UiButton label="Save" :icon="Check" />
-      <UiButton label="Cancel" :icon="X" variant="secondary" />
-      <UiButton label="Next" :icon="ArrowRight" icon-position="right" />
+      <UiButton :label="t('pages.buttons.labels.save')" :icon="Check" />
+      <UiButton :label="t('pages.buttons.labels.cancel')" :icon="X" variant="secondary" />
+      <UiButton :label="t('pages.buttons.labels.next')" :icon="ArrowRight" icon-position="right" />
     </div>
 
     <!-- States -->
     <div class="flex gap-4 flex-wrap">
-      <UiButton label="Loading" :loading="true" />
-      <UiButton label="Disabled" :disabled="true" />
-      <UiButton label="Full Width" full />
+      <UiButton :label="t('pages.buttons.labels.loading')" :loading="true" />
+      <UiButton :label="t('pages.buttons.labels.disabled')" :disabled="true" />
+      <UiButton :label="t('pages.buttons.fullWidth')" full />
     </div>
 
     <!-- Icon-only -->

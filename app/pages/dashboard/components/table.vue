@@ -2,6 +2,8 @@
 import { ref, onMounted, watch } from 'vue'
 import UiTable, { type TableColumn } from '~/components/Ui/Data/UiTable.vue'
 
+const { t } = useI18n()
+
 /* ------------------ Data model ------------------ */
 interface User {
   id: number
@@ -13,12 +15,12 @@ interface User {
 }
 
 /* ------------------ Fake data ------------------ */
-const roles = ['Admin', 'Editor', 'Viewer'] as const
+const roles = [t('pages.componentTable.roles.admin'), t('pages.componentTable.roles.editor'), t('pages.componentTable.roles.viewer')] as const
 
 const rows = ref<User[]>(
     Array.from({ length: 125 }, (_, i): User => ({
       id: i + 1,
-      name: `User ${i + 1}`,
+      name: `${t('pages.componentTable.labels.user')} ${i + 1}`,
       email: `user${i + 1}@example.com`,
       role: roles[i % roles.length] as User['role'],
       createdAt: new Date(Date.now() - i * 86_400_000).toISOString(),
@@ -28,21 +30,21 @@ const rows = ref<User[]>(
 
 /* ------------------ Columns ------------------ */
 const cols = ref<TableColumn<User>[]>([
-  { key: 'name', header: 'Name', sortable: true, filter: { type: 'text' } },
-  { key: 'email', header: 'Email', sortable: true, filter: { type: 'text' } },
+  { key: 'name', header: t('pages.componentTable.headers.name'), sortable: true, filter: { type: 'text' } },
+  { key: 'email', header: t('pages.componentTable.headers.email'), sortable: true, filter: { type: 'text' } },
   {
     key: 'role',
-    header: 'Role',
+    header: t('pages.componentTable.headers.role'),
     sortable: true,
     filter: {
       type: 'select',
       options: roles.map(r => ({ label: r, value: r })),
     },
   },
-  { key: 'usage', header: 'Usage %', sortable: true, filter: { type: 'range' } },
+  { key: 'usage', header: t('pages.componentTable.headers.usage'), sortable: true, filter: { type: 'range' } },
   {
     key: 'createdAt',
-    header: 'Created',
+    header: t('pages.componentTable.headers.created'),
     sortable: true,
     accessor: (u: User) =>
         new Date(u.createdAt).toLocaleDateString(undefined, {
@@ -104,7 +106,7 @@ watch(persistedWidths, v => {
 <template>
   <section class="p-8 space-y-6">
     <h1 class="text-2xl font-bold text-gray-100">
-      📊 UiTable — Persistent Demo
+      {{ t('pages.componentTable.title') }}
     </h1>
 
     <UiTable
@@ -135,12 +137,12 @@ watch(persistedWidths, v => {
     </template>
 
     <template #empty>
-      <div class="py-6 text-gray-400">No users found.</div>
+      <div class="py-6 text-gray-400">{{ t('pages.componentTable.emptyState') }}</div>
     </template>
     </UiTable>
 
     <div class="text-sm text-gray-400">
-      Selected rows: {{ selected.join(', ') || 'None' }}
+      {{ t('pages.componentTable.selectedRows') }}: {{ selected.join(', ') || t('pages.componentTable.none') }}
     </div>
   </section>
 </template>

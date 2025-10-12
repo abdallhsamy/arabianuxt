@@ -2,19 +2,21 @@
 import UiTextarea from '~/components/Ui/Form/UiTextarea.vue'
 import { ref } from 'vue'
 
+const { t } = useI18n()
+
 const bio = ref('')
 const notes = ref('Initial text here...')
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Textarea Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentTextarea.title') }}</h1>
 
     <!-- Default -->
     <UiTextarea
         v-model="bio"
-        label="Your Bio"
-        placeholder="Tell us about yourself..."
+        :label="t('pages.componentTextarea.labels.yourBio')"
+        :placeholder="t('pages.componentTextarea.placeholders.tellUsAboutYourself')"
         max-length="160"
         :parent-theme="'dark'"
     />
@@ -22,20 +24,20 @@ const notes = ref('Initial text here...')
     <!-- Gradient theme -->
     <UiTextarea
         v-model="notes"
-        label="Notes"
-        placeholder="Write something here..."
+        :label="t('pages.componentTextarea.labels.notes')"
+        :placeholder="t('pages.componentTextarea.placeholders.writeSomething')"
         variant="filled"
         :parent-theme="'gradient'"
-        message="Autosizing & adaptive styling"
+        :message="t('pages.componentTextarea.messages.autosizing')"
     />
 
     <!-- Error state -->
     <UiTextarea
         v-model="bio"
-        label="Feedback"
-        placeholder="Type your feedback..."
+        :label="t('pages.componentTextarea.labels.feedback')"
+        :placeholder="t('pages.componentTextarea.placeholders.typeFeedback')"
         state="error"
-        message="Exceeded character limit"
+        :message="t('pages.componentTextarea.messages.exceededLimit')"
         :max-length="10"
     />
   </section>

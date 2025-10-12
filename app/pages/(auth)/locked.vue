@@ -5,6 +5,8 @@ import { useRouter } from '#imports'
 
 definePageMeta({ layout: 'auth' })
 
+const { t } = useI18n()
+
 const router = useRouter()
 const password = ref('')
 const isUnlocking = ref(false)
@@ -41,18 +43,18 @@ const unlock = async () => {
             v-if="!unlocked"
             class="text-2xl font-semibold text-white mb-4"
         >
-          Screen Locked
+          {{ t('pages.auth.locked.screenLocked') }}
         </h2>
 
         <p v-if="!unlocked" class="text-sm text-[var(--text-secondary)] mb-6">
-          Enter your password to unlock
+          {{ t('pages.auth.locked.enterPasswordToUnlock') }}
         </p>
 
         <template v-if="!unlocked" class="space-y-4">
           <input
               v-model="password"
               type="password"
-              placeholder="••••••••"
+              :placeholder="t('pages.auth.locked.passwordPlaceholder')"
               class="input-dark w-full mb-5"
           />
           <button
@@ -60,7 +62,7 @@ const unlock = async () => {
               :disabled="isUnlocking"
               class="w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-2"
           >
-            {{ isUnlocking ? 'Unlocking...' : 'Unlock' }}
+            {{ isUnlocking ? t('pages.auth.locked.unlocking') : t('pages.auth.locked.unlock') }}
           </button>
         </template>
 
@@ -68,7 +70,7 @@ const unlock = async () => {
             v-else
             class="text-2xl font-semibold text-cyan-400 mt-4 animate-pulse"
         >
-          Unlocked ✨
+          {{ t('pages.auth.locked.unlockedSuccess') }}
         </h2>
       </div>
     </div>

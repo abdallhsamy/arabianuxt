@@ -19,10 +19,12 @@ import {
 } from 'lucide-vue-next';
 import { useRouter, useRoute } from '#imports';
 import { useSidebar } from '~/composables/useSidebar';
+import { useI18n } from 'vue-i18n';
 
 const router = useRouter();
 const route = useRoute();
 const localePath = useLocalePath();
+const { t } = useI18n();
 
 // Use shared sidebar state
 const { isExpanded, isMobile, checkViewport, toggleSidebar, setExpanded } = useSidebar();
@@ -34,105 +36,105 @@ onMounted(() => {
 
 const menuItems = [
   // Main Dashboard
-  { icon: Home, label: 'Dashboard', to: '/dashboard' },
+  { icon: Home, label: t('navigation.dashboard'), to: '/dashboard' },
   
   // Analytics & Monitoring
-  { icon: BarChart3, label: 'Analytics', to: '/dashboard/analytics' },
-  { icon: Activity, label: 'Health', to: '/dashboard/health' },
-  { icon: ScrollText, label: 'Logs', to: '/dashboard/logs' },
-  { icon: AlertTriangle, label: 'Errors', to: '/dashboard/errors' },
+  { icon: BarChart3, label: t('navigation.analytics'), to: '/dashboard/analytics' },
+  { icon: Activity, label: t('navigation.health'), to: '/dashboard/health' },
+  { icon: ScrollText, label: t('navigation.logs'), to: '/dashboard/logs' },
+  { icon: AlertTriangle, label: t('navigation.errors'), to: '/dashboard/errors' },
   
   // AI & Automation
-  { icon: Sparkles, label: 'AI Playground', to: '/dashboard/ai-playground' },
-  { icon: Zap, label: 'Assistant', to: '/dashboard/assistant' },
-  { icon: BookOpen, label: 'Prompt Library', to: '/dashboard/prompt-library' },
-  { icon: Zap, label: 'Automation Rules', to: '/dashboard/automation-rules' },
+  { icon: Sparkles, label: t('navigation.aiPlayground'), to: '/dashboard/ai-playground' },
+  { icon: Zap, label: t('navigation.assistant'), to: '/dashboard/assistant' },
+  { icon: BookOpen, label: t('navigation.promptLibrary'), to: '/dashboard/prompt-library' },
+  { icon: Zap, label: t('navigation.automationRules'), to: '/dashboard/automation-rules' },
   
   // Development & Tools
-  { icon: Play, label: 'Playground', to: '/dashboard/playground' },
-  { icon: Edit3, label: 'Editor', to: '/dashboard/editor' },
-  { icon: Square, label: 'Blank', to: '/dashboard/blank' },
-  { icon: MessageSquare, label: 'Toaster Demo', to: '/dashboard/toaster-demo' },
+  { icon: Play, label: t('navigation.playground'), to: '/dashboard/playground' },
+  { icon: Edit3, label: t('navigation.editor'), to: '/dashboard/editor' },
+  { icon: Square, label: t('navigation.blank'), to: '/dashboard/blank' },
+  { icon: MessageSquare, label: t('navigation.toasterDemo'), to: '/dashboard/toaster-demo' },
   
   // UI Components
-  { icon: MousePointer, label: 'Buttons', to: '/dashboard/buttons' },
-  { icon: Layers, label: 'Components', to: '/dashboard/components' },
-  { icon: AlertCircle, label: 'Alert', to: '/dashboard/components/alert' },
-  { icon: Badge, label: 'Badge', to: '/dashboard/components/badge' },
-  { icon: CreditCardIcon, label: 'Card', to: '/dashboard/components/card' },
-  { icon: BarChart, label: 'Charts', to: '/dashboard/components/charts' },
-  { icon: Code, label: 'Dev Tools', to: '/dashboard/components/dev-tools' },
-  { icon: Table, label: 'Table', to: '/dashboard/components/table' },
-  { icon: Type, label: 'Input', to: '/dashboard/components/input' },
-  { icon: ToggleLeft, label: 'Switch', to: '/dashboard/components/switch' },
-  { icon: FileTextIcon, label: 'Textarea', to: '/dashboard/components/textarea' },
-  { icon: SquareIcon, label: 'Skeleton', to: '/dashboard/components/skeleton' },
-  { icon: Target, label: 'Stepper', to: '/dashboard/components/stepper' },
-  { icon: Wrench, label: 'Utilities', to: '/dashboard/components/utilities' },
-  { icon: Grip, label: 'Widgets', to: '/dashboard/components/widgets' },
-  { icon: Droplets, label: 'Advanced UI', to: '/dashboard/components/advanced-ui' },
-  { icon: Cpu, label: 'AI Tools', to: '/dashboard/components/ai-tools' },
-  { icon: Hash, label: 'Accordion', to: '/dashboard/components/accordion' },
-  { icon: Image, label: 'Dropdown', to: '/dashboard/components/dropdown' },
-  { icon: List, label: 'Form', to: '/dashboard/components/form' },
-  { icon: Maximize2, label: 'Modal', to: '/dashboard/components/modal' },
-  { icon: Minus, label: 'Select', to: '/dashboard/components/select' },
-  { icon: Plus, label: 'Tabs', to: '/dashboard/components/tabs' },
-  { icon: RotateCcw, label: 'Tooltip', to: '/dashboard/components/tooltip' },
-  { icon: Search, label: 'Interaction', to: '/dashboard/components/interaction' },
+  { icon: MousePointer, label: t('navigation.buttons'), to: '/dashboard/buttons' },
+  { icon: Layers, label: t('navigation.components'), to: '/dashboard/components' },
+  { icon: AlertCircle, label: t('navigation.alert'), to: '/dashboard/components/alert' },
+  { icon: Badge, label: t('navigation.badge'), to: '/dashboard/components/badge' },
+  { icon: CreditCardIcon, label: t('navigation.card'), to: '/dashboard/components/card' },
+  { icon: BarChart, label: t('navigation.charts'), to: '/dashboard/components/charts' },
+  { icon: Code, label: t('navigation.devTools'), to: '/dashboard/components/dev-tools' },
+  { icon: Table, label: t('navigation.table'), to: '/dashboard/components/table' },
+  { icon: Type, label: t('navigation.input'), to: '/dashboard/components/input' },
+  { icon: ToggleLeft, label: t('navigation.switch'), to: '/dashboard/components/switch' },
+  { icon: FileTextIcon, label: t('navigation.textarea'), to: '/dashboard/components/textarea' },
+  { icon: SquareIcon, label: t('navigation.skeleton'), to: '/dashboard/components/skeleton' },
+  { icon: Target, label: t('navigation.stepper'), to: '/dashboard/components/stepper' },
+  { icon: Wrench, label: t('navigation.utilities'), to: '/dashboard/components/utilities' },
+  { icon: Grip, label: t('navigation.widgets'), to: '/dashboard/components/widgets' },
+  { icon: Droplets, label: t('navigation.advancedUi'), to: '/dashboard/components/advanced-ui' },
+  { icon: Cpu, label: t('navigation.aiTools'), to: '/dashboard/components/ai-tools' },
+  { icon: Hash, label: t('navigation.accordion'), to: '/dashboard/components/accordion' },
+  { icon: Image, label: t('navigation.dropdown'), to: '/dashboard/components/dropdown' },
+  { icon: List, label: t('navigation.form'), to: '/dashboard/components/form' },
+  { icon: Maximize2, label: t('navigation.modal'), to: '/dashboard/components/modal' },
+  { icon: Minus, label: t('navigation.select'), to: '/dashboard/components/select' },
+  { icon: Plus, label: t('navigation.tabs'), to: '/dashboard/components/tabs' },
+  { icon: RotateCcw, label: t('navigation.tooltip'), to: '/dashboard/components/tooltip' },
+  { icon: Search, label: t('navigation.interaction'), to: '/dashboard/components/interaction' },
   
   // Communication
-  { icon: Mail, label: 'Mail', to: '/dashboard/mail' },
+  { icon: Mail, label: t('navigation.mail'), to: '/dashboard/mail' },
   
   // Security & Access
-  { icon: Shield, label: 'Security', to: '/dashboard/security' },
-  { icon: UserCheck, label: 'Access Control', to: '/dashboard/access-control' },
-  { icon: Eye, label: 'Audit Logs', to: '/dashboard/audit-logs' },
+  { icon: Shield, label: t('navigation.security'), to: '/dashboard/security' },
+  { icon: UserCheck, label: t('navigation.accessControl'), to: '/dashboard/access-control' },
+  { icon: Eye, label: t('navigation.auditLogs'), to: '/dashboard/audit-logs' },
   
   // Team & Organization
-  { icon: Users, label: 'Team', to: '/dashboard/team' },
-  { icon: Building2, label: 'Organization', to: '/dashboard/organization' },
-  { icon: User, label: 'Profile', to: '/dashboard/profile' },
+  { icon: Users, label: t('navigation.team'), to: '/dashboard/team' },
+  { icon: Building2, label: t('navigation.organization'), to: '/dashboard/organization' },
+  { icon: User, label: t('navigation.profile'), to: '/dashboard/profile' },
   
   // Support & Communication
-  { icon: HeadphonesIcon, label: 'Support', to: '/dashboard/support' },
-  { icon: Bell, label: 'Notifications', to: '/dashboard/notifications' },
-  { icon: Calendar, label: 'Calendar', to: '/dashboard/calendar' },
+  { icon: HeadphonesIcon, label: t('navigation.support'), to: '/dashboard/support' },
+  { icon: Bell, label: t('navigation.notifications'), to: '/dashboard/notifications' },
+  { icon: Calendar, label: t('navigation.calendar'), to: '/dashboard/calendar' },
   
   // Knowledge & Integrations
-  { icon: BookOpen, label: 'Knowledge Base', to: '/dashboard/knowledge-base' },
-  { icon: Plug, label: 'Integrations', to: '/dashboard/integrations' },
+  { icon: BookOpen, label: t('navigation.knowledgeBase'), to: '/dashboard/knowledge-base' },
+  { icon: Plug, label: t('navigation.integrations'), to: '/dashboard/integrations' },
   
   // System & Settings
-  { icon: Cog, label: 'System', to: '/dashboard/system' },
-  { icon: Settings, label: 'Settings', to: '/dashboard/components/settings' },
-  { icon: Palette, label: 'Theme Customizer', to: '/dashboard/theme-customizer' },
-  { icon: Lock, label: 'Privacy', to: '/dashboard/privacy' },
-  { icon: CreditCard, label: 'Billing', to: '/dashboard/billing' },
+  { icon: Cog, label: t('navigation.system'), to: '/dashboard/system' },
+  { icon: Settings, label: t('navigation.settings'), to: '/dashboard/components/settings' },
+  { icon: Palette, label: t('navigation.themeCustomizer'), to: '/dashboard/theme-customizer' },
+  { icon: Lock, label: t('navigation.privacy'), to: '/dashboard/privacy' },
+  { icon: CreditCard, label: t('navigation.billing'), to: '/dashboard/billing' },
   
   // Authentication
-  { icon: LogIn, label: 'Login', to: '/login' },
-  { icon: UserPlus, label: 'Register', to: '/register' },
-  { icon: KeyRound, label: 'Forgot Password', to: '/forgot-password' },
-  { icon: KeyRound, label: 'Reset Password', to: '/reset-password' },
-  { icon: LockIcon, label: 'Locked', to: '/locked' },
-  { icon: LockIcon, label: 'Locked V2', to: '/locked-v2' },
+  { icon: LogIn, label: t('navigation.login'), to: '/login' },
+  { icon: UserPlus, label: t('navigation.register'), to: '/register' },
+  { icon: KeyRound, label: t('navigation.forgotPassword'), to: '/forgot-password' },
+  { icon: KeyRound, label: t('navigation.resetPassword'), to: '/reset-password' },
+  { icon: LockIcon, label: t('navigation.locked'), to: '/locked' },
+  { icon: LockIcon, label: t('navigation.lockedV2'), to: '/locked-v2' },
 ];
 
 // Group separators for better organization
 const menuGroups = [
-  { items: menuItems.slice(0, 1), label: 'Main' },
-  { items: menuItems.slice(1, 5), label: 'Analytics' },
-  { items: menuItems.slice(5, 9), label: 'AI & Automation' },
-  { items: menuItems.slice(9, 13), label: 'Development' },
-  { items: menuItems.slice(13, 41), label: 'UI Components' },
-  { items: menuItems.slice(41, 42), label: 'Communication' },
-  { items: menuItems.slice(42, 45), label: 'Security' },
-  { items: menuItems.slice(45, 48), label: 'Team' },
-  { items: menuItems.slice(48, 51), label: 'Support' },
-  { items: menuItems.slice(51, 53), label: 'Knowledge' },
-  { items: menuItems.slice(53, 59), label: 'System' },
-  { items: menuItems.slice(59), label: 'Authentication' },
+  { items: menuItems.slice(0, 1), label: t('navigation.main') },
+  { items: menuItems.slice(1, 5), label: t('navigation.analytics') },
+  { items: menuItems.slice(5, 9), label: t('navigation.aiAutomation') },
+  { items: menuItems.slice(9, 13), label: t('navigation.development') },
+  { items: menuItems.slice(13, 41), label: t('navigation.uiComponents') },
+  { items: menuItems.slice(41, 42), label: t('navigation.communication') },
+  { items: menuItems.slice(42, 45), label: t('navigation.security') },
+  { items: menuItems.slice(45, 48), label: t('navigation.team') },
+  { items: menuItems.slice(48, 51), label: t('navigation.support') },
+  { items: menuItems.slice(51, 53), label: t('navigation.knowledge') },
+  { items: menuItems.slice(53, 59), label: t('navigation.system') },
+  { items: menuItems.slice(59), label: t('navigation.authentication') },
 ];
 
 const mainMargin = computed(() =>
@@ -172,7 +174,7 @@ const navigate = (to: string): void => {
           class="font-bold text-lg whitespace-nowrap transition-opacity duration-300 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-cyan-400"
           :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden'"
       >
-        Dashboard
+        {{ t('common.dashboard') }}
       </span>
       <button
           class="text-gray-400 hover:text-white hover:scale-110 transition-transform duration-300"
@@ -246,7 +248,7 @@ const navigate = (to: string): void => {
         <Crown v-if="!isExpanded" class="w-5 h-5 text-white z-10" />
         <template v-else>
           <Crown class="w-4 h-4 text-white z-10" />
-          <span class="text-sm font-semibold text-white z-10">Upgrade</span>
+          <span class="text-sm font-semibold text-white z-10">{{ t('common.upgrade') }}</span>
         </template>
       </button>
     </div>

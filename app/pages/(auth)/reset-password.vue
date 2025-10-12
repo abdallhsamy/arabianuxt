@@ -7,6 +7,8 @@ definePageMeta({
   layout: 'auth',
 })
 
+const { t } = useI18n()
+
 const router = useRouter()
 
 const password = ref('')
@@ -19,7 +21,7 @@ const success = ref(false)
 const handleReset = async (): Promise<void> => {
   if (!password.value || !confirmPassword.value) return
   if (password.value !== confirmPassword.value) {
-    alert('Passwords do not match')
+    alert(t('pages.auth.resetPassword.passwordsDoNotMatch'))
     return
   }
   isLoading.value = true
@@ -46,10 +48,10 @@ const handleReset = async (): Promise<void> => {
           <h2
               class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-indigo-400 mb-2"
           >
-            Password Reset Successful
+            {{ t('pages.auth.resetPassword.successTitle') }}
           </h2>
           <p class="text-sm text-[var(--text-secondary)] max-w-xs mx-auto">
-            Your password has been changed successfully.
+            {{ t('pages.auth.resetPassword.successMessage') }}
           </p>
         </div>
       </template>
@@ -59,23 +61,23 @@ const handleReset = async (): Promise<void> => {
         <h1
             class="text-center text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-indigo-400 mb-6"
         >
-          Reset Your Password
+          {{ t('pages.auth.resetPassword.title') }}
         </h1>
         <p class="text-center text-sm text-[var(--text-secondary)] mb-8">
-          Choose a strong new password for your account.
+          {{ t('pages.auth.resetPassword.description') }}
         </p>
 
         <form @submit.prevent="handleReset" class="space-y-6">
           <!-- New Password -->
           <div>
             <label class="text-sm text-[var(--text-secondary)] mb-1 block">
-              New Password
+              {{ t('pages.auth.resetPassword.newPassword') }}
             </label>
             <div class="relative">
               <input
                   v-model="password"
                   :type="showPassword ? 'text' : 'password'"
-                  placeholder="••••••••"
+                  :placeholder="t('pages.auth.resetPassword.passwordPlaceholder')"
                   class="input-dark w-full pr-10 focus:ring-2 focus:ring-fuchsia-500/50"
               />
               <button
@@ -91,13 +93,13 @@ const handleReset = async (): Promise<void> => {
           <!-- Confirm Password -->
           <div>
             <label class="text-sm text-[var(--text-secondary)] mb-1 block">
-              Confirm Password
+              {{ t('pages.auth.resetPassword.confirmPassword') }}
             </label>
             <div class="relative">
               <input
                   v-model="confirmPassword"
                   :type="showConfirm ? 'text' : 'password'"
-                  placeholder="••••••••"
+                  :placeholder="t('pages.auth.resetPassword.passwordPlaceholder')"
                   class="input-dark w-full pr-10 focus:ring-2 focus:ring-fuchsia-500/50"
               />
               <button
@@ -116,8 +118,8 @@ const handleReset = async (): Promise<void> => {
               :disabled="isLoading"
               class="relative w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-2"
           >
-            <span v-if="!isLoading">Reset Password</span>
-            <span v-else class="animate-pulse">Updating...</span>
+            <span v-if="!isLoading">{{ t('pages.auth.resetPassword.resetPassword') }}</span>
+            <span v-else class="animate-pulse">{{ t('pages.auth.resetPassword.updating') }}</span>
             <KeyRound class="w-5 h-5" />
           </button>
         </form>

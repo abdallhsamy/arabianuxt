@@ -4,27 +4,29 @@ import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { User, Settings, Bell, LogOut, ChevronDown } from 'lucide-vue-next'
 import type {DropdownItem} from "~/components/Ui/Common/UiDropdown.type";
 
+const { t } = useI18n()
+
 const dropdownItems: DropdownItem[] = [
-  { id: 'profile', label: 'Profile', icon: User },
-  { id: 'settings', label: 'Settings', icon: Settings },
-  { id: 'notifications', label: 'Notifications', icon: Bell },
+  { id: 'profile', label: t('pages.componentDropdown.items.profile'), icon: User },
+  { id: 'settings', label: t('pages.componentDropdown.items.settings'), icon: Settings },
+  { id: 'notifications', label: t('pages.componentDropdown.items.notifications'), icon: Bell },
   { id: 'divider1', divider: true },
-  { id: 'logout', label: 'Logout', icon: LogOut, color: 'rose' },
+  { id: 'logout', label: t('pages.componentDropdown.items.logout'), icon: LogOut, color: 'rose' },
 ]
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Dropdown Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentDropdown.title') }}</h1>
 
     <div class="flex flex-wrap gap-6">
-      <UiDropdown label="User Menu" :items="dropdownItems" :icon="User" />
+      <UiDropdown :label="t('pages.componentDropdown.labels.userMenu')" :items="dropdownItems" :icon="User" />
 
-      <UiDropdown label="Hover Menu" :items="dropdownItems" trigger="hover" color="cyan" />
+      <UiDropdown :label="t('pages.componentDropdown.labels.hoverMenu')" :items="dropdownItems" trigger="hover" color="cyan" />
 
-      <UiDropdown label="Right Aligned" :items="dropdownItems" align="right" color="emerald" />
+      <UiDropdown :label="t('pages.componentDropdown.labels.rightAligned')" :items="dropdownItems" align="right" color="emerald" />
 
-      <UiDropdown label="Top Position" :items="dropdownItems" position="top" color="rose" />
+      <UiDropdown :label="t('pages.componentDropdown.labels.topPosition')" :items="dropdownItems" position="top" color="rose" />
     </div>
   </section>
 </template>

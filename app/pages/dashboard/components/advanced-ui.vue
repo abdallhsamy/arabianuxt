@@ -12,6 +12,8 @@ import UiApiConsole from '~/components/Ui/Dev/UiApiConsole.vue'
 
 import { ref } from 'vue'
 
+const { t } = useI18n()
+
 const rating = ref(4)
 
 const users = [
@@ -50,17 +52,17 @@ console.log('Updated')`
 <template>
   <UiContainer max="xl" class="space-y-10 text-gray-100">
     <UiSectionHeader
-        title="Advanced UI Components"
-        subtitle="Interactive and data-rich examples"
+        :title="t('pages.componentAdvancedUi.title')"
+        :subtitle="t('pages.componentAdvancedUi.subtitle')"
         icon="i-lucide-layout-dashboard"
     >
       <template #actions>
-        <UiBadgeStatus label="Demo Mode" color="info" />
+        <UiBadgeStatus :label="t('pages.componentAdvancedUi.demoMode')" color="info" />
       </template>
     </UiSectionHeader>
 
     <!-- 🧍 Avatars -->
-    <UiSectionHeader title="Avatars & Badges" subtitle="User presence and status" />
+    <UiSectionHeader :title="t('pages.componentAdvancedUi.avatarsTitle')" :subtitle="t('pages.componentAdvancedUi.avatarsSubtitle')" />
     <UiGridLayout :cols="4">
       <div v-for="u in users" :key="u.name" class="flex flex-col items-center space-y-2 p-3 rounded-xl bg-white/5">
         <UiAvatar :name="u.name" :src="u.src" :status="u.status" size="lg" />
@@ -73,23 +75,23 @@ console.log('Updated')`
     </UiGridLayout>
 
     <!-- ⭐ Rating -->
-    <UiSectionHeader title="Rating Component" subtitle="Interactive rating input" />
+    <UiSectionHeader :title="t('pages.componentAdvancedUi.ratingTitle')" :subtitle="t('pages.componentAdvancedUi.ratingSubtitle')" />
     <div class="flex flex-col items-center gap-2">
       <UiRating v-model="rating" icon="star" />
-      <span class="text-gray-400 text-sm">Current rating: {{ rating }}/5</span>
+      <span class="text-gray-400 text-sm">{{ t('pages.componentAdvancedUi.currentRating', { rating }) }}</span>
     </div>
 
     <!-- 🧱 Grid Layout -->
-    <UiSectionHeader title="Grid Layout Showcase" subtitle="Automatic responsive columns" />
+    <UiSectionHeader :title="t('pages.componentAdvancedUi.gridTitle')" :subtitle="t('pages.componentAdvancedUi.gridSubtitle')" />
     <UiGridLayout :cols="3" gap="lg">
       <div v-for="n in 6" :key="n" class="rounded-xl bg-gradient-to-br from-fuchsia-900/30 to-cyan-900/20 border border-white/10 p-6 text-center">
-        <h4 class="font-semibold text-gray-100">Card {{ n }}</h4>
-        <p class="text-sm text-gray-400">Dynamic grid item</p>
+        <h4 class="font-semibold text-gray-100">{{ t('pages.componentAdvancedUi.card', { number: n }) }}</h4>
+        <p class="text-sm text-gray-400">{{ t('pages.componentAdvancedUi.dynamicGridItem') }}</p>
       </div>
     </UiGridLayout>
 
     <!-- 🤖 Agents -->
-    <UiSectionHeader title="AI Agents" subtitle="Registered AI personalities" />
+    <UiSectionHeader :title="t('pages.componentAdvancedUi.agentsTitle')" :subtitle="t('pages.componentAdvancedUi.agentsSubtitle')" />
     <UiGridLayout :cols="2" gap="lg">
       <UiAgentCard
           v-for="a in agents"
@@ -103,15 +105,15 @@ console.log('Updated')`
     </UiGridLayout>
 
     <!-- 🧠 Prompt History -->
-    <UiSectionHeader title="Prompt History" subtitle="Stored conversation context" />
+    <UiSectionHeader :title="t('pages.componentAdvancedUi.promptHistoryTitle')" :subtitle="t('pages.componentAdvancedUi.promptHistorySubtitle')" />
     <UiPromptHistory />
 
     <!-- 🔍 Diff Side-by-Side -->
-    <UiSectionHeader title="Diff Side-by-Side" subtitle="Compare code revisions" />
+    <UiSectionHeader :title="t('pages.componentAdvancedUi.diffTitle')" :subtitle="t('pages.componentAdvancedUi.diffSubtitle')" />
     <UiDiffSideBySide :left="diffLeft" :right="diffRight" />
 
     <!-- 🧪 API Console -->
-    <UiSectionHeader title="API Console" subtitle="Mock REST interaction demo" />
+    <UiSectionHeader :title="t('pages.componentAdvancedUi.apiConsoleTitle')" :subtitle="t('pages.componentAdvancedUi.apiConsoleSubtitle')" />
     <UiApiConsole />
   </UiContainer>
 </template>

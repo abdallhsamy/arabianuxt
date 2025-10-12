@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import PromptItem from '~/components/Ui/AI/PromptItem.vue'
 import TagChips from '~/components/Ui/Common/TagChips.vue'
 
+const { t } = useI18n()
+
 type Prompt = { id:string; title:string; text:string; tags:string[] }
 const search = ref('')
 const tagsFilter = ref<string[]>([])
@@ -32,7 +34,7 @@ const addPrompt = (): void => {
 }
 
 const removePrompt = (id: string): void => { prompts.value = prompts.value.filter(p => p.id !== id) }
-const usePrompt = (id: string): void => alert(`Use prompt ${id} → inject into AI input`)
+const usePrompt = (id: string): void => alert(t('pages.promptLibrary.usePrompt', { id }))
 const toggleTag = (arr: string[], tag: string): void => {
   const idx = arr.indexOf(tag); idx >= 0 ? arr.splice(idx,1) : arr.push(tag)
 }
@@ -41,17 +43,17 @@ const toggleTag = (arr: string[], tag: string): void => {
 <template>
   <section class="space-y-8">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">Prompt Library</h1>
+      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">{{ t('pages.promptLibrary.title') }}</h1>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Sidebar Filters -->
       <div class="lg:col-span-1 p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#8B5CF6_0%,#22D3EE_55%,#EC4899_100%)] animate-rotate-gradient">
         <div class="rounded-2xl bg-[rgba(15,17,23,0.94)] border border-white/10 p-5">
-          <h3 class="text-white font-semibold mb-2">Filters</h3>
-          <input v-model="search" class="input-dark w-full mb-3" placeholder="Search…" />
+          <h3 class="text-white font-semibold mb-2">{{ t('pages.promptLibrary.filters') }}</h3>
+          <input v-model="search" class="input-dark w-full mb-3" :placeholder="t('pages.promptLibrary.searchPlaceholder')" />
           <div class="space-y-2">
-            <p class="text-xs text-gray-400">Tags</p>
+            <p class="text-xs text-gray-400">{{ t('pages.promptLibrary.tags') }}</p>
             <div class="flex flex-wrap gap-2">
               <button
                   v-for="t in allTags" :key="t"
@@ -79,11 +81,11 @@ const toggleTag = (arr: string[], tag: string): void => {
         <!-- Create -->
         <div class="p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#22D3EE_0%,#8B5CF6_55%,#EC4899_100%)] animate-rotate-gradient">
           <div class="rounded-2xl bg-[rgba(15,17,23,0.94)] border border-white/10 p-5">
-            <h3 class="text-white font-semibold mb-3">Add Prompt</h3>
+            <h3 class="text-white font-semibold mb-3">{{ t('pages.promptLibrary.addPrompt') }}</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <input v-model="newTitle" class="input-dark" placeholder="Title" />
+              <input v-model="newTitle" class="input-dark" :placeholder="t('pages.promptLibrary.titlePlaceholder')" />
               <div>
-                <p class="text-xs text-gray-400 mb-1">Tags</p>
+                <p class="text-xs text-gray-400 mb-1">{{ t('pages.promptLibrary.tags') }}</p>
                 <div class="flex flex-wrap gap-2">
                   <button
                       v-for="t in allTags" :key="t"
@@ -95,11 +97,11 @@ const toggleTag = (arr: string[], tag: string): void => {
                   </button>
                 </div>
               </div>
-              <textarea v-model="newText" class="input-dark md:col-span-2 min-h-[120px]" placeholder="Prompt text…"></textarea>
+              <textarea v-model="newText" class="input-dark md:col-span-2 min-h-[120px]" :placeholder="t('pages.promptLibrary.promptTextPlaceholder')"></textarea>
             </div>
             <div class="text-right mt-4">
               <button @click="addPrompt" class="px-5 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 font-semibold">
-                Save Prompt
+                {{ t('pages.promptLibrary.savePrompt') }}
               </button>
             </div>
           </div>

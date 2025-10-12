@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 
+const { t } = useI18n()
+
 type Err = { id:string; time:string; message:string; severity:'critical'|'warning'|'info'; trace:string; open?:boolean }
 const errors = ref<Err[]>([
   { id:'E-2025-01', time:'2025-10-08 11:22', message:'Unhandled promise rejection in payments.js',
@@ -17,7 +19,7 @@ const toggle = (e:Err) => (e.open = !e.open)
 <template>
   <section class="space-y-8">
     <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">
-      Error Reports
+      {{ t('pages.errors.title') }}
     </h1>
 
     <GradientCard>
@@ -32,7 +34,7 @@ const toggle = (e:Err) => (e.open = !e.open)
                   :class="e.severity==='critical'?'bg-rose-500/10 text-rose-400 border border-rose-400/30'
                           :e.severity==='warning'?'bg-amber-400/10 text-amber-300 border border-amber-300/30'
                           :'bg-cyan-500/10 text-cyan-300 border border-cyan-300/30'">
-              {{ e.severity }}
+              {{ t(`pages.errors.severities.${e.severity}`) }}
             </span>
           </div>
           <transition name="fade">

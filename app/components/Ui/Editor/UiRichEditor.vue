@@ -6,6 +6,9 @@ import Underline from '@tiptap/extension-underline'
 import Placeholder from '@tiptap/extension-placeholder'
 import Typography from '@tiptap/extension-typography'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // ✅ Lowlight v3 setup
 import { createLowlight } from 'lowlight'
@@ -102,22 +105,22 @@ const slashQuery = ref('')
 const slashList = ref<CommandItem[]>([])
 
 const baseCommands: CommandItem[] = [
-  { label: 'Heading 1', description: 'Large title', action: e => e.chain().focus().toggleHeading({ level: 1 }).run() },
-  { label: 'Heading 2', description: 'Section title', action: e => e.chain().focus().toggleHeading({ level: 2 }).run() },
-  { label: 'Paragraph', description: 'Normal text', action: e => e.chain().focus().setParagraph().run() },
-  { label: 'Bullet List', description: '• list', action: e => e.chain().focus().toggleBulletList().run() },
-  { label: 'Numbered List', description: '1. list', action: e => e.chain().focus().toggleOrderedList().run() },
-  { label: 'Quote', description: 'Block quote', action: e => e.chain().focus().toggleBlockquote().run() },
-  { label: 'Code Block', description: 'Snippet block', action: e => e.chain().focus().toggleCodeBlock().run() },
-  { label: 'Divider', description: 'Horizontal rule', action: e => e.chain().focus().setHorizontalRule().run() },
+  { label: t('components.richEditor.commands.heading1.label'), description: t('components.richEditor.commands.heading1.description'), action: e => e.chain().focus().toggleHeading({ level: 1 }).run() },
+  { label: t('components.richEditor.commands.heading2.label'), description: t('components.richEditor.commands.heading2.description'), action: e => e.chain().focus().toggleHeading({ level: 2 }).run() },
+  { label: t('components.richEditor.commands.paragraph.label'), description: t('components.richEditor.commands.paragraph.description'), action: e => e.chain().focus().setParagraph().run() },
+  { label: t('components.richEditor.commands.bulletList.label'), description: t('components.richEditor.commands.bulletList.description'), action: e => e.chain().focus().toggleBulletList().run() },
+  { label: t('components.richEditor.commands.numberedList.label'), description: t('components.richEditor.commands.numberedList.description'), action: e => e.chain().focus().toggleOrderedList().run() },
+  { label: t('components.richEditor.commands.quote.label'), description: t('components.richEditor.commands.quote.description'), action: e => e.chain().focus().toggleBlockquote().run() },
+  { label: t('components.richEditor.commands.codeBlock.label'), description: t('components.richEditor.commands.codeBlock.description'), action: e => e.chain().focus().toggleCodeBlock().run() },
+  { label: t('components.richEditor.commands.divider.label'), description: t('components.richEditor.commands.divider.description'), action: e => e.chain().focus().setHorizontalRule().run() },
 
   // AI shortcuts
-  { label: 'AI: Rewrite', description: 'Improve clarity', action: e => openAiPanel('rewrite', e) },
-  { label: 'AI: Summarize', description: 'Summarize section', action: e => openAiPanel('summarize', e) },
-  { label: 'AI: Translate', description: 'Translate selection', action: e => openAiPanel('translate', e) },
-  { label: 'AI: Expand', description: 'Elaborate details', action: e => openAiPanel('expand', e) },
-  { label: 'AI: Tone', description: 'Change tone', action: e => openAiPanel('tone', e) },
-  { label: 'AI: Fix Grammar', description: 'Correct text', action: e => openAiPanel('fix-grammar', e) },
+  { label: t('components.richEditor.commands.aiRewrite.label'), description: t('components.richEditor.commands.aiRewrite.description'), action: e => openAiPanel('rewrite', e) },
+  { label: t('components.richEditor.commands.aiSummarize.label'), description: t('components.richEditor.commands.aiSummarize.description'), action: e => openAiPanel('summarize', e) },
+  { label: t('components.richEditor.commands.aiTranslate.label'), description: t('components.richEditor.commands.aiTranslate.description'), action: e => openAiPanel('translate', e) },
+  { label: t('components.richEditor.commands.aiExpand.label'), description: t('components.richEditor.commands.aiExpand.description'), action: e => openAiPanel('expand', e) },
+  { label: t('components.richEditor.commands.aiTone.label'), description: t('components.richEditor.commands.aiTone.description'), action: e => openAiPanel('tone', e) },
+  { label: t('components.richEditor.commands.aiFixGrammar.label'), description: t('components.richEditor.commands.aiFixGrammar.description'), action: e => openAiPanel('fix-grammar', e) },
 ]
 
 const detectSlash = (e: Editor) => {

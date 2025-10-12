@@ -2,7 +2,1373 @@
   "common": {
     "appName": "Arabianuxt",
     "language": "Language",
-    "selectLanguage": "Select Language"
+    "selectLanguage": "Select Language",
+    "dashboard": "Dashboard",
+    "upgrade": "Upgrade",
+    "close": "Close",
+    "search": "Search",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "navigation": {
+    "main": "Main",
+    "analytics": "Analytics",
+    "aiAutomation": "AI & Automation",
+    "development": "Development",
+    "uiComponents": "UI Components",
+    "communication": "Communication",
+    "security": "Security",
+    "team": "Team",
+    "support": "Support",
+    "knowledge": "Knowledge",
+    "system": "System",
+    "authentication": "Authentication",
+    "dashboard": "Dashboard",
+    "health": "Health",
+    "logs": "Logs",
+    "errors": "Errors",
+    "aiPlayground": "AI Playground",
+    "assistant": "Assistant",
+    "promptLibrary": "Prompt Library",
+    "automationRules": "Automation Rules",
+    "playground": "Playground",
+    "editor": "Editor",
+    "blank": "Blank",
+    "toasterDemo": "Toaster Demo",
+    "buttons": "Buttons",
+    "components": "Components",
+    "alert": "Alert",
+    "badge": "Badge",
+    "card": "Card",
+    "charts": "Charts",
+    "devTools": "Dev Tools",
+    "table": "Table",
+    "input": "Input",
+    "switch": "Switch",
+    "textarea": "Textarea",
+    "skeleton": "Skeleton",
+    "stepper": "Stepper",
+    "utilities": "Utilities",
+    "widgets": "Widgets",
+    "advancedUi": "Advanced UI",
+    "aiTools": "AI Tools",
+    "accordion": "Accordion",
+    "dropdown": "Dropdown",
+    "form": "Form",
+    "modal": "Modal",
+    "select": "Select",
+    "tabs": "Tabs",
+    "tooltip": "Tooltip",
+    "interaction": "Interaction",
+    "mail": "Mail",
+    "accessControl": "Access Control",
+    "auditLogs": "Audit Logs",
+    "organization": "Organization",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "calendar": "Calendar",
+    "knowledgeBase": "Knowledge Base",
+    "integrations": "Integrations",
+    "settings": "Settings",
+    "themeCustomizer": "Theme Customizer",
+    "privacy": "Privacy",
+    "billing": "Billing",
+    "login": "Login",
+    "register": "Register",
+    "forgotPassword": "Forgot Password",
+    "resetPassword": "Reset Password",
+    "locked": "Locked",
+    "lockedV2": "Locked V2"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard Overview",
+      "subtitle": "Welcome back! Here's a quick snapshot of your platform performance ⚡️",
+      "stats": {
+        "revenue": "Revenue",
+        "users": "Users",
+        "conversion": "Conversion",
+        "activeUsers": "Active Users",
+        "transactions": "Transactions",
+        "errors": "Errors"
+      },
+      "charts": {
+        "lineChart": "Line Chart",
+        "barChart": "Bar Chart",
+        "salesDistribution": "Sales Distribution"
+      },
+      "forms": {
+        "uploadFiles": "Upload Files",
+        "asyncSelect": "Async Select",
+        "tags": "Tags"
+      },
+      "actions": {
+        "openNotifications": "Open Notifications",
+        "openCommandPalette": "Open Command Palette (⌘K)",
+        "showConfirmDialog": "Show Confirm Dialog"
+      },
+      "confirmDialog": {
+        "title": "Delete Record",
+        "message": "Are you sure you want to delete this record permanently?"
+      },
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "components": "Components",
+        "demo": "Demo"
+      },
+      "events": {
+        "userRegistered": "User registered",
+        "serverDeployed": "Server deployed",
+        "paymentReceived": "Payment received",
+        "newUserJoined": "New user joined",
+        "versionReleased": "Version 2.1 released",
+        "stripeTransaction": "Stripe transaction"
+      },
+      "commands": {
+        "openNotificationDrawer": "Open Notification Drawer",
+        "showToast": "Show Toast",
+        "actionExecuted": "Action executed!"
+      },
+      "sidebar": {
+        "overview": "Overview",
+        "traffic": "Traffic",
+        "revenue": "Revenue",
+        "conversions": "Conversions"
+      }
+    },
+    "blank": {
+      "title": "Get Started"
+    },
+    "analytics": {
+      "title": "Real-Time Account Analytics",
+      "liveUpdating": "Live Updating",
+      "paused": "Paused",
+      "weeklyLoginActivity": "Weekly Login Activity",
+      "deviceUsage": "Device Usage",
+      "dataDownloadsOverview": "Data Downloads Overview",
+      "liveProportionDescription": "Live proportion of export activity over the last 30 seconds.",
+      "chartLabels": {
+        "logins": "Logins",
+        "sessions": "Sessions",
+        "profileData": "Profile Data",
+        "reports": "Reports",
+        "invoices": "Invoices"
+      },
+      "deviceLabels": {
+        "macbook": "MacBook",
+        "iphone": "iPhone",
+        "windowsPc": "Windows PC",
+        "android": "Android"
+      }
+    },
+    "team": {
+      "title": "Team & Roles",
+      "inviteMember": "Invite Member",
+      "inviteNewMember": "Invite a New Member",
+      "sendInvite": "Send Invite",
+      "fullName": "Full name",
+      "emailAddress": "Email address",
+      "tableHeaders": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "actions": "Actions"
+      },
+      "roles": {
+        "owner": "Owner",
+        "admin": "Admin",
+        "member": "Member"
+      },
+      "remove": "Remove"
+    },
+    "editor": {
+      "title": "📝 Rich Text Editor Demo",
+      "placeholder": "Start typing like in Notion...",
+      "liveHtmlOutput": "Live HTML Output"
+    },
+    "playground": {
+      "title": "Component Playground",
+      "description": "This page automatically generates a playground for any UI component using a JSON schema."
+    },
+    "buttons": {
+      "title": "Button Components",
+      "subtitle": "Explore all button styles, sizes, icons, and states.",
+      "variants": {
+        "primary": "Primary",
+        "secondary": "Secondary",
+        "success": "Success",
+        "danger": "Danger",
+        "outline": "Outline",
+        "glass": "Glass"
+      },
+      "sizes": "Sizes",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "buttonsWithIcons": "Buttons with Icons",
+      "fullWidth": "Full Width",
+      "iconOnlyButtons": "Icon-only Buttons",
+      "toggleButtons": "Toggle Buttons",
+      "accessibilityDemo": "Accessibility Demo",
+      "accessibilityDescription": "Try navigating with Tab / Shift+Tab — focus rings are visible.",
+      "focusMe": "Focus Me",
+      "accessible": "Accessible",
+      "keyboardOk": "Keyboard OK",
+      "labels": {
+        "default": "Default",
+        "withIcon": "With Icon",
+        "loading": "Loading",
+        "disabled": "Disabled",
+        "save": "Save",
+        "cancel": "Cancel",
+        "next": "Next",
+        "download": "Download",
+        "notify": "Notify",
+        "fullButton": "Full Button",
+        "confirm": "Confirm",
+        "star": "Star",
+        "power": "Power",
+        "favorite": "Favorite",
+        "on": "On",
+        "off": "Off"
+      },
+      "ariaLabels": {
+        "notifications": "Notifications",
+        "confirm": "Confirm",
+        "close": "Close",
+        "star": "Star",
+        "favorite": "Favorite"
+      }
+    },
+    "componentButton": {
+      "title": "Button Component Examples"
+    },
+    "componentInput": {
+      "title": "Input Component Examples",
+      "labels": {
+        "email": "Email",
+        "password": "Password",
+        "validEmail": "Valid Email",
+        "unverifiedEmail": "Unverified Email",
+        "invalidEmail": "Invalid Email",
+        "outlinedInput": "Outlined Input",
+        "filledInput": "Filled Input",
+        "emailAddress": "Email Address",
+        "verificationCode": "Verification Code"
+      },
+      "placeholders": {
+        "enterEmail": "Enter your email",
+        "enterPassword": "Enter your password",
+        "focusBorderHighlight": "Focus to see border highlight",
+        "smoothGlassFill": "Smooth glass fill",
+        "dots": "••••••"
+      },
+      "messages": {
+        "neverShareEmail": "We'll never share your email.",
+        "looksGood": "Looks good!",
+        "verifyEmail": "Please verify your email.",
+        "enterValidEmail": "Please enter a valid email address.",
+        "codeResent": "Code resent!"
+      },
+      "actions": {
+        "resend": "Resend"
+      }
+    },
+    "componentCard": {
+      "title": "Card Component Examples",
+      "variants": {
+        "glass": "Glass Variant",
+        "solid": "Solid Variant",
+        "gradient": "Gradient Variant",
+        "outlined": "Outlined Variant"
+      },
+      "subtitles": {
+        "defaultDashboardPanel": "Default dashboard panel",
+        "opaqueBackground": "Opaque background",
+        "dynamicBackground": "Dynamic background from your accent colors.",
+        "subtleLightweight": "Subtle, lightweight, and perfect for nested containers."
+      },
+      "descriptions": {
+        "glassStyle": "This is the default {strong} with a subtle transparent background. It's great for dashboard widgets and stats.",
+        "glassStyleCard": "glass-style card",
+        "solidHighContrast": "The solid variant provides a high-contrast opaque background — great for text-heavy sections.",
+        "gradientDynamic": "The gradient variant features a dynamic background from your accent colors.",
+        "outlinedSubtle": "The outlined variant is subtle, lightweight, and perfect for nested containers.",
+        "customSlots": "You can fully customize the header and footer using named slots for ultimate flexibility."
+      },
+      "customHeader": "Custom Header",
+      "actions": {
+        "viewDetails": "View Details",
+        "action": "Action",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      }
+    },
+    "mail": {
+      "title": "Mail",
+      "compose": "Compose",
+      "folders": {
+        "inbox": "Inbox",
+        "sent": "Sent",
+        "drafts": "Drafts",
+        "trash": "Trash"
+      },
+      "storage": "Storage: {used} / {total}",
+      "searchPlaceholder": "Search mail...",
+      "noEmailsFound": "No emails found",
+      "from": "From:",
+      "archive": "Archive",
+      "delete": "Delete",
+      "newMessage": "New Message",
+      "to": "To",
+      "subject": "Subject",
+      "writeMessage": "Write your message...",
+      "attach": "Attach",
+      "send": "Send"
+    },
+    "automationRules": {
+      "title": "Automation Rules",
+      "newRule": "New Rule",
+      "createRule": "Create Rule",
+      "ruleName": "Rule name",
+      "event": "Event (e.g., security.failed_login)",
+      "condition": "Condition (optional)",
+      "action": "Action (e.g., notify.slack(#security))",
+      "when": "When:",
+      "if": "If:",
+      "then": "Then:",
+      "cancel": "Cancel",
+      "add": "Add"
+    },
+    "system": {
+      "title": "System Settings",
+      "environment": "Environment",
+      "environmentName": "Environment name",
+      "theme": "Theme",
+      "dark": "Dark",
+      "light": "Light",
+      "selected": "Selected:",
+      "sessionTimeout": "Session Timeout",
+      "minutes": "minutes",
+      "maintenanceMode": "Maintenance Mode",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "saveSettings": "Save Settings"
+    },
+    "componentSwitch": {
+      "title": "Switch Component Examples",
+      "enableNotifications": "Enable Notifications",
+      "receiveAlerts": "Receive alerts instantly",
+      "power": "Power",
+      "darkMode": "Dark Mode",
+      "disabledExample": "Disabled Example"
+    },
+    "componentSelect": {
+      "title": "Select Component Examples",
+      "country": "Country",
+      "selectCountry": "Select your country",
+      "favoriteColor": "Favorite Color",
+      "chooseThemeColor": "Choose your theme color",
+      "requiredField": "Required Field",
+      "fieldRequired": "This field is required.",
+      "countries": {
+        "saudiArabia": "Saudi Arabia",
+        "unitedArabEmirates": "United Arab Emirates",
+        "kuwait": "Kuwait",
+        "qatar": "Qatar",
+        "egypt": "Egypt"
+      },
+      "colors": {
+        "fuchsia": "Fuchsia",
+        "emerald": "Emerald",
+        "cyan": "Cyan",
+        "rose": "Rose"
+      }
+    },
+    "componentAlert": {
+      "title": "Alert Component Examples",
+      "information": "Information",
+      "profileUpdated": "Your profile has been updated successfully.",
+      "success": "Success!",
+      "paymentProcessed": "Your payment was processed successfully.",
+      "warning": "Warning",
+      "sessionExpire": "Your session will expire in 5 minutes.",
+      "error": "Error",
+      "somethingWrong": "Something went wrong. Please try again later.",
+      "autoCloseAlert": "Auto-close Alert",
+      "autoCloseMessage": "This alert will disappear automatically after 4 seconds.",
+      "unsavedChanges": "Unsaved changes",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "componentModal": {
+      "title": "Modal Component Examples",
+      "openBasicModal": "Open Basic Modal",
+      "largeGlassModal": "Large Glass Modal",
+      "persistentModal": "Persistent Modal",
+      "welcome": "Welcome",
+      "simpleModalExample": "This is a simple modal example. It uses v-model to control visibility.",
+      "close": "Close",
+      "confirm": "Confirm",
+      "glassModal": "Glass Modal",
+      "glassModalDescription": "This modal uses a glass effect with backdrop blur and smooth transitions. You can include long text or any other content here.",
+      "gotIt": "Got it",
+      "persistentModalDescription": "This modal cannot be closed by clicking outside or pressing ESC."
+    },
+    "auth": {
+      "login": {
+        "title": "Sign In",
+        "subtitle": "Access your dashboard securely ✨",
+        "email": "Email",
+        "password": "Password",
+        "passwordPlaceholder": "••••••••",
+        "forgotPassword": "Forgot password?",
+        "loginButton": "Login",
+        "authenticating": "Authenticating...",
+        "noAccount": "Don't have an account?",
+        "createOne": "Create one"
+      },
+      "register": {
+        "title": "Create Account",
+        "subtitle": "Start your journey with a vibrant dashboard ✨",
+        "fullName": "Full Name",
+        "namePlaceholder": "Your Name",
+        "email": "Email",
+        "password": "Password",
+        "passwordPlaceholder": "••••••••",
+        "confirmPassword": "Confirm Password",
+        "signUpButton": "Sign Up",
+        "creatingAccount": "Creating Account...",
+        "haveAccount": "Already have an account?",
+        "signIn": "Sign In",
+        "passwordsDoNotMatch": "Passwords do not match"
+      },
+      "locked": {
+        "unlocked": "Unlocked!",
+        "enterPassword": "Enter password",
+        "unlock": "Unlock",
+        "screenLocked": "Screen Locked",
+        "enterPasswordToUnlock": "Enter your password to unlock",
+        "passwordPlaceholder": "••••••••",
+        "unlocking": "Unlocking...",
+        "unlockedSuccess": "Unlocked ✨"
+      },
+      "resetPassword": {
+        "title": "Reset Your Password",
+        "description": "Choose a strong new password for your account.",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "passwordPlaceholder": "••••••••",
+        "resetPassword": "Reset Password",
+        "updating": "Updating...",
+        "successTitle": "Password Reset Successful",
+        "successMessage": "Your password has been changed successfully.",
+        "passwordsDoNotMatch": "Passwords do not match"
+      },
+      "forgotPassword": {
+        "title": "Reset Password",
+        "description": "Enter your email and we'll send you a link to reset your password.",
+        "emailAddress": "Email Address",
+        "sendResetLink": "Send Reset Link",
+        "sending": "Sending...",
+        "rememberPassword": "Remember your password?",
+        "signIn": "Sign In",
+        "successTitle": "Link Sent Successfully!",
+        "successMessage": "We've sent a password reset link to {email}. Please check your inbox and follow the instructions.",
+        "backToLogin": "Back to Login"
+      }
+
+    },
+    "error": {
+      "404": {
+        "title": "404",
+        "pageNotFound": "Page Not Found",
+        "description": "The page you're looking for doesn't exist or has been moved.",
+        "goHome": "Go Home"
+      },
+      "maintenance": {
+        "title": "We'll Be Back Soon",
+        "description": "Our dashboard is currently under scheduled maintenance.",
+        "checkBack": "Please check back in a few minutes.",
+        "lastUpdated": "Last updated"
+      },
+      "500": {
+        "description": "Oops! Something went wrong on our servers.",
+        "tryAgain": "Please try again later.",
+        "refreshPage": "Refresh Page"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Settings",
+      "dataTrackingPreferences": "Data & Tracking Preferences",
+      "exportData": "Export Data",
+      "exportDescription": "Request a copy of all your personal data in machine-readable format.",
+      "requestExport": "Request Export",
+      "deleteAccountData": "Delete Account Data",
+      "deleteDescription": "Permanently delete your account and all related information.",
+      "deleteData": "Delete Data",
+      "howWeProtectData": "How We Protect Your Data",
+      "dataProtectionDescription": "Your data is encrypted at rest and in transit. We follow GDPR and ISO-27001 standards. You have full control over your information — what is stored, shared, and deleted.",
+      "confirmExport": "Confirm Export",
+      "confirmDeletion": "Confirm Deletion",
+      "exportMessage": "We will prepare your data for download shortly.",
+      "deleteMessage": "This action cannot be undone. Are you sure you want to permanently delete your data?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "exportRequestSubmitted": "Your data export request has been submitted.",
+      "accountDataDeleted": "Your account data will be deleted permanently."
+    },
+    "support": {
+      "title": "Support Tickets",
+      "searchPlaceholder": "Search by subject or ID…",
+      "tableHeaders": {
+        "id": "ID",
+        "subject": "Subject",
+        "status": "Status",
+        "priority": "Priority",
+        "created": "Created"
+      },
+      "statuses": {
+        "all": "All",
+        "open": "Open",
+        "pending": "Pending",
+        "closed": "Closed"
+      },
+      "priorities": {
+        "all": "All",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "ticket": "Ticket"
+    },
+    "integrations": {
+      "title": "Integrations",
+      "apiKey": "API Key",
+      "hide": "Hide",
+      "show": "Show",
+      "copy": "Copy",
+      "regenerate": "Regenerate",
+      "connected": "Connected",
+      "disconnected": "Disconnected",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "webhooks": "Webhooks",
+      "webhookTableHeaders": {
+        "url": "URL",
+        "secret": "Secret",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "sendTest": "Send Test",
+      "regenerateApiKey": "Regenerate API Key",
+      "regenerateDescription": "Regenerating invalidates the current key immediately. Clients using the old key will fail until updated.",
+      "regenerateButton": "Regenerate",
+      "pingSent": "Ping sent to {url}"
+    },
+    "billing": {
+      "title": "Billing & Invoices",
+      "addPaymentMethod": "Add Payment Method",
+      "paymentMethod": "Payment Method",
+      "cardOnFile": "Card on file",
+      "updateCard": "Update Card",
+      "payNow": "Pay Now",
+      "invoices": "Invoices",
+      "invoiceTableHeaders": {
+        "invoice": "Invoice",
+        "date": "Date",
+        "amount": "Amount",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "pdf": "PDF",
+      "updatePaymentMethod": "Update Payment Method",
+      "saveCard": "Save Card",
+      "cardholderName": "Cardholder Name",
+      "cardNumber": "Card Number",
+      "expiryDate": "MM/YY",
+      "cvc": "CVC"
+    },
+        "toasterDemo": {
+          "title": "Toaster Playground",
+          "description": "Test different notification styles, actions, and group behavior in your dashboard UI.",
+          "successToast": "Success Toast",
+          "errorToast": "Error Toast",
+          "warningToast": "Warning Toast",
+          "infoToast": "Info Toast",
+          "undoAction": "Undo Action",
+          "groupedToasts": "Grouped Toasts",
+          "allTypes": "All Types",
+          "customToast": "Custom Toast",
+          "tips": "💡 Tips:",
+          "tip1": "Hover over a toast to pause its auto-dismiss timer.",
+          "tip2": "Use groupKey to update ongoing notifications dynamically.",
+          "tip3": "Add actionLabel and onAction() for interactive toast actions.",
+          "tip4": "Supports different positions like top-right, bottom-left, etc.",
+          "successMessage": "Profile updated successfully.",
+          "errorMessage": "Failed to connect to server.",
+          "retryAction": "Retry",
+          "retrying": "Retrying…",
+          "warningMessage": "High CPU usage detected.",
+          "infoMessage": "Backup completed at 10:32 AM.",
+          "fileDeleted": "File deleted",
+          "fileDeletedMessage": "You can restore it within 10s.",
+          "fileRestored": "File restored",
+          "fileRestoredMessage": "Your file is back in Documents!",
+          "groupedAlert1": "3 new system alerts",
+          "groupedNotification": "Grouped notification.",
+          "groupedAlert2": "5 new system alerts",
+          "updatedCount": "Updated count.",
+          "customMessage": "Version 2.4 rolling out...",
+          "viewLogs": "View Logs",
+          "openingLogs": "Opening logs..."
+        },
+    "aiPlayground": {
+      "title": "AI Playground",
+      "model": "Model",
+      "temperature": "Temperature:",
+      "systemPrompt": "System Prompt",
+      "promptPlaceholder": "Type your prompt…",
+      "tokensApprox": "Tokens (approx):",
+      "run": "Run",
+      "running": "Running…",
+      "output": "Output"
+    },
+        "themeCustomizer": {
+          "title": "Theme Customizer",
+          "exportJson": "Export JSON",
+          "primary": "Primary",
+          "accent": "Accent",
+          "surface": "Surface",
+          "text": "Text",
+          "buttons": "Buttons",
+          "cards": "Cards",
+          "glassCardDescription": "Glass card with gradient header",
+          "ghost": "Ghost"
+        },
+    "promptLibrary": {
+      "title": "Prompt Library",
+      "filters": "Filters",
+      "searchPlaceholder": "Search…",
+      "tags": "Tags",
+      "addPrompt": "Add Prompt",
+      "titlePlaceholder": "Title",
+      "promptTextPlaceholder": "Prompt text…",
+      "savePrompt": "Save Prompt",
+      "usePrompt": "Use prompt {id} → inject into AI input"
+    },
+    "logs": {
+      "title": "Logs Viewer",
+      "pause": "Pause",
+      "resume": "Resume",
+      "searchPlaceholder": "Search logs…",
+      "messages": {
+        "authOk": "Auth OK",
+        "queryExecuted": "Query executed",
+        "cacheMiss": "Cache miss",
+        "jobStarted": "Job started",
+        "userLogin": "User login",
+        "paymentSucceeded": "Payment succeeded"
+      }
+    },
+    "errors": {
+      "title": "Error Reports",
+      "severities": {
+        "critical": "Critical",
+        "warning": "Warning",
+        "info": "Info"
+      }
+    },
+    "health": {
+      "title": "System Health",
+      "cpuUsage": "CPU Usage",
+      "memoryUsage": "Memory Usage",
+      "diskIo": "Disk IO",
+      "network": "Network",
+      "serviceStatus": "Service Status",
+      "services": {
+        "apiGateway": "API Gateway",
+        "dbCluster": "DB Cluster",
+        "authServer": "Auth Server",
+        "emailQueue": "Email Queue"
+      },
+      "statuses": {
+        "up": "Up",
+        "down": "Down",
+        "degraded": "Degraded"
+      }
+    },
+    "auditLogs": {
+      "title": "Audit Logs",
+      "exportCsv": "Export CSV",
+      "searchPlaceholder": "Search actor/action/target…",
+      "tableHeaders": {
+        "time": "Time",
+        "actor": "Actor",
+        "action": "Action",
+        "target": "Target",
+        "severity": "Severity"
+      },
+      "severities": {
+        "all": "All",
+        "info": "Info",
+        "warning": "Warning",
+        "critical": "Critical"
+      }
+    },
+    "knowledgeBase": {
+      "title": "Knowledge Base",
+      "searchPlaceholder": "Search docs…",
+      "categories": "Categories",
+      "articles": "Articles",
+      "selectArticle": "Select an article.",
+      "categoriesList": {
+        "all": "All",
+        "gettingStarted": "Getting Started",
+        "security": "Security",
+        "billing": "Billing",
+        "integrations": "Integrations"
+      },
+      "articlesList": {
+        "gettingStarted": {
+          "title": "Getting Started with Dashboard",
+          "content": "# Welcome\n\nThis guide helps you onboard quickly. Steps:\n1. Invite team\n2. Configure RBAC\n3. Connect integrations"
+        },
+        "twoFactorAuth": {
+          "title": "Two-Factor Authentication",
+          "content": "## 2FA\n\nEnable in **Security Settings**. Keep backup codes in a safe place."
+        },
+        "invoicesTaxes": {
+          "title": "Invoices & Taxes",
+          "content": "## Invoices\n\nAll invoices available under *Billing*. Export as PDF or CSV."
+        },
+        "slackIntegration": {
+          "title": "Slack Integration",
+          "content": "## Slack\n\nConnect via OAuth. Scopes required: `chat:write`, `incoming-webhook`."
+        }
+      }
+    },
+    "components": {
+      "title": "UI Components",
+      "subtitle": "Explore all core Arabia UI components.",
+      "componentsList": {
+        "button": {
+          "name": "Button",
+          "desc": "Gradient buttons with states & icons"
+        },
+        "input": {
+          "name": "Input",
+          "desc": "Form input fields with validation & icons"
+        },
+        "select": {
+          "name": "Select",
+          "desc": "Searchable dropdowns & async data"
+        },
+        "switch": {
+          "name": "Switch",
+          "desc": "Accessible toggle switches"
+        },
+        "card": {
+          "name": "Card",
+          "desc": "Flexible layout containers"
+        }
+      }
+    },
+    "accessControl": {
+      "title": "Access Control (RBAC)",
+      "save": "Save",
+      "permissionsSaved": "Permissions saved",
+      "module": "Module",
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "modules": {
+        "billing": "Billing",
+        "integrations": "Integrations",
+        "analytics": "Analytics",
+        "security": "Security",
+        "team": "Team"
+      }
+    },
+    "organization": {
+      "title": "Organization Settings",
+      "orgNamePlaceholder": "Organization name",
+      "domainPlaceholder": "Custom domain",
+      "primaryColor": "Primary color",
+      "noLogo": "No Logo",
+      "uploadLogo": "Upload Logo",
+      "saveSettings": "Save Settings",
+      "settingsSaved": "Organization settings saved",
+      "plans": {
+        "free": "Free",
+        "pro": "Pro",
+        "enterprise": "Enterprise"
+      }
+    },
+    "security": {
+      "title": "Security Settings",
+      "twoFactorAuth": "Two-Factor Authentication",
+      "twoFactorDescription": "Adds extra security to your account.",
+      "activeSessions": "Active Sessions",
+      "current": "Current",
+      "signOutAll": "Sign out all",
+      "allSessionsSignedOut": "All sessions signed out.",
+      "recentActivity": "Recent Activity",
+      "dangerZone": "Danger Zone",
+      "dangerZoneDescription": "You can log out from all devices or deactivate your account permanently.",
+      "deleteAccount": "Delete Account",
+      "deactivateAccount": "Deactivate Account"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "markAllAsRead": "Mark all as read",
+      "noNotifications": "No notifications",
+      "filters": {
+        "all": "All",
+        "system": "System",
+        "billing": "Billing",
+        "security": "Security"
+      }
+    },
+    "profile": {
+      "title": "Profile Settings",
+      "fullNamePlaceholder": "Full name",
+      "emailPlaceholder": "Email address",
+      "phonePlaceholder": "Phone",
+      "newPasswordPlaceholder": "New password",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "saveChanges": "Save Changes",
+      "profileSaved": "Profile saved!",
+      "timezones": {
+        "africaCairo": "Africa/Cairo",
+        "asiaDubai": "Asia/Dubai",
+        "europeLondon": "Europe/London"
+      }
+    },
+    "assistant": {
+      "title": "AI Assistant",
+      "assistant": "Assistant",
+      "toggleAssistant": "Toggle Assistant",
+      "inputPlaceholder": "Ask anything…",
+      "send": "Send",
+      "welcomeMessage": "Hey! I can help summarize analytics, generate reports, and draft emails.",
+      "responseMessage": "Got it. \"{query}\" — generating a concise response…"
+    },
+    "calendar": {
+      "title": "Activity Calendar",
+      "eventsTitle": "Events",
+      "noEvents": "No events",
+      "newEventPlaceholder": "New event title",
+      "add": "Add",
+      "days": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+      },
+      "events": {
+        "deploy": "Deploy v1.2",
+        "securityAudit": "Security audit",
+        "teamStandup": "Team standup"
+      }
+    },
+    "componentInteraction": {
+      "title": "✨ Interaction Components Demo",
+      "openSearch": "Open Search",
+      "tooltipExample": "Hover tooltip example",
+      "hoverMe": "Hover me",
+      "items": {
+        "dashboardOverview": "Dashboard Overview",
+        "settingsPanel": "Settings Panel",
+        "revenueReport": "Revenue Report"
+      },
+      "categories": {
+        "pages": "Pages",
+        "analytics": "Analytics"
+      }
+    },
+    "componentTooltip": {
+      "title": "Tooltip Component Examples",
+      "positions": {
+        "top": "Top Tooltip",
+        "bottom": "Bottom Tooltip",
+        "right": "Right Tooltip",
+        "left": "Left Tooltip",
+        "start": "Start Tooltip",
+        "end": "End Tooltip"
+      },
+      "buttons": {
+        "hoverTop": "Hover Top",
+        "hoverBottom": "Hover Bottom",
+        "hoverRight": "Hover Right",
+        "hoverLeft": "Hover Left",
+        "hoverStart": "Hover Start",
+        "hoverEnd": "Hover End",
+        "clickTooltip": "Click Tooltip"
+      },
+      "triggers": {
+        "clickMe": "Click me to toggle",
+        "focusToShow": "Focus to show"
+      },
+      "placeholders": {
+        "focusMe": "Focus me"
+      }
+    },
+    "componentBadge": {
+      "title": "Badge Component Examples",
+      "sections": {
+        "solidVariants": "Solid Variants",
+        "softVariants": "Soft Variants",
+        "outlineGlow": "Outline + Glow",
+        "dotBadges": "Dot Badges",
+        "withIcon": "With Icon"
+      },
+      "colors": {
+        "fuchsia": "Fuchsia",
+        "cyan": "Cyan",
+        "emerald": "Emerald",
+        "rose": "Rose"
+      },
+      "statuses": {
+        "info": "Info",
+        "success": "Success",
+        "warning": "Warning",
+        "error": "Error"
+      },
+      "labels": {
+        "new": "New",
+        "beta": "Beta",
+        "stable": "Stable",
+        "done": "Done",
+        "alerts": "Alerts",
+        "premium": "Premium"
+      }
+    },
+    "componentAdvancedUi": {
+      "title": "Advanced UI Components",
+      "subtitle": "Interactive and data-rich examples",
+      "demoMode": "Demo Mode",
+      "avatarsTitle": "Avatars & Badges",
+      "avatarsSubtitle": "User presence and status",
+      "ratingTitle": "Rating Component",
+      "ratingSubtitle": "Interactive rating input",
+      "currentRating": "Current rating: {rating}/5",
+      "gridTitle": "Grid Layout Showcase",
+      "gridSubtitle": "Automatic responsive columns",
+      "card": "Card {number}",
+      "dynamicGridItem": "Dynamic grid item",
+      "agentsTitle": "AI Agents",
+      "agentsSubtitle": "Registered AI personalities",
+      "promptHistoryTitle": "Prompt History",
+      "promptHistorySubtitle": "Stored conversation context",
+      "diffTitle": "Diff Side-by-Side",
+      "diffSubtitle": "Compare code revisions",
+      "apiConsoleTitle": "API Console",
+      "apiConsoleSubtitle": "Mock REST interaction demo"
+    },
+    "componentDevTools": {
+      "title": "🛠️ Developer Tools",
+      "heartbeat": "Heartbeat…"
+    },
+    "componentAiTools": {
+      "commands": {
+        "openSettings": "Open Settings",
+        "newChat": "New Chat",
+        "toggleTheme": "Toggle Theme"
+      },
+      "alerts": {
+        "settingsOpened": "Settings opened!",
+        "newChatStarted": "New chat started!"
+      }
+    },
+    "componentWidgets": {
+      "analytics": {
+        "revenue": "Revenue",
+        "activeUsers": "Active Users",
+        "bounceRate": "Bounce Rate",
+        "errors": "Errors"
+      },
+      "tasks": {
+        "designMockups": "Design new UI mockups",
+        "fixBugs": "Fix dashboard bugs",
+        "deployRelease": "Deploy release"
+      },
+      "feed": {
+        "newUserJoined": "New user joined",
+        "ahmedRegistered": "Ahmed registered",
+        "fiveMinAgo": "5 min ago",
+        "paymentReceived": "Payment received",
+        "amountCredited": "$250 credited",
+        "tenMinAgo": "10 min ago",
+        "serverWarning": "Server warning",
+        "memoryUsageHigh": "Memory usage high",
+        "oneHourAgo": "1 hr ago"
+      }
+    },
+    "componentCharts": {
+      "stats": {
+        "revenue": "Revenue",
+        "users": "Users",
+        "sessions": "Sessions",
+        "errors": "Errors"
+      },
+      "days": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri"
+      },
+      "quarters": {
+        "q1": "Q1",
+        "q2": "Q2",
+        "q3": "Q3",
+        "q4": "Q4"
+      },
+      "browsers": {
+        "chrome": "Chrome",
+        "firefox": "Firefox",
+        "edge": "Edge",
+        "safari": "Safari"
+      },
+      "metrics": {
+        "speed": "Speed",
+        "ui": "UI",
+        "ux": "UX",
+        "security": "Security",
+        "support": "Support"
+      },
+      "datasets": {
+        "traffic": "Traffic",
+        "sales": "Sales",
+        "score": "Score"
+      }
+    },
+    "componentUtilities": {
+      "title": "🧩 Utility Components",
+      "badges": {
+        "active": "Active",
+        "pending": "Pending",
+        "error": "Error"
+      },
+      "sections": {
+        "loaders": "Loaders",
+        "emptyStates": "Empty States",
+        "verticalDivider": "Vertical Divider"
+      },
+      "emptyState": {
+        "title": "No Records Found",
+        "description": "Try changing your filters or create a new item.",
+        "actionLabel": "Create New"
+      },
+      "directions": {
+        "left": "Left",
+        "right": "Right"
+      }
+    },
+    "componentSettings": {
+      "buttons": {
+        "openNotifications": "Open Notifications",
+        "openSettings": "Open Settings"
+      },
+      "currentTheme": "Current theme",
+      "notifications": {
+        "buildComplete": "Build complete",
+        "deploymentFinished": "Your deployment finished",
+        "twoMinAgo": "2m ago",
+        "newSignup": "New signup",
+        "userJoined": "A user just joined",
+        "tenMinAgo": "10m ago"
+      }
+    },
+    "componentSkeleton": {
+      "title": "✨ UiSkeleton Animation Variants",
+      "variants": {
+        "shimmer": "Shimmer (default)",
+        "pulse": "Pulse",
+        "static": "Static (no animation)"
+      },
+      "sections": {
+        "intensitySpeed": "Intensity & Speed"
+      },
+      "loadedData": {
+        "title": "Loaded Data",
+        "description": "Skeletons above fade out smoothly after loading.",
+        "continue": "Continue"
+      },
+      "buttons": {
+        "toggleTheme": "Toggle Fancy Theme"
+      }
+    },
+    "componentTextarea": {
+      "title": "Textarea Component Examples",
+      "labels": {
+        "yourBio": "Your Bio",
+        "notes": "Notes",
+        "feedback": "Feedback"
+      },
+      "placeholders": {
+        "tellUsAboutYourself": "Tell us about yourself...",
+        "writeSomething": "Write something here...",
+        "typeFeedback": "Type your feedback..."
+      },
+      "messages": {
+        "autosizing": "Autosizing & adaptive styling",
+        "exceededLimit": "Exceeded character limit"
+      }
+    },
+    "componentAccordion": {
+      "title": "Accordion Component Examples",
+      "variants": {
+        "vertical": "Vertical Variant",
+        "multipleVertical": "Multiple Vertical",
+        "horizontal": "Horizontal Variant"
+      },
+      "faq": {
+        "privacy": {
+          "title": "What is our privacy policy?",
+          "content": "We use advanced encryption to secure your data. No third parties can access personal information."
+        },
+        "settings": {
+          "title": "How to change my settings?",
+          "content": "Go to Settings → Preferences to personalize your dashboard experience."
+        },
+        "docs": {
+          "title": "Where can I find more info?",
+          "content": "Visit our docs or contact support for further technical details."
+        }
+      }
+    },
+    "componentTable": {
+      "title": "📊 UiTable — Persistent Demo",
+      "roles": {
+        "admin": "Admin",
+        "editor": "Editor",
+        "viewer": "Viewer"
+      },
+      "labels": {
+        "user": "User"
+      },
+      "headers": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "usage": "Usage %",
+        "created": "Created"
+      },
+      "emptyState": "No users found.",
+      "selectedRows": "Selected rows",
+      "none": "None"
+    },
+    "componentForm": {
+      "title": "🧩 Form Playground",
+      "labels": {
+        "name": "Name",
+        "bio": "Bio",
+        "country": "Country",
+        "tags": "Tags",
+        "agreeToTerms": "I agree to terms",
+        "selectPlan": "Select Plan",
+        "featureToggle": "Feature Toggle",
+        "enableFeature": "Enable feature",
+        "date": "Date",
+        "slider": "Slider"
+      },
+      "placeholders": {
+        "enterName": "Enter your name",
+        "writeBio": "Write your bio",
+        "chooseCountry": "Choose country",
+        "pickTags": "Pick tags",
+        "pickDate": "Pick a date (Hijri / Gregorian)"
+      },
+      "countries": {
+        "saudiArabia": "Saudi Arabia",
+        "uae": "UAE",
+        "kuwait": "Kuwait"
+      },
+      "tags": {
+        "vue": "Vue",
+        "nuxt": "Nuxt",
+        "tailwind": "Tailwind"
+      },
+      "plans": {
+        "free": "Free",
+        "pro": "Pro",
+        "enterprise": "Enterprise"
+      }
+    },
+    "componentTabs": {
+      "title": "Tabs Component Examples",
+      "labels": {
+        "overview": "Overview",
+        "settings": "Settings",
+        "notifications": "Notifications",
+        "profile": "Profile"
+      },
+      "content": {
+        "overview": "This is the overview section content.",
+        "settings": "Here you can manage your app settings.",
+        "notifications": "Notifications and alerts appear here.",
+        "profile": "Profile information and user data."
+      },
+      "contentPill": {
+        "overview": "Overview content inside a pill-style tab navigation.",
+        "settings": "Manage configurations and integrations here.",
+        "notifications": "All app notifications and alerts listed here.",
+        "profile": "Edit your personal profile or update info."
+      },
+      "contentVertical": {
+        "overview": "Vertical tab layout is great for sidebar panels.",
+        "settings": "Settings section content in vertical orientation.",
+        "notifications": "Vertical mode keeps sections aligned with content.",
+        "profile": "Profile management inside vertical tabs."
+      }
+    },
+    "componentStepper": {
+      "title": "Stepper Component Examples",
+      "steps": {
+        "account": {
+          "label": "Account",
+          "description": "Create your account"
+        },
+        "billing": {
+          "label": "Billing",
+          "description": "Setup payment method"
+        },
+        "confirmation": {
+          "label": "Confirm",
+          "description": "Finish setup"
+        }
+      },
+      "stepsVertical": {
+        "details": "Personal Details",
+        "verify": "Verification",
+        "review": "Review Info",
+        "submit": "Submit"
+      },
+      "stepsErrors": {
+        "profile": "Profile",
+        "upload": "Upload Files",
+        "review": "Review"
+      }
+    },
+    "componentDropdown": {
+      "title": "Dropdown Component Examples",
+      "labels": {
+        "userMenu": "User Menu",
+        "hoverMenu": "Hover Menu",
+        "rightAligned": "Right Aligned",
+        "topPosition": "Top Position"
+      },
+      "items": {
+        "profile": "Profile",
+        "settings": "Settings",
+        "notifications": "Notifications",
+        "logout": "Logout"
+      }
+    }
+  },
+  "components": {
+    "aiChatDock": {
+      "title": "AI Assistant",
+      "placeholder": "Type a message...",
+      "welcomeMessage": "Hello 👋 How can I assist you today?",
+      "responsePrefix": "You said: \"{message}\" 🤖"
+    },
+    "alert": {
+      "closeLabel": "Close"
+    },
+    "emptyState": {
+      "defaultTitle": "No data available",
+      "defaultDescription": "There's nothing to show here yet."
+    },
+    "richEditor": {
+      "commands": {
+        "heading1": {
+          "label": "Heading 1",
+          "description": "Large title"
+        },
+        "heading2": {
+          "label": "Heading 2",
+          "description": "Section title"
+        },
+        "paragraph": {
+          "label": "Paragraph",
+          "description": "Normal text"
+        },
+        "bulletList": {
+          "label": "Bullet List",
+          "description": "• list"
+        },
+        "numberedList": {
+          "label": "Numbered List",
+          "description": "1. list"
+        },
+        "quote": {
+          "label": "Quote",
+          "description": "Block quote"
+        },
+        "codeBlock": {
+          "label": "Code Block",
+          "description": "Snippet block"
+        },
+        "divider": {
+          "label": "Divider",
+          "description": "Horizontal rule"
+        },
+        "aiRewrite": {
+          "label": "AI: Rewrite",
+          "description": "Improve clarity"
+        },
+        "aiSummarize": {
+          "label": "AI: Summarize",
+          "description": "Summarize section"
+        },
+        "aiTranslate": {
+          "label": "AI: Translate",
+          "description": "Translate selection"
+        },
+        "aiExpand": {
+          "label": "AI: Expand",
+          "description": "Elaborate details"
+        },
+        "aiTone": {
+          "label": "AI: Tone",
+          "description": "Change tone"
+        },
+        "aiFixGrammar": {
+          "label": "AI: Fix Grammar",
+          "description": "Correct text"
+        }
+      }
+    },
+    "uiSelect": {
+      "placeholder": "Select option...",
+      "searchPlaceholder": "Search..."
+    },
+    "uiModal": {
+      "closeLabel": "Close"
+    }
   },
   "public": {
     "homePage": {

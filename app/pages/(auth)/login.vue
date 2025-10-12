@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import { Eye, EyeOff, LogIn } from 'lucide-vue-next'
 import { useRouter } from '#imports'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 definePageMeta({ layout: 'auth' })
 
@@ -32,30 +35,30 @@ const handleLogin = async (): Promise<void> => {
         <h1
             class="text-center text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400 mb-6"
         >
-          Sign In
+          {{ t('pages.auth.login.title') }}
         </h1>
         <p class="text-center text-sm text-[var(--text-secondary)] mb-8">
-          Access your dashboard securely ✨
+          {{ t('pages.auth.login.subtitle') }}
         </p>
 
         <form @submit.prevent="handleLogin" class="space-y-6">
           <div>
-            <label class="text-sm text-[var(--text-secondary)] mb-1 block">Email</label>
+            <label class="text-sm text-[var(--text-secondary)] mb-1 block">{{ t('pages.auth.login.email') }}</label>
             <input
                 v-model="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="your@mail.com"
                 class="input-dark w-full focus:ring-2 focus:ring-fuchsia-500/50"
             />
           </div>
 
           <div>
-            <label class="text-sm text-[var(--text-secondary)] mb-1 block">Password</label>
+            <label class="text-sm text-[var(--text-secondary)] mb-1 block">{{ t('pages.auth.login.password') }}</label>
             <div class="relative">
               <input
                   v-model="password"
                   :type="showPassword ? 'text' : 'password'"
-                  placeholder="••••••••"
+                  :placeholder="t('pages.auth.login.passwordPlaceholder')"
                   class="input-dark w-full pr-10 focus:ring-2 focus:ring-fuchsia-500/50"
               />
               <button
@@ -74,7 +77,7 @@ const handleLogin = async (): Promise<void> => {
                 to="/forgot-password"
                 class="text-sm text-fuchsia-400 hover:text-cyan-400 transition-colors"
             >
-              Forgot password?
+              {{ t('pages.auth.login.forgotPassword') }}
             </NuxtLink>
           </div>
 
@@ -83,15 +86,15 @@ const handleLogin = async (): Promise<void> => {
               :disabled="isLoading"
               class="relative w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-2"
           >
-            <span v-if="!isLoading">Login</span>
-            <span v-else class="animate-pulse">Authenticating...</span>
+            <span v-if="!isLoading">{{ t('pages.auth.login.loginButton') }}</span>
+            <span v-else class="animate-pulse">{{ t('pages.auth.login.authenticating') }}</span>
             <LogIn class="w-5 h-5" />
           </button>
 
           <p class="text-center text-sm text-[var(--text-secondary)] mt-4">
-            Don’t have an account?
+            {{ t('pages.auth.login.noAccount') }}
             <NuxtLink to="/register" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
-              Create one
+              {{ t('pages.auth.login.createOne') }}
             </NuxtLink>
           </p>
         </form>

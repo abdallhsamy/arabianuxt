@@ -1,26 +1,29 @@
 <script setup lang="ts">
 import UiAlert from '~/components/Ui/Common/UiAlert.vue'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const showAuto = ref(true)
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Alert Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentAlert.title') }}</h1>
 
     <div class="grid gap-6 md:grid-cols-2">
       <!-- Info -->
-      <UiAlert type="info" title="Information" message="Your profile has been updated successfully." />
+      <UiAlert type="info" :title="t('pages.componentAlert.information')" :message="t('pages.componentAlert.profileUpdated')" />
 
       <!-- Success -->
-      <UiAlert type="success" title="Success!" message="Your payment was processed successfully." />
+      <UiAlert type="success" :title="t('pages.componentAlert.success')" :message="t('pages.componentAlert.paymentProcessed')" />
 
       <!-- Warning -->
-      <UiAlert type="warning" title="Warning" message="Your session will expire in 5 minutes." />
+      <UiAlert type="warning" :title="t('pages.componentAlert.warning')" :message="t('pages.componentAlert.sessionExpire')" />
 
       <!-- Error -->
-      <UiAlert type="error" title="Error" message="Something went wrong. Please try again later." />
+      <UiAlert type="error" :title="t('pages.componentAlert.error')" :message="t('pages.componentAlert.somethingWrong')" />
 
       <!-- Auto-close -->
       <UiAlert
@@ -28,18 +31,18 @@ const showAuto = ref(true)
           type="info"
           auto-close
           :duration="4000"
-          title="Auto-close Alert"
-          message="This alert will disappear automatically after 4 seconds."
+          :title="t('pages.componentAlert.autoCloseAlert')"
+          :message="t('pages.componentAlert.autoCloseMessage')"
           @close="showAuto = false"
       />
 
       <!-- With actions -->
-      <UiAlert type="warning" title="Unsaved changes" :dismissible="false">
+      <UiAlert type="warning" :title="t('pages.componentAlert.unsavedChanges')" :dismissible="false">
         <template #actions>
           <div class="flex gap-3">
-            <button class="px-3 py-1.5 text-xs rounded-lg bg-white/10 hover:bg-white/20">Cancel</button>
+            <button class="px-3 py-1.5 text-xs rounded-lg bg-white/10 hover:bg-white/20">{{ t('pages.componentAlert.cancel') }}</button>
             <button class="px-3 py-1.5 text-xs rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 text-black font-medium">
-              Save
+              {{ t('pages.componentAlert.save') }}
             </button>
           </div>
         </template>

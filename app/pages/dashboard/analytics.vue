@@ -3,6 +3,9 @@ import IncidentsTimeline from '~/components/Ui/Security/IncidentsTimeline.vue'
 import { ref, onMounted, nextTick, onUnmounted } from 'vue'
 import Chart from 'chart.js/auto'
 import { Activity, PieChart, Clock, Zap } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const loginCanvas = ref<HTMLCanvasElement | null>(null)
 const deviceCanvas = ref<HTMLCanvasElement | null>(null)
@@ -53,7 +56,7 @@ onMounted(async () => {
       labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
       datasets: [
         {
-          label: 'Logins',
+          label: t('pages.analytics.chartLabels.logins'),
           data: [12, 19, 15, 22, 18, 25, 20],
           borderColor: '#EC4899',
           backgroundColor: gradient,
@@ -70,10 +73,15 @@ onMounted(async () => {
   deviceChart = new Chart(ctxDevice, {
     type: 'bar',
     data: {
-      labels: ['MacBook', 'iPhone', 'Windows PC', 'Android'],
+      labels: [
+        t('pages.analytics.deviceLabels.macbook'),
+        t('pages.analytics.deviceLabels.iphone'),
+        t('pages.analytics.deviceLabels.windowsPc'),
+        t('pages.analytics.deviceLabels.android')
+      ],
       datasets: [
         {
-          label: 'Sessions',
+          label: t('pages.analytics.chartLabels.sessions'),
           data: [25, 18, 8, 6],
           backgroundColor: [
             'rgba(139,92,246,0.7)',
@@ -92,7 +100,11 @@ onMounted(async () => {
   downloadChart = new Chart(ctxDownload, {
     type: 'doughnut',
     data: {
-      labels: ['Profile Data', 'Reports', 'Invoices'],
+      labels: [
+        t('pages.analytics.chartLabels.profileData'),
+        t('pages.analytics.chartLabels.reports'),
+        t('pages.analytics.chartLabels.invoices')
+      ],
       datasets: [
         {
           data: [55, 25, 20],
@@ -150,7 +162,7 @@ onUnmounted(() => {
       <h1
           class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400"
       >
-        Real-Time Account Analytics
+        {{ t('pages.analytics.title') }}
       </h1>
 
       <!-- 🔴 Live Toggle -->
@@ -159,7 +171,7 @@ onUnmounted(() => {
           class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-indigo-500 to-cyan-400 hover:brightness-110 transition-all"
       >
         <Zap class="w-4 h-4" />
-        <span>{{ isLive ? 'Live Updating' : 'Paused' }}</span>
+        <span>{{ isLive ? t('pages.analytics.liveUpdating') : t('pages.analytics.paused') }}</span>
         <span
             :class="[
             'ms-2 w-2.5 h-2.5 rounded-full animate-pulse',
@@ -177,7 +189,7 @@ onUnmounted(() => {
               class="rounded-2xl bg-[rgba(15,17,23,0.92)] backdrop-blur-xl border border-white/10 p-6 h-[360px] flex flex-col"
           >
             <h2 class="flex items-center gap-2 text-white font-semibold text-lg mb-4">
-              <Activity class="w-5 h-5 text-fuchsia-400" /> Weekly Login Activity
+              <Activity class="w-5 h-5 text-fuchsia-400" /> {{ t('pages.analytics.weeklyLoginActivity') }}
             </h2>
             <canvas ref="loginCanvas" class="flex-1"></canvas>
           </div>
@@ -189,7 +201,7 @@ onUnmounted(() => {
               class="rounded-2xl bg-[rgba(15,17,23,0.92)] backdrop-blur-xl border border-white/10 p-6 h-[360px] flex flex-col"
           >
             <h2 class="flex items-center gap-2 text-white font-semibold text-lg mb-4">
-              <PieChart class="w-5 h-5 text-cyan-400" /> Device Usage
+              <PieChart class="w-5 h-5 text-cyan-400" /> {{ t('pages.analytics.deviceUsage') }}
             </h2>
             <canvas ref="deviceCanvas" class="flex-1"></canvas>
           </div>
@@ -202,10 +214,10 @@ onUnmounted(() => {
           >
             <div class="flex-1">
               <h2 class="flex items-center gap-2 text-white font-semibold text-lg mb-4">
-                <Clock class="w-5 h-5 text-indigo-400" /> Data Downloads Overview
+                <Clock class="w-5 h-5 text-indigo-400" /> {{ t('pages.analytics.dataDownloadsOverview') }}
               </h2>
               <p class="text-sm text-gray-400 mb-4">
-                Live proportion of export activity over the last 30 seconds.
+                {{ t('pages.analytics.liveProportionDescription') }}
               </p>
             </div>
             <div class="flex-1 min-h-[260px]">

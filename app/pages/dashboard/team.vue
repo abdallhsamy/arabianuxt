@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import { UserPlus, Trash2, Shield, BadgeCheck } from 'lucide-vue-next'
 import UiModal from '~/components/Ui/Common/UiModal.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 type Member = { id: string; name: string; email: string; role: 'Owner'|'Admin'|'Member' }
 const members = ref<Member[]>([
@@ -39,10 +42,10 @@ const roleBadge = (r: Member['role']): string => ({
   <section class="space-y-8">
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">
-        Team & Roles
+        {{ t('pages.team.title') }}
       </h1>
       <button class="flex items-center gap-2 px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 transition-all" @click="inviteOpen = true">
-        <UserPlus class="w-4 h-4" /> Invite Member
+        <UserPlus class="w-4 h-4" /> {{ t('pages.team.inviteMember') }}
       </button>
     </div>
 
@@ -51,10 +54,10 @@ const roleBadge = (r: Member['role']): string => ({
         <table class="w-full text-sm">
           <thead class="text-gray-400">
           <tr class="text-start">
-            <th class="py-2">Name</th>
-            <th class="py-2">Email</th>
-            <th class="py-2">Role</th>
-            <th class="py-2 text-end">Actions</th>
+            <th class="py-2">{{ t('pages.team.tableHeaders.name') }}</th>
+            <th class="py-2">{{ t('pages.team.tableHeaders.email') }}</th>
+            <th class="py-2">{{ t('pages.team.tableHeaders.role') }}</th>
+            <th class="py-2 text-end">{{ t('pages.team.tableHeaders.actions') }}</th>
           </tr>
           </thead>
           <tbody class="divide-y divide-white/10">
@@ -69,7 +72,7 @@ const roleBadge = (r: Member['role']): string => ({
             </td>
             <td class="py-3 text-end">
               <button class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-rose-300 flex items-center gap-1" @click="removeMember(m.id)">
-                <Trash2 class="w-4 h-4" /> Remove
+                <Trash2 class="w-4 h-4" /> {{ t('pages.team.remove') }}
               </button>
             </td>
           </tr>
@@ -79,14 +82,14 @@ const roleBadge = (r: Member['role']): string => ({
     </div>
 
     <!-- Invite UiModal -->
-    <UiModal v-model:open="inviteOpen" title="Invite a New Member" confirm-text="Send Invite" @confirm="invite">
+    <UiModal v-model:open="inviteOpen" :title="t('pages.team.inviteNewMember')" :confirm-text="t('pages.team.sendInvite')" @confirm="invite">
       <div class="space-y-3">
-        <input v-model="inviteName" class="input-dark w-full" placeholder="Full name" />
-        <input v-model="inviteEmail" class="input-dark w-full" placeholder="Email address" />
+        <input v-model="inviteName" class="input-dark w-full" :placeholder="t('pages.team.fullName')" />
+        <input v-model="inviteEmail" class="input-dark w-full" :placeholder="t('pages.team.emailAddress')" />
         <select v-model="inviteRole" class="input-dark w-full">
-          <option>Member</option>
-          <option>Admin</option>
-          <option>Owner</option>
+          <option>{{ t('pages.team.roles.member') }}</option>
+          <option>{{ t('pages.team.roles.admin') }}</option>
+          <option>{{ t('pages.team.roles.owner') }}</option>
         </select>
       </div>
     </UiModal>

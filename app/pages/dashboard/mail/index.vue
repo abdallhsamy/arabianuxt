@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { X, Send, Search, Paperclip, Star, Trash2, Archive, MailPlus } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // --------------------
 // Types
@@ -111,7 +114,7 @@ const sendMail = () => {
           class="flex items-center gap-2 px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white rounded-lg font-medium mb-4"
           @click="showCompose = true"
       >
-        <MailPlus class="w-4 h-4" /> Compose
+        <MailPlus class="w-4 h-4" /> {{ t('pages.mail.compose') }}
       </button>
 
       <nav class="space-y-1">
@@ -122,12 +125,12 @@ const sendMail = () => {
             :class="selectedFolder===folder ? 'bg-white/10 text-fuchsia-400' : 'hover:bg-white/5'"
             @click="selectedFolder = folder"
         >
-          {{ folder }}
+          {{ t(`pages.mail.folders.${folder}`) }}
         </button>
       </nav>
 
       <div class="mt-auto text-xs text-gray-500 pt-6 border-t border-white/10">
-        Storage: 1.2 GB / 15 GB
+        {{ t('pages.mail.storage', { used: '1.2 GB', total: '15 GB' }) }}
       </div>
     </aside>
 
@@ -137,7 +140,7 @@ const sendMail = () => {
         <Search class="w-4 h-4 text-gray-400" />
         <input
             v-model="search"
-            placeholder="Search mail..."
+            :placeholder="t('pages.mail.searchPlaceholder')"
             class="bg-transparent flex-1 outline-none text-gray-200 text-sm"
         />
       </header>
@@ -168,7 +171,7 @@ const sendMail = () => {
               <Paperclip v-if="m.attachments" class="w-4 h-4 text-gray-500" />
             </div>
           </li>
-          <li v-if="!filteredMails.length" class="text-gray-500 text-sm text-center py-6">No emails found</li>
+          <li v-if="!filteredMails.length" class="text-gray-500 text-sm text-center py-6">{{ t('pages.mail.noEmailsFound') }}</li>
         </ul>
       </div>
     </section>
@@ -183,16 +186,16 @@ const sendMail = () => {
       </header>
 
       <div class="p-4 flex-1 overflow-y-auto space-y-3">
-        <div class="text-sm text-gray-400">From: {{ selectedMail.from }}</div>
+        <div class="text-sm text-gray-400">{{ t('pages.mail.from') }} {{ selectedMail.from }}</div>
         <p class="whitespace-pre-wrap text-gray-100">{{ selectedMail.content }}</p>
       </div>
 
       <footer class="flex justify-end gap-2 p-3 border-t border-white/10">
         <button class="px-3 py-1.5 bg-white/10 rounded-md text-sm hover:bg-white/20">
-          <Archive class="w-4 h-4 inline-block me-1" /> Archive
+          <Archive class="w-4 h-4 inline-block me-1" /> {{ t('pages.mail.archive') }}
         </button>
         <button class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-md text-sm">
-          <Trash2 class="w-4 h-4 inline-block me-1" /> Delete
+          <Trash2 class="w-4 h-4 inline-block me-1" /> {{ t('pages.mail.delete') }}
         </button>
       </footer>
     </aside>
@@ -206,39 +209,39 @@ const sendMail = () => {
       >
         <div class="bg-black/80 rounded-xl border border-white/10 w-full max-w-lg p-6 space-y-4">
           <div class="flex justify-between items-center">
-            <h3 class="text-lg font-semibold text-gray-100">New Message</h3>
+            <h3 class="text-lg font-semibold text-gray-100">{{ t('pages.mail.newMessage') }}</h3>
             <button class="hover:text-rose-400" @click="showCompose=false"><X class="w-5 h-5" /></button>
           </div>
 
           <input
               v-model="newMail.to"
               type="text"
-              placeholder="To"
+              :placeholder="t('pages.mail.to')"
               class="w-full bg-transparent border-b border-white/10 pb-1 text-gray-100 text-sm outline-none"
           />
           <input
               v-model="newMail.subject"
               type="text"
-              placeholder="Subject"
+              :placeholder="t('pages.mail.subject')"
               class="w-full bg-transparent border-b border-white/10 pb-1 text-gray-100 text-sm outline-none"
           />
           <textarea
               v-model="newMail.body"
-              placeholder="Write your message..."
+              :placeholder="t('pages.mail.writeMessage')"
               class="w-full bg-white/5 border border-white/10 rounded-md text-gray-100 text-sm p-2 h-48 resize-none"
           ></textarea>
 
           <div class="flex justify-between items-center">
             <label class="flex items-center gap-1 cursor-pointer text-sm text-fuchsia-400 hover:text-fuchsia-300">
               <Paperclip class="w-4 h-4" />
-              Attach
+              {{ t('pages.mail.attach') }}
               <input type="file" multiple class="hidden" @change="newMail.attachments = Array.from(($event.target as HTMLInputElement).files || [])" />
             </label>
             <button
                 class="flex items-center gap-1 bg-fuchsia-600 hover:bg-fuchsia-700 text-white text-sm font-medium px-4 py-2 rounded-md"
                 @click="sendMail"
             >
-              <Send class="w-4 h-4" /> Send
+              <Send class="w-4 h-4" /> {{ t('pages.mail.send') }}
             </button>
           </div>
         </div>

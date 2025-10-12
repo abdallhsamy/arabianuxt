@@ -1,7 +1,7 @@
 <template>
   <section class="space-y-8">
-    <h1 class="page-title">UI Components</h1>
-    <p class="text-gray-400">Explore all core Arabia UI components.</p>
+    <h1 class="page-title">{{ t('pages.components.title') }}</h1>
+    <p class="text-gray-400">{{ t('pages.components.subtitle') }}</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       <NuxtLink
           v-for="c in components"
@@ -17,12 +17,16 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const components = [
-  { name: 'Button', path: '/dashboard/components/button', desc: 'Gradient buttons with states & icons' },
-  { name: 'Input', path: '/dashboard/components/input', desc: 'Form input fields with validation & icons' },
-  { name: 'Select', path: '/dashboard/components/select', desc: 'Searchable dropdowns & async data' },
-  { name: 'Switch', path: '/dashboard/components/switch', desc: 'Accessible toggle switches' },
-  { name: 'Card', path: '/dashboard/components/card', desc: 'Flexible layout containers' },
+  { name: t('pages.components.componentsList.button.name'), path: '/dashboard/components/button', desc: t('pages.components.componentsList.button.desc') },
+  { name: t('pages.components.componentsList.input.name'), path: '/dashboard/components/input', desc: t('pages.components.componentsList.input.desc') },
+  { name: t('pages.components.componentsList.select.name'), path: '/dashboard/components/select', desc: t('pages.components.componentsList.select.desc') },
+  { name: t('pages.components.componentsList.switch.name'), path: '/dashboard/components/switch', desc: t('pages.components.componentsList.switch.desc') },
+  { name: t('pages.components.componentsList.card.name'), path: '/dashboard/components/card', desc: t('pages.components.componentsList.card.desc') },
 ]
 </script>
 

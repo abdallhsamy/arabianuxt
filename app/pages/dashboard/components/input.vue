@@ -2,7 +2,9 @@
 import UiInput from '~/components/Ui/Form/UiInput.vue'
 import { Copy, Mail, Lock } from 'lucide-vue-next'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const email = ref('')
 const password = ref('')
 const otp = ref('')
@@ -10,23 +12,23 @@ const otp = ref('')
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Input Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentInput.title') }}</h1>
 
     <!-- Default Input -->
     <UiInput
         v-model="email"
-        label="Email"
-        placeholder="Enter your email"
+        :label="t('pages.componentInput.labels.email')"
+        :placeholder="t('pages.componentInput.placeholders.enterEmail')"
         :icon="Mail"
-        message="We'll never share your email."
+        :message="t('pages.componentInput.messages.neverShareEmail')"
     />
 
     <!-- Password Input -->
     <UiInput
         v-model="password"
-        label="Password"
+        :label="t('pages.componentInput.labels.password')"
         type="password"
-        placeholder="Enter your password"
+        :placeholder="t('pages.componentInput.placeholders.enterPassword')"
         password-toggle
         :icon="Lock"
     />
@@ -34,42 +36,42 @@ const otp = ref('')
     <!-- Success -->
     <UiInput
         v-model="email"
-        label="Valid Email"
+        :label="t('pages.componentInput.labels.validEmail')"
         placeholder="example@domain.com"
         state="success"
-        message="Looks good!"
+        :message="t('pages.componentInput.messages.looksGood')"
     />
 
     <!-- Warning -->
     <UiInput
         v-model="email"
-        label="Unverified Email"
+        :label="t('pages.componentInput.labels.unverifiedEmail')"
         state="warning"
-        message="Please verify your email."
+        :message="t('pages.componentInput.messages.verifyEmail')"
     />
 
     <!-- Error -->
     <UiInput
         v-model="email"
-        label="Invalid Email"
+        :label="t('pages.componentInput.labels.invalidEmail')"
         state="error"
-        message="Please enter a valid email address."
+        :message="t('pages.componentInput.messages.enterValidEmail')"
     />
 
     <!-- Outlined Variant -->
     <UiInput
         v-model="email"
-        label="Outlined Input"
+        :label="t('pages.componentInput.labels.outlinedInput')"
         variant="outlined"
-        placeholder="Focus to see border highlight"
+        :placeholder="t('pages.componentInput.placeholders.focusBorderHighlight')"
     />
 
     <!-- Filled Variant -->
     <UiInput
         v-model="email"
-        label="Filled Input"
+        :label="t('pages.componentInput.labels.filledInput')"
         variant="filled"
-        placeholder="Smooth glass fill"
+        :placeholder="t('pages.componentInput.placeholders.smoothGlassFill')"
     />
 
     <h1 class="page-title">Input with Prefix & Suffix Slots</h1>
@@ -77,7 +79,7 @@ const otp = ref('')
     <!-- Email Input with Prefix Icon -->
     <UiInput
         v-model="email"
-        label="Email Address"
+        :label="t('pages.componentInput.labels.emailAddress')"
         placeholder="user@example.com"
         :parent-theme="'dark'"
     >
@@ -92,16 +94,16 @@ const otp = ref('')
     <!-- OTP Input with Suffix Action -->
     <UiInput
         v-model="otp"
-        label="Verification Code"
-        placeholder="••••••"
+        :label="t('pages.componentInput.labels.verificationCode')"
+        :placeholder="t('pages.componentInput.placeholders.dots')"
         :parent-theme="'gradient'"
     >
       <template #suffix>
         <button
             class="text-xs text-fuchsia-400 hover:text-fuchsia-300 font-medium"
-            @click="alert('Code resent!')"
+            @click="alert(t('pages.componentInput.messages.codeResent'))"
         >
-          Resend
+          {{ t('pages.componentInput.actions.resend') }}
         </button>
       </template>
     </UiInput>
@@ -110,7 +112,7 @@ const otp = ref('')
     <UiInput
         v-model="email"
         type="password"
-        label="Password"
+        :label="t('pages.componentInput.labels.password')"
         password-toggle
         :parent-theme="'dark'"
     >

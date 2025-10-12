@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Eye, Database, Trash2, Download, ShieldCheck, Lock } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const privacy = ref({
   analytics: true,
@@ -20,9 +23,9 @@ const confirmAction = (action: 'export' | 'delete') => {
 const handleConfirm = () => {
   showModal.value = false
   if (modalAction.value === 'export') {
-    alert('Your data export request has been submitted.')
+    alert(t('pages.privacy.exportRequestSubmitted'))
   } else if (modalAction.value === 'delete') {
-    alert('Your account data will be deleted permanently.')
+    alert(t('pages.privacy.accountDataDeleted'))
   }
 }
 </script>
@@ -32,7 +35,7 @@ const handleConfirm = () => {
     <h1
         class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400 mb-6"
     >
-      Privacy Settings
+      {{ t('pages.privacy.title') }}
     </h1>
 
     <!-- 🧭 Privacy Controls -->
@@ -45,7 +48,7 @@ const handleConfirm = () => {
         <h2
             class="flex items-center gap-2 text-white font-semibold text-lg mb-2"
         >
-          <Eye class="w-5 h-5 text-cyan-400" /> Data & Tracking Preferences
+          <Eye class="w-5 h-5 text-cyan-400" /> {{ t('pages.privacy.dataTrackingPreferences') }}
         </h2>
 
         <div
@@ -84,16 +87,16 @@ const handleConfirm = () => {
           <h2
               class="flex items-center justify-center gap-2 text-white font-semibold text-lg mb-2"
           >
-            <Download class="w-5 h-5 text-cyan-400" /> Export Data
+            <Download class="w-5 h-5 text-cyan-400" /> {{ t('pages.privacy.exportData') }}
           </h2>
           <p class="text-sm text-[var(--text-secondary)] mb-4">
-            Request a copy of all your personal data in machine-readable format.
+            {{ t('pages.privacy.exportDescription') }}
           </p>
           <button
               @click="confirmAction('export')"
               class="px-6 py-2 rounded-xl text-white bg-gradient-to-r from-cyan-500 via-indigo-500 to-fuchsia-500 hover:brightness-110 transition-all font-semibold"
           >
-            Request Export
+            {{ t('pages.privacy.requestExport') }}
           </button>
         </div>
       </div>
@@ -108,16 +111,16 @@ const handleConfirm = () => {
           <h2
               class="flex items-center justify-center gap-2 text-rose-400 font-semibold text-lg mb-2"
           >
-            <Trash2 class="w-5 h-5" /> Delete Account Data
+            <Trash2 class="w-5 h-5" /> {{ t('pages.privacy.deleteAccountData') }}
           </h2>
           <p class="text-sm text-[var(--text-secondary)] mb-4">
-            Permanently delete your account and all related information.
+            {{ t('pages.privacy.deleteDescription') }}
           </p>
           <button
               @click="confirmAction('delete')"
               class="px-6 py-2 rounded-xl text-white bg-gradient-to-r from-rose-500 via-fuchsia-500 to-gray-800 hover:brightness-110 transition-all font-semibold"
           >
-            Delete Data
+            {{ t('pages.privacy.deleteData') }}
           </button>
         </div>
       </div>
@@ -133,12 +136,10 @@ const handleConfirm = () => {
         <h2
             class="flex items-center gap-2 text-white font-semibold text-lg mb-2"
         >
-          <ShieldCheck class="w-5 h-5 text-fuchsia-400" /> How We Protect Your Data
+          <ShieldCheck class="w-5 h-5 text-fuchsia-400" /> {{ t('pages.privacy.howWeProtectData') }}
         </h2>
         <p>
-          Your data is encrypted at rest and in transit. We follow GDPR and ISO-27001
-          standards. You have full control over your information — what is stored,
-          shared, and deleted.
+          {{ t('pages.privacy.dataProtectionDescription') }}
         </p>
       </div>
     </div>
@@ -156,25 +157,25 @@ const handleConfirm = () => {
         >
           <Lock class="w-10 h-10 text-fuchsia-400 mx-auto mb-4" />
           <h3 class="text-lg font-semibold text-white mb-2">
-            Confirm {{ modalAction === 'export' ? 'Export' : 'Deletion' }}
+            {{ modalAction === 'export' ? t('pages.privacy.confirmExport') : t('pages.privacy.confirmDeletion') }}
           </h3>
           <p class="text-sm text-gray-400 mb-6">
             {{ modalAction === 'export'
-              ? 'We will prepare your data for download shortly.'
-              : 'This action cannot be undone. Are you sure you want to permanently delete your data?' }}
+              ? t('pages.privacy.exportMessage')
+              : t('pages.privacy.deleteMessage') }}
           </p>
           <div class="flex justify-center gap-3">
             <button
                 class="px-5 py-2 rounded-xl bg-gray-700 text-white hover:bg-gray-600 transition-all"
                 @click="showModal = false"
             >
-              Cancel
+              {{ t('pages.privacy.cancel') }}
             </button>
             <button
                 class="px-5 py-2 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 transition-all"
                 @click="handleConfirm"
             >
-              Confirm
+              {{ t('pages.privacy.confirm') }}
             </button>
           </div>
         </div>

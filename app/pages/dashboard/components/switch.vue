@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import UiSwitch from '~/components/Ui/Common/UiSwitch.vue'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const notifications = ref(true)
 const power = ref(false)
@@ -9,13 +12,13 @@ const theme = ref(true)
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Switch Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentSwitch.title') }}</h1>
 
     <div class="grid gap-6 md:grid-cols-2">
-      <UiSwitch label="Enable Notifications" v-model="notifications" color="fuchsia" description="Receive alerts instantly" />
-      <UiSwitch label="Power" v-model="power" color="emerald" icon />
-      <UiSwitch label="Dark Mode" v-model="theme" color="cyan" outlined />
-      <UiSwitch label="Disabled Example" disabled />
+      <UiSwitch :label="t('pages.componentSwitch.enableNotifications')" v-model="notifications" color="fuchsia" :description="t('pages.componentSwitch.receiveAlerts')" />
+      <UiSwitch :label="t('pages.componentSwitch.power')" v-model="power" color="emerald" icon />
+      <UiSwitch :label="t('pages.componentSwitch.darkMode')" v-model="theme" color="cyan" outlined />
+      <UiSwitch :label="t('pages.componentSwitch.disabledExample')" disabled />
     </div>
   </section>
 </template>

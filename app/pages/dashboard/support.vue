@@ -4,6 +4,9 @@ import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 import DataTable from '~/components/Ui/Common/DataTable.vue'
 import TicketModal from '~/components/Ui/Support/TicketModal.vue'
 import { AlertCircle, CheckCircle2, Clock } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 type Ticket = {
   id: string
@@ -24,11 +27,11 @@ const priority = ref<'all'|'low'|'medium'|'high'>('all')
 const query = ref('')
 
 const headers = [
-  { key:'id', label:'ID' },
-  { key:'subject', label:'Subject' },
-  { key:'status', label:'Status' },
-  { key:'priority', label:'Priority' },
-  { key:'createdAt', label:'Created', class:'text-right' },
+  { key:'id', label: t('pages.support.tableHeaders.id') },
+  { key:'subject', label: t('pages.support.tableHeaders.subject') },
+  { key:'status', label: t('pages.support.tableHeaders.status') },
+  { key:'priority', label: t('pages.support.tableHeaders.priority') },
+  { key:'createdAt', label: t('pages.support.tableHeaders.created'), class:'text-right' },
 ]
 
 const filtered = computed<Ticket[]>(() => {
@@ -66,7 +69,7 @@ const badgePriority = (p: Ticket['priority']): string => ({
   <section class="space-y-8">
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">
-        Support Tickets
+        {{ t('pages.support.title') }}
       </h1>
       <div class="flex gap-2">
         <button
@@ -76,14 +79,14 @@ const badgePriority = (p: Ticket['priority']): string => ({
             class="px-3 py-1.5 rounded-xl text-sm capitalize"
             :class="status===s ? 'bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 text-white' : 'bg-white/10 text-gray-300 hover:bg-white/15'"
         >
-          {{ s }}
+          {{ t(`pages.support.statuses.${s}`) }}
         </button>
       </div>
     </div>
 
     <GradientCard>
       <div class="flex flex-col md:flex-row gap-3 mb-4">
-        <input v-model="query" class="input-dark md:flex-1" placeholder="Search by subject or ID…" />
+        <input v-model="query" class="input-dark md:flex-1" :placeholder="t('pages.support.searchPlaceholder')" />
         <div class="flex gap-2">
           <button
               v-for="p in ['all','low','medium','high']"
@@ -92,7 +95,7 @@ const badgePriority = (p: Ticket['priority']): string => ({
               class="px-3 py-1.5 rounded-xl text-sm capitalize"
               :class="priority===p ? 'bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 text-white' : 'bg-white/10 text-gray-300 hover:bg-white/15'"
           >
-            {{ p }}
+            {{ t(`pages.support.priorities.${p}`) }}
           </button>
         </div>
       </div>
@@ -124,7 +127,7 @@ const badgePriority = (p: Ticket['priority']): string => ({
     <TicketModal
         v-model:open="modalOpen"
         :ticket-id="activeTicketId"
-        :subject="(filtered.find(t=>t.id===activeTicketId)?.subject ?? 'Ticket')"
+        :subject="(filtered.find(t=>t.id===activeTicketId)?.subject ?? t('pages.support.ticket'))"
     />
   </section>
 </template>

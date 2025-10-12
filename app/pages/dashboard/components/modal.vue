@@ -2,6 +2,9 @@
 import UiModal from '~/components/Ui/Common/UiModal.vue'
 import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const modal1 = ref(false)
 const modal2 = ref(false)
@@ -10,39 +13,38 @@ const modal3 = ref(false)
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Modal Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentModal.title') }}</h1>
 
     <div class="flex flex-wrap gap-4">
-      <UiButton label="Open Basic Modal" @click="modal1 = true" />
-      <UiButton label="Large Glass Modal" variant="outline" @click="modal2 = true" />
-      <UiButton label="Persistent Modal" variant="danger" @click="modal3 = true" />
+      <UiButton :label="t('pages.componentModal.openBasicModal')" @click="modal1 = true" />
+      <UiButton :label="t('pages.componentModal.largeGlassModal')" variant="outline" @click="modal2 = true" />
+      <UiButton :label="t('pages.componentModal.persistentModal')" variant="danger" @click="modal3 = true" />
     </div>
 
     <!-- Basic UiModal -->
-    <UiModal v-model="modal1" title="Welcome">
-      <p>This is a simple modal example. It uses v-model to control visibility.</p>
+    <UiModal v-model="modal1" :title="t('pages.componentModal.welcome')">
+      <p>{{ t('pages.componentModal.simpleModalExample') }}</p>
       <template #footer>
-        <UiButton label="Close" variant="outline" @click="modal1 = false" />
-        <UiButton label="Confirm" variant="primary" @click="modal1 = false" />
+        <UiButton :label="t('pages.componentModal.close')" variant="outline" @click="modal1 = false" />
+        <UiButton :label="t('pages.componentModal.confirm')" variant="primary" @click="modal1 = false" />
       </template>
     </UiModal>
 
     <!-- Large Glass UiModal -->
-    <UiModal v-model="modal2" title="Glass Modal" size="lg" glass>
+    <UiModal v-model="modal2" :title="t('pages.componentModal.glassModal')" size="lg" glass>
       <p>
-        This modal uses a glass effect with backdrop blur and smooth transitions.
-        You can include long text or any other content here.
+        {{ t('pages.componentModal.glassModalDescription') }}
       </p>
       <template #footer>
-        <UiButton label="Got it" variant="success" @click="modal2 = false" />
+        <UiButton :label="t('pages.componentModal.gotIt')" variant="success" @click="modal2 = false" />
       </template>
     </UiModal>
 
     <!-- Persistent UiModal -->
-    <UiModal v-model="modal3" title="Persistent Modal" persistent>
-      <p>This modal cannot be closed by clicking outside or pressing ESC.</p>
+    <UiModal v-model="modal3" :title="t('pages.componentModal.persistentModal')" persistent>
+      <p>{{ t('pages.componentModal.persistentModalDescription') }}</p>
       <template #footer>
-        <UiButton label="Close" variant="danger" @click="modal3 = false" />
+        <UiButton :label="t('pages.componentModal.close')" variant="danger" @click="modal3 = false" />
       </template>
     </UiModal>
   </section>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
+const { t } = useI18n()
+
 type Theme = { primary:string; accent:string; surface:string; text:string }
 const theme = ref<Theme>({
   primary: '#8B5CF6',
@@ -30,8 +32,8 @@ const download = (): void => {
 <template>
   <section class="space-y-6">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">Theme Customizer</h1>
-      <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110" @click="download">Export JSON</button>
+      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">{{ t('pages.themeCustomizer.title') }}</h1>
+      <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110" @click="download">{{ t('pages.themeCustomizer.exportJson') }}</button>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -41,28 +43,28 @@ const download = (): void => {
           <div class="flex items-center gap-3">
             <input v-model="theme.primary" type="color" class="h-10 w-14 rounded-lg border border-white/10 bg-transparent" />
             <div class="text-sm">
-              <p class="text-white font-medium">Primary</p>
+              <p class="text-white font-medium">{{ t('pages.themeCustomizer.primary') }}</p>
               <p class="text-gray-400 text-xs">{{ theme.primary }}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
             <input v-model="theme.accent" type="color" class="h-10 w-14 rounded-lg border border-white/10 bg-transparent" />
             <div class="text-sm">
-              <p class="text-white font-medium">Accent</p>
+              <p class="text-white font-medium">{{ t('pages.themeCustomizer.accent') }}</p>
               <p class="text-gray-400 text-xs">{{ theme.accent }}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
             <input v-model="theme.surface" type="color" class="h-10 w-14 rounded-lg border border-white/10 bg-transparent" />
             <div class="text-sm">
-              <p class="text-white font-medium">Surface</p>
+              <p class="text-white font-medium">{{ t('pages.themeCustomizer.surface') }}</p>
               <p class="text-gray-400 text-xs">{{ theme.surface }}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
             <input v-model="theme.text" type="color" class="h-10 w-14 rounded-lg border border-white/10 bg-transparent" />
             <div class="text-sm">
-              <p class="text-white font-medium">Text</p>
+              <p class="text-white font-medium">{{ t('pages.themeCustomizer.text') }}</p>
               <p class="text-gray-400 text-xs">{{ theme.text }}</p>
             </div>
           </div>
@@ -72,16 +74,16 @@ const download = (): void => {
       <!-- Preview -->
       <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="rounded-2xl p-5 border" :style="{ backgroundColor: 'var(--theme-surface)', color:'var(--theme-text)', borderColor:'rgba(255,255,255,0.1)' }">
-          <h3 class="font-semibold mb-2">Buttons</h3>
+          <h3 class="font-semibold mb-2">{{ t('pages.themeCustomizer.buttons') }}</h3>
           <div class="flex gap-3">
-            <button class="px-4 py-2 rounded-xl text-white" :style="{ backgroundImage:`linear-gradient(90deg, ${theme.primary}, ${theme.accent})` }">Primary</button>
-            <button class="px-4 py-2 rounded-xl bg-white/10 text-white border border-white/10">Ghost</button>
+            <button class="px-4 py-2 rounded-xl text-white" :style="{ backgroundImage:`linear-gradient(90deg, ${theme.primary}, ${theme.accent})` }">{{ t('pages.themeCustomizer.primary') }}</button>
+            <button class="px-4 py-2 rounded-xl bg-white/10 text-white border border-white/10">{{ t('pages.themeCustomizer.ghost') }}</button>
           </div>
         </div>
         <div class="rounded-2xl p-5 border" :style="{ backgroundColor: 'var(--theme-surface)', color:'var(--theme-text)', borderColor:'rgba(255,255,255,0.1)' }">
-          <h3 class="font-semibold mb-2">Cards</h3>
+          <h3 class="font-semibold mb-2">{{ t('pages.themeCustomizer.cards') }}</h3>
           <div class="rounded-xl p-4 border" :style="{ borderColor:'rgba(255,255,255,0.1)', background:'rgba(255,255,255,0.05)' }">
-            <p class="text-sm">Glass card with gradient header</p>
+            <p class="text-sm">{{ t('pages.themeCustomizer.glassCardDescription') }}</p>
           </div>
         </div>
       </div>

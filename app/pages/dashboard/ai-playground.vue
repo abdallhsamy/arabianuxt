@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const { t } = useI18n()
+
 const models = ['gpt-4o-mini','gpt-4o','llama-3.1-70b','mistral-large']
 const model = ref(models[0])
 const temperature = ref(0.7)
@@ -24,26 +26,26 @@ const run = async (): Promise<void> => {
 
 <template>
   <section class="space-y-6">
-    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">AI Playground</h1>
+    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">{{ t('pages.aiPlayground.title') }}</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Controls -->
       <div class="lg:col-span-1 p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#8B5CF6_0%,#22D3EE_55%,#EC4899_100%)] animate-rotate-gradient">
         <div class="rounded-2xl bg-[rgba(15,17,23,0.94)] border border-white/10 p-5 space-y-4">
           <div>
-            <label class="text-xs text-gray-400">Model</label>
+            <label class="text-xs text-gray-400">{{ t('pages.aiPlayground.model') }}</label>
             <select v-model="model" class="input-dark w-full mt-1">
               <option v-for="m in models" :key="m">{{ m }}</option>
             </select>
           </div>
 
           <div>
-            <label class="text-xs text-gray-400">Temperature: {{ temperature }}</label>
+            <label class="text-xs text-gray-400">{{ t('pages.aiPlayground.temperature') }} {{ temperature }}</label>
             <input v-model.number="temperature" type="range" min="0" max="1" step="0.1" class="w-full" />
           </div>
 
           <div>
-            <label class="text-xs text-gray-400">System Prompt</label>
+            <label class="text-xs text-gray-400">{{ t('pages.aiPlayground.systemPrompt') }}</label>
             <textarea v-model="system" class="input-dark w-full min-h-[90px] mt-1"></textarea>
           </div>
         </div>
@@ -52,16 +54,16 @@ const run = async (): Promise<void> => {
       <!-- Chat Area -->
       <div class="lg:col-span-2 p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#22D3EE_0%,#8B5CF6_55%,#EC4899_100%)] animate-rotate-gradient">
         <div class="rounded-2xl bg-[rgba(15,17,23,0.94)] border border-white/10 p-5">
-          <textarea v-model="userInput" class="input-dark w-full min-h-[120px]" placeholder="Type your prompt…"></textarea>
+          <textarea v-model="userInput" class="input-dark w-full min-h-[120px]" :placeholder="t('pages.aiPlayground.promptPlaceholder')"></textarea>
           <div class="mt-3 flex items-center justify-between">
-            <span class="text-xs text-gray-400">Tokens (approx): {{ Math.ceil(userInput.length / 4) }}</span>
+            <span class="text-xs text-gray-400">{{ t('pages.aiPlayground.tokensApprox') }} {{ Math.ceil(userInput.length / 4) }}</span>
             <button @click="run" class="px-5 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 font-semibold">
-              {{ loading ? 'Running…' : 'Run' }}
+              {{ loading ? t('pages.aiPlayground.running') : t('pages.aiPlayground.run') }}
             </button>
           </div>
 
           <div class="mt-4">
-            <label class="text-xs text-gray-400">Output</label>
+            <label class="text-xs text-gray-400">{{ t('pages.aiPlayground.output') }}</label>
             <pre class="bg-black/30 text-gray-200 p-3 rounded-xl text-sm whitespace-pre-wrap min-h-[140px]">{{ output }}</pre>
           </div>
         </div>

@@ -2,50 +2,49 @@
 import UiAccordion from '~/components/Ui/Common/UiAccordion.vue'
 import { Info, Settings, Lock } from 'lucide-vue-next'
 
+const { t } = useI18n()
+
 const faqItems = [
   {
     id: 'privacy',
-    title: 'What is our privacy policy?',
+    title: t('pages.componentAccordion.faq.privacy.title'),
     icon: Lock,
-    content:
-        'We use advanced encryption to secure your data. No third parties can access personal information.',
+    content: t('pages.componentAccordion.faq.privacy.content'),
   },
   {
     id: 'settings',
-    title: 'How to change my settings?',
+    title: t('pages.componentAccordion.faq.settings.title'),
     icon: Settings,
-    content:
-        'Go to Settings → Preferences to personalize your dashboard experience.',
+    content: t('pages.componentAccordion.faq.settings.content'),
   },
   {
     id: 'docs',
-    title: 'Where can I find more info?',
+    title: t('pages.componentAccordion.faq.docs.title'),
     icon: Info,
-    content:
-        'Visit our docs or contact support for further technical details.',
+    content: t('pages.componentAccordion.faq.docs.content'),
   },
 ]
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Accordion Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentAccordion.title') }}</h1>
 
     <!-- Vertical -->
     <div>
-      <h2 class="section-title">Vertical Variant</h2>
+      <h2 class="section-title">{{ t('pages.componentAccordion.variants.vertical') }}</h2>
       <UiAccordion :items="faqItems" color="fuchsia" />
     </div>
 
     <!-- Multiple open vertical -->
     <div>
-      <h2 class="section-title">Multiple Vertical</h2>
+      <h2 class="section-title">{{ t('pages.componentAccordion.variants.multipleVertical') }}</h2>
       <UiAccordion :items="faqItems" multiple color="cyan" />
     </div>
 
     <!-- Horizontal -->
     <div>
-      <h2 class="section-title">Horizontal Variant</h2>
+      <h2 class="section-title">{{ t('pages.componentAccordion.variants.horizontal') }}</h2>
       <UiAccordion :items="faqItems" orientation="horizontal" color="emerald" />
     </div>
   </section>

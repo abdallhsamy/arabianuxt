@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import { KeyRound, RefreshCw, Check, PlugZap, Link as LinkIcon, Unplug, Globe } from 'lucide-vue-next'
 import UiModal from '~/components/Ui/Common/UiModal.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const apiKey = ref('sk-live-********-A1B2')
 const showKey = ref(false)
@@ -31,30 +34,30 @@ const doRegen = (): void => {
   regenOpen.value = false
 }
 const testPing = (w: Webhook): void => {
-  alert(`Ping sent to ${w.url}`)
+  alert(t('pages.integrations.pingSent', { url: w.url }))
 }
 </script>
 
 <template>
   <section class="space-y-8">
     <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">
-      Integrations
+      {{ t('pages.integrations.title') }}
     </h1>
 
     <!-- API Keys -->
     <div class="p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#8B5CF6_0%,#22D3EE_60%,#EC4899_100%)] animate-rotate-gradient">
       <div class="rounded-2xl bg-[rgba(15,17,23,0.92)] backdrop-blur-xl border border-white/10 p-6">
-        <h2 class="text-white font-semibold text-lg mb-4 flex items-center gap-2"><KeyRound class="w-5 h-5 text-cyan-400" /> API Key</h2>
+        <h2 class="text-white font-semibold text-lg mb-4 flex items-center gap-2"><KeyRound class="w-5 h-5 text-cyan-400" /> {{ t('pages.integrations.apiKey') }}</h2>
         <div class="flex items-center gap-3">
           <input :value="showKey ? apiKey : 'sk-live-********-****'" readonly class="input-dark w-full" />
           <button class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white" @click="showKey = !showKey">
-            {{ showKey ? 'Hide' : 'Show' }}
+            {{ showKey ? t('pages.integrations.hide') : t('pages.integrations.show') }}
           </button>
           <button class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white flex items-center gap-2" @click="copyKey">
-            <Check class="w-4 h-4" /> Copy
+            <Check class="w-4 h-4" /> {{ t('pages.integrations.copy') }}
           </button>
           <button class="px-3 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 flex items-center gap-2" @click="confirmRegen">
-            <RefreshCw class="w-4 h-4" /> Regenerate
+            <RefreshCw class="w-4 h-4" /> {{ t('pages.integrations.regenerate') }}
           </button>
         </div>
       </div>
@@ -68,16 +71,16 @@ const testPing = (w: Webhook): void => {
             <PlugZap class="w-5 h-5 text-fuchsia-400" />
             <div>
               <p class="text-white font-semibold">{{ p.name }}</p>
-              <p class="text-xs text-gray-400">{{ p.connected ? 'Connected' : 'Disconnected' }}</p>
-            </div>
-          </div>
-          <button
-              class="px-4 py-2 rounded-xl text-white transition-all flex items-center gap-2"
-              :class="p.connected ? 'bg-white/10 hover:bg-white/15' : 'bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110'"
-          >
-            <component :is="p.connected ? Unplug : LinkIcon" class="w-4 h-4" />
-            {{ p.connected ? 'Disconnect' : 'Connect' }}
-          </button>
+                  <p class="text-xs text-gray-400">{{ p.connected ? t('pages.integrations.connected') : t('pages.integrations.disconnected') }}</p>
+                </div>
+              </div>
+              <button
+                  class="px-4 py-2 rounded-xl text-white transition-all flex items-center gap-2"
+                  :class="p.connected ? 'bg-white/10 hover:bg-white/15' : 'bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110'"
+              >
+                <component :is="p.connected ? Unplug : LinkIcon" class="w-4 h-4" />
+                {{ p.connected ? t('pages.integrations.disconnect') : t('pages.integrations.connect') }}
+              </button>
         </div>
       </div>
     </div>
@@ -85,10 +88,10 @@ const testPing = (w: Webhook): void => {
     <!-- Webhooks -->
     <div class="p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#EC4899_0%,#8B5CF6_50%,#22D3EE_100%)] animate-rotate-gradient">
       <div class="rounded-2xl bg-[rgba(15,17,23,0.92)] backdrop-blur-xl border border-white/10 p-6 overflow-x-auto">
-        <h2 class="text-white font-semibold text-lg mb-4 flex items-center gap-2"><Globe class="w-5 h-5 text-indigo-400" /> Webhooks</h2>
+        <h2 class="text-white font-semibold text-lg mb-4 flex items-center gap-2"><Globe class="w-5 h-5 text-indigo-400" /> {{ t('pages.integrations.webhooks') }}</h2>
         <table class="w-full text-sm">
           <thead class="text-gray-400">
-          <tr class="text-left"><th class="py-2">URL</th><th class="py-2">Secret</th><th class="py-2">Status</th><th class="py-2 text-right">Actions</th></tr>
+          <tr class="text-left"><th class="py-2">{{ t('pages.integrations.webhookTableHeaders.url') }}</th><th class="py-2">{{ t('pages.integrations.webhookTableHeaders.secret') }}</th><th class="py-2">{{ t('pages.integrations.webhookTableHeaders.status') }}</th><th class="py-2 text-right">{{ t('pages.integrations.webhookTableHeaders.actions') }}</th></tr>
           </thead>
           <tbody class="divide-y divide-white/10">
           <tr v-for="w in webhooks" :key="w.id" class="hover:bg-white/5 transition-colors">
@@ -100,7 +103,7 @@ const testPing = (w: Webhook): void => {
                 </span>
             </td>
             <td class="py-3 text-right">
-              <button class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white" @click="testPing(w)">Send Test</button>
+              <button class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white" @click="testPing(w)">{{ t('pages.integrations.sendTest') }}</button>
             </td>
           </tr>
           </tbody>
@@ -109,9 +112,9 @@ const testPing = (w: Webhook): void => {
     </div>
 
     <!-- Regenerate UiModal -->
-    <UiModal v-model:open="regenOpen" title="Regenerate API Key" confirm-text="Regenerate">
+    <UiModal v-model:open="regenOpen" :title="t('pages.integrations.regenerateApiKey')" :confirm-text="t('pages.integrations.regenerateButton')">
       <p class="text-gray-300">
-        Regenerating invalidates the current key immediately. Clients using the old key will fail until updated.
+        {{ t('pages.integrations.regenerateDescription') }}
       </p>
     </UiModal>
   </section>

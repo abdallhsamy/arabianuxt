@@ -4,6 +4,8 @@ import { Mail, CheckCircle2 } from 'lucide-vue-next'
 
 definePageMeta({ layout: 'auth' })
 
+const { t } = useI18n()
+
 const email = ref('')
 const isLoading = ref(false)
 const success = ref(false)
@@ -28,16 +30,16 @@ const handleSubmit = async (): Promise<void> => {
         <h1
             class="text-center text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-indigo-400 mb-6"
         >
-          Reset Password
+          {{ t('pages.auth.forgotPassword.title') }}
         </h1>
         <p class="text-center text-sm text-[var(--text-secondary)] mb-8">
-          Enter your email and we’ll send you a link to reset your password.
+          {{ t('pages.auth.forgotPassword.description') }}
         </p>
 
         <form @submit.prevent="handleSubmit" class="space-y-6">
           <div>
             <label class="text-sm text-[var(--text-secondary)] mb-1 block">
-              Email Address
+              {{ t('pages.auth.forgotPassword.emailAddress') }}
             </label>
             <input
                 v-model="email"
@@ -53,15 +55,15 @@ const handleSubmit = async (): Promise<void> => {
               :disabled="isLoading"
               class="relative w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-indigo-500 to-cyan-400 hover:brightness-110 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-2"
           >
-            <span v-if="!isLoading">Send Reset Link</span>
-            <span v-else class="animate-pulse">Sending...</span>
+            <span v-if="!isLoading">{{ t('pages.auth.forgotPassword.sendResetLink') }}</span>
+            <span v-else class="animate-pulse">{{ t('pages.auth.forgotPassword.sending') }}</span>
             <Mail class="w-5 h-5" />
           </button>
 
           <p class="text-center text-sm text-[var(--text-secondary)] mt-4">
-            Remember your password?
+            {{ t('pages.auth.forgotPassword.rememberPassword') }}
             <NuxtLink to="/login" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
-              Sign In
+              {{ t('pages.auth.forgotPassword.signIn') }}
             </NuxtLink>
           </p>
         </form>
@@ -76,17 +78,16 @@ const handleSubmit = async (): Promise<void> => {
           <h2
               class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-indigo-400 mb-2"
           >
-            Link Sent Successfully!
+            {{ t('pages.auth.forgotPassword.successTitle') }}
           </h2>
           <p class="text-sm text-[var(--text-secondary)] max-w-xs mx-auto">
-            We’ve sent a password reset link to <span class="text-white font-medium">{{ email }}</span>.
-            Please check your inbox and follow the instructions.
+            {{ t('pages.auth.forgotPassword.successMessage', { email }) }}
           </p>
           <NuxtLink
               to="/login"
               class="mt-8 inline-block rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 py-2.5 px-6 hover:brightness-110 transition-all"
           >
-            Back to Login
+            {{ t('pages.auth.forgotPassword.backToLogin') }}
           </NuxtLink>
         </div>
       </template>

@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 import DataTable from '~/components/Ui/Common/DataTable.vue'
 
+const { t } = useI18n()
+
 type Log = {
   id: string
   time: string
@@ -23,11 +25,11 @@ const logs = ref<Log[]>([
 ])
 
 const headers = [
-  { key:'time', label:'Time' },
-  { key:'actor', label:'Actor' },
-  { key:'action', label:'Action' },
-  { key:'target', label:'Target' },
-  { key:'severity', label:'Severity', class:'text-right' },
+  { key:'time', label: t('pages.auditLogs.tableHeaders.time') },
+  { key:'actor', label: t('pages.auditLogs.tableHeaders.actor') },
+  { key:'action', label: t('pages.auditLogs.tableHeaders.action') },
+  { key:'target', label: t('pages.auditLogs.tableHeaders.target') },
+  { key:'severity', label: t('pages.auditLogs.tableHeaders.severity'), class:'text-right' },
 ]
 
 const filtered = computed<Log[]>(() => {
@@ -62,16 +64,16 @@ const exportCsv = (): void => {
   <section class="space-y-8">
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">
-        Audit Logs
+        {{ t('pages.auditLogs.title') }}
       </h1>
       <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 font-semibold" @click="exportCsv">
-        Export CSV
+        {{ t('pages.auditLogs.exportCsv') }}
       </button>
     </div>
 
     <GradientCard>
       <div class="flex flex-col md:flex-row gap-3 mb-4">
-        <input v-model="query" class="input-dark md:flex-1" placeholder="Search actor/action/target…" />
+        <input v-model="query" class="input-dark md:flex-1" :placeholder="t('pages.auditLogs.searchPlaceholder')" />
         <div class="flex gap-2">
           <button
               v-for="s in ['all','info','warning','critical']"
@@ -80,7 +82,7 @@ const exportCsv = (): void => {
               class="px-3 py-1.5 rounded-xl text-sm capitalize"
               :class="severity===s ? 'bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 text-white' : 'bg-white/10 text-gray-300 hover:bg-white/15'"
           >
-            {{ s }}
+            {{ t(`pages.auditLogs.severities.${s}`) }}
           </button>
         </div>
       </div>
@@ -88,7 +90,7 @@ const exportCsv = (): void => {
       <DataTable :headers="headers" :rows="filtered" row-key="id">
         <template #cell:severity="{ row }">
           <div class="text-right">
-            <span class="text-xs px-2 py-1 rounded-full" :class="badge(row.severity)">{{ row.severity }}</span>
+            <span class="text-xs px-2 py-1 rounded-full" :class="badge(row.severity)">{{ t(`pages.auditLogs.severities.${row.severity}`) }}</span>
           </div>
         </template>
       </DataTable>

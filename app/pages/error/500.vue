@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { RefreshCcw, ServerCrash } from 'lucide-vue-next'
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -8,14 +10,14 @@ import { RefreshCcw, ServerCrash } from 'lucide-vue-next'
       <ServerCrash class="w-16 h-16 text-rose-500 mb-4 mx-auto" />
       <h1 class="text-5xl font-bold text-rose-400 mb-2">500</h1>
       <p class="text-gray-400 mb-6">
-        Oops! Something went wrong on our servers.<br />
-        Please try again later.
+        {{ t('pages.error.500.description') }}<br />
+        {{ t('pages.error.500.tryAgain') }}
       </p>
       <button
           class="flex items-center gap-2 px-5 py-2 rounded-md bg-rose-600 hover:bg-rose-700 text-white transition"
           @click="window.location.reload()"
       >
-        <RefreshCcw class="w-4 h-4" /> Refresh Page
+        <RefreshCcw class="w-4 h-4" /> {{ t('pages.error.500.refreshPage') }}
       </button>
     </div>
   </section>

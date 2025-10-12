@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 import DataTable from '~/components/Ui/Common/DataTable.vue'
 
+const { t } = useI18n()
+
 type Role = 'Owner'|'Admin'|'Member'
 type ModuleKey = 'billing'|'integrations'|'analytics'|'security'|'team'
 
@@ -14,10 +16,10 @@ type PermRow = {
 }
 
 const headers = [
-  { key: 'module', label: 'Module' },
-  { key: 'Owner', label: 'Owner', class: 'text-center' },
-  { key: 'Admin', label: 'Admin', class: 'text-center' },
-  { key: 'Member', label: 'Member', class: 'text-center' },
+  { key: 'module', label: t('pages.accessControl.module') },
+  { key: 'Owner', label: t('pages.accessControl.owner'), class: 'text-center' },
+  { key: 'Admin', label: t('pages.accessControl.admin'), class: 'text-center' },
+  { key: 'Member', label: t('pages.accessControl.member'), class: 'text-center' },
 ]
 
 const rows = ref<PermRow[]>([
@@ -36,7 +38,7 @@ const toggle = (row: PermRow, role: Role): void => {
 
 const save = (): void => {
   // Send to API securely; here just demo
-  alert('Permissions saved')
+  alert(t('pages.accessControl.permissionsSaved'))
 }
 </script>
 
@@ -44,17 +46,17 @@ const save = (): void => {
   <section class="space-y-8">
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">
-        Access Control (RBAC)
+        {{ t('pages.accessControl.title') }}
       </h1>
       <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 font-semibold" @click="save">
-        Save
+        {{ t('pages.accessControl.save') }}
       </button>
     </div>
 
     <GradientCard>
       <DataTable :headers="headers" :rows="rows" row-key="module">
         <template #cell:module="{ row }">
-          <span class="capitalize text-white">{{ row.module }}</span>
+          <span class="capitalize text-white">{{ t(`pages.accessControl.modules.${row.module}`) }}</span>
         </template>
 
         <template #cell:Owner="{ row }">

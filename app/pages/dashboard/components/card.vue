@@ -1,41 +1,49 @@
 <script setup lang="ts">
 import UiCard from '~/components/Ui/Common/UiCard.vue'
 import UiButton from '~/components/Ui/Common/UiButton.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Card Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentCard.title') }}</h1>
 
     <!-- Glass Variant -->
-    <UiCard title="Glass Variant" subtitle="Default dashboard panel">
+    <UiCard :title="t('pages.componentCard.variants.glass')" :subtitle="t('pages.componentCard.subtitles.defaultDashboardPanel')">
       <p>
-        This is the default <strong>glass-style card</strong> with a subtle transparent background.
-        It’s great for dashboard widgets and stats.
+        <i18n-t keypath="pages.componentCard.descriptions.glassStyle">
+          <template #glassStyleCard>
+            <strong>
+              {{ t("pages.componentCard.descriptions.glassStyleCard") }}
+            </strong>
+          </template>
+        </i18n-t>
       </p>
       <template #footer>
-        <UiButton label="View Details" variant="primary" />
+        <UiButton :label="t('pages.componentCard.actions.viewDetails')" variant="primary" />
       </template>
     </UiCard>
 
     <!-- Solid Variant -->
-    <UiCard title="Solid Variant" subtitle="Opaque background" variant="solid" color="cyan">
+    <UiCard :title="t('pages.componentCard.variants.solid')" :subtitle="t('pages.componentCard.subtitles.opaqueBackground')" variant="solid" color="cyan">
       <p>
-        The solid variant provides a high-contrast opaque background — great for text-heavy sections.
+        {{ t('pages.componentCard.descriptions.solidHighContrast') }}
       </p>
     </UiCard>
 
     <!-- Gradient Variant -->
-    <UiCard title="Gradient Variant" variant="gradient" color="emerald">
+    <UiCard :title="t('pages.componentCard.variants.gradient')" variant="gradient" color="emerald">
       <p class="text-white">
-        The gradient variant features a dynamic background from your accent colors.
+        {{ t('pages.componentCard.descriptions.gradientDynamic') }}
       </p>
     </UiCard>
 
     <!-- Outlined Variant -->
-    <UiCard title="Outlined Variant" variant="outlined" color="rose">
+    <UiCard :title="t('pages.componentCard.variants.outlined')" variant="outlined" color="rose">
       <p>
-        The outlined variant is subtle, lightweight, and perfect for nested containers.
+        {{ t('pages.componentCard.descriptions.outlinedSubtle') }}
       </p>
     </UiCard>
 
@@ -43,18 +51,18 @@ import UiButton from '~/components/Ui/Common/UiButton.vue'
     <UiCard>
       <template #header>
         <div class="flex items-center justify-between w-full">
-          <h3 class="text-gray-100 font-semibold">Custom Header</h3>
-          <UiButton label="Action" size="sm" variant="outline" />
+          <h3 class="text-gray-100 font-semibold">{{ t('pages.componentCard.customHeader') }}</h3>
+          <UiButton :label="t('pages.componentCard.actions.action')" size="sm" variant="outline" />
         </div>
       </template>
 
       <p>
-        You can fully customize the header and footer using named slots for ultimate flexibility.
+        {{ t('pages.componentCard.descriptions.customSlots') }}
       </p>
 
       <template #footer>
-        <UiButton label="Cancel" variant="outline" />
-        <UiButton label="Confirm" variant="success" />
+        <UiButton :label="t('pages.componentCard.actions.cancel')" variant="outline" />
+        <UiButton :label="t('pages.componentCard.actions.confirm')" variant="success" />
       </template>
     </UiCard>
   </section>

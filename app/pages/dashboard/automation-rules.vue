@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 type Rule = {
   id: string
@@ -30,9 +33,9 @@ const addRule = (): void => {
 <template>
   <section class="space-y-6">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">Automation Rules</h1>
+      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400">{{ t('pages.automationRules.title') }}</h1>
       <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110" @click="open = true">
-        New Rule
+        {{ t('pages.automationRules.newRule') }}
       </button>
     </div>
 
@@ -48,9 +51,9 @@ const addRule = (): void => {
             </label>
           </div>
           <div class="mt-2 text-xs text-gray-300">
-            <p><span class="text-gray-400">When:</span> {{ r.when }}</p>
-            <p v-if="r.condition"><span class="text-gray-400">If:</span> {{ r.condition }}</p>
-            <p><span class="text-gray-400">Then:</span> {{ r.action }}</p>
+            <p><span class="text-gray-400">{{ t('pages.automationRules.when') }}</span> {{ r.when }}</p>
+            <p v-if="r.condition"><span class="text-gray-400">{{ t('pages.automationRules.if') }}</span> {{ r.condition }}</p>
+            <p><span class="text-gray-400">{{ t('pages.automationRules.then') }}</span> {{ r.action }}</p>
           </div>
         </div>
       </div>
@@ -60,16 +63,16 @@ const addRule = (): void => {
     <div v-if="open" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
       <div class="w-full max-w-lg p-[2px] rounded-2xl bg-[conic-gradient(from_var(--angle),#22D3EE_0%,#8B5CF6_60%,#EC4899_100%)] animate-rotate-gradient">
         <div class="rounded-2xl bg-[rgba(15,17,23,0.96)] border border-white/10 p-6">
-          <h3 class="text-white font-semibold mb-3">Create Rule</h3>
+          <h3 class="text-white font-semibold mb-3">{{ t('pages.automationRules.createRule') }}</h3>
           <div class="grid grid-cols-1 gap-3">
-            <input v-model="form.name" class="input-dark" placeholder="Rule name" />
-            <input v-model="form.when" class="input-dark" placeholder="Event (e.g., security.failed_login)" />
-            <input v-model="form.condition" class="input-dark" placeholder="Condition (optional)" />
-            <input v-model="form.action" class="input-dark" placeholder="Action (e.g., notify.slack(#security))" />
+            <input v-model="form.name" class="input-dark" :placeholder="t('pages.automationRules.ruleName')" />
+            <input v-model="form.when" class="input-dark" :placeholder="t('pages.automationRules.event')" />
+            <input v-model="form.condition" class="input-dark" :placeholder="t('pages.automationRules.condition')" />
+            <input v-model="form.action" class="input-dark" :placeholder="t('pages.automationRules.action')" />
           </div>
           <div class="text-right mt-4">
-            <button class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white me-2" @click="open = false">Cancel</button>
-            <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110" @click="addRule">Add</button>
+            <button class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white me-2" @click="open = false">{{ t('pages.automationRules.cancel') }}</button>
+            <button class="px-4 py-2 rounded-xl text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110" @click="addRule">{{ t('pages.automationRules.add') }}</button>
           </div>
         </div>
       </div>

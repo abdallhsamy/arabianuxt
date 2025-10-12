@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { ChevronDown, Check, Search } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 export interface Option {
   label: string
@@ -111,7 +114,7 @@ watch(() => isOpen.value, (open) => open && nextTick(() => dropdownRef.value?.fo
       <!-- Floating label -->
       <label
           v-if="props.label"
-          class="absolute left-3 transition-all duration-300 pointer-events-none select-none"
+          class="absolute ltr:left-3 rtl:right-3 transition-all duration-300 pointer-events-none select-none"
           :class="[
           shouldFloat
             ? [
@@ -135,7 +138,7 @@ watch(() => isOpen.value, (open) => open && nextTick(() => dropdownRef.value?.fo
       <div class="flex-1 px-3 truncate" :class="s.font">
         <span v-if="selectedLabel" class="text-gray-100">{{ selectedLabel }}</span>
         <span v-else-if="shouldFloat" class="text-gray-500">
-          {{ props.placeholder || 'Select option...' }}
+          {{ props.placeholder || t('components.uiSelect.placeholder') }}
         </span>
       </div>
 
@@ -159,7 +162,7 @@ watch(() => isOpen.value, (open) => open && nextTick(() => dropdownRef.value?.fo
           <input
               v-model="searchQuery"
               type="text"
-              placeholder="Search..."
+              :placeholder="t('components.uiSelect.searchPlaceholder')"
               class="bg-transparent text-gray-100 text-sm outline-none w-full"
           />
         </div>

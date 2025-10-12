@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 // Layout & Nav
 import UiSidebarAdvanced from '~/components/Ui/Layout/UiSidebarAdvanced.vue'
@@ -30,44 +31,46 @@ import UiProgressBar from '~/components/Ui/Data/UiProgressBar.vue'
 import UiTimeline from '~/components/Ui/Data/UiTimeline.vue'
 import UiConfirmDialog from '~/components/Ui/Feedback/UiConfirmDialog.vue'
 
+const { t } = useI18n()
+
 const currentPage = ref(1)
 const confirmOpen = ref(false)
 const events = [
-  { title: 'User registered', description: 'New user joined', time: '2 min ago' },
-  { title: 'Server deployed', description: 'Version 2.1 released', time: '10 min ago' },
-  { title: 'Payment received', description: 'Stripe transaction', time: '30 min ago' },
+  { title: t('pages.dashboard.events.userRegistered'), description: t('pages.dashboard.events.newUserJoined'), time: '2 min ago' },
+  { title: t('pages.dashboard.events.serverDeployed'), description: t('pages.dashboard.events.versionReleased'), time: '10 min ago' },
+  { title: t('pages.dashboard.events.paymentReceived'), description: t('pages.dashboard.events.stripeTransaction'), time: '30 min ago' },
 ]
 
 // -------------------------------------------------------------------
 // Sidebar menu items
 // -------------------------------------------------------------------
 const sidebarItems = [
-  { label: 'Overview', to: '/dashboard' },
+  { label: t('pages.dashboard.sidebar.overview'), to: '/dashboard' },
   {
-    label: 'Analytics',
+    label: t('navigation.analytics'),
     children: [
-      { label: 'Traffic', to: '#' },
-      { label: 'Revenue', to: '#' },
-      { label: 'Conversions', to: '#' },
+      { label: t('pages.dashboard.sidebar.traffic'), to: '#' },
+      { label: t('pages.dashboard.sidebar.revenue'), to: '#' },
+      { label: t('pages.dashboard.sidebar.conversions'), to: '#' },
     ],
   },
-  { label: 'Settings', to: '#' },
+  { label: t('navigation.settings'), to: '#' },
 ]
 
 // -------------------------------------------------------------------
 // Stats + charts demo data
 // -------------------------------------------------------------------
 const stats = [
-  { label: 'Revenue', value: '$12.4K', delta: 12.3, hint: 'vs last month' },
-  { label: 'Users', value: '4,832', delta: 3.7, hint: 'new signups' },
-  { label: 'Conversion', value: '2.9%', delta: -0.4, hint: 'weekly change' },
+  { label: t('pages.dashboard.stats.revenue'), value: '$12.4K', delta: 12.3, hint: 'vs last month' },
+  { label: t('pages.dashboard.stats.users'), value: '4,832', delta: 3.7, hint: 'new signups' },
+  { label: t('pages.dashboard.stats.conversion'), value: '2.9%', delta: -0.4, hint: 'weekly change' },
 ]
 
 // -------------------------------------------------------------------
 // Toasts + notifications + command palette
 // -------------------------------------------------------------------
 const toastRef = ref<InstanceType<typeof UiToastAdvanced> | null>(null)
-const notifications = ref([{ id: '1', title: 'Server deployed', time: '2m ago' }])
+const notifications = ref([{ id: '1', title: t('pages.dashboard.events.serverDeployed'), time: '2m ago' }])
 const showDrawer = ref(false)
 const showCmd = ref(false)
 
@@ -94,20 +97,20 @@ const asyncFetcher = async (q: string) => {
 const commands = [
   {
     id: 'open',
-    title: 'Open Notification Drawer',
+    title: t('pages.dashboard.commands.openNotificationDrawer'),
     run: () => (showDrawer.value = true),
   },
   {
     id: 'toast',
-    title: 'Show Toast',
-    run: () => toastRef.value?.push({ text: 'Action executed!', type: 'info' }),
+    title: t('pages.dashboard.commands.showToast'),
+    run: () => toastRef.value?.push({ text: t('pages.dashboard.commands.actionExecuted'), type: 'info' }),
   },
 ]
 const statistics = [
-  { label: 'Revenue', value: '$124,000', change: '+12%' },
-  { label: 'Active Users', value: '8,213', change: '+3.8%' },
-  { label: 'Transactions', value: '42,567', change: '+6.1%' },
-  { label: 'Errors', value: '24', change: '-1.2%' },
+  { label: t('pages.dashboard.stats.revenue'), value: '$124,000', change: '+12%' },
+  { label: t('pages.dashboard.stats.activeUsers'), value: '8,213', change: '+3.8%' },
+  { label: t('pages.dashboard.stats.transactions'), value: '42,567', change: '+6.1%' },
+  { label: t('pages.dashboard.stats.errors'), value: '24', change: '-1.2%' },
 ];
 </script>
 
@@ -116,10 +119,10 @@ const statistics = [
     <!-- Header -->
     <header class="relative">
       <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400 drop-shadow-[0_0_12px_rgba(236,72,153,0.3)]">
-        Dashboard Overview
+        {{ t('pages.dashboard.title') }}
       </h1>
       <p class="text-[var(--text-secondary)] mt-2">
-        Welcome back! Here's a quick snapshot of your platform performance ⚡️
+        {{ t('pages.dashboard.subtitle') }}
       </p>
     </header>
 
@@ -183,21 +186,21 @@ const statistics = [
 
       <!-- Charts -->
       <div class="grid md:grid-cols-3 gap-6">
-        <UiWidgetContainer title="Line Chart">
+        <UiWidgetContainer :title="t('pages.dashboard.charts.lineChart')">
           <UiChartLine
               :labels="['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']"
               :dataset="[12, 9, 14, 10, 16, 8, 11]"
           />
         </UiWidgetContainer>
 
-        <UiWidgetContainer title="Bar Chart">
+        <UiWidgetContainer :title="t('pages.dashboard.charts.barChart')">
           <UiChartBar
               :labels="['Q1', 'Q2', 'Q3', 'Q4']"
               :datasets="[{ label: 'Sales', data: [3, 6, 4, 8], color: '#06b6d4' }]"
           />
         </UiWidgetContainer>
 
-        <UiWidgetContainer title="Sales Distribution">
+        <UiWidgetContainer :title="t('pages.dashboard.charts.salesDistribution')">
           <UiChartDonut
               :labels="['A', 'B', 'C']"
               :dataset="[40, 35, 25]"
@@ -207,17 +210,17 @@ const statistics = [
 
       <!-- Form Widgets -->
       <div class="grid md:grid-cols-3 gap-6">
-        <UiWidgetContainer title="Upload Files">
+        <UiWidgetContainer :title="t('pages.dashboard.forms.uploadFiles')">
           <UiFileUpload
               @files="(f) => toastRef.value?.push({ text: `Uploaded ${f.length} files`, type: 'info' })"
           />
         </UiWidgetContainer>
 
-        <UiWidgetContainer title="Async Select">
+        <UiWidgetContainer :title="t('pages.dashboard.forms.asyncSelect')">
           <UiSelectAsync v-model="asyncValue" :fetcher="asyncFetcher" />
         </UiWidgetContainer>
 
-        <UiWidgetContainer title="Tags">
+        <UiWidgetContainer :title="t('pages.dashboard.forms.tags')">
           <UiTagInput v-model="tagsValue" />
         </UiWidgetContainer>
       </div>
@@ -228,14 +231,14 @@ const statistics = [
             class="px-4 py-2 rounded-lg bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white hover:opacity-90 transition"
             @click="showDrawer = true"
         >
-          Open Notifications
+          {{ t('pages.dashboard.actions.openNotifications') }}
         </button>
 
         <button
             class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-gray-200 hover:bg-white/10 transition"
             @click="showCmd = true"
         >
-          Open Command Palette (⌘K)
+          {{ t('pages.dashboard.actions.openCommandPalette') }}
         </button>
       </div>
     </main>
@@ -246,9 +249,9 @@ const statistics = [
     <UiCommandPalette v-model="showCmd" :commands="commands" />
 
     <UiBreadcrumb :items="[
-      { label: 'Dashboard', to: '/dashboard' },
-      { label: 'Components', to: '#' },
-      { label: 'Demo' }
+      { label: t('pages.dashboard.breadcrumb.dashboard'), to: '/dashboard' },
+      { label: t('pages.dashboard.breadcrumb.components'), to: '#' },
+      { label: t('pages.dashboard.breadcrumb.demo') }
     ]" />
 
     <UiProgressBar :value="72" />
@@ -262,13 +265,13 @@ const statistics = [
         class="mt-6 px-4 py-2 rounded bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white hover:opacity-90"
         @click="confirmOpen = true"
     >
-      Show Confirm Dialog
+      {{ t('pages.dashboard.actions.showConfirmDialog') }}
     </button>
 
     <UiConfirmDialog
         v-model="confirmOpen"
-        title="Delete Record"
-        message="Are you sure you want to delete this record permanently?"
+        :title="t('pages.dashboard.confirmDialog.title')"
+        :message="t('pages.dashboard.confirmDialog.message')"
         @confirm="console.log('Deleted!')"
     />
   </section>

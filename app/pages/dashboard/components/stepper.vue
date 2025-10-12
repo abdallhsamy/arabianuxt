@@ -4,29 +4,31 @@ import { User, CreditCard, CheckCircle2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import type {StepItem} from "~/components/Ui/Common/UiStepper.type";
 
+const { t } = useI18n()
+
 const steps = ref<StepItem[]>([
-  { id: 'account', label: 'Account', description: 'Create your account', icon: User, state: 'completed' },
-  { id: 'billing', label: 'Billing', description: 'Setup payment method', icon: CreditCard, state: 'active' },
-  { id: 'confirmation', label: 'Confirm', description: 'Finish setup', icon: CheckCircle2, state: 'pending' },
+  { id: 'account', label: t('pages.componentStepper.steps.account.label'), description: t('pages.componentStepper.steps.account.description'), icon: User, state: 'completed' },
+  { id: 'billing', label: t('pages.componentStepper.steps.billing.label'), description: t('pages.componentStepper.steps.billing.description'), icon: CreditCard, state: 'active' },
+  { id: 'confirmation', label: t('pages.componentStepper.steps.confirmation.label'), description: t('pages.componentStepper.steps.confirmation.description'), icon: CheckCircle2, state: 'pending' },
 ])
 
 const stepsVertical = ref<StepItem[]>([
-  { id: 'details', label: 'Personal Details', state: 'completed' },
-  { id: 'verify', label: 'Verification', state: 'completed' },
-  { id: 'review', label: 'Review Info', state: 'active' },
-  { id: 'submit', label: 'Submit', state: 'pending' },
+  { id: 'details', label: t('pages.componentStepper.stepsVertical.details'), state: 'completed' },
+  { id: 'verify', label: t('pages.componentStepper.stepsVertical.verify'), state: 'completed' },
+  { id: 'review', label: t('pages.componentStepper.stepsVertical.review'), state: 'active' },
+  { id: 'submit', label: t('pages.componentStepper.stepsVertical.submit'), state: 'pending' },
 ])
 
 const stepsWithErrors = ref<StepItem[]>([
-  { id: 'profile', label: 'Profile', state: 'completed' },
-  { id: 'upload', label: 'Upload Files', state: 'error' },
-  { id: 'review', label: 'Review', state: 'pending' }
+  { id: 'profile', label: t('pages.componentStepper.stepsErrors.profile'), state: 'completed' },
+  { id: 'upload', label: t('pages.componentStepper.stepsErrors.upload'), state: 'error' },
+  { id: 'review', label: t('pages.componentStepper.stepsErrors.review'), state: 'pending' }
 ])
 </script>
 
 <template>
   <section class="space-y-10">
-    <h1 class="page-title">Stepper Component Examples</h1>
+    <h1 class="page-title">{{ t('pages.componentStepper.title') }}</h1>
 
     <!-- Horizontal -->
     <UiStepper :steps="steps" color="fuchsia" />

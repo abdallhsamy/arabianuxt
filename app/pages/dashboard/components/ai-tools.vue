@@ -6,6 +6,8 @@ import UiPromptBuilder from '~/components/Ui/AI/UiPromptBuilder.vue'
 import UiCodeBlock from '~/components/Ui/AI/UiCodeBlock.vue'
 import UiMarkdownViewer from '~/components/Ui/AI/UiMarkdownViewer.vue'
 
+const { t } = useI18n()
+
 const markdown = ref(`# Welcome
 This **Markdown viewer** supports *bold*, \`inline code\`, and lists:
 
@@ -15,9 +17,9 @@ This **Markdown viewer** supports *bold*, \`inline code\`, and lists:
 `)
 
 const commands = [
-  { id: '1', label: 'Open Settings', action: () => alert('Settings opened!') },
-  { id: '2', label: 'New Chat', action: () => alert('New chat started!') },
-  { id: '3', label: 'Toggle Theme', action: () => document.documentElement.classList.toggle('dark') },
+  { id: '1', label: t('pages.componentAiTools.commands.openSettings'), action: () => alert(t('pages.componentAiTools.alerts.settingsOpened')) },
+  { id: '2', label: t('pages.componentAiTools.commands.newChat'), action: () => alert(t('pages.componentAiTools.alerts.newChatStarted')) },
+  { id: '3', label: t('pages.componentAiTools.commands.toggleTheme'), action: () => document.documentElement.classList.toggle('dark') },
 ]
 </script>
 

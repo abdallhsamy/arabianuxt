@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Message {
   id: string
@@ -10,7 +13,7 @@ interface Message {
 const isOpen = ref(false)
 const input = ref('')
 const messages = ref<Message[]>([
-  { id: '1', role: 'assistant', content: 'Hello 👋 How can I assist you today?' },
+  { id: '1', role: 'assistant', content: t('components.aiChatDock.welcomeMessage') },
 ])
 
 const toggle = () => (isOpen.value = !isOpen.value)
@@ -24,7 +27,7 @@ const send = () => {
     messages.value.push({
       id: crypto.randomUUID(),
       role: 'assistant',
-      content: `You said: "${userText}" 🤖`,
+      content: t('components.aiChatDock.responsePrefix', { message: userText }),
     })
   })
 }
@@ -45,7 +48,7 @@ const send = () => {
           class="fixed bottom-20 right-5 w-80 rounded-2xl bg-black/70 backdrop-blur-xl border border-white/10 shadow-2xl flex flex-col overflow-hidden"
       >
         <header class="px-4 py-2 text-gray-100 font-semibold bg-gradient-to-r from-fuchsia-600/20 to-cyan-600/10">
-          AI Assistant
+          {{ t('components.aiChatDock.title') }}
         </header>
 
         <div class="flex-1 p-3 space-y-2 overflow-y-auto max-h-96">
@@ -63,7 +66,7 @@ const send = () => {
           <input
               v-model="input"
               type="text"
-              placeholder="Type a message..."
+              :placeholder="t('components.aiChatDock.placeholder')"
               class="flex-1 bg-transparent text-gray-100 text-sm outline-none px-2"
               @keydown.enter="send"
           />

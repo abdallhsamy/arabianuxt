@@ -6,17 +6,19 @@ import UiSearchPanel from '~/components/Ui/Nav/UiSearchPanel.vue'
 import UiChatDock from '~/components/Ui/Assist/UiChatDock.vue'
 import UiTooltip from '~/components/Ui/Feedback/UiTooltip.vue'
 
+const { t } = useI18n()
+
 const searchOpen = ref(false)
 const items = [
-  { id: '1', title: 'Dashboard Overview', category: 'Pages' },
-  { id: '2', title: 'Settings Panel', category: 'Pages' },
-  { id: '3', title: 'Revenue Report', category: 'Analytics' },
+  { id: '1', title: t('pages.componentInteraction.items.dashboardOverview'), category: t('pages.componentInteraction.categories.pages') },
+  { id: '2', title: t('pages.componentInteraction.items.settingsPanel'), category: t('pages.componentInteraction.categories.pages') },
+  { id: '3', title: t('pages.componentInteraction.items.revenueReport'), category: t('pages.componentInteraction.categories.analytics') },
 ]
 </script>
 
 <template>
   <section class="p-8 text-gray-100 space-y-6">
-    <h1 class="text-2xl font-bold">✨ Interaction Components Demo</h1>
+    <h1 class="text-2xl font-bold">{{ t('pages.componentInteraction.title') }}</h1>
 
     <div class="grid md:grid-cols-2 gap-6">
       <UiFileUploadAdvanced />
@@ -27,10 +29,10 @@ const items = [
         class="px-4 py-2 rounded-lg bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white"
         @click="searchOpen = true"
     >
-      Open Search
+      {{ t('pages.componentInteraction.openSearch') }}
     </button>
 
-    <UiTooltip class="ms-4" text="Hover tooltip example"><span class="underline cursor-help">Hover me</span></UiTooltip>
+    <UiTooltip class="ms-4" :text="t('pages.componentInteraction.tooltipExample')"><span class="underline cursor-help">{{ t('pages.componentInteraction.hoverMe') }}</span></UiTooltip>
 
     <UiSearchPanel v-model="searchOpen" :items="items" />
     <UiChatDock />
