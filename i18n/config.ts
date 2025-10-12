@@ -8,8 +8,8 @@ export const AvailableLocales = {
 export type AvailableLocale = (typeof AvailableLocales)[keyof typeof AvailableLocales];
 
 export const LanguageDirections: Record<AvailableLocale, LanguageDirection> = {
-    ar: 'rtl',
-    en: 'ltr',
+    [AvailableLocales.Arabic]: 'rtl',
+    [AvailableLocales.English]: 'ltr',
 }
 
 export const i18nConfig = {
