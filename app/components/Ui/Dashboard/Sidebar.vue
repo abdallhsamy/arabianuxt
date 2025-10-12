@@ -16,7 +16,8 @@ import {
   Hash, Image, List, Maximize2,
   Minus, Plus, RotateCcw, Search,
   Settings as SettingsIcon, Shield as ShieldIcon,
-  Square as SquareIcon, Target, Wrench
+  Square as SquareIcon, Target, Wrench,
+  LogIn, UserPlus, KeyRound, Lock as LockIcon
 } from 'lucide-vue-next';
 import { useRouter, useRoute } from '#imports';
 import { useSidebar } from '~/composables/useSidebar';
@@ -109,6 +110,14 @@ const menuItems = [
   { icon: Palette, label: 'Theme Customizer', to: '/dashboard/theme-customizer' },
   { icon: Lock, label: 'Privacy', to: '/dashboard/privacy' },
   { icon: CreditCard, label: 'Billing', to: '/dashboard/billing' },
+  
+  // Authentication
+  { icon: LogIn, label: 'Login', to: '/login' },
+  { icon: UserPlus, label: 'Register', to: '/register' },
+  { icon: KeyRound, label: 'Forgot Password', to: '/forgot-password' },
+  { icon: KeyRound, label: 'Reset Password', to: '/reset-password' },
+  { icon: LockIcon, label: 'Locked', to: '/locked' },
+  { icon: LockIcon, label: 'Locked V2', to: '/locked-v2' },
 ];
 
 // Group separators for better organization
@@ -123,7 +132,8 @@ const menuGroups = [
   { items: menuItems.slice(45, 48), label: 'Team' },
   { items: menuItems.slice(48, 51), label: 'Support' },
   { items: menuItems.slice(51, 53), label: 'Knowledge' },
-  { items: menuItems.slice(53), label: 'System' },
+  { items: menuItems.slice(53, 59), label: 'System' },
+  { items: menuItems.slice(59), label: 'Authentication' },
 ];
 
 const mainMargin = computed(() =>
