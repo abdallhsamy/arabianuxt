@@ -5,12 +5,14 @@ import { Github, Globe } from 'lucide-vue-next'
 import {AvailableLocales, LanguageDirections} from "~~/i18n/config";
 const { t, locale, setLocale } = useI18n()
 
+const switchLocalePath = useSwitchLocalePath()
 definePageMeta({ layout: 'empty' })
 
-const toggleLocale = (): void => {
-  setLocale(locale.value === AvailableLocales.English ? AvailableLocales.Arabic : AvailableLocales.English)
-  document.dir = LanguageDirections[locale.value as keyof typeof LanguageDirections]
-}
+const toggleLocale = switchLocalePath(
+    locale.value === AvailableLocales.English ?
+        AvailableLocales.Arabic :
+        AvailableLocales.English
+)
 
 
 const siteUrl = 'https://arabianuxt.netlify.app'
@@ -28,7 +30,7 @@ useSeoMeta({
   ogUrl: siteUrl,
   ogImage: `${siteUrl}/og-cover.png`,
   twitterCard: 'summary_large_image',
-  twitterSite: '@abdallhsamy',
+  // twitterSite: '@abdallhsamy',
   twitterTitle: `${siteName} — Nuxt 4 + Tailwind v4 Dashboard`,
   twitterDescription:
       'Elegant, production-ready Nuxt 4 dashboard built with Tailwind v4 and TypeScript.',
@@ -86,17 +88,15 @@ const features = [
 
 <template>
   <section
-      class="min-h-screen bg-gradient-to-br from-fuchsia-900 via-gray-900 to-black text-gray-100 flex flex-col items-center justify-center px-6 py-24 relative transition-all"
-      :dir="$i18n.localeProperties.dir"
-  >
+      class="min-h-screen bg-gradient-to-br from-fuchsia-900 via-gray-900 to-black text-gray-100 flex flex-col items-center justify-center px-6 py-24 relative transition-all">
     <!-- Language Switch -->
-    <button
+    <NuxtLink
         class="absolute top-6 right-6 flex items-center gap-2 text-sm bg-white/10 px-3 py-1.5 rounded-lg border border-white/15 hover:bg-white/15 transition"
-        @click="toggleLocale"
+        :to="toggleLocale"
     >
       <Globe class="w-4 h-4" />
       {{ locale === 'en' ? 'العربية' : 'English' }}
-    </button>
+    </NuxtLink>
 
     <div class="max-w-4xl text-center space-y-6">
       <h1
