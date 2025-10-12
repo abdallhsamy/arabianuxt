@@ -56,9 +56,9 @@ const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof Lan
 
       <Toaster id="global-toaster" position="top-right" />
 
-<!--      <ClientOnly>-->
-<!--        <UiChatFloating />-->
-<!--      </ClientOnly>-->
+      <ClientOnly>
+        <UiChatFloating />
+      </ClientOnly>
     </div>
     </Body>
     </Html>
