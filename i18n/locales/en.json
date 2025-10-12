@@ -1,4 +1,9 @@
 {
+  "common": {
+    "appName": "Arabianuxt",
+    "language": "Language",
+    "selectLanguage": "Select Language"
+  },
   "public": {
     "homePage": {
       "title": "Arabianuxt",

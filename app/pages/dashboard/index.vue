@@ -86,9 +86,9 @@ const asyncFetcher = async (q: string) => {
 }
 
 // Toast demo
-onMounted(() => {
-  toastRef.value?.push({ text: 'Welcome back 👋', type: 'success' })
-})
+// onMounted(() => {
+//   toastRef.value?.push({ text: 'Welcome back 👋', type: 'success' })
+// })
 
 // Command palette demo commands
 const commands = [

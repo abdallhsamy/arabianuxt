@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Bell, Search, User, LogOut, Lock, Settings, Github, Linkedin } from 'lucide-vue-next'
 import { useSidebar } from '~/composables/useSidebar'
+import LanguageSwitcher from '~/components/Ui/Common/LanguageSwitcher.vue'
 
 const search = ref('')
 const openNotifs = ref(false)
@@ -73,7 +74,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
       >
         A
       </div>
-      <span class="text-white font-semibold tracking-wide hidden sm:block">ArabiaNuxt Dashboard</span>
+      <span class="text-white font-semibold tracking-wide hidden sm:block">{{ $t("common.appName") }}</span>
     </div>
 
     <!-- Search -->
@@ -110,6 +111,9 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
           <Linkedin class="w-5 h-5" />
         </a>
       </div>
+
+      <!-- Language Switcher -->
+      <LanguageSwitcher />
 
       <!-- Notifications -->
       <div class="relative" @click.stop="toggleDropdown('notif')">

@@ -1,7 +1,12 @@
 {
+  "common": {
+    "appName": "نوكست عربية",
+    "language": "اللغة",
+    "selectLanguage": "اختر اللغة"
+  },
   "public": {
     "homePage": {
-      "title": "عربيا نوكست",
+      "title": "نوكست عربية",
       "subtitle": "لوحة تحكم جاهزة للإنتاج مبنية بـ Nuxt 4 و Tailwind v4",
       "description": "مصممة للسرعة والأمان وقابلية التوسع — من إعداد عبدالله سامي.",
       "openDashboard": "افتح لوحة التحكم",

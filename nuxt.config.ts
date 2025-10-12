@@ -17,5 +17,13 @@ export default defineNuxtConfig({
     pinia: {
         storesDirs: ['./app/stores/**'],
     },
-    i18n: i18nConfig,
+    i18n: {
+        ...i18nConfig,
+        strategy: 'prefix_except_default',
+        detectBrowserLanguage: {
+            useCookie: true,
+            cookieKey: 'i18n_redirected',
+            redirectOn: 'root',
+        },
+    },
 });
