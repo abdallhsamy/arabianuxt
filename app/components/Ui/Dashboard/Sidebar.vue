@@ -193,10 +193,12 @@ const navigate = (to: string): void => {
       @mouseleave="setExpanded(false)"
   >
     <!-- Header -->
-    <div class="flex items-center w-full p-3 border-b border-white/10" :class="isRTL ? 'flex-row-reverse' : 'justify-between'">
+    <div class="flex items-center w-full p-3 border-b border-white/10 justify-between">
       <span
-          class="font-bold text-lg whitespace-nowrap transition-opacity duration-300 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-cyan-400"
-          :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden'"
+          class="font-bold text-start text-lg whitespace-nowrap transition-opacity duration-300 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-cyan-400"
+          :class="[
+            isExpanded ? 'opacity-100' : 'opacity-0 hidden',
+          ]"
       >
         {{ t('common.dashboard') }}
       </span>
@@ -225,10 +227,7 @@ const navigate = (to: string): void => {
             v-for="item in group.items"
             :key="item.label"
             class="relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group overflow-hidden"
-            :class="[
-              !isExpanded && 'mx-auto',
-              isRTL && 'flex-row-reverse'
-            ]"
+            :class="{ 'mx-auto' : !isExpanded }"
             @click="navigate(localePath(item.to))"
         >
           <!-- Active Glow Border -->
@@ -248,10 +247,10 @@ const navigate = (to: string): void => {
 
           <!-- Label -->
           <span
-              class="z-10 font-medium text-sm transition-opacity duration-300"
+              class="z-10 font-medium text-sm transition-opacity duration-300 text-start"
               :class="[
               isExpanded ? 'opacity-100' : 'opacity-0 hidden',
-              route.path === localePath(item.to) ? 'text-white' : 'text-gray-400'
+              route.path === localePath(item.to) ? 'text-white' : 'text-gray-400',
             ]"
           >
             {{ item.label }}
@@ -278,7 +277,7 @@ const navigate = (to: string): void => {
         <Crown v-if="!isExpanded" class="w-5 h-5 text-white z-10" />
         <template v-else>
           <Crown class="w-4 h-4 text-white z-10" />
-          <span class="text-sm font-semibold text-white z-10">{{ t('common.upgrade') }}</span>
+          <span class="text-sm font-semibold text-white z-10 text-start">{{ t('common.upgrade') }}</span>
         </template>
       </button>
     </div>
@@ -301,7 +300,7 @@ const navigate = (to: string): void => {
         @click="navigate(localePath(item.to))"
     >
       <component :is="item.icon" class="w-5 h-5" />
-      <span class="text-xs whitespace-nowrap">{{ item.label }}</span>
+      <span class="text-xs whitespace-nowrap text-start">{{ item.label }}</span>
     </button>
   </nav>
 </template>
