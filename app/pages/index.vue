@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useSeoMeta, useHead } from '#imports'
+import { useI18n } from 'vue-i18n'
 import { Github, Globe } from 'lucide-vue-next'
 import {AvailableLocales, LanguageDirections} from "~~/i18n/config";
 const { t, locale, setLocale } = useI18n()
@@ -9,6 +11,69 @@ const toggleLocale = (): void => {
   setLocale(locale.value === AvailableLocales.English ? AvailableLocales.Arabic : AvailableLocales.English)
   document.dir = LanguageDirections[locale.value as keyof typeof LanguageDirections]
 }
+
+
+const siteUrl = 'https://arabianuxt.netlify.app'
+const siteName = 'Arabianuxt'
+const author = 'Abdallah Samy'
+
+// --- ✅ SEO META ---
+useSeoMeta({
+  title: `${siteName} — Modern Nuxt 4 + Tailwind v4 Dashboard Template`,
+  description:
+      'Arabianuxt is a free, open-source Nuxt 4 + Tailwind v4 dashboard and UI kit. Built by Abdallah Samy for speed, security, and elegance.',
+  ogTitle: `${siteName} — Modern Nuxt 4 + Tailwind v4 Dashboard`,
+  ogDescription:
+      'Build beautiful, production-ready dashboards with Arabianuxt — a secure and elegant Nuxt 4 + Tailwind v4 UI kit.',
+  ogUrl: siteUrl,
+  ogImage: `${siteUrl}/og-cover.png`,
+  twitterCard: 'summary_large_image',
+  twitterSite: '@abdallhsamy',
+  twitterTitle: `${siteName} — Nuxt 4 + Tailwind v4 Dashboard`,
+  twitterDescription:
+      'Elegant, production-ready Nuxt 4 dashboard built with Tailwind v4 and TypeScript.',
+  twitterImage: `${siteUrl}/og-cover.png`,
+  author,
+  themeColor: '#7e22ce',
+})
+
+// --- ✅ STRUCTURED DATA (JSON-LD) ---
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: siteName,
+        url: siteUrl,
+        description:
+            'Arabianuxt is a free, open-source Nuxt 4 + Tailwind v4 dashboard kit by Abdallah Samy.',
+        author: {
+          '@type': 'Person',
+          name: author,
+          url: 'https://www.linkedin.com/in/abdallah-samy/',
+        },
+        applicationCategory: 'WebApplication',
+        operatingSystem: 'All',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+      }),
+    },
+  ],
+  link: [
+    // ✅ Canonical
+    { rel: 'canonical', href: siteUrl },
+    // ✅ Favicon
+    { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+    // ✅ Hreflang for multilingual SEO
+    { rel: 'alternate', hreflang: 'en', href: `${siteUrl}/en` },
+    { rel: 'alternate', hreflang: 'ar', href: `${siteUrl}/ar` },
+  ],
+})
 
 const features = [
   { key: 'nuxt' },
