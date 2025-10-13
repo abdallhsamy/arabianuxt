@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue'
 import { Smile, Paperclip, Send } from 'lucide-vue-next'
-import { useChatUserStore } from '~/store/useChatUserStore'
-import { useChatMessagesStore } from '~/store/useChatMessagesStore'
+import { useChatUserStore } from '~/store/chatUserStore'
+import { useChatMessagesStore } from '~/store/chatMessagesStore'
 
 const userStore = useChatUserStore()
 const msgStore = useChatMessagesStore()
