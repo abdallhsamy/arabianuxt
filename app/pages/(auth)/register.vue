@@ -124,9 +124,9 @@ const handleRegister = async (): Promise<void> => {
         <!-- Already have account -->
         <p class="text-center text-sm text-[var(--text-secondary)] mt-4">
           {{ t('pages.auth.register.haveAccount') }}
-          <NuxtLink to="/login" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
+          <NuxtLinkLocale to="/login" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
             {{ t('pages.auth.register.signIn') }}
-          </NuxtLink>
+          </NuxtLinkLocale>
         </p>
       </form>
     </div>

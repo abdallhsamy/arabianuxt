@@ -62,9 +62,9 @@ const handleSubmit = async (): Promise<void> => {
 
           <p class="text-center text-sm text-[var(--text-secondary)] mt-4">
             {{ t('pages.auth.forgotPassword.rememberPassword') }}
-            <NuxtLink to="/login" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
+            <NuxtLinkLocale to="/login" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
               {{ t('pages.auth.forgotPassword.signIn') }}
-            </NuxtLink>
+            </NuxtLinkLocale>
           </p>
         </form>
       </template>
@@ -83,12 +83,12 @@ const handleSubmit = async (): Promise<void> => {
           <p class="text-sm text-[var(--text-secondary)] max-w-xs mx-auto">
             {{ t('pages.auth.forgotPassword.successMessage', { email }) }}
           </p>
-          <NuxtLink
+          <NuxtLinkLocale
               to="/login"
               class="mt-8 inline-block rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 py-2.5 px-6 hover:brightness-110 transition-all"
           >
             {{ t('pages.auth.forgotPassword.backToLogin') }}
-          </NuxtLink>
+          </NuxtLinkLocale>
         </div>
       </template>
     </div>

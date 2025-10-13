@@ -73,12 +73,12 @@ const handleLogin = async (): Promise<void> => {
 
           <!-- Forgot password -->
           <div class="text-right">
-            <NuxtLink
-                to="/forgot-password"
+            <NuxtLinkLocale
+                to="'/forgot-password'"
                 class="text-sm text-fuchsia-400 hover:text-cyan-400 transition-colors"
             >
               {{ t('pages.auth.login.forgotPassword') }}
-            </NuxtLink>
+            </NuxtLinkLocale>
           </div>
 
           <button
@@ -93,9 +93,9 @@ const handleLogin = async (): Promise<void> => {
 
           <p class="text-center text-sm text-[var(--text-secondary)] mt-4">
             {{ t('pages.auth.login.noAccount') }}
-            <NuxtLink to="/register" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
+            <NuxtLinkLocale to="/register" class="text-fuchsia-400 hover:text-cyan-400 font-medium">
               {{ t('pages.auth.login.createOne') }}
-            </NuxtLink>
+            </NuxtLinkLocale>
           </p>
         </form>
       </div>
