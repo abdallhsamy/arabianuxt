@@ -7,30 +7,20 @@ import {
   AlertTriangle,
   AlertOctagon,
 } from "lucide-vue-next";
-
-export interface UiInputProps {
-  modelValue: string;
-  type?: string;
-  label?: string;
-  placeholder?: string;
-  variant?: "default" | "outlined" | "filled";
-  state?: "success" | "warning" | "error" | "none";
-  message?: string;
-  errorMessage?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  clearable?: boolean;
-  passwordToggle?: boolean;
-  parentTheme?: "dark" | "light" | "gradient";
-  size?: "sm" | "md" | "lg";
-}
+import {
+  UiInputParentSizes,
+  UiInputParentThemes,
+  type UiInputProps,
+  UiInputStates,
+  UiInputVariants,
+} from "./UiInput.type";
 
 const props = withDefaults(defineProps<UiInputProps>(), {
   type: "text",
-  variant: "default",
-  state: "none",
-  parentTheme: "dark",
-  size: "md",
+  variant: UiInputVariants.Default,
+  state: UiInputStates.None,
+  parentTheme: UiInputParentThemes.Dark,
+  size: UiInputParentSizes.Medium,
   disabled: false,
   readonly: false,
   clearable: false,
@@ -49,19 +39,19 @@ const inputType = computed(() =>
 const s = computed(
   () =>
     ({
-      sm: { h: "h-10", font: "text-sm" },
-      md: { h: "h-11", font: "text-sm" },
-      lg: { h: "h-12", font: "text-base" },
+      [UiInputParentSizes.Small]: { h: "h-10", font: "text-sm" },
+      [UiInputParentSizes.Medium]: { h: "h-11", font: "text-sm" },
+      [UiInputParentSizes.Large]: { h: "h-12", font: "text-base" },
     })[props.size]
 );
 
 const borderClass = computed(() => {
   switch (computedState.value) {
-    case "success":
+    case UiInputStates.Success:
       return "border-emerald-400 focus:ring-emerald-500/40";
-    case "warning":
+    case UiInputStates.Warning:
       return "border-amber-400 focus:ring-amber-500/40";
-    case "error":
+    case UiInputStates.Error:
       return "border-rose-400 focus:ring-rose-500/40";
     default:
       return "border-white/10 focus:ring-fuchsia-500/40";
@@ -70,11 +60,11 @@ const borderClass = computed(() => {
 
 const stateIcon = computed(() => {
   switch (computedState.value) {
-    case "success":
+    case UiInputStates.Success:
       return CheckCircle2;
-    case "warning":
+    case UiInputStates.Warning:
       return AlertTriangle;
-    case "error":
+    case UiInputStates.Error:
       return AlertOctagon;
     default:
       return null;
@@ -86,7 +76,7 @@ const shouldFloat = computed(() => isFocused.value || !!props.modelValue);
 
 // Computed state that prioritizes error state when errorMessage is provided
 const computedState = computed(() => {
-  if (props.errorMessage) return "error";
+  if (props.errorMessage) return UiInputStates.Error;
   return props.state;
 });
 
@@ -104,9 +94,9 @@ const computedMessage = computed(() => {
       :class="[
         s.h,
         borderClass,
-        props.variant === 'default' && 'bg-white/5',
-        props.variant === 'outlined' && 'bg-transparent',
-        props.variant === 'filled' && 'bg-white/10',
+        props.variant === UiInputVariants.Default && 'bg-white/5',
+        props.variant === UiInputVariants.Outlined && 'bg-transparent',
+        props.variant === UiInputVariants.Filled && 'bg-white/10',
         props.disabled && 'opacity-50 pointer-events-none',
       ]"
     >
@@ -118,9 +108,9 @@ const computedMessage = computed(() => {
           shouldFloat
             ? [
                 '-top-2 translate-y-0 text-xs font-medium px-2 rounded-md border backdrop-blur-md',
-                props.parentTheme === 'gradient'
+                props.parentTheme === UiInputParentThemes.Gradient
                   ? 'bg-gradient-to-r from-fuchsia-500/40 to-cyan-500/40 border-transparent text-white'
-                  : props.parentTheme === 'light'
+                  : props.parentTheme === UiInputParentThemes.Light
                     ? 'bg-black/70 border-white/20 text-white'
                     : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
               ]
@@ -160,9 +150,9 @@ const computedMessage = computed(() => {
         :is="stateIcon"
         class="w-4 h-4 me-3"
         :class="{
-          'text-emerald-400': computedState === 'success',
-          'text-amber-400': computedState === 'warning',
-          'text-rose-400': computedState === 'error',
+          'text-emerald-400': computedState === UiInputStates.Success,
+          'text-amber-400': computedState === UiInputStates.Warning,
+          'text-rose-400': computedState === UiInputStates.Error,
         }"
       />
     </div>
@@ -171,10 +161,10 @@ const computedMessage = computed(() => {
       v-if="computedMessage"
       class="text-xs mt-0.5"
       :class="{
-        'text-emerald-400': computedState === 'success',
-        'text-amber-400': computedState === 'warning',
-        'text-rose-400': computedState === 'error',
-        'text-gray-400': computedState === 'none',
+        'text-emerald-400': computedState === UiInputStates.Success,
+        'text-amber-400': computedState === UiInputStates.Warning,
+        'text-rose-400': computedState === UiInputStates.Error,
+        'text-gray-400': computedState === UiInputStates.None,
       }"
     >
       {{ computedMessage }}

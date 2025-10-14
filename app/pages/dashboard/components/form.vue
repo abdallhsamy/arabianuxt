@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 
 import UiFormField from "~/components/Ui/Form/UiFormField.vue";
-import UiInput from "~/components/Ui/Form/UiInput.vue";
+import UiInput from "~/components/Ui/Form/UiInput/UiInput.vue";
 import UiTextarea from "~/components/Ui/Form/UiTextarea.vue";
 import UiSelect from "~/components/Ui/Form/UiSelect.vue";
 import UiSelectMulti from "~/components/Ui/Form/UiSelectMulti.vue";

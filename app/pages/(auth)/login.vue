@@ -9,7 +9,7 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { getLoginSchema } from "~/api/schemas/auth.schema";
 import { useField, useForm } from "vee-validate";
 import { useRequest } from "alova/client";
-import UiInput from "~/components/Ui/Form/UiInput.vue";
+import UiInput from "~/components/Ui/Form/UiInput/UiInput.vue";
 
 const { t } = useI18n();
 const authStore = useAuthStore();

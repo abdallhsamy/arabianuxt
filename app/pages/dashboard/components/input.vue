@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiInput from "~/components/Ui/Form/UiInput.vue";
+import UiInput from "~/components/Ui/Form/UiInput/UiInput.vue";
 import { Copy, Mail, Lock } from "lucide-vue-next";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
