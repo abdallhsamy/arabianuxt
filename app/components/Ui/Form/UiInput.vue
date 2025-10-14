@@ -1,90 +1,107 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Eye, EyeOff, CheckCircle2, AlertTriangle, AlertOctagon } from 'lucide-vue-next'
+import { ref, computed } from "vue";
+import {
+  Eye,
+  EyeOff,
+  CheckCircle2,
+  AlertTriangle,
+  AlertOctagon,
+} from "lucide-vue-next";
 
 export interface UiInputProps {
-  modelValue: string
-  type?: string
-  label?: string
-  placeholder?: string
-  variant?: 'default' | 'outlined' | 'filled'
-  state?: 'success' | 'warning' | 'error' | 'none'
-  message?: string
-  errorMessage?: string
-  disabled?: boolean
-  readonly?: boolean
-  clearable?: boolean
-  passwordToggle?: boolean
-  parentTheme?: 'dark' | 'light' | 'gradient'
-  size?: 'sm' | 'md' | 'lg'
+  modelValue: string;
+  type?: string;
+  label?: string;
+  placeholder?: string;
+  variant?: "default" | "outlined" | "filled";
+  state?: "success" | "warning" | "error" | "none";
+  message?: string;
+  errorMessage?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  clearable?: boolean;
+  passwordToggle?: boolean;
+  parentTheme?: "dark" | "light" | "gradient";
+  size?: "sm" | "md" | "lg";
 }
 
 const props = withDefaults(defineProps<UiInputProps>(), {
-  type: 'text',
-  variant: 'default',
-  state: 'none',
-  parentTheme: 'dark',
-  size: 'md',
+  type: "text",
+  variant: "default",
+  state: "none",
+  parentTheme: "dark",
+  size: "md",
   disabled: false,
   readonly: false,
   clearable: false,
   passwordToggle: false,
-})
+});
 
-const emit = defineEmits(['update:modelValue', 'clear'])
-const inputRef = ref<HTMLInputElement>()
-const showPassword = ref(false)
-const isFocused = ref(false)
+const emit = defineEmits(["update:modelValue", "clear"]);
+const inputRef = ref<HTMLInputElement>();
+const showPassword = ref(false);
+const isFocused = ref(false);
 
 const inputType = computed(() =>
-    props.passwordToggle ? (showPassword.value ? 'text' : 'password') : props.type
-)
+  props.passwordToggle ? (showPassword.value ? "text" : "password") : props.type
+);
 
-const s = computed(() => ({
-  sm: { h: 'h-10', font: 'text-sm' },
-  md: { h: 'h-11', font: 'text-sm' },
-  lg: { h: 'h-12', font: 'text-base' },
-}[props.size]))
+const s = computed(
+  () =>
+    ({
+      sm: { h: "h-10", font: "text-sm" },
+      md: { h: "h-11", font: "text-sm" },
+      lg: { h: "h-12", font: "text-base" },
+    })[props.size]
+);
 
 const borderClass = computed(() => {
   switch (computedState.value) {
-    case 'success': return 'border-emerald-400 focus:ring-emerald-500/40'
-    case 'warning': return 'border-amber-400 focus:ring-amber-500/40'
-    case 'error': return 'border-rose-400 focus:ring-rose-500/40'
-    default: return 'border-white/10 focus:ring-fuchsia-500/40'
+    case "success":
+      return "border-emerald-400 focus:ring-emerald-500/40";
+    case "warning":
+      return "border-amber-400 focus:ring-amber-500/40";
+    case "error":
+      return "border-rose-400 focus:ring-rose-500/40";
+    default:
+      return "border-white/10 focus:ring-fuchsia-500/40";
   }
-})
+});
 
 const stateIcon = computed(() => {
   switch (computedState.value) {
-    case 'success': return CheckCircle2
-    case 'warning': return AlertTriangle
-    case 'error': return AlertOctagon
-    default: return null
+    case "success":
+      return CheckCircle2;
+    case "warning":
+      return AlertTriangle;
+    case "error":
+      return AlertOctagon;
+    default:
+      return null;
   }
-})
+});
 
-const clear = () => { emit('update:modelValue', ''); emit('clear') }
-const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
+// Clear function removed as it was unused
+const shouldFloat = computed(() => isFocused.value || !!props.modelValue);
 
 // Computed state that prioritizes error state when errorMessage is provided
 const computedState = computed(() => {
-  if (props.errorMessage) return 'error'
-  return props.state
-})
+  if (props.errorMessage) return "error";
+  return props.state;
+});
 
 // Computed message that shows errorMessage when state is error
 const computedMessage = computed(() => {
-  if (props.errorMessage) return props.errorMessage
-  return props.message
-})
+  if (props.errorMessage) return props.errorMessage;
+  return props.message;
+});
 </script>
 
 <template>
   <div class="flex flex-col gap-1.5 w-full">
     <div
-        class="relative flex items-center rounded-xl backdrop-blur-xl transition-all border focus-within:ring-2"
-        :class="[
+      class="relative flex items-center rounded-xl backdrop-blur-xl transition-all border focus-within:ring-2"
+      :class="[
         s.h,
         borderClass,
         props.variant === 'default' && 'bg-white/5',
@@ -95,17 +112,17 @@ const computedMessage = computed(() => {
     >
       <!-- Floating label -->
       <label
-          v-if="props.label"
-          class="absolute ltr:left-3 rtl:right-3 transition-all duration-300 pointer-events-none select-none"
-          :class="[
+        v-if="props.label"
+        class="absolute ltr:left-3 rtl:right-3 transition-all duration-300 pointer-events-none select-none"
+        :class="[
           shouldFloat
             ? [
                 '-top-2 translate-y-0 text-xs font-medium px-2 rounded-md border backdrop-blur-md',
                 props.parentTheme === 'gradient'
                   ? 'bg-gradient-to-r from-fuchsia-500/40 to-cyan-500/40 border-transparent text-white'
                   : props.parentTheme === 'light'
-                  ? 'bg-black/70 border-white/20 text-white'
-                  : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
+                    ? 'bg-black/70 border-white/20 text-white'
+                    : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
               ]
             : ['top-1/2 -translate-y-1/2 text-gray-400', s.font],
         ]"
@@ -114,33 +131,35 @@ const computedMessage = computed(() => {
       </label>
 
       <input
-          ref="inputRef"
-          :type="inputType"
-          :disabled="props.disabled"
-          :readonly="props.readonly"
-          class="flex-1 bg-transparent outline-none px-3 text-gray-100 truncate"
-          :class="[s.font]"
-          :placeholder="shouldFloat ? props.placeholder : ''"
-          :value="props.modelValue"
-          @focus="isFocused = true"
-          @blur="isFocused = false"
-          @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        ref="inputRef"
+        :type="inputType"
+        :disabled="props.disabled"
+        :readonly="props.readonly"
+        class="flex-1 bg-transparent outline-none px-3 text-gray-100 truncate"
+        :class="[s.font]"
+        :placeholder="shouldFloat ? props.placeholder : ''"
+        :value="props.modelValue"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
+        @input="
+          emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
       />
 
       <button
-          v-if="props.passwordToggle"
-          type="button"
-          class="text-gray-400 hover:text-gray-200 px-2"
-          @click="showPassword = !showPassword"
+        v-if="props.passwordToggle"
+        type="button"
+        class="text-gray-400 hover:text-gray-200 px-2"
+        @click="showPassword = !showPassword"
       >
         <component :is="showPassword ? EyeOff : Eye" class="w-4 h-4" />
       </button>
 
       <component
-          v-if="stateIcon"
-          :is="stateIcon"
-          class="w-4 h-4 me-3"
-          :class="{
+        v-if="stateIcon"
+        :is="stateIcon"
+        class="w-4 h-4 me-3"
+        :class="{
           'text-emerald-400': computedState === 'success',
           'text-amber-400': computedState === 'warning',
           'text-rose-400': computedState === 'error',
@@ -149,9 +168,9 @@ const computedMessage = computed(() => {
     </div>
 
     <p
-        v-if="computedMessage"
-        class="text-xs mt-0.5"
-        :class="{
+      v-if="computedMessage"
+      class="text-xs mt-0.5"
+      :class="{
         'text-emerald-400': computedState === 'success',
         'text-amber-400': computedState === 'warning',
         'text-rose-400': computedState === 'error',

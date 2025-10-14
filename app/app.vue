@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {AvailableLocale, LanguageDirection} from "~~/i18n/config";
+import type { AvailableLocale, LanguageDirection } from "~~/i18n/config";
 import Toaster from "~/components/Ui/Common/Toaster.vue";
 
 const headMeta = useLocaleHead({
@@ -11,8 +11,8 @@ useHead({
   htmlAttrs: {
     dir: headMeta.value.htmlAttrs.dir as LanguageDirection,
     lang: headMeta.value.htmlAttrs.lang as AvailableLocale,
-  }
-})
+  },
+});
 </script>
 
 <template>

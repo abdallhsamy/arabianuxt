@@ -1,88 +1,97 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { ChevronDown } from 'lucide-vue-next'
-import type {DropdownItem, UiDropdownProps} from "~/components/Ui/Common/UiDropdown.type";
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ChevronDown } from "lucide-vue-next";
+import type {
+  DropdownItem,
+  UiDropdownProps,
+} from "~/components/Ui/Common/UiDropdown.type";
 
 const props = withDefaults(defineProps<UiDropdownProps>(), {
-  trigger: 'click',
-  align: 'left',
-  position: 'bottom',
+  trigger: "click",
+  align: "left",
+  position: "bottom",
   glow: true,
   glass: true,
-  color: 'fuchsia',
-})
+  color: "fuchsia",
+});
 
-const open = ref(false)
-const activeIndex = ref<number | null>(null)
-const dropdownRef = ref<HTMLElement | null>(null)
+const open = ref(false);
+const activeIndex = ref<number | null>(null);
+const dropdownRef = ref<HTMLElement | null>(null);
 
-const toggle = () => (open.value = !open.value)
-const close = () => (open.value = false)
-const openMenu = () => (open.value = true)
+const toggle = () => (open.value = !open.value);
+const close = () => (open.value = false);
+const openMenu = () => (open.value = true);
 
 // Close on outside click
 const handleClickOutside = (e: MouseEvent) => {
-  if (!dropdownRef.value?.contains(e.target as Node)) close()
-}
+  if (!dropdownRef.value?.contains(e.target as Node)) close();
+};
 
-onMounted(() => document.addEventListener('click', handleClickOutside))
-onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
+onMounted(() => document.addEventListener("click", handleClickOutside));
+onBeforeUnmount(() =>
+  document.removeEventListener("click", handleClickOutside)
+);
 
 // Keyboard navigation
 const onKeyDown = (e: KeyboardEvent) => {
-  if (!open.value) return
-  const enabledItems = props.items.filter((i) => !i.divider && !i.disabled)
-  if (enabledItems.length === 0) return
+  if (!open.value) return;
+  const enabledItems = props.items.filter(i => !i.divider && !i.disabled);
+  if (enabledItems.length === 0) return;
 
-  if (e.key === 'ArrowDown') {
-    e.preventDefault()
-    const next = activeIndex.value === null ? 0 : (activeIndex.value + 1) % enabledItems.length
-    activeIndex.value = next
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault()
-    const prev = activeIndex.value === null ? enabledItems.length - 1 : (activeIndex.value - 1 + enabledItems.length) % enabledItems.length
-    activeIndex.value = prev
-  } else if (e.key === 'Enter' && activeIndex.value !== null) {
-    const item = enabledItems[activeIndex.value]
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    const next =
+      activeIndex.value === null
+        ? 0
+        : (activeIndex.value + 1) % enabledItems.length;
+    activeIndex.value = next;
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    const prev =
+      activeIndex.value === null
+        ? enabledItems.length - 1
+        : (activeIndex.value - 1 + enabledItems.length) % enabledItems.length;
+    activeIndex.value = prev;
+  } else if (e.key === "Enter" && activeIndex.value !== null) {
+    const item = enabledItems[activeIndex.value];
     if (item) {
-      selectItem(item)
+      selectItem(item);
     }
-  } else if (e.key === 'Escape') {
-    close()
+  } else if (e.key === "Escape") {
+    close();
   }
-}
+};
 
 const selectItem = (item: DropdownItem) => {
-  if (item.disabled || item.divider) return
-  emit('select', item)
-  close()
-}
+  if (item.disabled || item.divider) return;
+  emit("select", item);
+  close();
+};
 
-const emit = defineEmits(['select'])
+const emit = defineEmits(["select"]);
 
-const colors: Record<string, string> = {
-  fuchsia: 'from-fuchsia-500 to-indigo-500',
-  cyan: 'from-cyan-400 to-fuchsia-500',
-  emerald: 'from-emerald-400 to-cyan-400',
-  rose: 'from-rose-500 to-fuchsia-500',
-  indigo: 'from-indigo-500 to-cyan-400',
-}
+// colors object removed as it was unused
 
-const colorClass = computed(() => colors[props.color])
+// colorClass computed property removed as it was unused
 </script>
 
 <template>
   <div
-      class="relative inline-block select-none"
-      ref="dropdownRef"
-      @keydown="onKeyDown"
-      v-bind="props.trigger === 'hover' ? { onMouseenter: openMenu, onMouseleave: close } : {}"
+    class="relative inline-block select-none"
+    ref="dropdownRef"
+    @keydown="onKeyDown"
+    v-bind="
+      props.trigger === 'hover'
+        ? { onMouseenter: openMenu, onMouseleave: close }
+        : {}
+    "
   >
     <!-- Trigger Button -->
     <button
-        type="button"
-        @click="props.trigger === 'click' && toggle()"
-        class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-white/10 text-gray-200 bg-white/5 hover:bg-white/10 transition-all"
+      type="button"
+      @click="props.trigger === 'click' && toggle()"
+      class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-white/10 text-gray-200 bg-white/5 hover:bg-white/10 transition-all"
     >
       <component v-if="props.icon" :is="props.icon" class="w-4 h-4" />
       <span>{{ props.label }}</span>
@@ -92,9 +101,9 @@ const colorClass = computed(() => colors[props.color])
     <!-- Dropdown Menu -->
     <transition name="fade-scale">
       <div
-          v-if="open"
-          class="absolute z-50 mt-2 min-w-[10rem] overflow-hidden rounded-xl border border-white/10 shadow-2xl backdrop-blur-xl"
-          :class="[
+        v-if="open"
+        class="absolute z-50 mt-2 min-w-[10rem] overflow-hidden rounded-xl border border-white/10 shadow-2xl backdrop-blur-xl"
+        :class="[
           props.glass ? 'bg-white/10' : 'bg-gray-900',
           props.glow ? 'shadow-[0_0_20px_rgba(236,72,153,0.35)]' : '',
           props.align === 'right' ? 'right-0' : 'left-0',
@@ -103,22 +112,28 @@ const colorClass = computed(() => colors[props.color])
       >
         <ul class="py-2 max-h-60 overflow-y-auto" role="menu">
           <li
-              v-for="(item, i) in props.items"
-              :key="item.id"
-              :class="[
+            v-for="(item, i) in props.items"
+            :key="item.id"
+            :class="[
               'flex items-center justify-between px-3 py-2.5 text-sm transition-all cursor-pointer select-none',
               item.divider ? 'border-t border-white/10 my-1' : '',
               item.disabled ? 'opacity-40 cursor-not-allowed' : '',
               activeIndex === i ? 'bg-white/10' : 'hover:bg-white/10',
             ]"
-              @click="selectItem(item)"
-              role="menuitem"
+            @click="selectItem(item)"
+            role="menuitem"
           >
             <div v-if="!item.divider" class="flex items-center gap-2">
-              <component v-if="item.icon" :is="item.icon" class="w-4 h-4 shrink-0" />
+              <component
+                v-if="item.icon"
+                :is="item.icon"
+                class="w-4 h-4 shrink-0"
+              />
               <span class="truncate text-gray-100">{{ item.label }}</span>
             </div>
-            <span v-if="item.shortcut" class="text-xs text-gray-500 ms-3">{{ item.shortcut }}</span>
+            <span v-if="item.shortcut" class="text-xs text-gray-500 ms-3">{{
+              item.shortcut
+            }}</span>
           </li>
         </ul>
       </div>

@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+yarn.lock
+package-lock.json
+
+# Build outputs
+.nuxt/
+.output/
+dist/
+build/
+
+# Generated files
+*.min.js
+*.min.css
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp

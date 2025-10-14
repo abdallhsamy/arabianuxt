@@ -1,47 +1,47 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from "vue";
 
 export interface UiRatingProps {
-  modelValue?: number
-  max?: number
-  icon?: 'star' | 'emoji' | 'heart'
-  readonly?: boolean
+  modelValue?: number;
+  max?: number;
+  icon?: "star" | "emoji" | "heart";
+  readonly?: boolean;
 }
 
 const props = withDefaults(defineProps<UiRatingProps>(), {
   modelValue: 0,
   max: 5,
-  icon: 'star',
+  icon: "star",
   readonly: false,
-})
-const emit = defineEmits<{ (e:'update:modelValue', v:number):void }>()
+});
+const emit = defineEmits<{ (e: "update:modelValue", v: number): void }>();
 
-const hover = ref<number|null>(null)
+const hover = ref<number | null>(null);
 const icons = {
-  star: ['☆','★'],
-  emoji: ['😐','😍'],
-  heart: ['♡','❤️'],
-}
+  star: ["☆", "★"],
+  emoji: ["😐", "😍"],
+  heart: ["♡", "❤️"],
+};
 
-const set = (i:number) => {
-  if (props.readonly) return
-  emit('update:modelValue', i)
-}
+const set = (i: number) => {
+  if (props.readonly) return;
+  emit("update:modelValue", i);
+};
 </script>
 
 <template>
   <div class="flex gap-1 text-2xl select-none">
     <span
-        v-for="i in props.max"
-        :key="i"
-        class="cursor-pointer transition-transform"
-        :class="{
+      v-for="i in props.max"
+      :key="i"
+      class="cursor-pointer transition-transform"
+      :class="{
         'scale-110': hover === i,
         'opacity-60': i > (hover ?? props.modelValue),
       }"
-        @mouseenter="hover = i"
-        @mouseleave="hover = null"
-        @click="set(i)"
+      @mouseenter="hover = i"
+      @mouseleave="hover = null"
+      @click="set(i)"
     >
       {{ i <= (hover ?? props.modelValue) ? icons[icon][1] : icons[icon][0] }}
     </span>

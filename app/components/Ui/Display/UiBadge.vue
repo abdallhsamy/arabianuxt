@@ -1,35 +1,35 @@
 <script setup lang="ts">
 export interface UiBadgeProps {
-  label?: string
-  color?: 'gray' | 'fuchsia' | 'cyan' | 'emerald' | 'amber' | 'rose' | 'indigo'
-  variant?: 'solid' | 'outline' | 'soft' | 'glass'
-  size?: 'sm' | 'md'
-  dot?: boolean
-  glow?: boolean
-  icon?: any
+  label?: string;
+  color?: "gray" | "fuchsia" | "cyan" | "emerald" | "amber" | "rose" | "indigo";
+  variant?: "solid" | "outline" | "soft" | "glass";
+  size?: "sm" | "md";
+  dot?: boolean;
+  glow?: boolean;
+  icon?: any;
 }
 
 const props = withDefaults(defineProps<UiBadgeProps>(), {
-  color: 'fuchsia',
-  variant: 'soft',
-  size: 'md',
-})
+  color: "fuchsia",
+  variant: "soft",
+  size: "md",
+});
 
 const colorMap = {
-  gray: 'from-gray-600 to-gray-500 text-gray-100 border-gray-600',
-  fuchsia: 'from-fuchsia-600 to-pink-500 text-fuchsia-100 border-fuchsia-600',
-  cyan: 'from-cyan-600 to-teal-500 text-cyan-100 border-cyan-600',
-  emerald: 'from-emerald-600 to-green-500 text-emerald-100 border-emerald-600',
-  amber: 'from-amber-600 to-orange-500 text-amber-100 border-amber-600',
-  rose: 'from-rose-600 to-pink-500 text-rose-100 border-rose-600',
-  indigo: 'from-indigo-600 to-blue-500 text-indigo-100 border-indigo-600',
-}
+  gray: "from-gray-600 to-gray-500 text-gray-100 border-gray-600",
+  fuchsia: "from-fuchsia-600 to-pink-500 text-fuchsia-100 border-fuchsia-600",
+  cyan: "from-cyan-600 to-teal-500 text-cyan-100 border-cyan-600",
+  emerald: "from-emerald-600 to-green-500 text-emerald-100 border-emerald-600",
+  amber: "from-amber-600 to-orange-500 text-amber-100 border-amber-600",
+  rose: "from-rose-600 to-pink-500 text-rose-100 border-rose-600",
+  indigo: "from-indigo-600 to-blue-500 text-indigo-100 border-indigo-600",
+};
 </script>
 
 <template>
   <span
-      class="inline-flex items-center justify-center rounded-full text-xs font-medium select-none"
-      :class="[
+    class="inline-flex items-center justify-center rounded-full text-xs font-medium select-none"
+    :class="[
       props.size === 'sm' ? 'px-2 py-0.5' : 'px-3 py-1',
       props.dot ? 'w-2 h-2 p-0' : '',
       props.glow ? 'shadow-lg' : '',
@@ -42,7 +42,11 @@ const colorMap = {
             : `bg-${props.color}-500/20 text-${props.color}-300`,
     ]"
   >
-    <component v-if="props.icon && !props.dot" :is="props.icon" class="w-3 h-3 me-1" />
+    <component
+      v-if="props.icon && !props.dot"
+      :is="props.icon"
+      class="w-3 h-3 me-1"
+    />
     <span v-if="!props.dot">{{ props.label }}</span>
   </span>
 </template>

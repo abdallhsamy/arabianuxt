@@ -1,20 +1,23 @@
 <script setup lang="ts">
 export interface BreadcrumbItem {
-  label: string
-  to?: string
-  icon?: any
+  label: string;
+  to?: string;
+  icon?: any;
 }
 
-defineProps<{ items: BreadcrumbItem[] }>()
+defineProps<{ items: BreadcrumbItem[] }>();
 </script>
 
 <template>
-  <nav aria-label="breadcrumb" class="flex items-center gap-2 text-sm text-gray-300">
+  <nav
+    aria-label="breadcrumb"
+    class="flex items-center gap-2 text-sm text-gray-300"
+  >
     <template v-for="(item, i) in items" :key="i">
       <a
-          v-if="item.to"
-          :href="item.to"
-          class="hover:text-fuchsia-400 transition-colors"
+        v-if="item.to"
+        :href="item.to"
+        class="hover:text-fuchsia-400 transition-colors"
       >
         {{ item.label }}
       </a>

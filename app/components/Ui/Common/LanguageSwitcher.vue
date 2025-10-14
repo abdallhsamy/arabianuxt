@@ -1,45 +1,45 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Globe } from 'lucide-vue-next'
-import {type AvailableLocale, AvailableLocales} from '~~/i18n/config'
+import { ref, computed } from "vue";
+import { Globe } from "lucide-vue-next";
+import { type AvailableLocale, AvailableLocales } from "~~/i18n/config";
 
-const { locale, locales, setLocale } = useI18n()
-const openDropdown = ref(false)
+const { locale, locales, setLocale } = useI18n();
+const openDropdown = ref(false);
 
 const currentLocale = computed(() => {
-  return locales.value.find(l => l.code === locale.value)
+  return locales.value.find(l => l.code === locale.value);
 });
 
 const availableLocales = computed(() => {
-  return locales.value.filter(l => l.code !== locale.value)
-})
+  return locales.value.filter(l => l.code !== locale.value);
+});
 
 const localeNames = {
-  [AvailableLocales.English]: 'English',
-  [AvailableLocales.Arabic]: 'العربية'
-}
+  [AvailableLocales.English]: "English",
+  [AvailableLocales.Arabic]: "العربية",
+};
 
 const switchLanguage = async (localeCode: string) => {
-  await setLocale(<AvailableLocale>localeCode)
-  openDropdown.value = false
-}
+  await setLocale(localeCode as AvailableLocale);
+  openDropdown.value = false;
+};
 
 const toggleDropdown = () => {
-  openDropdown.value = !openDropdown.value
-}
+  openDropdown.value = !openDropdown.value;
+};
 
 const closeDropdown = () => {
-  openDropdown.value = false
-}
+  openDropdown.value = false;
+};
 
 // Close dropdown when clicking outside
 onMounted(() => {
-  document.addEventListener('click', closeDropdown)
-})
+  document.addEventListener("click", closeDropdown);
+});
 
 onUnmounted(() => {
-  document.removeEventListener('click', closeDropdown)
-})
+  document.removeEventListener("click", closeDropdown);
+});
 </script>
 
 <template>
@@ -59,10 +59,12 @@ onUnmounted(() => {
         v-if="openDropdown"
         class="absolute right-0 mt-2 w-48 rounded-2xl bg-[rgba(15,17,23,0.95)] border border-white/10 shadow-xl py-2 z-50"
       >
-        <div class="px-3 py-2 text-xs text-gray-400 font-medium uppercase tracking-wide">
-          {{ $t('common.selectLanguage') }}
+        <div
+          class="px-3 py-2 text-xs text-gray-400 font-medium uppercase tracking-wide"
+        >
+          {{ $t("common.selectLanguage") }}
         </div>
-        
+
         <button
           v-for="loc in availableLocales"
           :key="loc.code"

@@ -1,47 +1,51 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Check, AlertCircle } from 'lucide-vue-next'
-import type { UiStepperProps } from "./UiStepper.type"
+import { computed } from "vue";
+import { Check, AlertCircle } from "lucide-vue-next";
+import type { UiStepperProps } from "./UiStepper.type";
 
 const props = withDefaults(defineProps<UiStepperProps>(), {
   vertical: false,
-  color: 'fuchsia',
+  color: "fuchsia",
   glow: true,
   showNumbers: true,
   connectLines: true,
-})
+});
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(["change"]);
 
-const selectStep = (id: string) => emit('change', id)
+const selectStep = (id: string) => emit("change", id);
 
 const colors: Record<string, string> = {
-  fuchsia: 'from-fuchsia-500 to-indigo-500',
-  cyan: 'from-cyan-400 to-fuchsia-500',
-  emerald: 'from-emerald-400 to-cyan-400',
-  rose: 'from-rose-500 to-fuchsia-500',
-  indigo: 'from-indigo-500 to-cyan-400',
-  amber: 'from-amber-400 to-orange-500',
-}
+  fuchsia: "from-fuchsia-500 to-indigo-500",
+  cyan: "from-cyan-400 to-fuchsia-500",
+  emerald: "from-emerald-400 to-cyan-400",
+  rose: "from-rose-500 to-fuchsia-500",
+  indigo: "from-indigo-500 to-cyan-400",
+  amber: "from-amber-400 to-orange-500",
+};
 
-const colorClass = computed(() => colors[props.color])
+const colorClass = computed(() => colors[props.color]);
 </script>
 
 <template>
   <div
-      class="flex"
-      :class="vertical ? 'flex-col gap-6' : 'flex-row items-start justify-between gap-3'"
+    class="flex"
+    :class="
+      vertical ? 'flex-col gap-6' : 'flex-row items-start justify-between gap-3'
+    "
   >
     <div
-        v-for="(step, index) in steps"
-        :key="step.id"
-        class="flex items-start"
-        :class="vertical ? 'flex-row' : 'flex-col items-center text-center flex-1'"
+      v-for="(step, index) in steps"
+      :key="step.id"
+      class="flex items-start"
+      :class="
+        vertical ? 'flex-row' : 'flex-col items-center text-center flex-1'
+      "
     >
       <!-- Connector line -->
       <div
-          v-if="connectLines && index !== 0"
-          :class="[
+        v-if="connectLines && index !== 0"
+        :class="[
           'absolute',
           vertical
             ? 'h-[calc(100%-2rem)] w-[2px] left-[11px] top-8'
@@ -52,8 +56,8 @@ const colorClass = computed(() => colors[props.color])
 
       <!-- Step circle -->
       <div
-          class="relative z-10 flex items-center justify-center rounded-full border border-white/10 text-gray-200 transition-all duration-300"
-          :class="[
+        class="relative z-10 flex items-center justify-center rounded-full border border-white/10 text-gray-200 transition-all duration-300"
+        :class="[
           step.state === 'completed'
             ? `bg-gradient-to-r ${colorClass} text-white border-transparent`
             : step.state === 'active'
@@ -66,39 +70,31 @@ const colorClass = computed(() => colors[props.color])
             : '',
           'w-10 h-10 shrink-0 backdrop-blur-xl',
         ]"
-          @click="selectStep(step.id)"
-          role="button"
-          tabindex="0"
+        @click="selectStep(step.id)"
+        role="button"
+        tabindex="0"
       >
         <component
-            v-if="step.state === 'completed'"
-            :is="Check"
-            class="w-5 h-5"
+          v-if="step.state === 'completed'"
+          :is="Check"
+          class="w-5 h-5"
         />
         <component
-            v-else-if="step.state === 'error'"
-            :is="AlertCircle"
-            class="w-5 h-5"
+          v-else-if="step.state === 'error'"
+          :is="AlertCircle"
+          class="w-5 h-5"
         />
-        <component
-            v-else-if="step.icon"
-            :is="step.icon"
-            class="w-5 h-5"
-        />
-        <span
-            v-else-if="showNumbers"
-            class="font-semibold text-sm"
-        >{{ index + 1 }}</span>
+        <component v-else-if="step.icon" :is="step.icon" class="w-5 h-5" />
+        <span v-else-if="showNumbers" class="font-semibold text-sm">{{
+          index + 1
+        }}</span>
       </div>
 
       <!-- Labels -->
-      <div
-          class="flex flex-col"
-          :class="vertical ? 'ms-4' : 'mt-3'"
-      >
+      <div class="flex flex-col" :class="vertical ? 'ms-4' : 'mt-3'">
         <span
-            class="text-sm font-medium"
-            :class="[
+          class="text-sm font-medium"
+          :class="[
             step.state === 'active'
               ? 'text-white'
               : step.state === 'completed'
@@ -110,10 +106,7 @@ const colorClass = computed(() => colors[props.color])
         >
           {{ step.label }}
         </span>
-        <span
-            v-if="step.description"
-            class="text-xs text-gray-500"
-        >
+        <span v-if="step.description" class="text-xs text-gray-500">
           {{ step.description }}
         </span>
       </div>

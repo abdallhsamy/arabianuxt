@@ -1,28 +1,28 @@
 export type AuthUser = {
-    id: number;
-    name: string;
-    email: string;
-    avatar: string;
-    role: string;
-    sessionToken: string;
-    refreshToken: string;
-}
+  id: number;
+  name: string;
+  email: string;
+  avatar: string;
+  role: string;
+  sessionToken: string;
+  refreshToken: string;
+};
 
 // i18n type definitions
-declare module '#app' {
+declare module "#app" {
   interface NuxtApp {
-    $t: (key: string, ...args: any[]) => string
+    $t: (key: string, ...args: any[]) => string;
   }
 }
 
-declare module 'vue' {
+declare module "vue" {
   interface ComponentCustomProperties {
-    $t: (key: string, ...args: any[]) => string
+    $t: (key: string, ...args: any[]) => string;
   }
 }
 
-declare module '@vue/runtime-core' {
+declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
-    $t: (key: string, ...args: any[]) => string
+    $t: (key: string, ...args: any[]) => string;
   }
 }

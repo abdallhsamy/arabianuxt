@@ -1,68 +1,93 @@
 <script setup lang="ts">
-import Sidebar from '~/components/Ui/Dashboard/Sidebar.vue'
-import Topbar from '~/components/Layout/Topbar.vue'
-import { useI18n } from 'vue-i18n'
-import {LanguageDirections} from "~~/i18n/config";
+import Sidebar from "~/components/Ui/Dashboard/Sidebar.vue";
+import Topbar from "~/components/Layout/Topbar.vue";
+import { useI18n } from "vue-i18n";
+import { LanguageDirections } from "~~/i18n/config";
 
-const route = useRoute()
-const { locale, t } = useI18n()
-const head = useLocaleHead()
-const title = computed(() => t(<string>route.meta.title ?? 'common.appName'));
-const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof LanguageDirections] === 'rtl')
+const route = useRoute();
+const { locale, t } = useI18n();
+const head = useLocaleHead();
+const title = computed(() =>
+  t((route.meta.title as string) ?? "common.appName")
+);
+const isRTL = computed(
+  () =>
+    LanguageDirections[locale.value as keyof typeof LanguageDirections] ===
+    "rtl"
+);
 </script>
 
 <template>
   <div>
     <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
-    <Head>
-      <Title>{{ title }}</Title>
-      <template v-for="link in head.link" :key="link.key">
-        <Link :id="link.key" :rel="link.rel" :href="link.href" :hreflang="link.hreflang" />
-      </template>
-      <template v-for="meta in head.meta" :key="meta.key">
-        <Meta :id="meta.key" :property="meta.property" :content="meta.content" />
-      </template>
-    </Head>
-    <Body>
-    <div
-        class="min-h-screen relative overflow-hidden text-[var(--text-primary)] selection:bg-fuchsia-500/20"
-    >
-      <!-- 🌌 Animated Gradient Background -->
-      <div
-          class="absolute inset-0 -z-10 animate-gradient-flow bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.25),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(236,72,153,0.25),transparent_50%),linear-gradient(180deg,#0b0b0f_0%,#0f1115_100%)]"
-      />
+      <Head>
+        <Title>{{ title }}</Title>
+        <template v-for="link in head.link" :key="link.key">
+          <Link
+            :id="link.key"
+            :rel="link.rel"
+            :href="link.href"
+            :hreflang="link.hreflang"
+          />
+        </template>
+        <template v-for="meta in head.meta" :key="meta.key">
+          <Meta
+            :id="meta.key"
+            :property="meta.property"
+            :content="meta.content"
+          />
+        </template>
+      </Head>
+      <Body>
+        <div
+          class="min-h-screen relative overflow-hidden text-[var(--text-primary)] selection:bg-fuchsia-500/20"
+        >
+          <!-- 🌌 Animated Gradient Background -->
+          <div
+            class="absolute inset-0 -z-10 animate-gradient-flow bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.25),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(236,72,153,0.25),transparent_50%),linear-gradient(180deg,#0b0b0f_0%,#0f1115_100%)]"
+          />
 
-      <!-- Topbar -->
+          <!-- Topbar -->
 
-      <Topbar />
+          <Topbar />
 
-      <!-- Sidebar -->
-      <Sidebar />
+          <!-- Sidebar -->
+          <Sidebar />
 
-      <!-- Main Content -->
-      <main id="main" class="transition-all mt-16 duration-300 p-8 md:pb-16" :class="{ 'rtl': isRTL }">
-        <slot />
-      </main>
+          <!-- Main Content -->
+          <main
+            id="main"
+            class="transition-all mt-16 duration-300 p-8 md:pb-16"
+            :class="{ rtl: isRTL }"
+          >
+            <slot />
+          </main>
 
-      <!-- Optional floating blur or particles -->
-      <div
-          class="pointer-events-none -z-20 absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
-      />
+          <!-- Optional floating blur or particles -->
+          <div
+            class="pointer-events-none -z-20 absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
+          />
 
-      <ClientOnly>
-        <UiChatFloating />
-      </ClientOnly>
-    </div>
-    </Body>
+          <ClientOnly>
+            <UiChatFloating />
+          </ClientOnly>
+        </div>
+      </Body>
     </Html>
   </div>
 </template>
 
 <style scoped>
 @keyframes gradient-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .animate-gradient-flow {
   background-size: 200% 200%;

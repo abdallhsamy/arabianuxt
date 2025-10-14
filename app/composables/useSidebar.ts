@@ -1,8 +1,8 @@
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 // Global sidebar state
-const isExpanded = ref(false)
-const isMobile = ref(false)
+const isExpanded = ref(false);
+const isMobile = ref(false);
 
 export const useSidebar = () => {
   const checkViewport = (): void => {
@@ -22,6 +22,6 @@ export const useSidebar = () => {
     isMobile: computed(() => isMobile.value),
     checkViewport,
     toggleSidebar,
-    setExpanded
-  }
-}
+    setExpanded,
+  };
+};

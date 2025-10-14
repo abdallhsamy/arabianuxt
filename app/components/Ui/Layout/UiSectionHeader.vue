@@ -1,15 +1,17 @@
 <script setup lang="ts">
 export interface UiSectionHeaderProps {
-  title: string
-  subtitle?: string
-  icon?: string
+  title: string;
+  subtitle?: string;
+  icon?: string;
 }
 
-defineProps<UiSectionHeaderProps>()
+defineProps<UiSectionHeaderProps>();
 </script>
 
 <template>
-  <header class="flex items-center justify-between pb-2 border-b border-white/10">
+  <header
+    class="flex items-center justify-between pb-2 border-b border-white/10"
+  >
     <div class="flex items-center gap-3">
       <i v-if="icon" :class="['text-fuchsia-400 text-lg', icon]" />
       <div>

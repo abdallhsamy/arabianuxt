@@ -1,98 +1,98 @@
 @import "tailwindcss";
 
 @theme {
-    /* 🎨 Base Colors */
-    --color-bg: #09090B;
-    --color-surface: #111113;
-    --color-panel: #18181B;
+  /* 🎨 Base Colors */
+  --color-bg: #09090b;
+  --color-surface: #111113;
+  --color-panel: #18181b;
 
-    --color-text-primary: #F4F4F5;
-    --color-text-secondary: #A1A1AA;
-    --color-border: #27272A;
+  --color-text-primary: #f4f4f5;
+  --color-text-secondary: #a1a1aa;
+  --color-border: #27272a;
 
-    /* 🌈 Gradients */
-    --gradient-primary: linear-gradient(135deg, #6366F1, #EC4899, #F472B6);
-    --gradient-accent: linear-gradient(135deg, #22D3EE, #3B82F6);
-    --gradient-success: linear-gradient(135deg, #4ADE80, #22C55E);
-    --gradient-warning: linear-gradient(135deg, #FACC15, #F97316);
-    --gradient-error: linear-gradient(135deg, #FB7185, #F43F5E);
+  /* 🌈 Gradients */
+  --gradient-primary: linear-gradient(135deg, #6366f1, #ec4899, #f472b6);
+  --gradient-accent: linear-gradient(135deg, #22d3ee, #3b82f6);
+  --gradient-success: linear-gradient(135deg, #4ade80, #22c55e);
+  --gradient-warning: linear-gradient(135deg, #facc15, #f97316);
+  --gradient-error: linear-gradient(135deg, #fb7185, #f43f5e);
 
-    --color-overlay: rgba(255,255,255,0.05);
-    --color-glass: rgba(255,255,255,0.08);
+  --color-overlay: rgba(255, 255, 255, 0.05);
+  --color-glass: rgba(255, 255, 255, 0.08);
 
-    --gradient-cyber: linear-gradient(135deg, #6366F1, #EC4899, #22D3EE);
-    --gradient-glow: linear-gradient(90deg, #EC4899, #8B5CF6, #22D3EE);
+  --gradient-cyber: linear-gradient(135deg, #6366f1, #ec4899, #22d3ee);
+  --gradient-glow: linear-gradient(90deg, #ec4899, #8b5cf6, #22d3ee);
 }
 
 :root,
 .dark {
-    color-scheme: dark;
-    --bg: var(--color-bg);
-    --surface: var(--color-surface);
-    --panel: var(--color-panel);
-    --text-primary: var(--color-text-primary);
-    --text-secondary: var(--color-text-secondary);
-    --border: var(--color-border);
-    --overlay: var(--color-overlay);
+  color-scheme: dark;
+  --bg: var(--color-bg);
+  --surface: var(--color-surface);
+  --panel: var(--color-panel);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --border: var(--color-border);
+  --overlay: var(--color-overlay);
 }
 
 :root {
-    --skeleton-bg: rgb(255 255 255 / 0.08);
-    --skeleton-light: rgb(255 255 255 / 0.15);
-    --skeleton-radius: 0.5rem;
-    --skeleton-speed: 1.6s;
+  --skeleton-bg: rgb(255 255 255 / 0.08);
+  --skeleton-light: rgb(255 255 255 / 0.15);
+  --skeleton-radius: 0.5rem;
+  --skeleton-speed: 1.6s;
 }
 
 .dark {
-    --skeleton-bg: rgb(255 255 255 / 0.05);
-    --skeleton-light: rgb(255 255 255 / 0.10);
+  --skeleton-bg: rgb(255 255 255 / 0.05);
+  --skeleton-light: rgb(255 255 255 / 0.1);
 }
 
-[data-theme='fancy'] {
-    --skeleton-bg: rgb(236 72 153 / 0.10);    /* fuchsia-500 */
-    --skeleton-light: rgb(34 211 238 / 0.25); /* cyan-400 */
-    --skeleton-speed: 1.2s;
+[data-theme="fancy"] {
+  --skeleton-bg: rgb(236 72 153 / 0.1); /* fuchsia-500 */
+  --skeleton-light: rgb(34 211 238 / 0.25); /* cyan-400 */
+  --skeleton-speed: 1.2s;
 }
 
 /* 🧊 Glass Effect */
 @utility bg-glass {
-    background: var(--color-glass);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  background: var(--color-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* 🌈 Gradient Text */
 @utility text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
+  @apply bg-clip-text text-transparent;
+  background-image: var(--gradient-primary);
 }
 
 /* 🪄 Fancy Buttons */
 @utility btn-primary {
-    background-image: var(--gradient-primary);
-    color: white;
-    font-weight: 600;
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.75rem;
-    transition: all 0.25s ease;
+  background-image: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  transition: all 0.25s ease;
 
-    &:hover {
-        filter: brightness(1.1);
-        transform: translateY(-1px);
-    }
+  &:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
 }
 
 /* 🧱 Card Component */
 @utility card {
-    background-color: var(--panel);
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-    &:hover {
-        border-color: #3B82F6;
-        box-shadow: 0 0 40px rgba(59,130,246,0.1);
-    }
+  background-color: var(--panel);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  &:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.1);
+  }
 }

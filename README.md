@@ -8,6 +8,7 @@
 ## 🚀 Overview
 
 Arabianuxt is a **modern, elegant, and production-ready Nuxt 4 dashboard template** built with:
+
 - ⚡ **Nuxt 4**, TypeScript, and Vite
 - 🎨 **Tailwind CSS v4** with glassmorphic gradients
 - 🧩 **Pinia** setup stores
@@ -21,15 +22,15 @@ Perfect for SaaS, admin panels, internal tools, and startup dashboards.
 
 ## ✨ Features
 
-| Category | Description |
-|-----------|-------------|
-| **UI System** | Reusable components: buttons, modals, tables, tooltips, alerts, badges, forms, etc. |
-| **AI Editor** | Slash commands `/rewrite`, `/summarize`, `/translate`, tone & length controls |
-| **Design** | Tailwind v4 atomic tokens, gradients, and glassmorphism |
-| **Security** | Nuxt-Security headers, CSP, XSS protection |
-| **Performance** | Lazy-loaded routes, Vite + Nuxt hybrid SSR |
-| **Developer DX** | TypeScript strict, ESLint + Prettier, Vitest + Vue Test Utils |
-| **Accessibility** | Semantic components with keyboard support |
+| Category          | Description                                                                         |
+| ----------------- | ----------------------------------------------------------------------------------- |
+| **UI System**     | Reusable components: buttons, modals, tables, tooltips, alerts, badges, forms, etc. |
+| **AI Editor**     | Slash commands `/rewrite`, `/summarize`, `/translate`, tone & length controls       |
+| **Design**        | Tailwind v4 atomic tokens, gradients, and glassmorphism                             |
+| **Security**      | Nuxt-Security headers, CSP, XSS protection                                          |
+| **Performance**   | Lazy-loaded routes, Vite + Nuxt hybrid SSR                                          |
+| **Developer DX**  | TypeScript strict, ESLint + Prettier, Vitest + Vue Test Utils                       |
+| **Accessibility** | Semantic components with keyboard support                                           |
 
 ---
 
@@ -95,19 +96,18 @@ The rich editor includes a pluggable AI handler:
 
 ```ts
 const aiHandler = async ({ action, text }) => {
-  const res = await $fetch('/api/ai', { method: 'POST', body: { action, text } })
-  return res.result
-}
+  const res = await $fetch("/api/ai", { method: "POST", body: { action, text } });
+  return res.result;
+};
 ```
 
 Connect it to:
 
--   OpenAI / Anthropic
+- OpenAI / Anthropic
 
--   Local Ollama
+- Local Ollama
 
--   Your custom backend
-
+- Your custom backend
 
 ---
 
@@ -134,25 +134,23 @@ yarn test
 
 5.  Open a Pull Request
 
-
 All contributions are welcome — UI fixes, docs, new components, or AI enhancements.
 
 ---
 
 ## 🧭 Roadmap
 
--    Docs site with component playground
+- Docs site with component playground
 
--    i18n (Arabic / English)
+- i18n (Arabic / English)
 
--    CLI starter (`npx create-arabianuxt`)
+- CLI starter (`npx create-arabianuxt`)
 
--    Theme Builder (light/dark/brand palettes)
+- Theme Builder (light/dark/brand palettes)
 
--    VS Code Snippets extension
+- VS Code Snippets extension
 
--    AI Assistant plugin (Nuxt module)
-
+- AI Assistant plugin (Nuxt module)
 
 ---
 
@@ -160,10 +158,9 @@ All contributions are welcome — UI fixes, docs, new components, or AI enhancem
 
 **Abdallah Samy** — Technical Consultant & Software Engineer
 
--   🌐 [LinkedIn](https://www.linkedin.com/in/abdallah-samy/)
+- 🌐 [LinkedIn](https://www.linkedin.com/in/abdallah-samy/)
 
--   💻 [GitHub](https://github.com/abdallhsamy)
-
+- 💻 [GitHub](https://github.com/abdallhsamy)
 
 ---
 
