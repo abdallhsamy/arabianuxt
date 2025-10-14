@@ -42,8 +42,10 @@ const componentMap: Record<string, any> = {
   "Ui/Display/UiBadge.vue": () => import("~/components/Ui/Display/UiBadge.vue"),
   "Ui/Nav/UiBreadcrumb.vue": () =>
     import("~/components/Ui/Nav/UiBreadcrumb.vue"),
-  "Ui/Common/UiButton.vue": () => import("~/components/Ui/Common/UiButton.vue"),
-  "Ui/Common/UiCard.vue": () => import("~/components/Ui/Common/UiCard.vue"),
+  "Ui/Common/UiButton/UiButton.vue": () =>
+    import("~/components/Ui/Common/UiButton/UiButton.vue"),
+  "Ui/Common/UiCard/UiCard.vue": () =>
+    import("~/components/Ui/Common/UiCard/UiCard.vue"),
   "Ui/Charts/UiChartArea.vue": () =>
     import("~/components/Ui/Charts/UiChartArea.vue"),
   "Ui/Charts/UiChartBar.vue": () =>
@@ -63,7 +65,8 @@ const componentMap: Record<string, any> = {
     import("~/components/Ui/Display/UiEmptyState.vue"),
   "Ui/Form/UiFileUpload.vue": () =>
     import("~/components/Ui/Form/UiFileUpload.vue"),
-  "Ui/Form/UiInput.vue": () => import("~/components/Ui/Form/UiInput.vue"),
+  "Ui/Form/UiInput/UiInput.vue": () =>
+    import("~/components/Ui/Form/UiInput/UiInput.vue"),
   "Ui/Display/UiLoaderSpinner.vue": () =>
     import("~/components/Ui/Display/UiLoaderSpinner.vue"),
   "Ui/Common/UiModal.vue": () => import("~/components/Ui/Common/UiModal.vue"),

@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const cardSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiCard.vue",
+  component: "Ui/Common/UiCard/UiCard.vue",
   title: "Card",
   props: [
     { key: "title", type: "string", default: "Card Title" },

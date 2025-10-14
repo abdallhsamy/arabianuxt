@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const buttonSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiButton.vue",
+  component: "Ui/Common/UiButton/UiButton.vue",
   title: "Button",
   props: [
     { key: "label", type: "string", default: "Click Me" },

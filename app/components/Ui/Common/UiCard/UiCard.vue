@@ -1,42 +1,32 @@
 <script setup lang="ts">
 import { computed } from "vue";
-
-export interface UiCardProps {
-  title?: string;
-  subtitle?: string;
-  variant?: "glass" | "solid" | "gradient" | "outlined";
-  hoverable?: boolean;
-  elevated?: boolean;
-  padding?: "none" | "sm" | "md" | "lg";
-  color?: "fuchsia" | "cyan" | "emerald" | "rose" | "indigo" | "amber";
-  rounded?: boolean;
-  footer?: boolean;
-}
+import type { UiCardProps } from "./UiCard.type";
+import { UiCardVariants, UiCardPaddings, UiCardColors } from "./UiCard.type";
 
 const props = withDefaults(defineProps<UiCardProps>(), {
-  variant: "glass",
+  variant: UiCardVariants.Glass,
   hoverable: true,
   elevated: true,
-  padding: "md",
-  color: "fuchsia",
+  padding: UiCardPaddings.Medium,
+  color: UiCardColors.Fuchsia,
   rounded: true,
   footer: false,
 });
 
 const paddingMap = {
-  none: "",
-  sm: "p-3",
-  md: "p-5",
-  lg: "p-8",
+  [UiCardPaddings.None]: "",
+  [UiCardPaddings.Small]: "p-3",
+  [UiCardPaddings.Medium]: "p-5",
+  [UiCardPaddings.Large]: "p-8",
 };
 
 const colors: Record<string, string> = {
-  fuchsia: "from-fuchsia-500 to-indigo-500",
-  cyan: "from-cyan-400 to-fuchsia-500",
-  emerald: "from-emerald-400 to-cyan-400",
-  rose: "from-rose-500 to-fuchsia-500",
-  indigo: "from-indigo-500 to-cyan-400",
-  amber: "from-amber-400 to-orange-500",
+  [UiCardColors.Fuchsia]: "from-fuchsia-500 to-indigo-500",
+  [UiCardColors.Cyan]: "from-cyan-400 to-fuchsia-500",
+  [UiCardColors.Emerald]: "from-emerald-400 to-cyan-400",
+  [UiCardColors.Rose]: "from-rose-500 to-fuchsia-500",
+  [UiCardColors.Indigo]: "from-indigo-500 to-cyan-400",
+  [UiCardColors.Amber]: "from-amber-400 to-orange-500",
 };
 
 const colorClass = computed(() => colors[props.color]);
@@ -47,10 +37,12 @@ const colorClass = computed(() => colors[props.color]);
     class="relative flex flex-col transition-all duration-300 border border-white/10 backdrop-blur-xl overflow-hidden"
     :class="[
       props.rounded ? 'rounded-2xl' : 'rounded-lg',
-      props.variant === 'glass' && 'bg-white/5',
-      props.variant === 'solid' && 'bg-gray-900',
-      props.variant === 'gradient' && `bg-gradient-to-br ${colorClass}`,
-      props.variant === 'outlined' && 'bg-transparent border-white/20',
+      props.variant === UiCardVariants.Glass && 'bg-white/5',
+      props.variant === UiCardVariants.Solid && 'bg-gray-900',
+      props.variant === UiCardVariants.Gradient &&
+        `bg-gradient-to-br ${colorClass}`,
+      props.variant === UiCardVariants.Outlined &&
+        'bg-transparent border-white/20',
       props.hoverable ? 'hover:scale-[1.02]' : '',
       props.elevated ? 'shadow-[0_0_20px_rgba(255,255,255,0.05)]' : '',
     ]"

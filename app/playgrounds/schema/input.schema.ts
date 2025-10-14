@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const inputSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiInput.vue",
+  component: "Ui/Form/UiInput/UiInput.vue",
   title: "Input",
   props: [
     { key: "modelValue", type: "string", default: "Sample text" },

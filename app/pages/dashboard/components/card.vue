@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiCard from "~/components/Ui/Common/UiCard.vue";
+import UiCard from "~/components/Ui/Common/UiCard/UiCard.vue";
 import UiButton from "~/components/Ui/Common/UiButton/UiButton.vue";
 import { useI18n } from "vue-i18n";
 
