@@ -2,6 +2,11 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Article = { id:string; title:string; category:string; content:string }

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const models = ['gpt-4o-mini','gpt-4o','llama-3.1-70b','mistral-large']

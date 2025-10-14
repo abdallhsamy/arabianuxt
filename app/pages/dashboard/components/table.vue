@@ -2,6 +2,11 @@
 import { ref, onMounted, watch } from 'vue'
 import UiTable, { type TableColumn } from '~/components/Ui/Data/UiTable.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 /* ------------------ Data model ------------------ */

@@ -2,6 +2,11 @@
 import { ref } from 'vue'
 import AvatarUpload from '~/components/Ui/User/AvatarUpload.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const name = ref('Abdallah Samy')

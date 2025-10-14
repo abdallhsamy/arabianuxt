@@ -3,6 +3,11 @@ import UiTabs from '~/components/Ui/Common/UiTabs.vue'
 import { Home, Settings, Bell, User } from 'lucide-vue-next'
 import { ref } from 'vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const activeTab = ref('overview')

@@ -12,6 +12,11 @@ import UiApiConsole from '~/components/Ui/Dev/UiApiConsole.vue'
 
 import { ref } from 'vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const rating = ref(4)

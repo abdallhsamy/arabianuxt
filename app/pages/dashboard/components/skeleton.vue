@@ -3,6 +3,11 @@ import { ref, onMounted, watchEffect } from 'vue'
 import UiSkeleton from '~/components/Ui/Feedback/UiSkeleton.vue'
 import UiSkeletonGroup from '~/components/Ui/Feedback/UiSkeletonGroup.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const loading = ref(true)

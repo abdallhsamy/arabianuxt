@@ -4,6 +4,11 @@ import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { Check, X, ArrowRight, Download, Bell, Heart, Star, Power } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 const variants = ['primary', 'secondary', 'success', 'danger', 'outline', 'glass']
 const toggleHeart = ref(false)

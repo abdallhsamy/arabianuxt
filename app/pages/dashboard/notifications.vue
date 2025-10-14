@@ -2,6 +2,11 @@
 import { ref, computed } from 'vue'
 import NotificationItem from "~/components/Ui/User/NotificationItem.vue";
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Notification = { id: string; type: 'system'|'billing'|'security'; text: string; read: boolean; time: string }

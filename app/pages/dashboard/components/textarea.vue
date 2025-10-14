@@ -2,6 +2,11 @@
 import UiTextarea from '~/components/Ui/Form/UiTextarea.vue'
 import { ref } from 'vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const bio = ref('')

@@ -2,6 +2,11 @@
 import UiAccordion from '~/components/Ui/Common/UiAccordion.vue'
 import { Info, Settings, Lock } from 'lucide-vue-next'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const faqItems = [

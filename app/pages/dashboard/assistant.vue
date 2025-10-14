@@ -2,6 +2,11 @@
 import { ref, nextTick } from 'vue'
 import { Bot, Send, Sparkles } from 'lucide-vue-next'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Msg = { id: string; role: 'user'|'assistant'; text: string }

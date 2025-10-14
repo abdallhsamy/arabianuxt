@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Theme = { primary:string; accent:string; surface:string; text:string }

@@ -3,6 +3,11 @@ import UiAlert from '~/components/Ui/Common/UiAlert.vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const showAuto = ref(true)

@@ -4,6 +4,11 @@ import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { User, Settings, Bell, LogOut, ChevronDown } from 'lucide-vue-next'
 import type {DropdownItem} from "~/components/Ui/Common/UiDropdown.type";
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const dropdownItems: DropdownItem[] = [

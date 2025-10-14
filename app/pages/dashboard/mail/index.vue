@@ -3,6 +3,11 @@ import { ref, computed } from 'vue'
 import { X, Send, Search, Paperclip, Star, Trash2, Archive, MailPlus } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 // --------------------

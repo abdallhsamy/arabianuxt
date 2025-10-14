@@ -3,6 +3,11 @@ import { ref, computed } from 'vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 import DataTable from '~/components/Ui/Common/DataTable.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Log = {

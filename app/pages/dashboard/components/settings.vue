@@ -4,6 +4,11 @@ import UiNotificationsPanel, { type Notice } from '~/components/Ui/Feedback/UiNo
 import UiSettingsDrawer from '~/components/Ui/Layout/UiSettingsDrawer.vue'
 import UiThemeSwitcher from '~/components/Ui/Layout/UiThemeSwitcher.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const notifOpen = ref(false)

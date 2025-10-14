@@ -6,6 +6,11 @@ import UiPromptBuilder from '~/components/Ui/AI/UiPromptBuilder.vue'
 import UiCodeBlock from '~/components/Ui/AI/UiCodeBlock.vue'
 import UiMarkdownViewer from '~/components/Ui/AI/UiMarkdownViewer.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const markdown = ref(`# Welcome

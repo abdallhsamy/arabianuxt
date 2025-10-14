@@ -4,6 +4,11 @@ import { User, CreditCard, CheckCircle2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import type {StepItem} from "~/components/Ui/Common/UiStepper.type";
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const steps = ref<StepItem[]>([

@@ -5,6 +5,11 @@ import UiChartPie from '~/components/Ui/Charts/UiChartPie.vue'
 import UiChartRadar from '~/components/Ui/Charts/UiChartRadar.vue'
 import UiStatsOverview from '~/components/Ui/Charts/UiStatsOverview.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const stats = [

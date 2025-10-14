@@ -6,6 +6,11 @@ import TicketModal from '~/components/Ui/Support/TicketModal.vue'
 import { AlertCircle, CheckCircle2, Clock } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Ticket = {

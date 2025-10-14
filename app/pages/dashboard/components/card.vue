@@ -3,6 +3,11 @@ import UiCard from '~/components/Ui/Common/UiCard.vue'
 import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 </script>
 

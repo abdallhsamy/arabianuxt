@@ -6,6 +6,11 @@ import UiSearchPanel from '~/components/Ui/Nav/UiSearchPanel.vue'
 import UiChatDock from '~/components/Ui/Assist/UiChatDock.vue'
 import UiTooltip from '~/components/Ui/Feedback/UiTooltip.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const searchOpen = ref(false)

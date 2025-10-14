@@ -12,6 +12,11 @@ import UiSwitch from '~/components/Ui/Form/UiSwitch.vue'
 import UiDatePicker from '~/components/Ui/Form/UiDatePicker.vue'
 import UiSlider from '~/components/Ui/Form/UiSlider.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const form = reactive({

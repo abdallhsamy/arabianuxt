@@ -2,6 +2,11 @@
 import { ref } from 'vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Err = { id:string; time:string; message:string; severity:'critical'|'warning'|'info'; trace:string; open?:boolean }

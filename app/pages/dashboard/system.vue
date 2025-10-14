@@ -3,6 +3,11 @@ import { ref } from 'vue'
 import { Settings, Sun, Moon, Timer, Wrench } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const envName = ref('Production')

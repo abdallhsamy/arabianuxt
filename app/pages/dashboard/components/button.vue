@@ -3,6 +3,11 @@ import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { Check, X, ArrowRight, Bell } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 </script>
 

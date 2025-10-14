@@ -2,6 +2,11 @@
 import { ref, computed } from 'vue'
 import { CalendarDays, Plus } from 'lucide-vue-next'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type EventItem = { id: string; date: string; title: string }

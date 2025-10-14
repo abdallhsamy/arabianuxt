@@ -2,6 +2,11 @@
 import { Check, AlertCircle, Bell, Star } from 'lucide-vue-next'
 import UiBadge from "~/components/Ui/Display/UiBadge.vue";
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 </script>
 

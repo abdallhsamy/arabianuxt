@@ -3,6 +3,11 @@ import MetricMini from '~/components/Ui/Charts/MetricMini.vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 import { ref } from 'vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Service = { name: string; status: 'up'|'down'|'degraded'; latency: string }

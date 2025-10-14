@@ -2,6 +2,11 @@
 import { ref } from 'vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const orgName = ref('Arabia Labs')

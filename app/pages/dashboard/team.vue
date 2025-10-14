@@ -4,6 +4,11 @@ import { UserPlus, Trash2, Shield, BadgeCheck } from 'lucide-vue-next'
 import UiModal from '~/components/Ui/Common/UiModal.vue'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Member = { id: string; name: string; email: string; role: 'Owner'|'Admin'|'Member' }

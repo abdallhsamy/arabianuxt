@@ -3,6 +3,11 @@ import { ref } from 'vue'
 import { Eye, Database, Trash2, Download, ShieldCheck, Lock } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const privacy = ref({

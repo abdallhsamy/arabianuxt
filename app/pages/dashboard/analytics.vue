@@ -5,6 +5,11 @@ import Chart from 'chart.js/auto'
 import { Activity, PieChart, Clock, Zap } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const loginCanvas = ref<HTMLCanvasElement | null>(null)

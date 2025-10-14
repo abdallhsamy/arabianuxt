@@ -4,6 +4,11 @@ import UiEmptyState from '~/components/Ui/Display/UiEmptyState.vue'
 import UiLoaderSpinner from '~/components/Ui/Display/UiLoaderSpinner.vue'
 import UiDivider from '~/components/Ui/Layout/UiDivider.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 </script>
 

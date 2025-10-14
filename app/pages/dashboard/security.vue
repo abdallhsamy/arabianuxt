@@ -2,6 +2,11 @@
 import { ref } from 'vue'
 import { Shield, Smartphone, Globe, LogOut, Lock, ShieldCheck } from 'lucide-vue-next'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Session = { id:string; device:string; ip:string; lastActive:string; current:boolean }

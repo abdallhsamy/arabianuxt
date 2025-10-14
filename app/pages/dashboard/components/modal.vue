@@ -4,6 +4,11 @@ import UiButton from '~/components/Ui/Common/UiButton.vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const modal1 = ref(false)

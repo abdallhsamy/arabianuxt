@@ -3,6 +3,11 @@ import { ref, computed } from 'vue'
 import PromptItem from '~/components/Ui/AI/PromptItem.vue'
 import TagChips from '~/components/Ui/Common/TagChips.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Prompt = { id:string; title:string; text:string; tags:string[] }

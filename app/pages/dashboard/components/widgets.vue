@@ -6,6 +6,11 @@ import UiMapWidget from '~/components/Ui/Widgets/UiMapWidget.vue'
 import UiKanbanBoard from '~/components/Ui/Widgets/UiKanbanBoard.vue'
 import UiUserAvatarGroup from '~/components/Ui/Widgets/UiUserAvatarGroup.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const tasks = ref([

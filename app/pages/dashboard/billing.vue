@@ -3,6 +3,11 @@ import { ref, computed } from 'vue'
 import { CreditCard, FileText, Download, CheckCircle2, AlertTriangle, Plus } from 'lucide-vue-next'
 import UiModal from '~/components/Ui/Common/UiModal.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 type Invoice = {

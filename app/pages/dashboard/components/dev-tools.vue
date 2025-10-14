@@ -6,6 +6,11 @@ import UiDiffViewer from '~/components/Ui/Dev/UiDiffViewer.vue'
 import UiLogConsole, { type LogItem } from '~/components/Ui/Dev/UiLogConsole.vue'
 import UiTerminalShell from '~/components/Ui/Dev/UiTerminalShell.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const logs = ref<LogItem[]>([])

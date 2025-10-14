@@ -2,6 +2,11 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import GradientCard from '~/components/Ui/Common/GradientCard.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const logs = ref<string[]>([])

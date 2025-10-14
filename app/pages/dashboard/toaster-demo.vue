@@ -2,6 +2,11 @@
 import { useToaster } from '~/composables/useToaster'
 import { Bell, Info, AlertTriangle, CheckCircle2, XCircle } from 'lucide-vue-next'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const toaster = useToaster()
 const { t } = useI18n()
 

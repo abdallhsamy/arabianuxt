@@ -4,6 +4,11 @@ import { KeyRound, RefreshCw, Check, PlugZap, Link as LinkIcon, Unplug, Globe } 
 import UiModal from '~/components/Ui/Common/UiModal.vue'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 
 const apiKey = ref('sk-live-********-A1B2')

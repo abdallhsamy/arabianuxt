@@ -4,6 +4,11 @@ import { Copy, Mail, Lock } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 const email = ref('')
 const password = ref('')

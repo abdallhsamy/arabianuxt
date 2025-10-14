@@ -2,6 +2,11 @@
 import UiTooltip from '~/components/Ui/Common/UiTooltip.vue'
 import UiButton from '~/components/Ui/Common/UiButton.vue'
 
+definePageMeta({
+  middleware: 'auth',
+  layout: 'dashboard',
+})
+
 const { t } = useI18n()
 </script>
 

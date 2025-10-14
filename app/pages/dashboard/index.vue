@@ -33,6 +33,7 @@ import UiConfirmDialog from '~/components/Ui/Feedback/UiConfirmDialog.vue'
 
 definePageMeta({
   middleware: 'auth',
+  layout: 'dashboard',
 })
 
 const { t } = useI18n()
