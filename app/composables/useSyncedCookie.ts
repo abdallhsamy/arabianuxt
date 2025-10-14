@@ -4,10 +4,11 @@ export const useSyncedCookie = <T>(key: string, defaultValue: T) => {
         watch: true,
     })
 
-    const state = ref<T>(cookie.value ?? defaultValue)
+    // Hydration-safe state seeded from SSR cookie value
+    const state = useState<T | undefined>(`cookie:${key}`, () => cookie.value ?? defaultValue)
 
     watch(state, (value) => {
-        cookie.value = value
+        cookie.value = value as T
     })
 
     return state;

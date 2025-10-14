@@ -1,9 +1,8 @@
-import {useAuthStore} from "~/store/authStore";
-
-export default defineNuxtRouteMiddleware((to, from) => {
-    const authStore = useAuthStore()
+export default defineNuxtRouteMiddleware((to) => {
     const localePath = useLocalePath()
-    if (!authStore.isAuthenticated) {
+    const user = useCookie("authUser")
+
+    if (!user.value) {
         return navigateTo(localePath('/login'))
     }
 })
