@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UiTooltip from "~/components/Ui/Common/UiTooltip.vue";
-import UiButton from "~/components/Ui/Common/UiButton.vue";
+import UiButton from "~/components/Ui/Common/UiButton/UiButton.vue";
 
 definePageMeta({
   middleware: "auth",

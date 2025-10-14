@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiButton from "~/components/Ui/Common/UiButton.vue";
+import UiButton from "~/components/Ui/Common/UiButton/UiButton.vue";
 import { Check, X, ArrowRight, Bell } from "lucide-vue-next";
 import { useI18n } from "vue-i18n";
 

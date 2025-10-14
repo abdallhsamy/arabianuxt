@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import UiButton from "~/components/Ui/Common/UiButton.vue";
+import UiButton from "~/components/Ui/Common/UiButton/UiButton.vue";
 import {
   Check,
   X,
