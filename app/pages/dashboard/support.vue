@@ -113,11 +113,11 @@ const badgePriority = (p: Ticket['priority']): string => ({
         </template>
 
         <template #cell:status="{ row }">
-          <span class="text-xs px-2 py-1 rounded-full" :class="badgeStatus(row.status)">{{ row.status }}</span>
+          <span class="text-xs px-2 py-1 rounded-full" :class="badgeStatus(row.status as any)">{{ row.status }}</span>
         </template>
 
         <template #cell:priority="{ row }">
-          <span class="text-xs px-2 py-1 rounded-full" :class="badgePriority(row.priority)">{{ row.priority }}</span>
+          <span class="text-xs px-2 py-1 rounded-full" :class="badgePriority(row.priority as any)">{{ row.priority }}</span>
         </template>
 
         <template #cell:createdAt="{ row }">

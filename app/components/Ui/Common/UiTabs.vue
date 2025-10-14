@@ -100,7 +100,7 @@ const colorClass = computed(() => colors[props.color])
     <!-- Tab content -->
     <div class="relative flex-1 text-gray-200 text-sm">
       <transition name="fade">
-        <div v-if="$slots[activeId]" key="activeId">
+        <div v-if="activeId && $slots[activeId]" :key="activeId">
           <slot :name="activeId" />
         </div>
       </transition>

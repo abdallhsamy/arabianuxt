@@ -13,6 +13,7 @@ const emit = defineEmits<{ (e: 'files', files: File[]): void }>()
 
 const files = ref<UploadedFile[]>([])
 const dragging = ref(false)
+const fileInput = ref<HTMLInputElement>()
 
 const handleFiles = (fileList: FileList | null) => {
   if (!fileList) return
@@ -33,8 +34,8 @@ const handleFiles = (fileList: FileList | null) => {
       :class="dragging ? 'border-fuchsia-500 bg-fuchsia-500/10' : 'border-white/10 hover:border-white/20'"
       @dragover.prevent="dragging = true"
       @dragleave.prevent="dragging = false"
-      @drop.prevent="(e)=>{dragging=false;handleFiles(e.dataTransfer?.files)}"
-      @click="$refs.fileInput?.click()"
+      @drop.prevent="(e)=>{dragging=false;handleFiles(e.dataTransfer?.files || null)}"
+      @click="fileInput?.click()"
   >
     <input
         ref="fileInput"

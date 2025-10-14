@@ -39,13 +39,12 @@ const moveTask = (id: string, newStatus: KanbanTask['status']) => {
           {{ task.title }}
           <div class="flex gap-1">
             <button
-                v-for="next in columns"
-                :key="next"
-                v-if="next !== col"
+                v-for="nextCol in columns.filter(c => c !== col)"
+                :key="nextCol"
                 class="text-xs text-gray-400 hover:text-fuchsia-400"
-                @click="moveTask(task.id, next)"
+                @click="moveTask(task.id, nextCol)"
             >
-              → {{ next }}
+              → {{ nextCol }}
             </button>
           </div>
         </div>

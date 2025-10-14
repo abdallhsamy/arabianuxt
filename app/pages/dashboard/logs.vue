@@ -27,7 +27,8 @@ onMounted(()=>{
   ]
   interval=setInterval(()=>{
     if(!running.value)return
-    addLog(messages[Math.floor(Math.random()*messages.length)])
+    const message = messages[Math.floor(Math.random()*messages.length)]
+    if (message) addLog(message)
     if(logs.value.length>200)logs.value.splice(200)
   },1000)
 })

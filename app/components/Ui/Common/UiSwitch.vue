@@ -45,8 +45,8 @@ const sizes: Record<string, { w: string; h: string; knob: string }> = {
   lg: { w: 'w-14', h: 'h-8', knob: 'w-7 h-7' },
 }
 
-const colorClass = computed(() => colors[props.color])
-const sizeClass = computed(() => sizes[props.size])
+const colorClass = computed(() => colors[props.color] || colors.fuchsia)
+const sizeClass = computed(() => sizes[props.size] || sizes.md)
 </script>
 
 <template>
@@ -65,8 +65,8 @@ const sizeClass = computed(() => sizes[props.size])
         :disabled="disabled"
         class="relative inline-flex transition-all duration-300 rounded-full border border-white/10 backdrop-blur-xl"
         :class="[
-        sizeClass.w,
-        sizeClass.h,
+        sizeClass?.w,
+        sizeClass?.h,
         outlined ? 'bg-transparent' : modelValue ? `bg-gradient-to-r ${colorClass}` : 'bg-white/10',
         'focus-visible:ring-2 focus-visible:ring-fuchsia-500/40'
       ]"
@@ -75,7 +75,7 @@ const sizeClass = computed(() => sizes[props.size])
       <div
           class="absolute top-0.5 left-0.5 flex items-center justify-center bg-white/90 text-gray-700 rounded-full transition-all duration-300 shadow-lg"
           :class="[
-          sizeClass.knob,
+          sizeClass?.knob,
           modelValue ? `translate-x-[calc(100%-0.25rem)]` : 'translate-x-0',
         ]"
       >

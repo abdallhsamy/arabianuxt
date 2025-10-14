@@ -2,10 +2,12 @@
 import { computed } from 'vue'
 
 const props = withDefaults(defineProps<{
-  before: string
-  after: string
+  before?: string
+  after?: string
   showLineNumbers?: boolean
 }>(), {
+  before: '',
+  after: '',
   showLineNumbers: true,
 })
 
@@ -13,19 +15,19 @@ type DiffLine = { type: 'ctx' | 'add' | 'del'; text: string; a?: number; b?: num
 
 // naive LCS-free line matcher (fast & simple for UI diffs)
 const diff = computed<DiffLine[]>(() => {
-  const a = props.before.split('\n')
-  const b = props.after.split('\n')
+  const a = (props.before || '').split('\n')
+  const b = (props.after || '').split('\n')
   const out: DiffLine[] = []
   let i = 0, j = 0, ai = 1, bi = 1
   while (i < a.length || j < b.length) {
     if (i < a.length && j < b.length && a[i] === b[j]) {
-      out.push({ type: 'ctx', text: a[i], a: ai++, b: bi++ })
+      out.push({ type: 'ctx', text: a[i] || '', a: ai++, b: bi++ })
       i++; j++
-    } else if (j < b.length && (i >= a.length || !a.slice(i, i+3).includes(b[j]))) {
-      out.push({ type: 'add', text: b[j], b: bi++ })
+    } else if (j < b.length && (i >= a.length || !a.slice(i, i+3).includes(b[j] || ''))) {
+      out.push({ type: 'add', text: b[j] || '', b: bi++ })
       j++
     } else if (i < a.length) {
-      out.push({ type: 'del', text: a[i], a: ai++ })
+      out.push({ type: 'del', text: a[i] || '', a: ai++ })
       i++
     }
   }

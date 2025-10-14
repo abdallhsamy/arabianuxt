@@ -95,7 +95,7 @@ const exportCsv = (): void => {
       <DataTable :headers="headers" :rows="filtered" row-key="id">
         <template #cell:severity="{ row }">
           <div class="text-right">
-            <span class="text-xs px-2 py-1 rounded-full" :class="badge(row.severity)">{{ t(`pages.auditLogs.severities.${row.severity}`) }}</span>
+            <span class="text-xs px-2 py-1 rounded-full" :class="badge(row.severity as any)">{{ t(`pages.auditLogs.severities.${row.severity}`) }}</span>
           </div>
         </template>
       </DataTable>

@@ -20,9 +20,11 @@ onMounted(() => {
   })
   interval = setInterval(() => {
     if (!chart) return
-    const val = Math.floor(Math.random() * 80 + 10)
-    chart.data.datasets[0].data = [val, 100 - val]
-    chart.update()
+    if (chart && chart.data.datasets[0]) {
+      const val = Math.floor(Math.random() * 80 + 10)
+      chart.data.datasets[0].data = [val, 100 - val]
+      chart.update()
+    }
   }, 3000)
 })
 onUnmounted(() => { if (interval) clearInterval(interval); chart?.destroy() })

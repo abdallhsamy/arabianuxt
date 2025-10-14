@@ -105,7 +105,7 @@ const currency = (n: number): string => `$${n.toFixed(2)}`
     </div>
 
     <!-- Add Card UiModal -->
-    <UiModal v-model:open="addCardOpen" :title="t('pages.billing.updatePaymentMethod')" :confirm-text="t('pages.billing.saveCard')">
+    <UiModal v-model="addCardOpen" :title="t('pages.billing.updatePaymentMethod')" :confirm-text="t('pages.billing.saveCard')">
       <div class="space-y-3">
         <input class="input-dark w-full" :placeholder="t('pages.billing.cardholderName')" />
         <input class="input-dark w-full" :placeholder="t('pages.billing.cardNumber')" />

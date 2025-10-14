@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { Eye, EyeOff, Search } from 'lucide-vue-next'
 
 export interface UiInputProps {
@@ -44,7 +44,7 @@ const inputType = computed(() =>
           :disabled="disabled"
           :readonly="readonly"
           class="flex-1 bg-transparent outline-none placeholder:text-gray-500"
-          @input="emit('update:modelValue', $event.target.value)"
+          @input="emit('update:modelValue', ($event.target as HTMLInputElement)?.value || '')"
       />
       <!-- Password Toggle -->
       <button

@@ -30,7 +30,7 @@ let interval: NodeJS.Timeout | undefined
 onMounted(() => {
   interval = setInterval(() => {
     const levels = ['debug', 'info', 'warn', 'error'] as const
-    const randomLevel = levels[Math.floor(Math.random() * levels.length)]
+    const randomLevel = levels[Math.floor(Math.random() * levels.length)] || 'info'
     pushLog(randomLevel, t('pages.componentDevTools.heartbeat'))
   }, 3000)
 })

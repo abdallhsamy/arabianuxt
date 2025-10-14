@@ -216,7 +216,7 @@ const statistics = [
       <div class="grid md:grid-cols-3 gap-6">
         <UiWidgetContainer :title="t('pages.dashboard.forms.uploadFiles')">
           <UiFileUpload
-              @files="(f) => toastRef.value?.push({ text: `Uploaded ${f.length} files`, type: 'info' })"
+              @files="(f) => toastRef?.push({ text: `Uploaded ${f.length} files`, type: 'info' })"
           />
         </UiWidgetContainer>
 

@@ -21,7 +21,7 @@ const run = (): void => {
   if (!input) return
   history.value.push({ id: crypto.randomUUID(), text: `${props.prompt} ${input}`, kind: 'in' })
   const [cmd, ...args] = input.split(' ')
-  const handler = commands[cmd] || (() => `command not found: ${cmd}`)
+  const handler = commands[cmd || ''] || (() => `command not found: ${cmd}`)
   const out = cmd === 'echo' ? args.join(' ') : handler()
   if (out) history.value.push({ id: crypto.randomUUID(), text: out, kind: 'out' })
   line.value = ''

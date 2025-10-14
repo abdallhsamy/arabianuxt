@@ -26,7 +26,7 @@ let interval: NodeJS.Timeout | null = null
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
-  animation: { duration: 800, easing: 'easeOutCubic' },
+  animation: { duration: 800, easing: 'easeOutCubic' as const },
   plugins: { legend: { labels: { color: '#ccc' } } },
   scales: {
     x: { ticks: { color: '#aaa' }, grid: { color: 'rgba(255,255,255,0.05)' } },
@@ -132,17 +132,17 @@ onMounted(async () => {
   interval = setInterval(() => {
     if (!isLive.value) return
 
-    if (loginChart) {
+    if (loginChart && loginChart.data.datasets[0]) {
       loginChart.data.datasets[0].data = loginChart.data.datasets[0].data.map(() => randomRange(10, 30))
       loginChart.update('active')
     }
 
-    if (deviceChart) {
+    if (deviceChart && deviceChart.data.datasets[0]) {
       deviceChart.data.datasets[0].data = deviceChart.data.datasets[0].data.map(() => randomRange(5, 25))
       deviceChart.update('active')
     }
 
-    if (downloadChart) {
+    if (downloadChart && downloadChart.data.datasets[0]) {
       downloadChart.data.datasets[0].data = [
         randomRange(40, 60),
         randomRange(15, 35),

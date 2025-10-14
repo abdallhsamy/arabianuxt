@@ -210,9 +210,12 @@ const cycleSort = (key: string): void => {
   const i = sorts.value.findIndex(s => s.key === key)
   if (i === -1) sorts.value = [{ key, dir: 'asc' }]
   else {
-    const dir = nextDir(sorts.value[i].dir)
-    if (!dir) sorts.value.splice(i, 1)
-    else sorts.value[i].dir = dir
+    const sortItem = sorts.value[i]
+    if (sortItem) {
+      const dir = nextDir(sortItem.dir)
+      if (!dir) sorts.value.splice(i, 1)
+      else sortItem.dir = dir
+    }
   }
   emit('sort-change', sorts.value)
   if (!props.serverMode) internalPage.value = 1
@@ -337,7 +340,7 @@ const toCSV = (): void => {
                   type="checkbox"
                   :checked="columnOrder.includes(col.key)"
                   @change="
-                  $event.target instanceof HTMLInputElement && $event.target.checked
+                  ($event.target as HTMLInputElement)?.checked
                     ? columnOrder = [...columnOrder, col.key].filter((v,i,a)=>a.indexOf(v)===i)
                     : columnOrder = columnOrder.filter(k => k !== col.key);
                   $emit('column-order-change', [...columnOrder])

@@ -14,15 +14,15 @@ definePageMeta({
 const { t } = useI18n()
 
 const tasks = ref([
-  { id: '1', title: t('pages.componentWidgets.tasks.designMockups'), status: 'todo' },
-  { id: '2', title: t('pages.componentWidgets.tasks.fixBugs'), status: 'progress' },
-  { id: '3', title: t('pages.componentWidgets.tasks.deployRelease'), status: 'done' },
+  { id: '1', title: t('pages.componentWidgets.tasks.designMockups'), status: 'todo' as const },
+  { id: '2', title: t('pages.componentWidgets.tasks.fixBugs'), status: 'progress' as const },
+  { id: '3', title: t('pages.componentWidgets.tasks.deployRelease'), status: 'done' as const },
 ])
 
 const feed = [
-  { id: '1', title: t('pages.componentWidgets.feed.newUserJoined'), description: t('pages.componentWidgets.feed.ahmedRegistered'), time: t('pages.componentWidgets.feed.fiveMinAgo'), type: 'info' },
-  { id: '2', title: t('pages.componentWidgets.feed.paymentReceived'), description: t('pages.componentWidgets.feed.amountCredited'), time: t('pages.componentWidgets.feed.tenMinAgo'), type: 'success' },
-  { id: '3', title: t('pages.componentWidgets.feed.serverWarning'), description: t('pages.componentWidgets.feed.memoryUsageHigh'), time: t('pages.componentWidgets.feed.oneHourAgo'), type: 'warning' },
+  { id: '1', title: t('pages.componentWidgets.feed.newUserJoined'), description: t('pages.componentWidgets.feed.ahmedRegistered'), time: t('pages.componentWidgets.feed.fiveMinAgo'), type: 'info' as const },
+  { id: '2', title: t('pages.componentWidgets.feed.paymentReceived'), description: t('pages.componentWidgets.feed.amountCredited'), time: t('pages.componentWidgets.feed.tenMinAgo'), type: 'success' as const },
+  { id: '3', title: t('pages.componentWidgets.feed.serverWarning'), description: t('pages.componentWidgets.feed.memoryUsageHigh'), time: t('pages.componentWidgets.feed.oneHourAgo'), type: 'warning' as const },
 ]
 
 const users = [

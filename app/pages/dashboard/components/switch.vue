@@ -23,7 +23,7 @@ const theme = ref(true)
       <UiSwitch :label="t('pages.componentSwitch.enableNotifications')" v-model="notifications" color="fuchsia" :description="t('pages.componentSwitch.receiveAlerts')" />
       <UiSwitch :label="t('pages.componentSwitch.power')" v-model="power" color="emerald" icon />
       <UiSwitch :label="t('pages.componentSwitch.darkMode')" v-model="theme" color="cyan" outlined />
-      <UiSwitch :label="t('pages.componentSwitch.disabledExample')" disabled />
+      <UiSwitch :label="t('pages.componentSwitch.disabledExample')" :model-value="false" disabled />
     </div>
   </section>
 </template>

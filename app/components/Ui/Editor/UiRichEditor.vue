@@ -83,7 +83,7 @@ onMounted(() => {
     editable: props.editable,
     autofocus: props.autofocus,
     onUpdate: ({ editor }) => emit('update:modelValue', editor.getHTML()),
-    onTransaction: ({ editor }) => detectSlash(editor),
+    onTransaction: ({ editor }) => detectSlash(editor as any),
   })
 })
 onBeforeUnmount(() => editor.value?.destroy())
@@ -147,7 +147,7 @@ const pickSlash = (cmd: CommandItem) => {
   const from = editor.value.state.selection.from
   const del = slashQuery.value.length + 1
   editor.value.chain().focus().deleteRange({ from: from - del, to: from }).run()
-  cmd.action(editor.value)
+  cmd.action(editor.value as any)
   showSlash.value = false
 }
 
@@ -271,7 +271,7 @@ const escapeHtml = (s: string) =>
     </div>
 
     <!-- Editor -->
-    <EditorContent v-if="editor" :editor="editor" class="prose prose-invert is-editor max-w-none min-h-[320px] px-4 py-3 text-sm focus:outline-none" />
+    <EditorContent v-if="editor" :editor="editor as any" class="prose prose-invert is-editor max-w-none min-h-[320px] px-4 py-3 text-sm focus:outline-none" />
 
     <!-- Slash menu -->
     <transition name="fade">

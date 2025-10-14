@@ -9,6 +9,10 @@ definePageMeta({
   layout: 'dashboard',
 })
 
+const showAlert = (message: string) => {
+  alert(message)
+}
+
 const { t } = useI18n()
 const email = ref('')
 const password = ref('')
@@ -106,7 +110,7 @@ const otp = ref('')
       <template #suffix>
         <button
             class="text-xs text-fuchsia-400 hover:text-fuchsia-300 font-medium"
-            @click="alert(t('pages.componentInput.messages.codeResent'))"
+            @click="showAlert(t('pages.componentInput.messages.codeResent'))"
         >
           {{ t('pages.componentInput.actions.resend') }}
         </button>

@@ -87,7 +87,7 @@ const roleBadge = (r: Member['role']): string => ({
     </div>
 
     <!-- Invite UiModal -->
-    <UiModal v-model:open="inviteOpen" :title="t('pages.team.inviteNewMember')" :confirm-text="t('pages.team.sendInvite')" @confirm="invite">
+    <UiModal v-model="inviteOpen" :title="t('pages.team.inviteNewMember')" :confirm-text="t('pages.team.sendInvite')" @confirm="invite">
       <div class="space-y-3">
         <input v-model="inviteName" class="input-dark w-full" :placeholder="t('pages.team.fullName')" />
         <input v-model="inviteEmail" class="input-dark w-full" :placeholder="t('pages.team.emailAddress')" />

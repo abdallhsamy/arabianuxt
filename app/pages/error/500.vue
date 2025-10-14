@@ -2,6 +2,12 @@
 import { RefreshCcw, ServerCrash } from 'lucide-vue-next'
 
 const { t } = useI18n()
+
+const refreshPage = () => {
+  if (import.meta.client) {
+    window.location.reload()
+  }
+}
 </script>
 
 <template>
@@ -15,7 +21,7 @@ const { t } = useI18n()
       </p>
       <button
           class="flex items-center gap-2 px-5 py-2 rounded-md bg-rose-600 hover:bg-rose-700 text-white transition"
-          @click="window.location.reload()"
+          @click="refreshPage"
       >
         <RefreshCcw class="w-4 h-4" /> {{ t('pages.error.500.refreshPage') }}
       </button>

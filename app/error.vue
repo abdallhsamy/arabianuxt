@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { useError, clearError } from '#app'
+import { useError, clearError, useRoute } from '#app'
 import { Home, RefreshCcw, AlertTriangle } from 'lucide-vue-next'
 
 const error = useError()
+const route = useRoute()
 
 const status = error.value?.statusCode || 500
 const message =
     error.value?.message ||
     (status === 404 ? 'Page Not Found' : 'Something went wrong')
+
+const retry = () => {
+  clearError({ redirect: route.fullPath })
+}
 </script>
 
 <template>
@@ -35,7 +40,7 @@ const message =
 
         <button
             class="flex items-center gap-2 px-5 py-2 rounded-md bg-white/10 hover:bg-white/15 text-gray-100 transition"
-            @click="clearError({ redirect: useRoute().fullPath })"
+            @click="retry"
         >
           <RefreshCcw class="w-4 h-4" /> Retry
         </button>

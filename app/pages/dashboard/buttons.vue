@@ -10,7 +10,7 @@ definePageMeta({
 })
 
 const { t } = useI18n()
-const variants = ['primary', 'secondary', 'success', 'danger', 'outline', 'glass']
+const variants = ['primary', 'secondary', 'success', 'danger', 'outline', 'glass'] as const
 const toggleHeart = ref(false)
 const togglePower = ref(true)
 </script>
@@ -31,10 +31,10 @@ const togglePower = ref(true)
       >
         <h2 class="text-gray-300 font-medium mb-4 capitalize">{{ t(`pages.buttons.variants.${variant}`) }} Variant</h2>
         <div class="flex flex-wrap gap-3">
-          <UiButton :variant="variant" :label="t('pages.buttons.labels.default')" />
-          <UiButton :variant="variant" :label="t('pages.buttons.labels.withIcon')" :icon="Check" />
-          <UiButton :variant="variant" :label="t('pages.buttons.labels.loading')" :loading="true" />
-          <UiButton :variant="variant" :label="t('pages.buttons.labels.disabled')" :disabled="true" />
+          <UiButton :variant="variant as any" :label="t('pages.buttons.labels.default')" />
+          <UiButton :variant="variant as any" :label="t('pages.buttons.labels.withIcon')" :icon="Check" />
+          <UiButton :variant="variant as any" :label="t('pages.buttons.labels.loading')" :loading="true" />
+          <UiButton :variant="variant as any" :label="t('pages.buttons.labels.disabled')" :disabled="true" />
         </div>
       </div>
     </div>

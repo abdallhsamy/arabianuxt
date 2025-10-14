@@ -22,10 +22,10 @@ const { t } = useI18n()
 const rating = ref(4)
 
 const users = [
-  { name: 'Abdallah Samy', src: 'https://i.pravatar.cc/120?img=1', status: 'online' },
-  { name: 'Layla Karim', src: 'https://i.pravatar.cc/120?img=3', status: 'away' },
-  { name: 'Ali Hassan', src: 'https://i.pravatar.cc/120?img=4', status: 'busy' },
-  { name: 'Guest User', status: 'offline' },
+  { name: 'Abdallah Samy', src: 'https://i.pravatar.cc/120?img=1', status: 'online' as const },
+  { name: 'Layla Karim', src: 'https://i.pravatar.cc/120?img=3', status: 'away' as const },
+  { name: 'Ali Hassan', src: 'https://i.pravatar.cc/120?img=4', status: 'busy' as const },
+  { name: 'Guest User', status: 'offline' as const },
 ]
 
 const agents = [

@@ -117,7 +117,7 @@ const testPing = (w: Webhook): void => {
     </div>
 
     <!-- Regenerate UiModal -->
-    <UiModal v-model:open="regenOpen" :title="t('pages.integrations.regenerateApiKey')" :confirm-text="t('pages.integrations.regenerateButton')">
+    <UiModal v-model="regenOpen" :title="t('pages.integrations.regenerateApiKey')" :confirm-text="t('pages.integrations.regenerateButton')">
       <p class="text-gray-300">
         {{ t('pages.integrations.regenerateDescription') }}
       </p>

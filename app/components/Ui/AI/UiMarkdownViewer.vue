@@ -6,9 +6,9 @@ import DOMPurify from 'dompurify'
 const props = defineProps<{ content: string }>()
 const html = ref('')
 
-const render = () => {
-  const raw = marked.parse(props.content)
-  html.value = DOMPurify.sanitize(raw)
+const render = async () => {
+  const raw = await marked.parse(props.content)
+  html.value = DOMPurify.sanitize(raw as string)
 }
 onMounted(render)
 watch(() => props.content, render)

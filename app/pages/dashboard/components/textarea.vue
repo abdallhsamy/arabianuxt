@@ -22,7 +22,7 @@ const notes = ref('Initial text here...')
         v-model="bio"
         :label="t('pages.componentTextarea.labels.yourBio')"
         :placeholder="t('pages.componentTextarea.placeholders.tellUsAboutYourself')"
-        max-length="160"
+        :max-length="160"
         :parent-theme="'dark'"
     />
 

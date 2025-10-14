@@ -66,19 +66,19 @@ const save = (): void => {
 
         <template #cell:Owner="{ row }">
           <div class="flex justify-center">
-            <input type="checkbox" class="accent-fuchsia-400" :checked="row.Owner" @change="toggle(row,'Owner')" />
+            <input type="checkbox" class="accent-fuchsia-400" :checked="(row as PermRow).Owner" @change="toggle(row as PermRow,'Owner')" />
           </div>
         </template>
 
         <template #cell:Admin="{ row }">
           <div class="flex justify-center">
-            <input type="checkbox" class="accent-indigo-400" :checked="row.Admin" @change="toggle(row,'Admin')" />
+            <input type="checkbox" class="accent-indigo-400" :checked="(row as PermRow).Admin" @change="toggle(row as PermRow,'Admin')" />
           </div>
         </template>
 
         <template #cell:Member="{ row }">
           <div class="flex justify-center">
-            <input type="checkbox" class="accent-cyan-400" :checked="row.Member" @change="toggle(row,'Member')" />
+            <input type="checkbox" class="accent-cyan-400" :checked="(row as PermRow).Member" @change="toggle(row as PermRow,'Member')" />
           </div>
         </template>
       </DataTable>

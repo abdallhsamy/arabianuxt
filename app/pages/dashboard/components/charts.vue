@@ -13,10 +13,10 @@ definePageMeta({
 const { t } = useI18n()
 
 const stats = [
-  { label: t('pages.componentCharts.stats.revenue'), value: '$42K', color: 'fuchsia', change: '+12%' },
-  { label: t('pages.componentCharts.stats.users'), value: '1,245', color: 'cyan', change: '+4%' },
-  { label: t('pages.componentCharts.stats.sessions'), value: '9,120', color: 'emerald', change: '-2%' },
-  { label: t('pages.componentCharts.stats.errors'), value: '12', color: 'rose', change: '-8%' },
+  { label: t('pages.componentCharts.stats.revenue'), value: '$42K', color: 'fuchsia' as const, change: '+12%' },
+  { label: t('pages.componentCharts.stats.users'), value: '1,245', color: 'cyan' as const, change: '+4%' },
+  { label: t('pages.componentCharts.stats.sessions'), value: '9,120', color: 'emerald' as const, change: '-2%' },
+  { label: t('pages.componentCharts.stats.errors'), value: '12', color: 'rose' as const, change: '-8%' },
 ]
 </script>
 

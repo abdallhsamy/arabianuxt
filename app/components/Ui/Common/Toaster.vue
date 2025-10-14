@@ -48,8 +48,25 @@ const push = (t: Toast) => {
 
 const remove = (id: string) => {
   toasts.value = toasts.value.filter(t => t.id !== id)
-  if (timers.has(id)) clearTimeout(timers.get(id))
+  if (timers.has(id)) {
+    const timer = timers.get(id)
+    if (timer) clearTimeout(timer)
+  }
   timers.delete(id)
+}
+
+const pauseTimer = (id: string) => {
+  if (timers.has(id)) {
+    const timer = timers.get(id)
+    if (timer) clearTimeout(timer)
+  }
+}
+
+const resumeTimer = (id: string, duration?: number) => {
+  if (duration) {
+    const timer = setTimeout(() => remove(id), duration)
+    timers.set(id, timer)
+  }
 }
 
 defineExpose({ push, remove })
@@ -70,8 +87,8 @@ onUnmounted(() => timers.forEach(clearTimeout))
           :key="t.id"
           class="pointer-events-auto relative flex items-start gap-3 p-4 rounded-2xl border border-white/10 backdrop-blur-xl text-white shadow-xl w-80
                bg-[rgba(15,17,23,0.9)] overflow-hidden group"
-          @mouseenter="timers.has(t.id) && clearTimeout(timers.get(t.id))"
-          @mouseleave="timers.has(t.id) || timers.set(t.id, setTimeout(() => remove(t.id), t.duration))"
+          @mouseenter="t.id && pauseTimer(t.id)"
+          @mouseleave="t.id && resumeTimer(t.id, t.duration)"
       >
         <!-- Icon -->
         <component
@@ -95,14 +112,14 @@ onUnmounted(() => timers.forEach(clearTimeout))
           <button
               v-if="t.actionLabel"
               class="mt-2 text-xs font-medium text-cyan-400 hover:text-white transition"
-              @click="t.onAction ? t.onAction() : remove(t.id)"
+              @click="t.onAction ? t.onAction() : t.id && remove(t.id)"
           >
             {{ t.actionLabel }}
           </button>
         </div>
 
         <!-- Dismiss -->
-        <button class="absolute top-2 ltr:right-2 rtl:left-2 text-gray-400 hover:text-white" @click="remove(t.id)">
+        <button class="absolute top-2 ltr:right-2 rtl:left-2 text-gray-400 hover:text-white" @click="t.id && remove(t.id)">
           <X class="w-4 h-4" />
         </button>
 
@@ -115,7 +132,7 @@ onUnmounted(() => timers.forEach(clearTimeout))
             'bg-gradient-to-r from-amber-400 to-orange-500': t.type==='warning',
             'bg-gradient-to-r from-cyan-400 to-indigo-400': t.type==='info'
           }"
-            :style="{ width: '100%', animation: `progress ${t.duration}ms linear forwards` }"
+            :style="{ width: '100%', animation: `progress ${t.duration || 4000}ms linear forwards` }"
         />
       </div>
     </transition-group>

@@ -71,6 +71,7 @@ const mails = ref<Mail[]>([
 // --------------------
 // State
 // --------------------
+const folders = ['inbox', 'sent', 'drafts', 'trash'] as const
 const selectedFolder = ref<'inbox' | 'sent' | 'drafts' | 'trash'>('inbox')
 const selectedMail = ref<Mail | null>(null)
 const search = ref('')
@@ -98,13 +99,13 @@ const sendMail = () => {
   mails.value.push({
     id: crypto.randomUUID(),
     from: 'me@dashboard.sa',
-    subject: newMail.value.subject,
-    preview: newMail.value.body.slice(0, 80),
-    date: new Date().toISOString().split('T')[0],
+    subject: newMail.value.subject || '',
+    preview: (newMail.value.body || '').slice(0, 80),
+    date: new Date().toISOString().split('T')[0] || '',
     starred: false,
     read: true,
     folder: 'sent',
-    content: newMail.value.body,
+    content: newMail.value.body || '',
   })
   showCompose.value = false
   newMail.value = { to: '', subject: '', body: '', attachments: [] }
@@ -124,11 +125,11 @@ const sendMail = () => {
 
       <nav class="space-y-1">
         <button
-            v-for="folder in ['inbox','sent','drafts','trash']"
+            v-for="folder in folders"
             :key="folder"
             class="w-full text-start px-3 py-2 rounded-lg text-sm capitalize"
             :class="selectedFolder===folder ? 'bg-white/10 text-fuchsia-400' : 'hover:bg-white/5'"
-            @click="selectedFolder = folder"
+            @click="selectedFolder = folder as any"
         >
           {{ t(`pages.mail.folders.${folder}`) }}
         </button>

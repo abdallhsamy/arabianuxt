@@ -200,7 +200,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDoc))
                 : 'hover:bg-white/10'
             ]"
               @click.stop="selectDate(cell.date)"
-              :aria-selected="selected && selected.toDateString() === cell.date.toDateString()"
+              :aria-selected="selected ? selected.toDateString() === cell.date.toDateString() : false"
           >
             {{ cell.label }}
           </button>

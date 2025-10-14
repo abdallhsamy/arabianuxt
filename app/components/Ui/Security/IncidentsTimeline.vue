@@ -23,11 +23,11 @@ let interval: NodeJS.Timeout | null = null
 
 const now = (): string => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
-const pick = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]
+const pick = <T,>(arr: T[]): T | undefined => arr[Math.floor(Math.random() * arr.length)]
 
 const generateIncident = (): Incident => {
   const severities: Severity[] = ['critical', 'warning', 'info']
-  const severity = pick(severities)
+  const severity = pick(severities) || 'info'
   const pools = {
     critical: [
       { message: 'Multiple failed login attempts detected', icon: ShieldAlert },
@@ -44,7 +44,7 @@ const generateIncident = (): Incident => {
     ],
   } as const
 
-  const item = pick(pools[severity])
+  const item = (pick(pools[severity] as any) || { message: 'Unknown incident', icon: ShieldAlert }) as { message: string; icon: any }
   const locs = ['Riyadh, SA', 'Cairo, EG', 'Dubai, AE', 'Berlin, DE', 'NYC, US']
   const ips = ['10.12.45.201', '172.16.8.44', '192.168.1.87', '10.0.2.33', '172.20.14.6']
 
@@ -52,8 +52,8 @@ const generateIncident = (): Incident => {
     id: crypto.randomUUID?.() ?? String(Date.now() + Math.random()),
     time: now(),
     message: item.message,
-    ip: pick(ips),
-    location: pick(locs),
+    ip: pick(ips) || '0.0.0.0',
+    location: pick(locs) || 'Unknown',
     severity,
     icon: item.icon,
   }
