@@ -443,6 +443,7 @@
         "loginButton": "تسجيل الدخول",
         "authenticating": "جاري المصادقة...",
         "noAccount": "ليس لديك حساب؟",
+        "autoFillCredentials": "تعبئة النموذج تلقائيا",
         "createOne": "إنشاء حساب"
       },
       "register": {
@@ -1402,6 +1403,41 @@
         "linkedin": "لينكدإن",
         "github": "جيت هب"
       }
+    }
+  },
+  "topbar": {
+    "searchPlaceholder": "بحث…",
+    "notifications": "الإشعارات",
+    "github": "جيت هب",
+    "linkedin": "لينكدإن",
+    "settings": "الإعدادات",
+    "lock": "قفل",
+    "notifs": {
+      "newUserSignedUp": "تم تسجيل مستخدم جديد",
+      "systemBackupComplete": "اكتمل النسخ الاحتياطي للنظام",
+      "paymentReceivedShort": "تم استلام دفعة"
+    },
+    "times": {
+      "twoMinAgo": "منذ دقيقتين",
+      "oneHourAgo": "منذ ساعة",
+      "twoHoursAgo": "منذ ساعتين"
+    }
+  },
+  "toasts": {
+    "unexpectedError": "حدث خطأ غير متوقع.",
+    "unknownError": "حدث خطأ غير معروف."
+  },
+  "api": {
+    "common": {
+      "serverError": "حدث خطأ أثناء معالجة طلبك."
+    },
+    "auth": {
+      "invalidData": "البيانات المدخلة غير صالحة.",
+      "emailRequired": "حقل البريد الإلكتروني مطلوب.",
+      "passwordRequired": "حقل كلمة المرور مطلوب.",
+      "invalidCredentials": "بيانات اعتماد غير صحيحة.",
+      "invalidEmailOrPassword": "بريد إلكتروني أو كلمة مرور غير صحيحة.",
+      "loggedOut": "تم تسجيل الخروج بنجاح."
     }
   }
 }

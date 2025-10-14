@@ -5,17 +5,23 @@ import { useSidebar } from '~/composables/useSidebar'
 import LanguageSwitcher from '~/components/Ui/Common/LanguageSwitcher.vue'
 import { useI18n } from 'vue-i18n'
 import { LanguageDirections } from '~~/i18n/config'
+import {useAuthStore} from "~/store/authStore";
+import {useRouter, useToaster} from "#imports";
+import {useRequest} from "alova/client";
+import {authApi} from "~/api/endpoints/auth.endpoint";
+import {HttpStatusCode} from "axios";
+
+const toaster = useToaster()
+const router = useRouter()
+const localePath = useLocalePath()
+const authStore = useAuthStore()
+const { locale } = useI18n()
+const { isExpanded, isMobile, checkViewport } = useSidebar()
+const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof LanguageDirections] === 'rtl')
 
 const search = ref('')
 const openNotifs = ref(false)
 const openProfile = ref(false)
-
-// Use shared sidebar state
-const { isExpanded, isMobile, checkViewport } = useSidebar()
-
-// RTL support
-const { locale } = useI18n()
-const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof LanguageDirections] === 'rtl')
 
 onMounted(() => {
   checkViewport();
@@ -46,10 +52,11 @@ const topbarWidth = computed(() => {
   return isExpanded.value ? 'calc(100% - 14rem - 4rem)' : 'calc(100% - 4rem - 4rem)';
 });
 
+const { t } = useI18n()
 const notifs = ref([
-  { id: 1, text: 'New user signed up', time: '2m ago' },
-  { id: 2, text: 'System backup complete', time: '1h ago' },
-  { id: 3, text: 'Payment received', time: '2h ago' },
+  { id: 1, text: t('topbar.notifs.newUserSignedUp'), time: t('topbar.times.twoMinAgo') },
+  { id: 2, text: t('topbar.notifs.systemBackupComplete'), time: t('topbar.times.oneHourAgo') },
+  { id: 3, text: t('topbar.notifs.paymentReceivedShort'), time: t('topbar.times.twoHoursAgo') },
 ])
 
 const toggleDropdown = (type: 'notif' | 'profile'): void => {
@@ -65,6 +72,26 @@ const toggleDropdown = (type: 'notif' | 'profile'): void => {
 const closeAll = (): void => {
   openNotifs.value = false
   openProfile.value = false
+}
+
+const {send: logout, loading, onSuccess, onError} = useRequest(authApi.logout, {immediate: false})
+
+onSuccess((event) => {
+  if (event.data.status === HttpStatusCode.Ok) {
+    authStore.logout();
+    router.push(localePath('/login'))
+  } else {
+    toaster.error($t('toasts.unexpectedError') as string)
+  }
+});
+
+onError(()=> {
+  toaster.error(t('toasts.unexpectedError'))
+})
+
+const lockSession = async () => {
+  // @todo: handle lock session
+  await router.push(localePath('/locked'))
 }
 
 onMounted(() => document.addEventListener('click', closeAll))
@@ -88,7 +115,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
       }"
   >
     <!-- Logo -->
-    <div class="flex items-center gap-3" :class="isRTL && 'flex-row-reverse'">
+    <div class="flex items-center gap-3">
       <div
           class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-fuchsia-500 to-cyan-400 flex items-center justify-center text-white font-bold"
       >
@@ -102,7 +129,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
       <Search class="w-4 h-4 text-gray-400 absolute top-1/2 -translate-y-1/2" :class="isRTL ? 'right-3' : 'left-3'" />
       <input
           v-model="search"
-          placeholder="Search…"
+          :placeholder="$t('topbar.searchPlaceholder')"
           class="w-full py-1.5 rounded-xl bg-white/5 text-gray-200 border border-white/10
                focus:outline-none focus:ring-2 focus:ring-fuchsia-500/40 text-sm"
           :class="isRTL ? 'pr-9 pl-3' : 'pl-9 pr-3'"
@@ -118,7 +145,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
             target="_blank"
             rel="noopener noreferrer"
             class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors"
-            title="GitHub"
+            :title="$t('topbar.github')"
         >
           <Github class="w-5 h-5" />
         </a>
@@ -127,7 +154,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
             target="_blank"
             rel="noopener noreferrer"
             class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors"
-            title="LinkedIn"
+            :title="$t('topbar.linkedin')"
         >
           <Linkedin class="w-5 h-5" />
         </a>
@@ -154,7 +181,7 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
               class="absolute mt-2 w-72 rounded-2xl bg-[rgba(15,17,23,0.95)] border border-white/10 shadow-xl p-3 space-y-2"
               :class="isRTL ? 'left-0' : 'right-0'"
           >
-            <h3 class="text-white text-sm font-semibold mb-1">Notifications</h3>
+            <h3 class="text-white text-sm font-semibold mb-1">{{ $t('topbar.notifications') }}</h3>
             <div
                 v-for="n in notifs"
                 :key="n.id"
@@ -172,36 +199,52 @@ onUnmounted(() => document.removeEventListener('click', closeAll))
         <button
             class="w-9 h-9 rounded-xl overflow-hidden bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white flex items-center justify-center font-semibold"
         >
-          <User class="w-4 h-4" />
+          <img
+              v-if="authStore.user?.avatar"
+              :src="authStore.user?.avatar" :alt="authStore.user?.name"
+              class="border border-white/10 rounded-full w-full h-full object-cover"
+          >
+          <span v-else-if="authStore.userInitials" class="text-xs">{{ authStore.userInitials }}</span>
+          <User v-else class="w-4 h-4" />
         </button>
 
         <transition name="fade">
           <div
               v-if="openProfile"
-              class="absolute mt-2 w-44 rounded-2xl bg-[rgba(15,17,23,0.95)] border border-white/10 shadow-xl py-2"
+              class="absolute mt-2 w-48 rounded-2xl bg-[rgba(15,17,23,0.95)] border border-white/10 shadow-xl py-2"
               :class="isRTL ? 'left-0' : 'right-0'"
           >
+            <!-- User Info -->
+            <div class="px-4 py-2 border-b border-white/10">
+              <p class="text-white text-sm font-semibold">{{ authStore.user?.name }}</p>
+              <p class="text-gray-400 text-xs">{{ authStore.user?.email }}</p>
+            </div>
+
+            <NuxtLinkLocale
+                class="flex items-center w-full px-4 py-2 text-sm text-gray-200 hover:bg-white/5 gap-2"
+                :class="isRTL ? 'text-right flex-row-reverse' : 'text-left'"
+                to="/dashboard/components/settings"
+            >
+              <Settings class="w-4 h-4 text-indigo-400" />
+              Settings
+            </NuxtLinkLocale>
             <button
                 class="flex items-center w-full px-4 py-2 text-sm text-gray-200 hover:bg-white/5 gap-2"
                 :class="isRTL ? 'text-right flex-row-reverse' : 'text-left'"
-                @click="$emit('settings')"
+                @click="lockSession"
             >
-              <Settings class="w-4 h-4 text-indigo-400" /> Settings
-            </button>
-            <button
-                class="flex items-center w-full px-4 py-2 text-sm text-gray-200 hover:bg-white/5 gap-2"
-                :class="isRTL ? 'text-right flex-row-reverse' : 'text-left'"
-                @click="$emit('lock')"
-            >
-              <Lock class="w-4 h-4 text-cyan-400" /> Lock
+              <Lock class="w-4 h-4 text-cyan-400" />
+              Lock
             </button>
             <hr class="border-white/10 my-1" />
             <button
                 class="flex items-center w-full px-4 py-2 text-sm text-rose-400 hover:bg-white/5 gap-2"
                 :class="isRTL ? 'text-right flex-row-reverse' : 'text-left'"
-                @click="$emit('logout')"
+                @click="logout"
+                :disabled="loading"
             >
-              <LogOut class="w-4 h-4" /> Logout
+              <LogOut class="w-4 h-4" />
+              Logout
             </button>
           </div>
         </transition>

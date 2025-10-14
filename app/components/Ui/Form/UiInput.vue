@@ -10,6 +10,7 @@ export interface UiInputProps {
   variant?: 'default' | 'outlined' | 'filled'
   state?: 'success' | 'warning' | 'error' | 'none'
   message?: string
+  errorMessage?: string
   disabled?: boolean
   readonly?: boolean
   clearable?: boolean
@@ -46,7 +47,7 @@ const s = computed(() => ({
 }[props.size]))
 
 const borderClass = computed(() => {
-  switch (props.state) {
+  switch (computedState.value) {
     case 'success': return 'border-emerald-400 focus:ring-emerald-500/40'
     case 'warning': return 'border-amber-400 focus:ring-amber-500/40'
     case 'error': return 'border-rose-400 focus:ring-rose-500/40'
@@ -55,7 +56,7 @@ const borderClass = computed(() => {
 })
 
 const stateIcon = computed(() => {
-  switch (props.state) {
+  switch (computedState.value) {
     case 'success': return CheckCircle2
     case 'warning': return AlertTriangle
     case 'error': return AlertOctagon
@@ -65,6 +66,18 @@ const stateIcon = computed(() => {
 
 const clear = () => { emit('update:modelValue', ''); emit('clear') }
 const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
+
+// Computed state that prioritizes error state when errorMessage is provided
+const computedState = computed(() => {
+  if (props.errorMessage) return 'error'
+  return props.state
+})
+
+// Computed message that shows errorMessage when state is error
+const computedMessage = computed(() => {
+  if (props.errorMessage) return props.errorMessage
+  return props.message
+})
 </script>
 
 <template>
@@ -128,24 +141,24 @@ const shouldFloat = computed(() => isFocused.value || !!props.modelValue)
           :is="stateIcon"
           class="w-4 h-4 me-3"
           :class="{
-          'text-emerald-400': props.state === 'success',
-          'text-amber-400': props.state === 'warning',
-          'text-rose-400': props.state === 'error',
+          'text-emerald-400': computedState === 'success',
+          'text-amber-400': computedState === 'warning',
+          'text-rose-400': computedState === 'error',
         }"
       />
     </div>
 
     <p
-        v-if="props.message"
+        v-if="computedMessage"
         class="text-xs mt-0.5"
         :class="{
-        'text-emerald-400': props.state === 'success',
-        'text-amber-400': props.state === 'warning',
-        'text-rose-400': props.state === 'error',
-        'text-gray-400': props.state === 'none',
+        'text-emerald-400': computedState === 'success',
+        'text-amber-400': computedState === 'warning',
+        'text-rose-400': computedState === 'error',
+        'text-gray-400': computedState === 'none',
       }"
     >
-      {{ props.message }}
+      {{ computedMessage }}
     </p>
   </div>
 </template>

@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import Sidebar from '~/components/Ui/Dashboard/Sidebar.vue'
 import Topbar from '~/components/Layout/Topbar.vue'
-import Toaster from '~/components/Ui/Common/Toaster.vue'
-import { useToaster } from '~/composables/useToaster'
 import { useI18n } from 'vue-i18n'
-import { LanguageDirections } from '~~/i18n/config'
+import {LanguageDirections} from "~~/i18n/config";
 
 const route = useRoute()
 const { locale, t } = useI18n()
 const head = useLocaleHead()
-const title = computed(() => t(route.meta.title ?? 'common.appName'));
-const toaster = useToaster()
-
-// Set document direction based on current locale
+const title = computed(() => t(<string>route.meta.title ?? 'common.appName'));
 const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof LanguageDirections] === 'rtl')
 </script>
 
@@ -53,8 +48,6 @@ const isRTL = computed(() => LanguageDirections[locale.value as keyof typeof Lan
       <div
           class="pointer-events-none -z-20 absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
       />
-
-      <Toaster id="global-toaster" position="top-right" />
 
       <ClientOnly>
         <UiChatFloating />

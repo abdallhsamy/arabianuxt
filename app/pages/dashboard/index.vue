@@ -31,8 +31,11 @@ import UiProgressBar from '~/components/Ui/Data/UiProgressBar.vue'
 import UiTimeline from '~/components/Ui/Data/UiTimeline.vue'
 import UiConfirmDialog from '~/components/Ui/Feedback/UiConfirmDialog.vue'
 
-const { t } = useI18n()
+definePageMeta({
+  middleware: 'auth',
+})
 
+const { t } = useI18n()
 const currentPage = ref(1)
 const confirmOpen = ref(false)
 const events = [
@@ -140,7 +143,7 @@ const statistics = [
 
         <!-- Inner Card -->
         <div
-            class="relative z-10 rounded-2xl bg-[rgba(15,17,23,0.85)] backdrop-blur-xl border border-white/10 p-5 flex flex-col justify-between h-full transition-all duration-300 group-hover:border-fuchsia-500/50 group-hover:shadow-[inset_0_1px_8px_rgba(255,255,255,0.05)]"
+            class="relative rounded-2xl bg-[rgba(15,17,23,0.85)] backdrop-blur-xl border border-white/10 p-5 flex flex-col justify-between h-full transition-all duration-300 group-hover:border-fuchsia-500/50 group-hover:shadow-[inset_0_1px_8px_rgba(255,255,255,0.05)]"
         >
           <p class="text-[var(--text-secondary)] text-sm">
             {{ item.label }}

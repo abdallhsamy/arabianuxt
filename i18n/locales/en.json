@@ -443,6 +443,7 @@
         "loginButton": "Login",
         "authenticating": "Authenticating...",
         "noAccount": "Don't have an account?",
+        "autoFillCredentials": "Auto fill credentials",
         "createOne": "Create one"
       },
       "register": {
@@ -1403,6 +1404,41 @@
         "linkedin": "LinkedIn",
         "github": "GitHub"
       }
+    }
+  },
+  "topbar": {
+    "searchPlaceholder": "Search…",
+    "notifications": "Notifications",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "settings": "Settings",
+    "lock": "Lock",
+    "notifs": {
+      "newUserSignedUp": "New user signed up",
+      "systemBackupComplete": "System backup complete",
+      "paymentReceivedShort": "Payment received"
+    },
+    "times": {
+      "twoMinAgo": "2m ago",
+      "oneHourAgo": "1h ago",
+      "twoHoursAgo": "2h ago"
+    }
+  },
+  "toasts": {
+    "unexpectedError": "An unexpected error occurred.",
+    "unknownError": "An unknown error occurred."
+  },
+  "api": {
+    "common": {
+      "serverError": "An error occurred while processing your request."
+    },
+    "auth": {
+      "invalidData": "The given data was invalid.",
+      "emailRequired": "The email field is required.",
+      "passwordRequired": "The password field is required.",
+      "invalidCredentials": "Invalid credentials.",
+      "invalidEmailOrPassword": "Invalid email or password.",
+      "loggedOut": "Logged out successfully."
     }
   }
 }

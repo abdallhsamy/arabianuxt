@@ -1,25 +1,81 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Eye, EyeOff, LogIn } from 'lucide-vue-next'
-import { useRouter } from '#imports'
+import { LogIn } from 'lucide-vue-next'
+import {useRouter, useToaster} from '#imports'
 import { useI18n } from 'vue-i18n'
+import {useAuthStore} from "~/store/authStore";
+import {authApi} from "~/api/endpoints/auth.endpoint";
+import {toTypedSchema} from "@vee-validate/zod";
+import {getLoginSchema} from "~/api/schemas/auth.schema";
+import {useField, useForm} from "vee-validate";
+import {useRequest} from "alova/client";
+import UiInput from "~/components/Ui/Form/UiInput.vue";
 
 const { t } = useI18n()
-
+const authStore = useAuthStore()
+const localePath = useLocalePath();
+const toaster = useToaster()
 definePageMeta({ layout: 'auth' })
 
 const router = useRouter()
-const email = ref('')
-const password = ref('')
-const showPassword = ref(false)
 const isLoading = ref(false)
 
-const handleLogin = async (): Promise<void> => {
-  if (!email.value || !password.value) return
-  isLoading.value = true
-  await new Promise(r => setTimeout(r, 1000))
-  isLoading.value = false
-  await router.push('/dashboard')
+const { handleSubmit, isSubmitting } = useForm({
+  validationSchema: toTypedSchema(getLoginSchema()),
+  initialValues: {
+    email: '',
+    password: '',
+  }
+})
+
+const {value: emailField, setValue: setEmailValue, errorMessage: emailError, setErrors: setEmailError} = useField<string>('email')
+const {value: passwordField, setValue: setPasswordValue, errorMessage: passwordError, setErrors: setPasswordError} = useField<string>('password')
+
+const {send, loading, onSuccess, onError} = useRequest(authApi.login, {immediate: false})
+
+const onSubmit = handleSubmit(()=> {
+  setEmailError('')
+  setPasswordError('')
+  send({
+    email: emailField.value,
+    password: passwordField.value,
+  })
+});
+
+onSuccess((event) => {
+  authStore.login(event.data.data);
+  router.push(localePath('/dashboard'))
+})
+
+onError((event) => {
+  const err = event.error
+  const res = err.response?.data || err.data
+  if (!res) {
+    toaster.error(t('toasts.unexpectedError'))
+    return
+  }
+
+  if (res.errors) {
+    if (res.errors.email?.length) {
+      setEmailError(res.errors.email[0])
+    }
+
+    if (res.errors.password?.length) {
+      setPasswordError(res.errors.password[0])
+    }
+
+    toaster.error(res.errors.password[0] || res.errors.email[0] || res.message)
+  } else if (res.message) {
+    toaster.error(res.message)
+
+  } else {
+    toaster.error(t('toasts.unknownError'))
+  }
+})
+
+const autoFillForm = () => {
+  setEmailValue("admin@example.com")
+  setPasswordValue("password")
 }
 </script>
 
@@ -41,34 +97,26 @@ const handleLogin = async (): Promise<void> => {
           {{ t('pages.auth.login.subtitle') }}
         </p>
 
-        <form @submit.prevent="handleLogin" class="space-y-6">
+        <form @submit.prevent="onSubmit" class="space-y-6">
           <div>
-            <label class="text-sm text-[var(--text-secondary)] mb-1 block">{{ t('pages.auth.login.email') }}</label>
-            <input
-                v-model="email"
+            <UiInput
+                :label="t('pages.auth.login.email')"
                 type="email"
+                v-model="emailField"
                 placeholder="your@mail.com"
-                class="input-dark w-full focus:ring-2 focus:ring-fuchsia-500/50"
+                :error-message="emailError"
             />
           </div>
 
           <div>
-            <label class="text-sm text-[var(--text-secondary)] mb-1 block">{{ t('pages.auth.login.password') }}</label>
-            <div class="relative">
-              <input
-                  v-model="password"
-                  :type="showPassword ? 'text' : 'password'"
-                  :placeholder="t('pages.auth.login.passwordPlaceholder')"
-                  class="input-dark w-full pr-10 focus:ring-2 focus:ring-fuchsia-500/50"
-              />
-              <button
-                  type="button"
-                  @click="showPassword = !showPassword"
-                  class="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
-              >
-                <component :is="showPassword ? EyeOff : Eye" class="w-5 h-5" />
-              </button>
-            </div>
+            <UiInput
+                :label="t('pages.auth.login.password')"
+                type="password"
+                v-model="passwordField"
+                :placeholder="t('pages.auth.login.passwordPlaceholder')"
+                :error-message="passwordError"
+                password-toggle
+            />
           </div>
 
           <!-- Forgot password -->
@@ -83,10 +131,10 @@ const handleLogin = async (): Promise<void> => {
 
           <button
               type="submit"
-              :disabled="isLoading"
-              class="relative w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-2"
+              :disabled="loading || isSubmitting"
+              class="cursor-pointer relative w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 hover:brightness-110 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-2"
           >
-            <span v-if="!isLoading">{{ t('pages.auth.login.loginButton') }}</span>
+            <span v-if="!isLoading || !isSubmitting">{{ t('pages.auth.login.loginButton') }}</span>
             <span v-else class="animate-pulse">{{ t('pages.auth.login.authenticating') }}</span>
             <LogIn class="w-5 h-5" />
           </button>
@@ -98,6 +146,14 @@ const handleLogin = async (): Promise<void> => {
             </NuxtLinkLocale>
           </p>
         </form>
+
+        <p class="text-center text-sm text-[var(--text-secondary)]">
+          <button
+              @click="autoFillForm"
+              class="text-fuchsia-400 hover:text-cyan-400 font-medium cursor-pointer">
+            {{ t('pages.auth.login.autoFillCredentials') }}
+          </button>
+        </p>
       </div>
     </div>
   </Transition>

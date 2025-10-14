@@ -102,7 +102,7 @@ onUnmounted(() => timers.forEach(clearTimeout))
         </div>
 
         <!-- Dismiss -->
-        <button class="absolute top-2 right-2 text-gray-400 hover:text-white" @click="remove(t.id)">
+        <button class="absolute top-2 ltr:right-2 rtl:left-2 text-gray-400 hover:text-white" @click="remove(t.id)">
           <X class="w-4 h-4" />
         </button>
 
