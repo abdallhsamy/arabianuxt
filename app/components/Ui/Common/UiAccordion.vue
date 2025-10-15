@@ -1,12 +1,15 @@
 <script setup lang="ts">
+/* eslint-disable vue/no-v-html */
 import { ref, computed } from "vue";
 import { ChevronDown } from "lucide-vue-next";
+import DOMPurify from "dompurify";
+import type { Component } from "vue";
 
 export interface AccordionItem {
   id: string;
   title: string;
   content: string | (() => string);
-  icon?: any;
+  icon?: Component;
   disabled?: boolean;
 }
 
@@ -51,6 +54,12 @@ const colors: Record<string, string> = {
 };
 
 const colorClass = computed(() => colors[props.color]);
+
+const sanitizeContent = (item: AccordionItem) => {
+  const content =
+    typeof item.content === "function" ? item.content() : item.content;
+  return DOMPurify.sanitize(content);
+};
 </script>
 
 <template>
@@ -120,13 +129,8 @@ const colorClass = computed(() => colors[props.color]);
           ]"
         >
           <slot :name="item.id">
-            <div
-              v-html="
-                typeof item.content === 'function'
-                  ? item.content()
-                  : item.content
-              "
-            ></div>
+            <!-- eslint-disable-next-line vue/no-v-html -->
+            <div v-html="sanitizeContent(item)"></div>
           </slot>
         </div>
       </transition>

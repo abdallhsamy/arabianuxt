@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { Component } from "vue";
+
 export interface BreadcrumbItem {
   label: string;
   to?: string;
-  icon?: any;
+  icon?: Component;
 }
 
 defineProps<{ items: BreadcrumbItem[] }>();

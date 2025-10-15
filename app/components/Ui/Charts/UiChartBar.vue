@@ -35,7 +35,7 @@ onMounted(() => {
       })),
     },
     options,
-  } as any);
+  });
 });
 </script>
 

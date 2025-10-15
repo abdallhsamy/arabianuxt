@@ -1,6 +1,8 @@
+import type { Component } from "vue";
+
 interface BaseDropdownItem {
   id: string;
-  icon?: any;
+  icon?: Component;
   shortcut?: string;
   disabled?: boolean;
   color?: string;
@@ -18,7 +20,7 @@ export type DropdownItem =
 
 export interface UiDropdownProps {
   label?: string;
-  icon?: any;
+  icon?: Component;
   items: DropdownItem[];
   trigger?: "click" | "hover";
   align?: "left" | "right";

@@ -1,3 +1,5 @@
+import type { Component } from "vue";
+
 export const UiTabsVariants = {
   Underline: "underline",
   Pill: "pill",
@@ -19,7 +21,7 @@ export type UiTabsColor = (typeof UiTabsColors)[keyof typeof UiTabsColors];
 export interface TabItem {
   id: string;
   label: string;
-  icon?: any;
+  icon?: Component;
   disabled?: boolean;
 }
 

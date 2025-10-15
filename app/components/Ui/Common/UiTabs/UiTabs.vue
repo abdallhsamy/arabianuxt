@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import type { UiTabsProps, TabItem } from "./UiTabs.type";
+import type { UiTabsProps } from "./UiTabs.type";
 import { UiTabsVariants, UiTabsColors } from "./UiTabs.type";
 
 const props = withDefaults(defineProps<UiTabsProps>(), {

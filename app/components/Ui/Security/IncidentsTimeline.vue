@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from "vue";
+import type { Component } from "vue";
 import {
   ShieldAlert,
   AlertTriangle,
@@ -17,7 +18,7 @@ interface Incident {
   ip: string;
   location: string;
   severity: Severity;
-  icon: any;
+  icon: Component;
 }
 
 const props = withDefaults(
@@ -55,10 +56,12 @@ const generateIncident = (): Incident => {
     ],
   } as const;
 
-  const item = (pick(pools[severity] as any) || {
+  const item = (pick(
+    pools[severity] as Array<{ message: string; icon: Component }>
+  ) || {
     message: "Unknown incident",
     icon: ShieldAlert,
-  }) as { message: string; icon: any };
+  }) as { message: string; icon: Component };
   const locs = [
     "Riyadh, SA",
     "Cairo, EG",

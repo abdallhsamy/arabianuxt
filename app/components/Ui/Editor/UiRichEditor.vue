@@ -83,7 +83,7 @@ onMounted(() => {
     editable: props.editable,
     autofocus: props.autofocus,
     onUpdate: ({ editor }) => emit("update:modelValue", editor.getHTML()),
-    onTransaction: ({ editor }) => detectSlash(editor as any),
+    onTransaction: ({ editor }) => detectSlash(editor),
   });
 });
 onBeforeUnmount(() => editor.value?.destroy());
@@ -219,7 +219,7 @@ const pickSlash = (cmd: CommandItem) => {
     .focus()
     .deleteRange({ from: from - del, to: from })
     .run();
-  cmd.action(editor.value as any);
+  cmd.action(editor.value);
   showSlash.value = false;
 };
 
@@ -253,7 +253,10 @@ const openAiPanel = (action: AiAction, _e?: Editor) => {
 const aiPopupPos = ref({ x: 0, y: 0 });
 
 const getSelection = () => {
-  const e = editor.value!;
+  if (!editor.value) {
+    return { text: "", from: 0, to: 0 };
+  }
+  const e = editor.value;
   const { from, to } = e.state.selection;
   const text = e.state.doc.textBetween(from, to, "\n");
   return { text, from, to };

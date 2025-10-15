@@ -11,18 +11,18 @@ export type AuthUser = {
 // i18n type definitions
 declare module "#app" {
   interface NuxtApp {
-    $t: (key: string, ...args: any[]) => string;
+    $t: (key: string, ...args: unknown[]) => string;
   }
 }
 
 declare module "vue" {
   interface ComponentCustomProperties {
-    $t: (key: string, ...args: any[]) => string;
+    $t: (key: string, ...args: unknown[]) => string;
   }
 }
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
-    $t: (key: string, ...args: any[]) => string;
+    $t: (key: string, ...args: unknown[]) => string;
   }
 }

@@ -1,8 +1,10 @@
+import type { Component } from "vue";
+
 export type StepItem = {
   id: string;
   label: string;
   description?: string;
-  icon?: any;
+  icon?: Component;
   state?: "pending" | "active" | "completed" | "error";
 };
 

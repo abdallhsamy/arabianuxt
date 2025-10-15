@@ -4,7 +4,7 @@ import { ref, computed, watch, onBeforeUnmount } from "vue";
 type SortDir = "asc" | "desc";
 export type FieldAccessor<T> = (row: T) => unknown;
 
-export interface TableColumn<T = Record<string, any>> {
+export interface TableColumn<T = Record<string, unknown>> {
   key: string;
   header: string;
   accessor?: keyof T | FieldAccessor<T>;
@@ -16,11 +16,11 @@ export interface TableColumn<T = Record<string, any>> {
   class?: string;
   filter?: {
     type: "text" | "select" | "range";
-    options?: Array<{ label: string; value: any }>;
+    options?: Array<{ label: string; value: string | number | boolean }>;
   };
 }
 
-export interface UiTableProps<T = Record<string, any>> {
+export interface UiTableProps<T = Record<string, unknown>> {
   rows: T[];
   columns: TableColumn<T>[];
   loading?: boolean;
@@ -56,7 +56,8 @@ const props = withDefaults(defineProps<UiTableProps>(), {
   searchPlaceholder: "Search…",
   debounceMs: 200,
   selectable: true,
-  rowKey: (r: any) => r.id ?? JSON.stringify(r),
+  rowKey: (r: Record<string, unknown>) =>
+    (r as { id?: string | number }).id ?? JSON.stringify(r),
   dense: false,
   rounded: true,
   stickyHeader: true,
@@ -67,7 +68,7 @@ const emit = defineEmits<{
   (e: "update:pageSize", v: number): void;
   (e: "selection-change", v: Array<string | number>): void;
   (e: "sort-change", v: { key: string; dir: SortDir }[]): void;
-  (e: "filter-change", v: Record<string, any>): void;
+  (e: "filter-change", v: Record<string, string | number | boolean>): void;
   (e: "column-order-change", v: string[]): void;
   (e: "column-width-change", v: Record<string, number>): void;
   (e: "export"): void;
@@ -82,7 +83,7 @@ const sorts = ref<{ key: string; dir: SortDir }[]>(
   props.defaultSort ? [props.defaultSort] : []
 );
 const selected = ref<Set<string | number>>(new Set());
-const filters = ref<Record<string, any>>({});
+const filters = ref<Record<string, string | number | boolean>>({});
 const filterOpenKey = ref<string | null>(null);
 
 /* ---------- Column order & widths ---------- */
@@ -122,9 +123,12 @@ const normalize = (v: unknown): string => (v == null ? "" : String(v));
 const getCell = <T,>(row: T, col: TableColumn<T>): unknown =>
   typeof col.accessor === "function"
     ? col.accessor(row)
-    : (row as any)[col.accessor ?? col.key];
+    : (row as Record<string, unknown>)[col.accessor ?? col.key];
 
-const debounced = <T extends (...args: any[]) => void>(fn: T, ms: number) => {
+const debounced = <T extends (...args: unknown[]) => void>(
+  fn: T,
+  ms: number
+) => {
   let t: number | undefined;
   return (...args: Parameters<T>) => {
     if (t) window.clearTimeout(t);
@@ -229,7 +233,7 @@ const toggleAllCurrentPage = (): void => {
   selected.value = set;
   emit("selection-change", Array.from(set));
 };
-const toggleRow = (row: any): void => {
+const toggleRow = (row: Record<string, unknown>): void => {
   const k = props.rowKey(row);
   const set = new Set(selected.value);
   if (set.has(k)) set.delete(k);
@@ -264,7 +268,7 @@ const sortIcon = (k: string) => {
 const toggleFilterMenu = (k: string): void => {
   filterOpenKey.value = filterOpenKey.value === k ? null : k;
 };
-const updateFilter = (k: string, v: any): void => {
+const updateFilter = (k: string, v: string | number | boolean): void => {
   filters.value[k] = v;
   emit("filter-change", { ...filters.value });
 };
@@ -339,7 +343,8 @@ const toCSV = (): void => {
   const header = cols.map(c => `"${c.header.replace(/"/g, '""')}"`).join(",");
   const rows = (props.serverMode ? props.rows : sortedRows.value).map(row => {
     const vals = cols.map(
-      c => `"${normalize(getCell(row as any, c)).replace(/"/g, '""')}"`
+      c =>
+        `"${normalize(getCell(row as Record<string, unknown>, c)).replace(/"/g, '""')}"`
     );
     return vals.join(",");
   });

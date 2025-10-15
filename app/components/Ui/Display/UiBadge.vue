@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Component } from "vue";
+
 export interface UiBadgeProps {
   label?: string;
   color?: "gray" | "fuchsia" | "cyan" | "emerald" | "amber" | "rose" | "indigo";
@@ -6,7 +8,7 @@ export interface UiBadgeProps {
   size?: "sm" | "md";
   dot?: boolean;
   glow?: boolean;
-  icon?: any;
+  icon?: Component;
 }
 
 const props = withDefaults(defineProps<UiBadgeProps>(), {

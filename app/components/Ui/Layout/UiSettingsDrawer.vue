@@ -42,7 +42,9 @@ onMounted(() => {
         ...settings.value,
         ...(JSON.parse(saved) as Settings),
       };
-  } catch {}
+  } catch {
+    // Ignore parsing errors and use default settings
+  }
   applyTheme();
 });
 

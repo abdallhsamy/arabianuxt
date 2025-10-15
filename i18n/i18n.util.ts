@@ -2,17 +2,19 @@ import en from "./locales/en.json";
 import ar from "./locales/ar.json";
 import type { AvailableLocale } from "./config";
 
-const dictionaries: Record<AvailableLocale, any> = {
+const dictionaries: Record<AvailableLocale, Record<string, unknown>> = {
   en,
   ar,
 };
 
-function getByPath(object: any, path: string): unknown {
+function getByPath(object: Record<string, unknown>, path: string): unknown {
   return path
     .split(".")
     .reduce(
-      (acc: any, key: string) =>
-        acc && acc[key] !== undefined ? acc[key] : undefined,
+      (acc: Record<string, unknown> | undefined, key: string) =>
+        acc && acc[key] !== undefined
+          ? (acc[key] as Record<string, unknown>)
+          : undefined,
       object
     );
 }

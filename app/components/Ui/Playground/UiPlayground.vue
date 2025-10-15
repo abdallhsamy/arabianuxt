@@ -7,6 +7,7 @@ import {
   onErrorCaptured,
   watch,
 } from "vue";
+import type { Component } from "vue";
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 const props = defineProps<{ schema: PlaygroundSchema }>();
@@ -34,7 +35,7 @@ watch(
 );
 
 // Load component dynamically
-const componentMap: Record<string, any> = {
+const componentMap: Record<string, () => Promise<{ default: Component }>> = {
   "Ui/Common/UiAccordion.vue": () =>
     import("~/components/Ui/Common/UiAccordion.vue"),
   "Ui/Common/UiAlert.vue": () => import("~/components/Ui/Common/UiAlert.vue"),
@@ -98,7 +99,7 @@ const componentMap: Record<string, any> = {
     import("~/components/Ui/Common/UiTooltip.vue"),
 };
 
-const Component = defineAsyncComponent({
+const AsyncComponent = defineAsyncComponent({
   loader:
     componentMap[props.schema.component] ||
     (() => Promise.resolve({ default: () => h("div", "Component not found") })),
@@ -128,7 +129,7 @@ const handleJsonInput = (key: string, event: Event) => {
 
 // Sanitize values before passing to components
 const sanitizedValues = computed(() => {
-  const sanitized: Record<string, any> = {};
+  const sanitized: Record<string, string | boolean | number | string[]> = {};
 
   // First, ensure all schema props have values
   for (const prop of props.schema.props) {
@@ -194,7 +195,7 @@ const sanitizedValues = computed(() => {
 });
 
 // Reactive prop values
-const values = ref<Record<string, any>>(
+const values = ref<Record<string, string | boolean | number | string[]>>(
   Object.fromEntries(
     props.schema.props.map(p => {
       let defaultValue = p.default ?? (p.type === "boolean" ? false : "");
@@ -319,7 +320,7 @@ const codeSnippet = computed(() => {
           </button>
         </div>
         <Suspense v-else>
-          <component :is="Component" v-bind="sanitizedValues" />
+          <component :is="AsyncComponent" v-bind="sanitizedValues" />
           <template #fallback>
             <div class="text-gray-400">Loading component...</div>
           </template>

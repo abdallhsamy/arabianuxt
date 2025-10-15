@@ -45,7 +45,7 @@ onMounted(() => {
         data: d.data,
         fill: true,
         borderColor: d.color ?? "#a855f7",
-        backgroundColor: (ctx: any) => {
+        backgroundColor: (ctx: Chart.ChartContext) => {
           const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 250);
           gradient.addColorStop(0, `${d.color ?? "#a855f7"}55`);
           gradient.addColorStop(1, "transparent");

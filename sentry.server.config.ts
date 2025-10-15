@@ -26,7 +26,12 @@ if (isSentryEnabled && sentryDsn) {
     beforeSend(event, hint) {
       // Check if this is an error with 4xx status code
       if (hint.originalException) {
-        const error = hint.originalException as any;
+        const error = hint.originalException as Error & {
+          isAxiosError?: boolean;
+          response?: { status: number };
+          status?: number;
+          statusCode?: number;
+        };
 
         // Handle AxiosError specifically
         if (

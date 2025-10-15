@@ -6,6 +6,6 @@ export type PlaygroundSchema = {
     type: "string" | "boolean" | "enum" | "number";
     label?: string;
     options?: string[];
-    default?: any;
+    default?: string | boolean | number;
   }[];
 };

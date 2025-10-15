@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import type { Component } from "vue";
 import {
   X,
   Info,
@@ -68,7 +69,7 @@ const colors: Record<string, { bg: string; border: string; text: string }> = {
 };
 
 // Icon mapping
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, Component> = {
   info: Info,
   success: CheckCircle2,
   warning: AlertTriangle,

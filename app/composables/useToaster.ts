@@ -2,7 +2,13 @@ import type { Toast } from "~/components/Ui/Common/Toaster.vue";
 
 export const useToaster = () => {
   const show = (toast: Toast) => {
-    const el = document.querySelector("#global-toaster") as any;
+    const el = document.querySelector("#global-toaster") as HTMLElement & {
+      __vueParentComponent?: {
+        exposed?: {
+          push: (toast: Toast) => void;
+        };
+      };
+    };
     el?.__vueParentComponent?.exposed?.push(toast);
   };
 

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import type { Component } from "vue";
 import { ChevronDown, LayoutDashboard, Star } from "lucide-vue-next";
 
 export interface NavItem {
   label: string;
-  icon?: any;
+  icon?: Component;
   to?: string;
   badge?: string | number;
   children?: NavItem[];
@@ -34,7 +35,7 @@ const toggleGroup = (key: string): void => {
   openMap.value[key] = !openMap.value[key];
 };
 
-const renderIcon = (icon: any) => icon || LayoutDashboard;
+const renderIcon = (icon: Component | undefined) => icon || LayoutDashboard;
 </script>
 
 <template>

@@ -1,3 +1,5 @@
+import type { Component } from "vue";
+
 export const UiButtonVariants = {
   Primary: "primary",
   Secondary: "secondary",
@@ -28,7 +30,7 @@ export type UiButtonIconPosition =
 
 export type UiButtonProps = {
   label?: string;
-  icon?: any;
+  icon?: Component;
   variant?: UiButtonVariant;
   size?: UiButtonSize;
   loading?: boolean;
