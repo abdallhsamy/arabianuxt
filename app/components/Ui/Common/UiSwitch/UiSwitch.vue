@@ -1,22 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { Check, X } from "lucide-vue-next";
-
-export interface UiSwitchProps {
-  modelValue: boolean;
-  label?: string;
-  description?: string;
-  size?: "sm" | "md" | "lg";
-  color?: "fuchsia" | "cyan" | "emerald" | "rose" | "amber" | "indigo";
-  disabled?: boolean;
-  icon?: boolean;
-  outlined?: boolean;
-}
+import type { UiSwitchProps } from "./UiSwitch.type";
+import { UiSwitchSizes, UiSwitchColors } from "./UiSwitch.type";
 
 const props = withDefaults(defineProps<UiSwitchProps>(), {
   modelValue: false,
-  size: "md",
-  color: "fuchsia",
+  size: UiSwitchSizes.Medium,
+  color: UiSwitchColors.Fuchsia,
   icon: false,
   disabled: false,
   outlined: false,
@@ -31,22 +22,26 @@ const toggle = (): void => {
 };
 
 const colors: Record<string, string> = {
-  fuchsia: "from-fuchsia-500 to-indigo-500",
-  cyan: "from-cyan-400 to-indigo-500",
-  emerald: "from-emerald-400 to-cyan-400",
-  rose: "from-rose-500 to-fuchsia-500",
-  amber: "from-amber-400 to-orange-500",
-  indigo: "from-indigo-500 to-fuchsia-500",
+  [UiSwitchColors.Fuchsia]: "from-fuchsia-500 to-indigo-500",
+  [UiSwitchColors.Cyan]: "from-cyan-400 to-indigo-500",
+  [UiSwitchColors.Emerald]: "from-emerald-400 to-cyan-400",
+  [UiSwitchColors.Rose]: "from-rose-500 to-fuchsia-500",
+  [UiSwitchColors.Amber]: "from-amber-400 to-orange-500",
+  [UiSwitchColors.Indigo]: "from-indigo-500 to-fuchsia-500",
 };
 
 const sizes: Record<string, { w: string; h: string; knob: string }> = {
-  sm: { w: "w-9", h: "h-5", knob: "w-4 h-4" },
-  md: { w: "w-11", h: "h-6", knob: "w-5 h-5" },
-  lg: { w: "w-14", h: "h-8", knob: "w-7 h-7" },
+  [UiSwitchSizes.Small]: { w: "w-9", h: "h-5", knob: "w-4 h-4" },
+  [UiSwitchSizes.Medium]: { w: "w-11", h: "h-6", knob: "w-5 h-5" },
+  [UiSwitchSizes.Large]: { w: "w-14", h: "h-8", knob: "w-7 h-7" },
 };
 
-const colorClass = computed(() => colors[props.color] || colors.fuchsia);
-const sizeClass = computed(() => sizes[props.size] || sizes.md);
+const colorClass = computed(
+  () => colors[props.color] || colors[UiSwitchColors.Fuchsia]
+);
+const sizeClass = computed(
+  () => sizes[props.size] || sizes[UiSwitchSizes.Medium]
+);
 </script>
 
 <template>

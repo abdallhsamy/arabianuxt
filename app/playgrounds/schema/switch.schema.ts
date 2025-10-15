@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const switchSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiSwitch.vue",
+  component: "Ui/Common/UiSwitch/UiSwitch.vue",
   title: "Switch",
   props: [
     { key: "label", type: "string", default: "Enable Notifications" },

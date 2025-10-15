@@ -87,7 +87,8 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
   "Ui/Form/UiSlider.vue": () => import("~/components/Ui/Form/UiSlider.vue"),
   "Ui/Common/UiStepper.vue": () =>
     import("~/components/Ui/Common/UiStepper.vue"),
-  "Ui/Common/UiSwitch.vue": () => import("~/components/Ui/Common/UiSwitch.vue"),
+  "Ui/Common/UiSwitch/UiSwitch.vue": () =>
+    import("~/components/Ui/Common/UiSwitch/UiSwitch.vue"),
   "Ui/Data/UiTable.vue": () => import("~/components/Ui/Data/UiTable.vue"),
   "Ui/Common/UiTabs/UiTabs.vue": () =>
     import("~/components/Ui/Common/UiTabs/UiTabs.vue"),

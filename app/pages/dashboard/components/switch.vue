@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiSwitch from "~/components/Ui/Common/UiSwitch.vue";
+import UiSwitch from "~/components/Ui/Common/UiSwitch/UiSwitch.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
