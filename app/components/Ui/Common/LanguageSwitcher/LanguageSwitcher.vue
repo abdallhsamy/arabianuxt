@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { Globe } from "lucide-vue-next";
-import { type AvailableLocale, AvailableLocales } from "~~/i18n/config";
+import { type AvailableLocale } from "~~/i18n/config";
+import { LocaleNames } from "./LanguageSwitcher.type";
 
 const { locale, locales, setLocale } = useI18n();
 const openDropdown = ref(false);
@@ -13,11 +14,6 @@ const currentLocale = computed(() => {
 const availableLocales = computed(() => {
   return locales.value.filter(l => l.code !== locale.value);
 });
-
-const localeNames = {
-  [AvailableLocales.English]: "English",
-  [AvailableLocales.Arabic]: "العربية",
-};
 
 const switchLanguage = async (localeCode: string) => {
   await setLocale(localeCode as AvailableLocale);
@@ -50,7 +46,7 @@ onUnmounted(() => {
     >
       <Globe class="w-5 h-5" />
       <span class="hidden sm:block text-sm font-medium">
-        {{ localeNames[currentLocale?.code as AvailableLocale] }}
+        {{ LocaleNames[currentLocale?.code as AvailableLocale] }}
       </span>
     </button>
 
@@ -71,7 +67,7 @@ onUnmounted(() => {
           class="flex items-center w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-white/5 gap-3 transition-colors"
           @click="switchLanguage(loc.code)"
         >
-          <span>{{ localeNames[loc.code] }}</span>
+          <span>{{ LocaleNames[loc.code] }}</span>
         </button>
       </div>
     </transition>
@@ -83,6 +79,7 @@ onUnmounted(() => {
 .fade-leave-active {
   transition: all 0.15s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
