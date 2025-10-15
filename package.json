@@ -19,6 +19,7 @@
     "@alova/adapter-axios": "^2.0.16",
     "@nuxtjs/i18n": "10.1.0",
     "@pinia/nuxt": "0.11.2",
+    "@sentry/nuxt": "^10",
     "@tailwindcss/vite": "^4.1.14",
     "@tiptap/extension-code-block-lowlight": "^3.6.6",
     "@tiptap/extension-link": "^3.6.6",
@@ -67,5 +68,8 @@
     "lint-staged": "^16.2.4",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3"
+  },
+  "resolutions": {
+    "@vercel/nft": "^0.27.4"
   }
 }
