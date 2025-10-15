@@ -1,9 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
-  headers: Array<{ key: string; label: string; class?: string }>;
-  rows: Array<Record<string, unknown>>;
-  rowKey?: string;
-}>();
+import type { DataTableProps } from "./DataTable.type";
+
+const props = defineProps<DataTableProps>();
 
 const getKey = (row: Record<string, unknown>, index: number): string => {
   const k = props.rowKey ? String(row[props.rowKey]) : undefined;
