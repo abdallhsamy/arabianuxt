@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { ChevronDown } from "lucide-vue-next";
-import type {
-  DropdownItem,
-  UiDropdownProps,
-} from "~/components/Ui/Common/UiDropdown.type";
+import type { DropdownItem, UiDropdownProps } from "./UiDropdown.type";
+import {
+  UiDropdownTriggers,
+  UiDropdownAligns,
+  UiDropdownPositions,
+  UiDropdownColors,
+} from "./UiDropdown.type";
 
 const props = withDefaults(defineProps<UiDropdownProps>(), {
-  trigger: "click",
-  align: "left",
-  position: "bottom",
+  trigger: UiDropdownTriggers.Click,
+  align: UiDropdownAligns.Left,
+  position: UiDropdownPositions.Bottom,
   glow: true,
   glass: true,
-  color: "fuchsia",
+  color: UiDropdownColors.Fuchsia,
 });
 
 const open = ref(false);
@@ -82,7 +85,7 @@ const emit = defineEmits(["select"]);
     ref="dropdownRef"
     @keydown="onKeyDown"
     v-bind="
-      props.trigger === 'hover'
+      props.trigger === UiDropdownTriggers.Hover
         ? { onMouseenter: openMenu, onMouseleave: close }
         : {}
     "
@@ -90,7 +93,7 @@ const emit = defineEmits(["select"]);
     <!-- Trigger Button -->
     <button
       type="button"
-      @click="props.trigger === 'click' && toggle()"
+      @click="props.trigger === UiDropdownTriggers.Click && toggle()"
       class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-white/10 text-gray-200 bg-white/5 hover:bg-white/10 transition-all"
     >
       <component v-if="props.icon" :is="props.icon" class="w-4 h-4" />
@@ -106,8 +109,10 @@ const emit = defineEmits(["select"]);
         :class="[
           props.glass ? 'bg-white/10' : 'bg-gray-900',
           props.glow ? 'shadow-[0_0_20px_rgba(236,72,153,0.35)]' : '',
-          props.align === 'right' ? 'right-0' : 'left-0',
-          props.position === 'top' ? 'bottom-full mb-2' : 'top-full mt-2',
+          props.align === UiDropdownAligns.Right ? 'right-0' : 'left-0',
+          props.position === UiDropdownPositions.Top
+            ? 'bottom-full mb-2'
+            : 'top-full mt-2',
         ]"
       >
         <ul class="py-2 max-h-60 overflow-y-auto" role="menu">
@@ -146,6 +151,7 @@ const emit = defineEmits(["select"]);
 .fade-scale-leave-active {
   transition: all 0.2s ease;
 }
+
 .fade-scale-enter-from,
 .fade-scale-leave-to {
   opacity: 0;

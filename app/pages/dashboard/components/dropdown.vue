@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiDropdown from "~/components/Ui/Common/UiDropdown.vue";
+import UiDropdown from "~/components/Ui/Common/UiDropdown/UiDropdown.vue";
 import { User, Settings, Bell, LogOut } from "lucide-vue-next";
 import type { DropdownItem } from "~/components/Ui/Common/UiDropdown.type";
 

@@ -61,8 +61,8 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
     import("~/components/Ui/Form/UiDatePicker.vue"),
   "Ui/Display/UiDivider.vue": () =>
     import("~/components/Ui/Display/UiDivider.vue"),
-  "Ui/Common/UiDropdown.vue": () =>
-    import("~/components/Ui/Common/UiDropdown.vue"),
+  "Ui/Common/UiDropdown/UiDropdown.vue": () =>
+    import("~/components/Ui/Common/UiDropdown/UiDropdown.vue"),
   "Ui/Display/UiEmptyState.vue": () =>
     import("~/components/Ui/Display/UiEmptyState.vue"),
   "Ui/Form/UiFileUpload.vue": () =>

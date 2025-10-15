@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const dropdownSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiDropdown.vue",
+  component: "Ui/Common/UiDropdown/UiDropdown.vue",
   title: "Dropdown",
   props: [
     { key: "label", type: "string", default: "Dropdown Menu" },
