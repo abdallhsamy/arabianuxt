@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineProps<{ tags: string[] }>();
+import type { TagChipsProps } from "./TagChips.type";
+
+defineProps<TagChipsProps>();
 </script>
 
 <template>
