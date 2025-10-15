@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const modalSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiModal.vue",
+  component: "Ui/Common/UiModal/UiModal.vue",
   title: "UiModal",
   props: [
     { key: "title", type: "string", default: "UiModal Title" },

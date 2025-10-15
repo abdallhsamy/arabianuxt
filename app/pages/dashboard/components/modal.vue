@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiModal from "~/components/Ui/Common/UiModal.vue";
+import UiModal from "~/components/Ui/Common/UiModal/UiModal.vue";
 import UiButton from "~/components/Ui/Common/UiButton/UiButton.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";

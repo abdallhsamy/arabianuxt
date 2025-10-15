@@ -2,22 +2,13 @@
 import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { X } from "lucide-vue-next";
 import { useI18n } from "vue-i18n";
+import type { UiModalProps } from "./UiModal.type";
+import { UiModalSizes } from "./UiModal.type";
 
 const { t } = useI18n();
 
-export interface UiModalProps {
-  modelValue: boolean;
-  title?: string;
-  size?: "sm" | "md" | "lg" | "xl";
-  closable?: boolean;
-  persistent?: boolean;
-  blur?: boolean;
-  glass?: boolean;
-  scrollLock?: boolean;
-}
-
 const props = withDefaults(defineProps<UiModalProps>(), {
-  size: "md",
+  size: UiModalSizes.Medium,
   closable: true,
   persistent: false,
   blur: true,
@@ -64,10 +55,10 @@ watch(visible, v => {
 });
 
 const sizes: Record<string, string> = {
-  sm: "max-w-sm",
-  md: "max-w-lg",
-  lg: "max-w-2xl",
-  xl: "max-w-4xl",
+  [UiModalSizes.Small]: "max-w-sm",
+  [UiModalSizes.Medium]: "max-w-lg",
+  [UiModalSizes.Large]: "max-w-2xl",
+  [UiModalSizes.ExtraLarge]: "max-w-4xl",
 };
 </script>
 

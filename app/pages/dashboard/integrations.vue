@@ -9,7 +9,7 @@ import {
   Unplug,
   Globe,
 } from "lucide-vue-next";
-import UiModal from "~/components/Ui/Common/UiModal.vue";
+import UiModal from "~/components/Ui/Common/UiModal/UiModal.vue";
 import { useI18n } from "vue-i18n";
 
 definePageMeta({

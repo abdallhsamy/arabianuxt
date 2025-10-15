@@ -8,7 +8,7 @@ import {
   AlertTriangle,
   Plus,
 } from "lucide-vue-next";
-import UiModal from "~/components/Ui/Common/UiModal.vue";
+import UiModal from "~/components/Ui/Common/UiModal/UiModal.vue";
 
 definePageMeta({
   middleware: "auth",

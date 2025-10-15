@@ -69,7 +69,8 @@ const componentMap: Record<string, any> = {
     import("~/components/Ui/Form/UiInput/UiInput.vue"),
   "Ui/Display/UiLoaderSpinner.vue": () =>
     import("~/components/Ui/Display/UiLoaderSpinner.vue"),
-  "Ui/Common/UiModal.vue": () => import("~/components/Ui/Common/UiModal.vue"),
+  "Ui/Common/UiModal/UiModal.vue": () =>
+    import("~/components/Ui/Common/UiModal/UiModal.vue"),
   "Ui/Nav/UiPagination.vue": () =>
     import("~/components/Ui/Nav/UiPagination.vue"),
   "Ui/Data/UiProgressBar.vue": () =>
