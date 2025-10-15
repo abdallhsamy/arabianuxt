@@ -1,13 +1,12 @@
 <script setup lang="ts">
+import {
+  GradientCardDefaults,
+  type GradientCardProps,
+} from "./GradientCard.type";
+
 const props = withDefaults(
-  defineProps<{
-    pad?: boolean;
-    class?: string;
-  }>(),
-  {
-    pad: true,
-    class: "",
-  }
+  defineProps<GradientCardProps>(),
+  GradientCardDefaults
 );
 </script>
 
@@ -31,11 +30,13 @@ const props = withDefaults(
   initial-value: 0deg;
   inherits: false;
 }
+
 @keyframes rotate-gradient {
   to {
     --angle: 360deg;
   }
 }
+
 .animate-rotate-gradient {
   background-size: 200% 200%;
   animation: rotate-gradient 14s linear infinite;
