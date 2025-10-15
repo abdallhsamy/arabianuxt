@@ -87,7 +87,8 @@ const componentMap: Record<string, any> = {
     import("~/components/Ui/Common/UiStepper.vue"),
   "Ui/Common/UiSwitch.vue": () => import("~/components/Ui/Common/UiSwitch.vue"),
   "Ui/Data/UiTable.vue": () => import("~/components/Ui/Data/UiTable.vue"),
-  "Ui/Common/UiTabs.vue": () => import("~/components/Ui/Common/UiTabs.vue"),
+  "Ui/Common/UiTabs/UiTabs.vue": () =>
+    import("~/components/Ui/Common/UiTabs/UiTabs.vue"),
   "Ui/Form/UiTagInput.vue": () => import("~/components/Ui/Form/UiTagInput.vue"),
   "Ui/Form/UiTextarea.vue": () => import("~/components/Ui/Form/UiTextarea.vue"),
   "Ui/Layout/UiThemeSwitcher.vue": () =>

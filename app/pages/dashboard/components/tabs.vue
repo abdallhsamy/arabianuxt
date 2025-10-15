@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiTabs from "~/components/Ui/Common/UiTabs.vue";
+import UiTabs from "~/components/Ui/Common/UiTabs/UiTabs.vue";
 import { Home, Settings, Bell, User } from "lucide-vue-next";
 import { ref } from "vue";
 

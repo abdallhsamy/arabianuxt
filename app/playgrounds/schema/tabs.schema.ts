@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const tabsSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiTabs.vue",
+  component: "Ui/Common/UiTabs/UiTabs.vue",
   title: "Tabs",
   props: [
     { key: "modelValue", type: "string", default: "tab1" },
