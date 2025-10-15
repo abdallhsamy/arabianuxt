@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const tooltipSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiTooltip.vue",
+  component: "Ui/Common/UiTooltip/UiTooltip.vue",
   title: "Tooltip",
   props: [
     { key: "text", type: "string", default: "Tooltip text" },

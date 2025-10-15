@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiTooltip from "~/components/Ui/Common/UiTooltip.vue";
+import UiTooltip from "~/components/Ui/Common/UiTooltip/UiTooltip.vue";
 import UiButton from "~/components/Ui/Common/UiButton/UiButton.vue";
 
 definePageMeta({

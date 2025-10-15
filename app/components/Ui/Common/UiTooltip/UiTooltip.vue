@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from "vue";
-
-export interface UiTooltipProps {
-  text: string;
-  position?: "top" | "right" | "bottom" | "left" | "start" | "end";
-  trigger?: "hover" | "click" | "focus";
-  delay?: number;
-  arrow?: boolean;
-  color?: "fuchsia" | "cyan" | "emerald" | "rose" | "amber" | "indigo";
-  glow?: boolean;
-}
+import type { UiTooltipProps } from "./UiTooltip.type";
+import {
+  UiTooltipPositions,
+  UiTooltipTriggers,
+  UiTooltipColors,
+} from "./UiTooltip.type";
 
 const props = withDefaults(defineProps<UiTooltipProps>(), {
-  position: "top",
-  trigger: "hover",
+  position: UiTooltipPositions.Top,
+  trigger: UiTooltipTriggers.Hover,
   delay: 150,
   arrow: true,
-  color: "fuchsia",
+  color: UiTooltipColors.Fuchsia,
   glow: true,
 });
 
@@ -36,21 +32,24 @@ const hideTooltip = () => {
 
 // Trigger logic
 const onTrigger = {
-  hover: { onMouseenter: showTooltip, onMouseleave: hideTooltip },
-  click: { onClick: () => (show.value = !show.value) },
-  focus: { onFocus: showTooltip, onBlur: hideTooltip },
+  [UiTooltipTriggers.Hover]: {
+    onMouseenter: showTooltip,
+    onMouseleave: hideTooltip,
+  },
+  [UiTooltipTriggers.Click]: { onClick: () => (show.value = !show.value) },
+  [UiTooltipTriggers.Focus]: { onFocus: showTooltip, onBlur: hideTooltip },
 }[props.trigger];
 
 onUnmounted(() => clearTimeout(timer.value));
 
 // Color gradients
 const colors: Record<string, string> = {
-  fuchsia: "from-fuchsia-500 to-indigo-500",
-  cyan: "from-cyan-400 to-fuchsia-500",
-  emerald: "from-emerald-400 to-cyan-400",
-  rose: "from-rose-500 to-fuchsia-500",
-  amber: "from-amber-400 to-orange-500",
-  indigo: "from-indigo-500 to-cyan-400",
+  [UiTooltipColors.Fuchsia]: "from-fuchsia-500 to-indigo-500",
+  [UiTooltipColors.Cyan]: "from-cyan-400 to-fuchsia-500",
+  [UiTooltipColors.Emerald]: "from-emerald-400 to-cyan-400",
+  [UiTooltipColors.Rose]: "from-rose-500 to-fuchsia-500",
+  [UiTooltipColors.Amber]: "from-amber-400 to-orange-500",
+  [UiTooltipColors.Indigo]: "from-indigo-500 to-cyan-400",
 };
 </script>
 
@@ -69,13 +68,17 @@ const colors: Record<string, string> = {
           'bg-gradient-to-br',
           colors[color],
           glow ? 'shadow-[0_0_15px_rgba(236,72,153,0.35)]' : '',
-          position === 'top' && 'bottom-full mb-2 left-1/2 -translate-x-1/2',
-          position === 'bottom' && 'top-full mt-2 left-1/2 -translate-x-1/2',
-          position === 'right' && 'left-full ml-2 top-1/2 -translate-y-1/2',
-          position === 'left' && 'right-full mr-2 top-1/2 -translate-y-1/2',
-          position === 'start' &&
+          position === UiTooltipPositions.Top &&
+            'bottom-full mb-2 left-1/2 -translate-x-1/2',
+          position === UiTooltipPositions.Bottom &&
+            'top-full mt-2 left-1/2 -translate-x-1/2',
+          position === UiTooltipPositions.Right &&
+            'left-full ml-2 top-1/2 -translate-y-1/2',
+          position === UiTooltipPositions.Left &&
+            'right-full mr-2 top-1/2 -translate-y-1/2',
+          position === UiTooltipPositions.Start &&
             'ltr:right-full rtl:left-full me-2 top-1/2 -translate-y-1/2',
-          position === 'end' &&
+          position === UiTooltipPositions.End &&
             'ltr:left-full rtl:right-full ms-2 top-1/2 -translate-y-1/2',
         ]"
       >
@@ -107,6 +110,7 @@ const colors: Record<string, string> = {
 .fade-leave-active {
   transition: all 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

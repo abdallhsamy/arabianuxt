@@ -4,7 +4,7 @@ import UiFileUploadAdvanced from "~/components/Ui/Form/UiFileUploadAdvanced.vue"
 import UiDateRangePicker from "~/components/Ui/Form/UiDateRangePicker.vue";
 import UiSearchPanel from "~/components/Ui/Nav/UiSearchPanel.vue";
 import UiChatDock from "~/components/Ui/Assist/UiChatDock.vue";
-import UiTooltip from "~/components/Ui/Feedback/UiTooltip.vue";
+import UiTooltip from "~/components/Ui/Feedback/UiTooltip/UiTooltip.vue";
 
 definePageMeta({
   middleware: "auth",

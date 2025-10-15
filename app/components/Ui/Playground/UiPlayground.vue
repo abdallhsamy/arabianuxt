@@ -97,8 +97,8 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
   "Ui/Layout/UiThemeSwitcher.vue": () =>
     import("~/components/Ui/Layout/UiThemeSwitcher.vue"),
   "Ui/Data/UiTimeline.vue": () => import("~/components/Ui/Data/UiTimeline.vue"),
-  "Ui/Common/UiTooltip.vue": () =>
-    import("~/components/Ui/Common/UiTooltip.vue"),
+  "Ui/Common/UiTooltip/UiTooltip.vue": () =>
+    import("~/components/Ui/Common/UiTooltip/UiTooltip.vue"),
 };
 
 const AsyncComponent = defineAsyncComponent({
