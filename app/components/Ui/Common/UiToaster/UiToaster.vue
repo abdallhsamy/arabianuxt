@@ -1,37 +1,24 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from "vue";
 import { CheckCircle2, XCircle, AlertTriangle, Info, X } from "lucide-vue-next";
+import type { UiToast, UiToasterProps } from "./UiToaster.type";
+import { UiToastTypes, UiToastPositions } from "./UiToaster.type";
 
-export type ToastType = "success" | "error" | "warning" | "info" | "custom";
-export interface Toast {
-  id?: string;
-  title: string;
-  message?: string;
-  type?: ToastType;
-  duration?: number;
-  actionLabel?: string;
-  onAction?: () => void;
-  groupKey?: string;
-}
-
-const props = defineProps<{ position?: string }>();
-const position = props.position ?? "top-right";
-const toasts = ref<Toast[]>([]);
+const props = defineProps<UiToasterProps>();
+const position = props.position ?? UiToastPositions.TopRight;
+const toasts = ref<UiToast[]>([]);
 const timers = new Map<string, NodeJS.Timeout>();
 
-// ✅ FIXED HERE ↓
-const push = (t: Toast) => {
-  // Parentheses around ?? expression
+const push = (t: UiToast) => {
   const id = t.id || (crypto.randomUUID?.() ?? String(Date.now()));
 
-  const toast: Toast = {
+  const toast: UiToast = {
     id,
     duration: t.duration ?? 4000,
-    type: t.type ?? "info",
+    type: t.type ?? UiToastTypes.Info,
     ...t,
   };
 
-  // group similar toasts
   if (t.groupKey) {
     const existing = toasts.value.find(x => x.groupKey === t.groupKey);
     if (existing) {
@@ -92,20 +79,20 @@ onUnmounted(() => timers.forEach(clearTimeout));
         <!-- Icon -->
         <component
           :is="
-            t.type === 'success'
+            t.type === UiToastTypes.Success
               ? CheckCircle2
-              : t.type === 'error'
+              : t.type === UiToastTypes.Error
                 ? XCircle
-                : t.type === 'warning'
+                : t.type === UiToastTypes.Warning
                   ? AlertTriangle
                   : Info
           "
           class="w-5 h-5 flex-shrink-0"
           :class="{
-            'text-emerald-400': t.type === 'success',
-            'text-rose-400': t.type === 'error',
-            'text-amber-400': t.type === 'warning',
-            'text-cyan-400': t.type === 'info',
+            'text-emerald-400': t.type === UiToastTypes.Success,
+            'text-rose-400': t.type === UiToastTypes.Error,
+            'text-amber-400': t.type === UiToastTypes.Warning,
+            'text-cyan-400': t.type === UiToastTypes.Info,
           }"
         />
 
@@ -138,11 +125,13 @@ onUnmounted(() => timers.forEach(clearTimeout));
           class="absolute bottom-0 left-0 h-1"
           :class="{
             'bg-gradient-to-r from-emerald-400 to-cyan-400':
-              t.type === 'success',
-            'bg-gradient-to-r from-rose-500 to-fuchsia-500': t.type === 'error',
+              t.type === UiToastTypes.Success,
+            'bg-gradient-to-r from-rose-500 to-fuchsia-500':
+              t.type === UiToastTypes.Error,
             'bg-gradient-to-r from-amber-400 to-orange-500':
-              t.type === 'warning',
-            'bg-gradient-to-r from-cyan-400 to-indigo-400': t.type === 'info',
+              t.type === UiToastTypes.Warning,
+            'bg-gradient-to-r from-cyan-400 to-indigo-400':
+              t.type === UiToastTypes.Info,
           }"
           :style="{
             width: '100%',
@@ -163,14 +152,17 @@ onUnmounted(() => timers.forEach(clearTimeout));
     width: 0;
   }
 }
+
 .toast-enter-active,
 .toast-leave-active {
   transition: all 0.25s ease;
 }
+
 .toast-enter-from {
   opacity: 0;
   transform: translateY(10px) scale(0.95);
 }
+
 .toast-leave-to {
   opacity: 0;
   transform: translateY(-10px) scale(0.95);

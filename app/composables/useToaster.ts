@@ -1,11 +1,11 @@
-import type { Toast } from "~/components/Ui/Common/Toaster.vue";
+import type { UiToast } from "~/components/Ui/Common/UiToaster/UiToaster.type";
 
 export const useToaster = () => {
-  const show = (toast: Toast) => {
+  const show = (toast: UiToast) => {
     const el = document.querySelector("#global-toaster") as HTMLElement & {
       __vueParentComponent?: {
         exposed?: {
-          push: (toast: Toast) => void;
+          push: (toast: UiToast) => void;
         };
       };
     };
@@ -15,22 +15,22 @@ export const useToaster = () => {
   const success = (
     title: string,
     message?: string,
-    options: Partial<Toast> = {}
+    options: Partial<UiToast> = {}
   ) => show({ title, message, type: "success", ...options });
   const error = (
     title: string,
     message?: string,
-    options: Partial<Toast> = {}
+    options: Partial<UiToast> = {}
   ) => show({ title, message, type: "error", ...options });
   const warning = (
     title: string,
     message?: string,
-    options: Partial<Toast> = {}
+    options: Partial<UiToast> = {}
   ) => show({ title, message, type: "warning", ...options });
   const info = (
     title: string,
     message?: string,
-    options: Partial<Toast> = {}
+    options: Partial<UiToast> = {}
   ) => show({ title, message, type: "info", ...options });
 
   return { show, success, error, warning, info };

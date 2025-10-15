@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AvailableLocale, LanguageDirection } from "~~/i18n/config";
-import Toaster from "~/components/Ui/Common/Toaster.vue";
+import UiToaster from "~/components/Ui/UiToaster/UiToaster.vue";
 
 const headMeta = useLocaleHead({
   dir: true,
@@ -18,6 +18,6 @@ useHead({
 <template>
   <NuxtLayout>
     <NuxtPage />
-    <Toaster id="global-toaster" position="top-right" />
+    <UiToaster id="global-toaster" position="top-right" />
   </NuxtLayout>
 </template>
