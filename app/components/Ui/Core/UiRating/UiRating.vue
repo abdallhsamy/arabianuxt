@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-
-export interface UiRatingProps {
-  modelValue?: number;
-  max?: number;
-  icon?: "star" | "emoji" | "heart";
-  readonly?: boolean;
-}
+import { UiRatingIconShapes, type UiRatingProps } from "./UiRating.type";
 
 const props = withDefaults(defineProps<UiRatingProps>(), {
   modelValue: 0,
@@ -14,14 +8,10 @@ const props = withDefaults(defineProps<UiRatingProps>(), {
   icon: "star",
   readonly: false,
 });
+
 const emit = defineEmits<{ (e: "update:modelValue", v: number): void }>();
 
 const hover = ref<number | null>(null);
-const icons = {
-  star: ["☆", "★"],
-  emoji: ["😐", "😍"],
-  heart: ["♡", "❤️"],
-};
 
 const set = (i: number) => {
   if (props.readonly) return;
@@ -43,7 +33,11 @@ const set = (i: number) => {
       @mouseleave="hover = null"
       @click="set(i)"
     >
-      {{ i <= (hover ?? props.modelValue) ? icons[icon][1] : icons[icon][0] }}
+      {{
+        i <= (hover ?? props.modelValue)
+          ? UiRatingIconShapes[icon][1]
+          : UiRatingIconShapes[icon][0]
+      }}
     </span>
   </div>
 </template>
