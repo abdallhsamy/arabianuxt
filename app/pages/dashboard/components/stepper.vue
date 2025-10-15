@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiStepper from "~/components/Ui/Common/UiStepper.vue";
+import UiStepper from "~/components/Ui/Common/UiStepper/UiStepper.vue";
 import { User, CreditCard, CheckCircle2 } from "lucide-vue-next";
 import { ref } from "vue";
 import type { StepItem } from "~/components/Ui/Common/UiStepper.type";

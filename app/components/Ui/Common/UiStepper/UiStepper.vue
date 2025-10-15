@@ -2,10 +2,11 @@
 import { computed } from "vue";
 import { Check, AlertCircle } from "lucide-vue-next";
 import type { UiStepperProps } from "./UiStepper.type";
+import { UiStepperColors, UiStepperStates } from "./UiStepper.type";
 
 const props = withDefaults(defineProps<UiStepperProps>(), {
   vertical: false,
-  color: "fuchsia",
+  color: UiStepperColors.Fuchsia,
   glow: true,
   showNumbers: true,
   connectLines: true,
@@ -16,12 +17,12 @@ const emit = defineEmits(["change"]);
 const selectStep = (id: string) => emit("change", id);
 
 const colors: Record<string, string> = {
-  fuchsia: "from-fuchsia-500 to-indigo-500",
-  cyan: "from-cyan-400 to-fuchsia-500",
-  emerald: "from-emerald-400 to-cyan-400",
-  rose: "from-rose-500 to-fuchsia-500",
-  indigo: "from-indigo-500 to-cyan-400",
-  amber: "from-amber-400 to-orange-500",
+  [UiStepperColors.Fuchsia]: "from-fuchsia-500 to-indigo-500",
+  [UiStepperColors.Cyan]: "from-cyan-400 to-fuchsia-500",
+  [UiStepperColors.Emerald]: "from-emerald-400 to-cyan-400",
+  [UiStepperColors.Rose]: "from-rose-500 to-fuchsia-500",
+  [UiStepperColors.Indigo]: "from-indigo-500 to-cyan-400",
+  [UiStepperColors.Amber]: "from-amber-400 to-orange-500",
 };
 
 const colorClass = computed(() => colors[props.color]);
@@ -58,14 +59,14 @@ const colorClass = computed(() => colors[props.color]);
       <div
         class="relative z-10 flex items-center justify-center rounded-full border border-white/10 text-gray-200 transition-all duration-300"
         :class="[
-          step.state === 'completed'
+          step.state === UiStepperStates.Completed
             ? `bg-gradient-to-r ${colorClass} text-white border-transparent`
-            : step.state === 'active'
+            : step.state === UiStepperStates.Active
               ? `bg-white/10 text-white ring-2 ring-fuchsia-500/40`
-              : step.state === 'error'
+              : step.state === UiStepperStates.Error
                 ? 'bg-rose-500/20 text-rose-300 border-rose-400/30'
                 : 'bg-white/5 text-gray-400',
-          props.glow && step.state === 'active'
+          props.glow && step.state === UiStepperStates.Active
             ? 'shadow-[0_0_15px_rgba(236,72,153,0.4)]'
             : '',
           'w-10 h-10 shrink-0 backdrop-blur-xl',
@@ -75,12 +76,12 @@ const colorClass = computed(() => colors[props.color]);
         tabindex="0"
       >
         <component
-          v-if="step.state === 'completed'"
+          v-if="step.state === UiStepperStates.Completed"
           :is="Check"
           class="w-5 h-5"
         />
         <component
-          v-else-if="step.state === 'error'"
+          v-else-if="step.state === UiStepperStates.Error"
           :is="AlertCircle"
           class="w-5 h-5"
         />
@@ -95,11 +96,11 @@ const colorClass = computed(() => colors[props.color]);
         <span
           class="text-sm font-medium"
           :class="[
-            step.state === 'active'
+            step.state === UiStepperStates.Active
               ? 'text-white'
-              : step.state === 'completed'
+              : step.state === UiStepperStates.Completed
                 ? 'text-gray-300'
-                : step.state === 'error'
+                : step.state === UiStepperStates.Error
                   ? 'text-rose-400'
                   : 'text-gray-400',
           ]"

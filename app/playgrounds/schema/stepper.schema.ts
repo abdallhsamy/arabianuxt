@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const stepperSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiStepper.vue",
+  component: "Ui/Common/UiStepper/UiStepper.vue",
   title: "Stepper",
   props: [
     { key: "vertical", type: "boolean", default: false },
