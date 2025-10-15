@@ -38,7 +38,8 @@ watch(
 const componentMap: Record<string, () => Promise<{ default: Component }>> = {
   "Ui/Common/UiAccordion.vue": () =>
     import("~/components/Ui/Common/UiAccordion.vue"),
-  "Ui/Common/UiAlert.vue": () => import("~/components/Ui/Common/UiAlert.vue"),
+  "Ui/Common/UiAlert/UiAlert.vue": () =>
+    import("~/components/Ui/Common/UiAlert/UiAlert.vue"),
   "Ui/Core/UiAvatar.vue": () => import("~/components/Ui/Core/UiAvatar.vue"),
   "Ui/Display/UiBadge.vue": () => import("~/components/Ui/Display/UiBadge.vue"),
   "Ui/Nav/UiBreadcrumb.vue": () =>

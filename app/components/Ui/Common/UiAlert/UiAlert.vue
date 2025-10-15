@@ -8,20 +8,11 @@ import {
   AlertTriangle,
   AlertOctagon,
 } from "lucide-vue-next";
-
-export interface UiAlertProps {
-  type?: "info" | "success" | "warning" | "error";
-  title?: string;
-  message?: string;
-  dismissible?: boolean;
-  autoClose?: boolean;
-  duration?: number;
-  icon?: boolean;
-  color?: "fuchsia" | "emerald" | "amber" | "rose" | "indigo" | "cyan";
-}
+import type { UiAlertProps } from "./UiAlert.type";
+import { UiAlertTypes } from "./UiAlert.type";
 
 const props = withDefaults(defineProps<UiAlertProps>(), {
-  type: "info",
+  type: UiAlertTypes.Info,
   dismissible: true,
   autoClose: false,
   duration: 4000,
@@ -46,22 +37,22 @@ onMounted(() => {
 
 // Color mapping
 const colors: Record<string, { bg: string; border: string; text: string }> = {
-  info: {
+  [UiAlertTypes.Info]: {
     bg: "bg-cyan-500/10",
     border: "border-cyan-500/30",
     text: "text-cyan-400",
   },
-  success: {
+  [UiAlertTypes.Success]: {
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/30",
     text: "text-emerald-400",
   },
-  warning: {
+  [UiAlertTypes.Warning]: {
     bg: "bg-amber-500/10",
     border: "border-amber-500/30",
     text: "text-amber-400",
   },
-  error: {
+  [UiAlertTypes.Error]: {
     bg: "bg-rose-500/10",
     border: "border-rose-500/30",
     text: "text-rose-400",
@@ -70,10 +61,10 @@ const colors: Record<string, { bg: string; border: string; text: string }> = {
 
 // Icon mapping
 const iconMap: Record<string, Component> = {
-  info: Info,
-  success: CheckCircle2,
-  warning: AlertTriangle,
-  error: AlertOctagon,
+  [UiAlertTypes.Info]: Info,
+  [UiAlertTypes.Success]: CheckCircle2,
+  [UiAlertTypes.Warning]: AlertTriangle,
+  [UiAlertTypes.Error]: AlertOctagon,
 };
 </script>
 
@@ -93,10 +84,10 @@ const iconMap: Record<string, Component> = {
       <div
         class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b"
         :class="{
-          'from-cyan-400 to-indigo-500': type === 'info',
-          'from-emerald-400 to-cyan-400': type === 'success',
-          'from-amber-400 to-orange-500': type === 'warning',
-          'from-rose-500 to-fuchsia-500': type === 'error',
+          'from-cyan-400 to-indigo-500': type === UiAlertTypes.Info,
+          'from-emerald-400 to-cyan-400': type === UiAlertTypes.Success,
+          'from-amber-400 to-orange-500': type === UiAlertTypes.Warning,
+          'from-rose-500 to-fuchsia-500': type === UiAlertTypes.Error,
         }"
       />
 
@@ -138,6 +129,7 @@ const iconMap: Record<string, Component> = {
 .fade-leave-active {
   transition: all 0.25s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

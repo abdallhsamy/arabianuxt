@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const alertSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiAlert.vue",
+  component: "Ui/Common/UiAlert/UiAlert.vue",
   title: "Alert",
   props: [
     {
