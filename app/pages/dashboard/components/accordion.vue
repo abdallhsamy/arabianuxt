@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiAccordion from "~/components/Ui/Common/UiAccordion.vue";
+import UiAccordion from "~/components/Ui/Common/UiAccordion/UiAccordion.vue";
 import { Info, Settings, Lock } from "lucide-vue-next";
 
 definePageMeta({
@@ -66,6 +66,7 @@ const faqItems = [
 .page-title {
   @apply text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-indigo-400 to-cyan-400;
 }
+
 .section-title {
   @apply text-lg font-semibold text-gray-300 mb-3;
 }

@@ -36,8 +36,8 @@ watch(
 
 // Load component dynamically
 const componentMap: Record<string, () => Promise<{ default: Component }>> = {
-  "Ui/Common/UiAccordion.vue": () =>
-    import("~/components/Ui/Common/UiAccordion.vue"),
+  "Ui/Common/UiAccordion/UiAccordion.vue": () =>
+    import("~/components/Ui/Common/UiAccordion/UiAccordion.vue"),
   "Ui/Common/UiAlert/UiAlert.vue": () =>
     import("~/components/Ui/Common/UiAlert/UiAlert.vue"),
   "Ui/Core/UiAvatar.vue": () => import("~/components/Ui/Core/UiAvatar.vue"),

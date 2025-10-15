@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const accordionSchema: PlaygroundSchema = {
-  component: "Ui/Common/UiAccordion.vue",
+  component: "Ui/Common/UiAccordion/UiAccordion.vue",
   title: "Accordion",
   props: [
     {

@@ -3,30 +3,13 @@
 import { ref, computed } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 import DOMPurify from "dompurify";
-import type { Component } from "vue";
-
-export interface AccordionItem {
-  id: string;
-  title: string;
-  content: string | (() => string);
-  icon?: Component;
-  disabled?: boolean;
-}
-
-export interface UiAccordionProps {
-  items: AccordionItem[];
-  multiple?: boolean;
-  orientation?: "vertical" | "horizontal";
-  color?: "fuchsia" | "cyan" | "emerald" | "rose" | "indigo" | "amber";
-  glow?: boolean;
-  glass?: boolean;
-  hover?: boolean;
-}
+import type { UiAccordionProps, AccordionItem } from "./UiAccordion.type";
+import { UiAccordionOrientations, UiAccordionColors } from "./UiAccordion.type";
 
 const props = withDefaults(defineProps<UiAccordionProps>(), {
   multiple: false,
-  orientation: "vertical",
-  color: "fuchsia",
+  orientation: UiAccordionOrientations.Vertical,
+  color: UiAccordionColors.Fuchsia,
   glow: true,
   glass: true,
   hover: true,
@@ -45,12 +28,12 @@ const toggle = (id: string) => {
 const isOpen = (id: string): boolean => openItems.value.includes(id);
 
 const colors: Record<string, string> = {
-  fuchsia: "from-fuchsia-500 to-indigo-500",
-  cyan: "from-cyan-400 to-fuchsia-500",
-  emerald: "from-emerald-400 to-cyan-400",
-  rose: "from-rose-500 to-fuchsia-500",
-  indigo: "from-indigo-500 to-cyan-400",
-  amber: "from-amber-400 to-orange-500",
+  [UiAccordionColors.Fuchsia]: "from-fuchsia-500 to-indigo-500",
+  [UiAccordionColors.Cyan]: "from-cyan-400 to-fuchsia-500",
+  [UiAccordionColors.Emerald]: "from-emerald-400 to-cyan-400",
+  [UiAccordionColors.Rose]: "from-rose-500 to-fuchsia-500",
+  [UiAccordionColors.Indigo]: "from-indigo-500 to-cyan-400",
+  [UiAccordionColors.Amber]: "from-amber-400 to-orange-500",
 };
 
 const colorClass = computed(() => colors[props.color]);
@@ -67,7 +50,7 @@ const sanitizeContent = (item: AccordionItem) => {
     class="relative w-full overflow-hidden border border-white/10 backdrop-blur-xl rounded-2xl"
     :class="[
       props.glass ? 'bg-white/5' : 'bg-gray-900',
-      props.orientation === 'horizontal'
+      props.orientation === UiAccordionOrientations.Horizontal
         ? 'flex divide-x divide-white/10'
         : 'flex flex-col divide-y divide-white/10',
     ]"
@@ -77,7 +60,7 @@ const sanitizeContent = (item: AccordionItem) => {
       :key="item.id"
       class="relative flex"
       :class="[
-        props.orientation === 'horizontal'
+        props.orientation === UiAccordionOrientations.Horizontal
           ? 'flex-col w-full max-w-sm min-w-[220px]'
           : 'flex-col w-full',
         props.glow && isOpen(item.id)
@@ -125,7 +108,9 @@ const sanitizeContent = (item: AccordionItem) => {
           class="px-5 py-4 text-sm text-gray-300 leading-relaxed transition-all"
           :class="[
             props.glass ? 'bg-white/5' : 'bg-gray-900',
-            props.orientation === 'horizontal' ? 'flex-1 overflow-y-auto' : '',
+            props.orientation === UiAccordionOrientations.Horizontal
+              ? 'flex-1 overflow-y-auto'
+              : '',
           ]"
         >
           <slot :name="item.id">
@@ -144,6 +129,7 @@ const sanitizeContent = (item: AccordionItem) => {
   transition: all 0.3s ease;
   overflow: hidden;
 }
+
 .accordion-enter-from,
 .accordion-leave-to {
   max-height: 0;
