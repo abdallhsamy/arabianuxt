@@ -1,29 +1,28 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import {
+  UiRadioDefaults,
+  type UiRadioProps,
+  UiRadioSizes,
+} from "./UiRadio.type";
 
-export type FieldSize = "sm" | "md" | "lg";
-
-export interface UiRadioProps {
-  modelValue: string | number | null;
-  value: string | number;
-  name?: string;
-  id?: string;
-  label?: string;
-  disabled?: boolean;
-  size?: FieldSize;
-}
-
-const props = withDefaults(defineProps<UiRadioProps>(), {
-  size: "md",
-});
+const props = withDefaults(defineProps<UiRadioProps>(), UiRadioDefaults);
 const emit = defineEmits(["update:modelValue", "change"]);
 
 const s = computed(
   () =>
     ({
-      sm: { dot: "w-2 h-2", box: "w-4 h-4", font: "text-sm" },
-      md: { dot: "w-2.5 h-2.5", box: "w-5 h-5", font: "text-sm" },
-      lg: { dot: "w-3 h-3", box: "w-6 h-6", font: "text-base" },
+      [UiRadioSizes.Small]: { dot: "w-2 h-2", box: "w-4 h-4", font: "text-sm" },
+      [UiRadioSizes.Medium]: {
+        dot: "w-2.5 h-2.5",
+        box: "w-5 h-5",
+        font: "text-sm",
+      },
+      [UiRadioSizes.Large]: {
+        dot: "w-3 h-3",
+        box: "w-6 h-6",
+        font: "text-base",
+      },
     })[props.size]
 );
 
@@ -59,8 +58,8 @@ const select = () => {
     >
       <span v-if="checked" class="rounded-full bg-white" :class="s.dot" />
     </span>
-    <span :class="['text-gray-200', s.font]" v-if="props.label">{{
-      props.label
-    }}</span>
+    <span :class="['text-gray-200', s.font]" v-if="props.label">
+      {{ props.label }}
+    </span>
   </button>
 </template>
