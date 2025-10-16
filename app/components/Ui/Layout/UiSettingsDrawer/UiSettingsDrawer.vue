@@ -1,21 +1,18 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
+import {
+  type Settings,
+  UI_SETTINGS_LS_KEY,
+  UiSettingsDensity,
+  type UiSettingsDrawerEmits,
+  type UiSettingsDrawerProps,
+  UiSettingsMotion,
+  UiSettingsThemes,
+} from "./UiSettingsDrawer.type";
 
-export interface Settings {
-  theme: "light" | "dark" | "fancy";
-  density: "comfortable" | "compact";
-  motion: "auto" | "reduced";
-  glass: number; // 0..1
-  rtl: boolean;
-}
+const props = defineProps<UiSettingsDrawerProps>();
 
-const LS_KEY = "app:settings";
-
-const props = defineProps<{ modelValue: boolean }>();
-const emit = defineEmits<{
-  (e: "update:modelValue", v: boolean): void;
-  (e: "update:settings", v: Settings): void;
-}>();
+const emit = defineEmits<UiSettingsDrawerEmits>();
 
 const open = ref<boolean>(props.modelValue);
 watch(
@@ -26,9 +23,9 @@ const close = (): void => emit("update:modelValue", false);
 
 /* defaults */
 const settings = ref<Settings>({
-  theme: "dark",
-  density: "comfortable",
-  motion: "auto",
+  theme: UiSettingsThemes.Dark,
+  density: UiSettingsDensity.Comfortable,
+  motion: UiSettingsMotion.Auto,
   glass: 0.7,
   rtl: false,
 });
@@ -36,7 +33,7 @@ const settings = ref<Settings>({
 /* hydrate from localStorage */
 onMounted(() => {
   try {
-    const saved = localStorage.getItem(LS_KEY);
+    const saved = localStorage.getItem(UI_SETTINGS_LS_KEY);
     if (saved)
       settings.value = {
         ...settings.value,
@@ -52,7 +49,7 @@ onMounted(() => {
 watch(
   settings,
   v => {
-    localStorage.setItem(LS_KEY, JSON.stringify(v));
+    localStorage.setItem(UI_SETTINGS_LS_KEY, JSON.stringify(v));
     applyTheme();
     emit("update:settings", v);
   },
@@ -63,15 +60,16 @@ const applyTheme = (): void => {
   const html = document.documentElement;
   // theme
   html.classList.toggle(
-    "dark",
-    settings.value.theme === "dark" || settings.value.theme === "fancy"
+    UiSettingsThemes.Dark,
+    settings.value.theme === UiSettingsThemes.Dark ||
+      settings.value.theme === UiSettingsThemes.Fancy
   );
   html.setAttribute("data-theme", settings.value.theme);
 
   // motion
   html.style.setProperty(
     "--motion",
-    settings.value.motion === "reduced" ? "0" : "1"
+    settings.value.motion === UiSettingsMotion.Reduced ? "0" : "1"
   );
 
   // glass intensity tokens (used by your components via CSS vars)
@@ -80,7 +78,7 @@ const applyTheme = (): void => {
   // density
   html.style.setProperty(
     "--space",
-    settings.value.density === "compact" ? "0.5rem" : "0.75rem"
+    settings.value.density === UiSettingsDensity.Compact ? "0.5rem" : "0.75rem"
   );
 
   // direction
@@ -111,15 +109,23 @@ const applyTheme = (): void => {
         <div class="grid grid-cols-3 gap-2">
           <button
             class="rounded-lg border border-white/10 bg-white/5 px-2 py-2 text-gray-200 hover:bg-white/10"
-            :class="settings.theme === 'light' ? 'ring-1 ring-cyan-400/50' : ''"
-            @click="settings.theme = 'light'"
+            :class="
+              settings.theme === UiSettingsThemes.Light
+                ? 'ring-1 ring-cyan-400/50'
+                : ''
+            "
+            @click="settings.theme = UiSettingsThemes.Light"
           >
             Light
           </button>
           <button
             class="rounded-lg border border-white/10 bg-white/5 px-2 py-2 text-gray-200 hover:bg-white/10"
-            :class="settings.theme === 'dark' ? 'ring-1 ring-cyan-400/50' : ''"
-            @click="settings.theme = 'dark'"
+            :class="
+              settings.theme === UiSettingsThemes.Dark
+                ? 'ring-1 ring-cyan-400/50'
+                : ''
+            "
+            @click="settings.theme = UiSettingsThemes.Dark"
           >
             Dark
           </button>
@@ -143,9 +149,9 @@ const applyTheme = (): void => {
             <input
               type="radio"
               name="density"
-              value="comfortable"
-              :checked="settings.density === 'comfortable'"
-              @change="settings.density = 'comfortable'"
+              :value="UiSettingsDensity.Comfortable"
+              :checked="settings.density === UiSettingsDensity.Comfortable"
+              @change="settings.density = UiSettingsDensity.Comfortable"
             />
             Comfortable
           </label>
@@ -155,9 +161,9 @@ const applyTheme = (): void => {
             <input
               type="radio"
               name="density"
-              value="compact"
-              :checked="settings.density === 'compact'"
-              @change="settings.density = 'compact'"
+              :value="UiSettingsDensity.Compact"
+              :checked="settings.density === UiSettingsDensity.Compact"
+              @change="settings.density = UiSettingsDensity.Compact"
             />
             Compact
           </label>
@@ -172,9 +178,9 @@ const applyTheme = (): void => {
             <input
               type="radio"
               name="motion"
-              value="auto"
-              :checked="settings.motion === 'auto'"
-              @change="settings.motion = 'auto'"
+              :value="UiSettingsMotion.Auto"
+              :checked="settings.motion === UiSettingsMotion.Auto"
+              @change="settings.motion = UiSettingsMotion.Auto"
             />
             Auto
           </label>
@@ -182,9 +188,9 @@ const applyTheme = (): void => {
             <input
               type="radio"
               name="motion"
-              value="reduced"
-              :checked="settings.motion === 'reduced'"
-              @change="settings.motion = 'reduced'"
+              :value="UiSettingsMotion.Reduced"
+              :checked="settings.motion === UiSettingsMotion.Reduced"
+              @change="settings.motion = UiSettingsMotion.Reduced"
             />
             Reduced
           </label>
