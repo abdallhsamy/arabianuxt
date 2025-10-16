@@ -9,36 +9,18 @@ import {
 } from "vue";
 import { ChevronDown, Check, Search } from "lucide-vue-next";
 import { useI18n } from "vue-i18n";
+import {
+  UiSelectDefaults,
+  UiSelectParentThemes,
+  type UiSelectProps,
+  UiSelectSizes,
+  UiSelectStates,
+  UiSelectVariants,
+} from "./UiSelect.type";
 
 const { t } = useI18n();
 
-export interface Option {
-  label: string;
-  value: string | number;
-}
-
-export interface UiSelectProps {
-  modelValue: string | number | null;
-  label?: string;
-  placeholder?: string;
-  options: Option[];
-  variant?: "default" | "outlined" | "filled";
-  state?: "success" | "warning" | "error" | "none";
-  searchable?: boolean;
-  message?: string;
-  disabled?: boolean;
-  parentTheme?: "dark" | "light" | "gradient";
-  size?: "sm" | "md" | "lg";
-}
-
-const props = withDefaults(defineProps<UiSelectProps>(), {
-  variant: "default",
-  state: "none",
-  parentTheme: "dark",
-  disabled: false,
-  searchable: false,
-  size: "md",
-});
+const props = withDefaults(defineProps<UiSelectProps>(), UiSelectDefaults);
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -53,9 +35,9 @@ const sizeMap: Record<
   Required<UiSelectProps>["size"],
   { h: string; font: string; caret: string }
 > = {
-  sm: { h: "h-10", font: "text-sm", caret: "w-4 h-4" },
-  md: { h: "h-11", font: "text-sm", caret: "w-4 h-4" },
-  lg: { h: "h-12", font: "text-base", caret: "w-5 h-5" },
+  [UiSelectSizes.Small]: { h: "h-10", font: "text-sm", caret: "w-4 h-4" },
+  [UiSelectSizes.Medium]: { h: "h-11", font: "text-sm", caret: "w-4 h-4" },
+  [UiSelectSizes.Large]: { h: "h-12", font: "text-base", caret: "w-5 h-5" },
 };
 const s = computed(() => sizeMap[props.size]);
 
@@ -116,9 +98,9 @@ watch(
       class="relative flex items-center justify-between rounded-xl backdrop-blur-xl transition-all border cursor-pointer select-none"
       :class="[
         s.h, // <- fixed control height
-        props.variant === 'default' && 'bg-white/5',
-        props.variant === 'outlined' && 'bg-transparent',
-        props.variant === 'filled' && 'bg-white/10',
+        props.variant === UiSelectVariants.Default && 'bg-white/5',
+        props.variant === UiSelectVariants.Outlined && 'bg-transparent',
+        props.variant === UiSelectVariants.Filled && 'bg-white/10',
         props.disabled && 'opacity-50 pointer-events-none',
         isFocused
           ? 'ring-2 ring-fuchsia-500/40 border-white/10'
@@ -134,9 +116,9 @@ watch(
           shouldFloat
             ? [
                 '-top-2 translate-y-0 text-xs font-medium px-2 rounded-md border backdrop-blur-md',
-                props.parentTheme === 'gradient'
+                props.parentTheme === UiSelectParentThemes.Gradient
                   ? 'bg-gradient-to-r from-fuchsia-500/40 to-cyan-500/40 border-transparent text-white'
-                  : props.parentTheme === 'light'
+                  : props.parentTheme === UiSelectParentThemes.Light
                     ? 'bg-black/70 border-white/20 text-white'
                     : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
                 'shadow-[0_0_6px_rgba(0,0,0,0.35)]',
@@ -151,9 +133,9 @@ watch(
 
       <!-- Value / Placeholder (no vertical padding; container controls height) -->
       <div class="flex-1 px-3 truncate" :class="s.font">
-        <span v-if="selectedLabel" class="text-gray-100">{{
-          selectedLabel
-        }}</span>
+        <span v-if="selectedLabel" class="text-gray-100">
+          {{ selectedLabel }}
+        </span>
         <span v-else-if="shouldFloat" class="text-gray-500">
           {{ props.placeholder || t("components.uiSelect.placeholder") }}
         </span>
@@ -215,10 +197,10 @@ watch(
       v-if="props.message"
       class="text-xs mt-0.5"
       :class="{
-        'text-emerald-400': props.state === 'success',
-        'text-amber-400': props.state === 'warning',
-        'text-rose-400': props.state === 'error',
-        'text-gray-400': props.state === 'none',
+        'text-emerald-400': props.state === UiSelectStates.Success,
+        'text-amber-400': props.state === UiSelectStates.Warning,
+        'text-rose-400': props.state === UiSelectStates.Error,
+        'text-gray-400': props.state === UiSelectStates.None,
       }"
     >
       {{ props.message }}
@@ -231,6 +213,7 @@ watch(
 .fade-leave-active {
   transition: all 0.25s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
