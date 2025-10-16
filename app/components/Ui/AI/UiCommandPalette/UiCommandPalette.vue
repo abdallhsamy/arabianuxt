@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { type UiCommandPaletteProps } from "./UiCommandPalette.type";
 
-interface Command {
-  id: string;
-  label: string;
-  group?: string;
-  action: () => void;
-}
-
-const props = defineProps<{ commands: Command[] }>();
+const props = defineProps<UiCommandPaletteProps>();
 const isOpen = ref(false);
 const query = ref("");
 
@@ -75,6 +69,7 @@ onBeforeUnmount(() => document.removeEventListener("keydown", handleKey));
 .fade-leave-active {
   transition: opacity 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
