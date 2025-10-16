@@ -2,24 +2,15 @@
 import { ref, computed } from "vue";
 import type { Component } from "vue";
 import { ChevronDown, LayoutDashboard, Star } from "lucide-vue-next";
+import {
+  UiSidebarAdvancedDefaults,
+  type UiSidebarAdvancedProps,
+} from "./UiSidebarAdvanced.type";
 
-export interface NavItem {
-  label: string;
-  icon?: Component;
-  to?: string;
-  badge?: string | number;
-  children?: NavItem[];
-}
-
-export interface UiSidebarAdvancedProps {
-  items: NavItem[];
-  expanded?: boolean;
-}
-
-const props = withDefaults(defineProps<UiSidebarAdvancedProps>(), {
-  items: () => [],
-  expanded: true,
-});
+const props = withDefaults(
+  defineProps<UiSidebarAdvancedProps>(),
+  UiSidebarAdvancedDefaults
+);
 
 const isExpanded = ref(props.expanded);
 const toggle = (): void => {
@@ -78,9 +69,9 @@ const renderIcon = (icon: Component | undefined) => icon || LayoutDashboard;
               :is="renderIcon(it.icon)"
               class="w-4 h-4 text-gray-400"
             />
-            <span v-if="isExpanded" class="flex-1 truncate">{{
-              it.label
-            }}</span>
+            <span v-if="isExpanded" class="flex-1 truncate">
+              {{ it.label }}
+            </span>
             <span
               v-if="isExpanded && it.badge"
               class="text-xs rounded-md bg-white/10 border border-white/10 px-1.5 py-0.5"
@@ -98,9 +89,9 @@ const renderIcon = (icon: Component | undefined) => icon || LayoutDashboard;
                 :is="renderIcon(it.icon)"
                 class="w-4 h-4 text-gray-400"
               />
-              <span v-if="isExpanded" class="flex-1 text-left">{{
-                it.label
-              }}</span>
+              <span v-if="isExpanded" class="flex-1 text-left">
+                {{ it.label }}
+              </span>
               <ChevronDown
                 v-if="isExpanded"
                 class="w-4 h-4 transition"
@@ -154,6 +145,7 @@ const renderIcon = (icon: Component | undefined) => icon || LayoutDashboard;
 .fade-leave-active {
   transition: all 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
