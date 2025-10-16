@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Sidebar from "~/components/Ui/Dashboard/Sidebar.vue";
-import Topbar from "~/components/Layout/Topbar.vue";
+import Sidebar from "~/components/Layout/Sidebar/Sidebar.vue";
+import Topbar from "~/components/Layout/Topbar/Topbar.vue";
 import { useI18n } from "vue-i18n";
 import { LanguageDirections } from "~~/i18n/config";
 
@@ -89,6 +89,7 @@ const isRTL = computed(
     background-position: 0% 50%;
   }
 }
+
 .animate-gradient-flow {
   background-size: 200% 200%;
   animation: gradient-flow 15s ease infinite;

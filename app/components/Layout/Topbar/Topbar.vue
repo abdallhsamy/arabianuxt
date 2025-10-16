@@ -11,7 +11,7 @@ import {
   Linkedin,
 } from "lucide-vue-next";
 import { useSidebar } from "~/composables/useSidebar";
-import LanguageSwitcher from "~/components/Ui/Common/LanguageSwitcher.vue";
+import LanguageSwitcher from "~/components/Ui/Common/LanguageSwitcher/LanguageSwitcher.vue";
 import { useI18n } from "vue-i18n";
 import { LanguageDirections } from "~~/i18n/config";
 import { useAuthStore } from "~/store/authStore";
@@ -296,6 +296,7 @@ onUnmounted(() => document.removeEventListener("click", closeAll));
 .fade-leave-active {
   transition: all 0.15s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
