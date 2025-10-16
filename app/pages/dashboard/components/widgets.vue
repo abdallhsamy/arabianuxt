@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import UiAnalyticsCard from "~/components/Ui/Widgets/UiAnalyticsCard.vue";
-import UiActivityFeed from "~/components/Ui/Widgets/UiActivityFeed.vue";
-import UiMapWidget from "~/components/Ui/Widgets/UiMapWidget.vue";
-import UiKanbanBoard from "~/components/Ui/Widgets/UiKanbanBoard.vue";
-import UiUserAvatarGroup from "~/components/Ui/Widgets/UiUserAvatarGroup.vue";
+import UiAnalyticsCard from "~/components/Ui/Widgets/UiAnalyticsCard/UiAnalyticsCard.vue";
+import UiActivityFeed from "~/components/Ui/Widgets/UiActivityFeed/UiActivityFeed.vue";
+import UiMapWidget from "~/components/Ui/Widgets/UiMapWidget/UiMapWidget.vue";
+import UiKanbanBoard from "~/components/Ui/Widgets/UiKanbanBoard/UiKanbanBoard.vue";
+import UiUserAvatarGroup from "~/components/Ui/Widgets/UiUserAvatarGroup/UiUserAvatarGroup.vue";
 
 definePageMeta({
   middleware: "auth",
