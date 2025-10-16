@@ -1,13 +1,13 @@
 <script setup lang="ts">
-export interface UiLoaderSpinnerProps {
-  size?: number;
-  color?: string;
-}
+import {
+  UiLoaderSpinnerDefaults,
+  type UiLoaderSpinnerProps,
+} from "./UiLoaderSpinner.type";
 
-const props = withDefaults(defineProps<UiLoaderSpinnerProps>(), {
-  size: 28,
-  color: "#A855F7",
-});
+const props = withDefaults(
+  defineProps<UiLoaderSpinnerProps>(),
+  UiLoaderSpinnerDefaults
+);
 </script>
 
 <template>
