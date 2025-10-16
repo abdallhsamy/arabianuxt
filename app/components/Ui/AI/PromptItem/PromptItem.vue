@@ -1,16 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{
-  id: string;
-  title: string;
-  text: string;
-  tags?: string[];
-}>();
+import type { PromptItemProps, PromptItemEmits } from "./PromptItem.type";
 
-const emit = defineEmits<{
-  (e: "use", id: string): void;
-  (e: "copy", id: string): void;
-  (e: "delete", id: string): void;
-}>();
+const props = defineProps<PromptItemProps>();
+const emit = defineEmits<PromptItemEmits>();
 
 const onCopy = (): void => {
   navigator.clipboard.writeText(props.text);
@@ -72,11 +64,13 @@ const onCopy = (): void => {
   initial-value: 0deg;
   inherits: false;
 }
+
 @keyframes rotate-gradient {
   to {
     --angle: 360deg;
   }
 }
+
 .animate-rotate-gradient {
   background-size: 200% 200%;
   animation: rotate-gradient 12s linear infinite;
