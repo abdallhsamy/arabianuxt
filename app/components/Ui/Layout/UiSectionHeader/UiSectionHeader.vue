@@ -1,9 +1,5 @@
 <script setup lang="ts">
-export interface UiSectionHeaderProps {
-  title: string;
-  subtitle?: string;
-  icon?: string;
-}
+import type { UiSectionHeaderProps } from "./UiSectionHeader.type";
 
 defineProps<UiSectionHeaderProps>();
 </script>
