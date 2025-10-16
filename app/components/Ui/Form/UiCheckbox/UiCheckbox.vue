@@ -1,28 +1,20 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import {
+  UiCheckboxDefaults,
+  type UiCheckboxProps,
+  UiCheckboxSizes,
+} from "./UiCheckbox.type";
 
-export type FieldSize = "sm" | "md" | "lg";
-
-export interface UiCheckboxProps {
-  modelValue: boolean;
-  id?: string;
-  label?: string;
-  disabled?: boolean;
-  indeterminate?: boolean;
-  size?: FieldSize;
-}
-
-const props = withDefaults(defineProps<UiCheckboxProps>(), {
-  size: "md",
-});
+const props = withDefaults(defineProps<UiCheckboxProps>(), UiCheckboxDefaults);
 const emit = defineEmits(["update:modelValue", "change"]);
 
 const s = computed(
   () =>
     ({
-      sm: { box: "w-4 h-4", font: "text-sm" },
-      md: { box: "w-5 h-5", font: "text-sm" },
-      lg: { box: "w-6 h-6", font: "text-base" },
+      [UiCheckboxSizes.Small]: { box: "w-4 h-4", font: "text-sm" },
+      [UiCheckboxSizes.Medium]: { box: "w-5 h-5", font: "text-sm" },
+      [UiCheckboxSizes.Large]: { box: "w-6 h-6", font: "text-base" },
     })[props.size]
 );
 
