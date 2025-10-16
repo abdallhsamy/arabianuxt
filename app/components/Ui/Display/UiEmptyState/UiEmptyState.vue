@@ -1,10 +1,5 @@
 <script setup lang="ts">
-export interface UiEmptyStateProps {
-  title: string;
-  description?: string;
-  icon?: string;
-  actionLabel?: string;
-}
+import type { UiEmptyStateProps } from "./UiEmptyState.type";
 
 const props = defineProps<UiEmptyStateProps>();
 const emit = defineEmits<{ (e: "action"): void }>();
