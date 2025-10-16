@@ -1,19 +1,16 @@
 <script setup lang="ts">
-export interface UiDividerProps {
-  label?: string;
-  orientation?: "horizontal" | "vertical";
-  gradient?: boolean;
-}
+import {
+  UiDividerDefaults,
+  UiDividerOrientations,
+  type UiDividerProps,
+} from "./UiDivider.type";
 
-const props = withDefaults(defineProps<UiDividerProps>(), {
-  orientation: "horizontal",
-  gradient: true,
-});
+const props = withDefaults(defineProps<UiDividerProps>(), UiDividerDefaults);
 </script>
 
 <template>
   <div
-    v-if="props.orientation === 'horizontal'"
+    v-if="props.orientation === UiDividerOrientations.Horizontal"
     class="relative flex items-center w-full my-4"
   >
     <div
