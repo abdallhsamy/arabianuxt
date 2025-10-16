@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { ref, nextTick } from "vue";
 import { useI18n } from "vue-i18n";
+import {
+  type UiChatDockMessage,
+  UiChatDockMessageRoles,
+} from "./UiChatDock.type";
 
 const { t } = useI18n();
 
-interface Message {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-}
-
 const isOpen = ref(false);
 const input = ref("");
-const messages = ref<Message[]>([
+const messages = ref<UiChatDockMessage[]>([
   {
     id: "1",
-    role: "assistant",
+    role: UiChatDockMessageRoles.Assistant,
     content: t("components.aiChatDock.welcomeMessage"),
   },
 ]);
@@ -26,7 +24,7 @@ const send = () => {
   if (!input.value.trim()) return;
   messages.value.push({
     id: crypto.randomUUID(),
-    role: "user",
+    role: UiChatDockMessageRoles.User,
     content: input.value,
   });
   const userText = input.value;
@@ -34,7 +32,7 @@ const send = () => {
   nextTick(() => {
     messages.value.push({
       id: crypto.randomUUID(),
-      role: "assistant",
+      role: UiChatDockMessageRoles.Assistant,
       content: t("components.aiChatDock.responsePrefix", { message: userText }),
     });
   });
@@ -101,6 +99,7 @@ const send = () => {
 .fade-leave-active {
   transition: opacity 0.25s;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

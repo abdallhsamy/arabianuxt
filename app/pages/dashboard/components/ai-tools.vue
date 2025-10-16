@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import UiChatDock from "~/components/Ui/AI/UiChatDock.vue";
+import UiChatDock from "~/components/Ui/AI/UiChatDock/UiChatDock.vue";
 import UiCommandPalette from "~/components/Ui/AI/UiCommandPalette/UiCommandPalette.vue";
 import UiPromptBuilder from "~/components/Ui/AI/UiPromptBuilder.vue";
 import UiCodeBlock from "~/components/Ui/AI/UiCodeBlock/UiCodeBlock.vue";
