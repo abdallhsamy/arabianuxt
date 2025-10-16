@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { useChart } from "~/composables/useChart";
+import type { UiChartLineProps } from "./UiChartLine.type";
 
-export interface UiChartLineProps {
-  labels: string[];
-  dataset: number[];
-}
 const props = defineProps<UiChartLineProps>();
 
 const { canvas } = useChart(
