@@ -1,43 +1,42 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-
-type Theme = "light" | "dark" | "fancy";
-const LS_KEY = "app:theme";
+import {
+  UI_THEME_SWITCHER_LS_KEY,
+  type UiTheme,
+  UiThemes,
+  UiThemeSwitcherDefaults,
+  type UiThemeSwitcherEmits,
+  type UiThemeSwitcherProps,
+} from "./UiThemeSwitcher.type";
 
 const props = withDefaults(
-  defineProps<{
-    modelValue?: Theme;
-    showLabel?: boolean;
-  }>(),
-  {
-    showLabel: false,
-  }
+  defineProps<UiThemeSwitcherProps>(),
+  UiThemeSwitcherDefaults
 );
 
-const emit = defineEmits<{
-  (e: "update:modelValue", v: Theme): void;
-  (e: "change", v: Theme): void;
-}>();
+const emit = defineEmits<UiThemeSwitcherEmits>();
 
 const open = ref(false);
-const theme = ref<Theme>(props.modelValue ?? "dark");
+const theme = ref<UiTheme>(props.modelValue ?? UiThemes.Dark);
 
 onMounted(() => {
-  const saved = localStorage.getItem(LS_KEY) as Theme | null;
+  const saved = localStorage.getItem(
+    UI_THEME_SWITCHER_LS_KEY
+  ) as UiTheme | null;
   if (saved) theme.value = saved;
   apply(theme.value);
 });
 
 watch(theme, t => {
-  localStorage.setItem(LS_KEY, t);
+  localStorage.setItem(UI_THEME_SWITCHER_LS_KEY, t);
   emit("update:modelValue", t);
   emit("change", t);
   apply(t);
 });
 
-const apply = (t: Theme): void => {
+const apply = (t: UiTheme): void => {
   const html = document.documentElement;
-  html.classList.toggle("dark", t === "dark" || t === "fancy");
+  html.classList.toggle("dark", t === UiThemes.Dark || t === UiThemes.Fancy);
   html.setAttribute("data-theme", t);
 };
 </script>
@@ -52,9 +51,9 @@ const apply = (t: Theme): void => {
       <span
         class="h-3 w-3 rounded-full"
         :class="
-          theme === 'light'
+          theme === UiThemes.Light
             ? 'bg-amber-300'
-            : theme === 'dark'
+            : theme === UiThemes.Dark
               ? 'bg-slate-300'
               : 'bg-fuchsia-400'
         "
@@ -65,12 +64,12 @@ const apply = (t: Theme): void => {
 
     <div
       v-if="open"
-      class="absolute right-0 mt-2 w-40 rounded-xl border border-white/10 bg-black/70 backdrop-blur-xl p-1 text-sm z-50"
+      class="absolute ltr:right-0 rtl:left-0 mt-2 w-40 rounded-xl border border-white/10 bg-black/70 backdrop-blur-xl p-1 text-sm z-50"
     >
       <button
         class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
         @click="
-          theme = 'light';
+          theme = UiThemes.Light;
           open = false;
         "
       >
@@ -79,7 +78,7 @@ const apply = (t: Theme): void => {
       <button
         class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
         @click="
-          theme = 'dark';
+          theme = UiThemes.Dark;
           open = false;
         "
       >
@@ -88,7 +87,7 @@ const apply = (t: Theme): void => {
       <button
         class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
         @click="
-          theme = 'fancy';
+          theme = UiThemes.Fancy;
           open = false;
         "
       >
