@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const chartBarSchema: PlaygroundSchema = {
-  component: "Ui/Charts/UiChartBar.vue",
+  component: "Ui/Charts/UiChartBar/UiChartBar.vue",
   title: "Bar Chart",
   props: [
     {
