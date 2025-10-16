@@ -9,13 +9,9 @@ import {
   Title,
 } from "chart.js";
 import { useChartTheme } from "~/composables/useChartTheme";
+import type { UiChartBarProps } from "./UiChartBar.type";
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title);
-
-export interface UiChartBarProps {
-  labels: string[];
-  datasets: { label: string; data: number[]; color?: string }[];
-}
 
 const props = defineProps<UiChartBarProps>();
 const canvas = ref<HTMLCanvasElement>();
