@@ -1,79 +1,16 @@
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeUnmount } from "vue";
+import {
+  type SortDir,
+  type TableColumn,
+  type UiTableProps,
+  type UiTableEmits,
+  UiTableDefaults,
+} from "./UiTable.type";
 
-type SortDir = "asc" | "desc";
-export type FieldAccessor<T> = (row: T) => unknown;
+const props = withDefaults(defineProps<UiTableProps>(), UiTableDefaults);
 
-export interface TableColumn<T = Record<string, unknown>> {
-  key: string;
-  header: string;
-  accessor?: keyof T | FieldAccessor<T>;
-  sortable?: boolean;
-  searchable?: boolean;
-  width?: string; // initial width utility e.g. 'w-48' (optional)
-  align?: "left" | "center" | "right";
-  hidden?: boolean;
-  class?: string;
-  filter?: {
-    type: "text" | "select" | "range";
-    options?: Array<{ label: string; value: string | number | boolean }>;
-  };
-}
-
-export interface UiTableProps<T = Record<string, unknown>> {
-  rows: T[];
-  columns: TableColumn<T>[];
-  loading?: boolean;
-  defaultSort?: { key: string; dir: SortDir } | null;
-  multiSort?: boolean;
-  serverMode?: boolean;
-  page?: number;
-  pageSize?: number;
-  total?: number;
-  pageSizes?: number[];
-  searchable?: boolean;
-  searchPlaceholder?: string;
-  debounceMs?: number;
-  selectable?: boolean;
-  rowKey?: (row: T) => string | number;
-  dense?: boolean;
-  rounded?: boolean;
-  stickyHeader?: boolean;
-}
-
-const props = withDefaults(defineProps<UiTableProps>(), {
-  rows: () => [],
-  columns: () => [],
-  loading: false,
-  defaultSort: null,
-  multiSort: false,
-  serverMode: false,
-  page: 1,
-  pageSize: 10,
-  total: 0,
-  pageSizes: () => [10, 25, 50, 100],
-  searchable: true,
-  searchPlaceholder: "Search…",
-  debounceMs: 200,
-  selectable: true,
-  rowKey: (r: Record<string, unknown>) =>
-    (r as { id?: string | number }).id ?? JSON.stringify(r),
-  dense: false,
-  rounded: true,
-  stickyHeader: true,
-});
-
-const emit = defineEmits<{
-  (e: "update:page", v: number): void;
-  (e: "update:pageSize", v: number): void;
-  (e: "selection-change", v: Array<string | number>): void;
-  (e: "sort-change", v: { key: string; dir: SortDir }[]): void;
-  (e: "filter-change", v: Record<string, string | number | boolean>): void;
-  (e: "column-order-change", v: string[]): void;
-  (e: "column-width-change", v: Record<string, number>): void;
-  (e: "export"): void;
-  (e: "search", v: string): void;
-}>();
+const emit = defineEmits<UiTableEmits>();
 
 /* ------------------ State ------------------ */
 const search = ref("");
@@ -89,13 +26,10 @@ const filterOpenKey = ref<string | null>(null);
 /* ---------- Column order & widths ---------- */
 const initialOrder = props.columns.filter(c => !c.hidden).map(c => c.key);
 const columnOrder = ref<string[]>([...initialOrder]);
-
-// widths in px; when undefined, auto
 const columnWidths = ref<Record<string, number>>({});
 const resizingKey = ref<string | null>(null);
 const dragStartX = ref(0);
 const dragStartW = ref(0);
-
 const draggingKey = ref<string | null>(null);
 const dragOverKey = ref<string | null>(null);
 
@@ -145,7 +79,6 @@ const onSearchInput = debounced((v: string) => {
 const filteredRows = computed(() => {
   if (props.serverMode) return props.rows;
   let data = [...props.rows];
-
   if (props.searchable && search.value.trim()) {
     const q = search.value.toLowerCase();
     data = data.filter(r =>
@@ -268,6 +201,7 @@ const sortIcon = (k: string) => {
 const toggleFilterMenu = (k: string): void => {
   filterOpenKey.value = filterOpenKey.value === k ? null : k;
 };
+
 const updateFilter = (k: string, v: string | number | boolean): void => {
   filters.value[k] = v;
   emit("filter-change", { ...filters.value });
@@ -324,9 +258,7 @@ const onResizerMove = (e: MouseEvent): void => {
   columnWidths.value = { ...columnWidths.value, [resizingKey.value]: w };
 };
 const onResizerUp = (): void => {
-  if (resizingKey.value) {
-    emit("column-width-change", { ...columnWidths.value });
-  }
+  if (resizingKey.value) emit("column-width-change", { ...columnWidths.value });
   resizingKey.value = null;
   document.removeEventListener("mousemove", onResizerMove);
   document.removeEventListener("mouseup", onResizerUp);
@@ -362,7 +294,6 @@ const toCSV = (): void => {
 
 <template>
   <div class="w-full">
-    <!-- Toolbar -->
     <div class="mb-3 flex flex-wrap items-center gap-2">
       <div v-if="props.searchable" class="flex items-center gap-2">
         <input
@@ -375,10 +306,9 @@ const toCSV = (): void => {
       </div>
 
       <div class="ms-auto flex items-center gap-2">
-        <!-- Columns menu -->
         <details class="relative">
           <summary
-            class="list-none select-none cursor-pointer rounded-lg border border-white/10 bg-white/5 text-gray-100 text-sm px-3 py-2"
+            class="list-none select-none cursor-pointer rounded-lg border border-white/10 bg_WHITE/5 text-gray-100 text-sm px-3 py-2"
           >
             Columns
           </summary>
@@ -417,7 +347,6 @@ const toCSV = (): void => {
       </div>
     </div>
 
-    <!-- Table container -->
     <div
       class="relative overflow-x-auto border border-white/10 bg-white/5 backdrop-blur-xl"
       :class="props.rounded ? 'rounded-2xl' : ''"
@@ -439,8 +368,6 @@ const toCSV = (): void => {
                 aria-label="Select all on page"
               />
             </th>
-
-            <!-- Visible columns in current order -->
             <th
               v-for="col in visibleColumns"
               :key="col.key"
@@ -480,8 +407,6 @@ const toCSV = (): void => {
                   }}</span>
                 </button>
                 <span v-else>{{ col.header }}</span>
-
-                <!-- Filter trigger -->
                 <button
                   v-if="col.filter"
                   class="ms-1 text-xs text-gray-400 hover:text-fuchsia-300"
@@ -491,14 +416,10 @@ const toCSV = (): void => {
                   ⛃
                 </button>
               </div>
-
-              <!-- Drag over indicator -->
               <div
                 v-if="dragOverKey === col.key && draggingKey"
                 class="absolute inset-y-0 left-0 w-1 bg-fuchsia-500/50"
               />
-
-              <!-- Filter popover -->
               <div
                 v-if="filterOpenKey === col.key"
                 class="absolute mt-1 z-50 rounded-lg border border-white/10 bg-black/70 p-2 text-xs shadow-2xl"
@@ -604,7 +525,6 @@ const toCSV = (): void => {
                 aria-label="Select row"
               />
             </td>
-
             <td
               v-for="col in visibleColumns"
               :key="col.key"
@@ -630,8 +550,7 @@ const toCSV = (): void => {
                 :name="`cell:${col.key}`"
                 :row="row"
                 :value="getCell(row, col)"
-              >
-                {{ getCell(row, col) }}
+                >{{ getCell(row, col) }}
               </slot>
             </td>
           </tr>
@@ -669,7 +588,6 @@ const toCSV = (): void => {
             {{ n }}
           </option>
         </select>
-
         <button
           class="rounded-md px-3 py-1 border border-white/10 bg-white/5 text-sm disabled:opacity-50"
           :disabled="internalPage <= 1"
