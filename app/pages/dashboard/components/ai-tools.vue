@@ -3,7 +3,7 @@ import { ref } from "vue";
 import UiChatDock from "~/components/Ui/AI/UiChatDock.vue";
 import UiCommandPalette from "~/components/Ui/AI/UiCommandPalette.vue";
 import UiPromptBuilder from "~/components/Ui/AI/UiPromptBuilder.vue";
-import UiCodeBlock from "~/components/Ui/AI/UiCodeBlock.vue";
+import UiCodeBlock from "~/components/Ui/AI/UiCodeBlock/UiCodeBlock.vue";
 import UiMarkdownViewer from "~/components/Ui/AI/UiMarkdownViewer/UiMarkdownViewer.vue";
 
 definePageMeta({

@@ -5,13 +5,14 @@ import javascript from "highlight.js/lib/languages/javascript";
 import typescript from "highlight.js/lib/languages/typescript";
 import bash from "highlight.js/lib/languages/bash";
 import json from "highlight.js/lib/languages/json";
+import { type UiCodeBlockProps } from "./UiCodeBlock.type";
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("typescript", typescript);
 hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("json", json);
 
-const props = defineProps<{ code: string; lang?: string }>();
+const props = defineProps<UiCodeBlockProps>();
 const codeRef = ref<HTMLElement>();
 const copied = ref(false);
 
@@ -46,15 +47,19 @@ const copy = async () => {
 .hljs-keyword {
   color: #93c5fd;
 }
+
 .hljs-string {
   color: #f9a8d4;
 }
+
 .hljs-number {
   color: #fbbf24;
 }
+
 .hljs-comment {
   color: #6b7280;
 }
+
 .hljs-attr {
   color: #5eead4;
 }
