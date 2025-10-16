@@ -1,35 +1,16 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted } from "vue";
 import { CheckCircle2, AlertTriangle, AlertOctagon } from "lucide-vue-next";
+import {
+  UiTextareaDefaults,
+  UiTextareaParentThemes,
+  type UiTextareaProps,
+  UiTextareaSizes,
+  UiTextareaStates,
+  UiTextareaVariants,
+} from "./UiTextarea.type";
 
-export interface UiTextareaProps {
-  modelValue: string;
-  label?: string;
-  placeholder?: string;
-  variant?: "default" | "outlined" | "filled";
-  state?: "success" | "warning" | "error" | "none";
-  message?: string;
-  maxLength?: number;
-  autoResize?: boolean;
-  rows?: number;
-  disabled?: boolean;
-  readonly?: boolean;
-  parentTheme?: "dark" | "light" | "gradient";
-  size?: "sm" | "md" | "lg";
-  resize?: "none" | "vertical" | "horizontal" | "both";
-}
-
-const props = withDefaults(defineProps<UiTextareaProps>(), {
-  variant: "default",
-  state: "none",
-  parentTheme: "dark",
-  rows: 3,
-  autoResize: true,
-  disabled: false,
-  readonly: false,
-  size: "md",
-  resize: "vertical", // ✅ user can resize vertically by default
-});
+const props = withDefaults(defineProps<UiTextareaProps>(), UiTextareaDefaults);
 
 const emit = defineEmits(["update:modelValue"]);
 const textareaRef = ref<HTMLTextAreaElement>();
@@ -39,20 +20,20 @@ const isFocused = ref(false);
 const s = computed(
   () =>
     ({
-      sm: { font: "text-sm", pad: "py-2" },
-      md: { font: "text-sm", pad: "py-2.5" },
-      lg: { font: "text-base", pad: "py-3" },
+      [UiTextareaSizes.Small]: { font: "text-sm", pad: "py-2" },
+      [UiTextareaSizes.Medium]: { font: "text-sm", pad: "py-2.5" },
+      [UiTextareaSizes.Large]: { font: "text-base", pad: "py-3" },
     })[props.size]
 );
 
 // --- Border classes per validation state ---
 const borderClass = computed(() => {
   switch (props.state) {
-    case "success":
+    case UiTextareaStates.Success:
       return "border-emerald-400 focus:ring-emerald-500/40";
-    case "warning":
+    case UiTextareaStates.Warning:
       return "border-amber-400 focus:ring-amber-500/40";
-    case "error":
+    case UiTextareaStates.Error:
       return "border-rose-400 focus:ring-rose-500/40";
     default:
       return "border-white/10 focus:ring-fuchsia-500/40";
@@ -62,11 +43,11 @@ const borderClass = computed(() => {
 // --- Icons per validation state (type-safe) ---
 const stateIcon = computed(() => {
   switch (props.state) {
-    case "success":
+    case UiTextareaStates.Success:
       return CheckCircle2;
-    case "warning":
+    case UiTextareaStates.Warning:
       return AlertTriangle;
-    case "error":
+    case UiTextareaStates.Error:
       return AlertOctagon;
     default:
       return null;
@@ -93,9 +74,9 @@ onMounted(() => nextTick(resizeTextarea));
       class="relative rounded-xl backdrop-blur-xl border transition-all focus-within:ring-2"
       :class="[
         borderClass,
-        props.variant === 'default' && 'bg-white/5',
-        props.variant === 'outlined' && 'bg-transparent',
-        props.variant === 'filled' && 'bg-white/10',
+        props.variant === UiTextareaVariants.Default && 'bg-white/5',
+        props.variant === UiTextareaVariants.Outlined && 'bg-transparent',
+        props.variant === UiTextareaVariants.Filled && 'bg-white/10',
         props.disabled && 'opacity-50 pointer-events-none',
       ]"
     >
@@ -107,9 +88,9 @@ onMounted(() => nextTick(resizeTextarea));
           shouldFloat
             ? [
                 '-top-2 text-xs font-medium px-2 rounded-md border backdrop-blur-md',
-                props.parentTheme === 'gradient'
+                props.parentTheme === UiTextareaParentThemes.Gradient
                   ? 'bg-gradient-to-r from-fuchsia-500/40 to-cyan-500/40 border-transparent text-white'
-                  : props.parentTheme === 'light'
+                  : props.parentTheme === UiTextareaParentThemes.Light
                     ? 'bg-black/70 border-white/20 text-white'
                     : 'bg-gray-900/85 border-white/15 text-fuchsia-300',
               ]
@@ -147,9 +128,9 @@ onMounted(() => nextTick(resizeTextarea));
         :is="stateIcon"
         class="absolute ltr:right-3 rtl:left-3 top-3 w-4 h-4"
         :class="{
-          'text-emerald-400': props.state === 'success',
-          'text-amber-400': props.state === 'warning',
-          'text-rose-400': props.state === 'error',
+          'text-emerald-400': props.state === UiTextareaStates.Success,
+          'text-amber-400': props.state === UiTextareaStates.Warning,
+          'text-rose-400': props.state === UiTextareaStates.Error,
         }"
       />
     </div>
@@ -159,10 +140,10 @@ onMounted(() => nextTick(resizeTextarea));
       <p
         v-if="props.message"
         :class="{
-          'text-emerald-400': props.state === 'success',
-          'text-amber-400': props.state === 'warning',
-          'text-rose-400': props.state === 'error',
-          'text-gray-400': props.state === 'none',
+          'text-emerald-400': props.state === UiTextareaStates.Success,
+          'text-amber-400': props.state === UiTextareaStates.Warning,
+          'text-rose-400': props.state === UiTextareaStates.Error,
+          'text-gray-400': props.state === UiTextareaStates.None,
         }"
       >
         {{ props.message }}
