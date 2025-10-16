@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Search, Bell, User } from "lucide-vue-next";
+import type { UiTopbarEmits } from "./UiTopbar.type";
 
 const q = ref("");
-const emit = defineEmits<{ (e: "search", v: string): void }>();
+const emit = defineEmits<UiTopbarEmits>();
 const onInput = (): void => emit("search", q.value);
 </script>
 
