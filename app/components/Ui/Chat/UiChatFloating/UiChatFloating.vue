@@ -79,7 +79,7 @@ const send = async (): Promise<void> => {
           class="flex items-center gap-3 px-3 py-2 hover:bg-white/10 cursor-pointer"
           @click="selectedUser = u.id"
         >
-          <img :src="u.avatar" class="w-9 h-9 rounded-full" />
+          <img :src="u.avatar" class="w-9 h-9 rounded-full" :alt="u.name" />
           <div class="flex-1">
             <div class="text-gray-100 text-sm font-medium">{{ u.name }}</div>
             <div
@@ -189,6 +189,7 @@ const send = async (): Promise<void> => {
 .fade-leave-active {
   transition: opacity 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
