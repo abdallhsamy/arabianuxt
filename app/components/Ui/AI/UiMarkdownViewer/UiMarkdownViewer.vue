@@ -3,8 +3,9 @@
 import { ref, watch, onMounted } from "vue";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
+import type { UiMarkdownViewerProps } from "./UiMarkdownViewer.type";
 
-const props = defineProps<{ content: string }>();
+const props = defineProps<UiMarkdownViewerProps>();
 const html = ref("");
 
 const render = async () => {
