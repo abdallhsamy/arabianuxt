@@ -1,13 +1,7 @@
 <script setup lang="ts">
-import type { Component } from "vue";
+import type { UiBreadcrumbProps } from "./UiBreadcrumb.type";
 
-export interface BreadcrumbItem {
-  label: string;
-  to?: string;
-  icon?: Component;
-}
-
-defineProps<{ items: BreadcrumbItem[] }>();
+defineProps<UiBreadcrumbProps>();
 </script>
 
 <template>
