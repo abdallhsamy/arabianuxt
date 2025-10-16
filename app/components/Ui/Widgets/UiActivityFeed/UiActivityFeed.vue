@@ -1,13 +1,10 @@
 <script setup lang="ts">
-export interface FeedItem {
-  id: string;
-  title: string;
-  description?: string;
-  time: string;
-  type?: "success" | "info" | "warning" | "error";
-}
+import {
+  FeedItemsTypes,
+  type UiActivityFeedProps,
+} from "./UiActivityFeed.type";
 
-defineProps<{ items: FeedItem[] }>();
+defineProps<UiActivityFeedProps>();
 </script>
 
 <template>
@@ -21,10 +18,10 @@ defineProps<{ items: FeedItem[] }>();
         <span
           class="w-2 h-2 mt-2 rounded-full"
           :class="{
-            'bg-emerald-400': item.type === 'success',
-            'bg-cyan-400': item.type === 'info',
-            'bg-amber-400': item.type === 'warning',
-            'bg-rose-400': item.type === 'error',
+            'bg-emerald-400': item.type === FeedItemsTypes.Success,
+            'bg-cyan-400': item.type === FeedItemsTypes.Info,
+            'bg-amber-400': item.type === FeedItemsTypes.Warning,
+            'bg-rose-400': item.type === FeedItemsTypes.Error,
           }"
         />
         <div>
