@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import {
+  UiAvatarDefaults,
+  type UiAvatarProps,
+  UiAvatarShapes,
+  UiAvatarSizes,
+  UiAvatarStatuses,
+} from "./UiAvatar.type";
 
-export interface UiAvatarProps {
-  name?: string;
-  src?: string;
-  size?: "sm" | "md" | "lg" | "xl";
-  shape?: "circle" | "square";
-  status?: "online" | "offline" | "busy" | "away";
-}
-
-const props = withDefaults(defineProps<UiAvatarProps>(), {
-  size: "md",
-  shape: "circle",
-  name: "",
-});
+const props = withDefaults(defineProps<UiAvatarProps>(), UiAvatarDefaults);
 
 const initials = computed(() =>
   props.name
@@ -28,25 +23,25 @@ const initials = computed(() =>
 const sizeClass = computed(
   () =>
     ({
-      sm: "w-8 h-8 text-xs",
-      md: "w-10 h-10 text-sm",
-      lg: "w-14 h-14 text-base",
-      xl: "w-20 h-20 text-lg",
+      [UiAvatarSizes.Small]: "w-8 h-8 text-xs",
+      [UiAvatarSizes.Medium]: "w-10 h-10 text-sm",
+      [UiAvatarSizes.Large]: "w-14 h-14 text-base",
+      [UiAvatarSizes.ExtraLarge]: "w-20 h-20 text-lg",
     })[props.size]
 );
 
 const shapeClass = computed(() =>
-  props.shape === "circle" ? "rounded-full" : "rounded-xl"
+  props.shape === UiAvatarShapes.Circle ? "rounded-full" : "rounded-xl"
 );
 
 const statusColor = computed(
   () =>
     ({
-      online: "bg-emerald-500",
-      offline: "bg-gray-500",
-      busy: "bg-rose-500",
-      away: "bg-amber-500",
-    })[props.status ?? "offline"]
+      [UiAvatarStatuses.Online]: "bg-emerald-500",
+      [UiAvatarStatuses.Offline]: "bg-gray-500",
+      [UiAvatarStatuses.Busy]: "bg-rose-500",
+      [UiAvatarStatuses.Away]: "bg-amber-500",
+    })[props.status ?? UiAvatarStatuses.Offline]
 );
 </script>
 
@@ -67,7 +62,7 @@ const statusColor = computed(
     </div>
     <span
       v-if="status"
-      class="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-black"
+      class="absolute bottom-0 ltr:right-0 rtl:left-0 w-3 h-3 rounded-full border-2 border-black"
       :class="statusColor"
     />
   </div>
