@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import UiChatDock from "~/components/Ui/AI/UiChatDock/UiChatDock.vue";
 import UiCommandPalette from "~/components/Ui/AI/UiCommandPalette/UiCommandPalette.vue";
-import UiPromptBuilder from "~/components/Ui/AI/UiPromptBuilder.vue";
+import UiPromptBuilder from "~/components/Ui/AI/UiPromptBuilder/UiPromptBuilder.vue";
 import UiCodeBlock from "~/components/Ui/AI/UiCodeBlock/UiCodeBlock.vue";
 import UiMarkdownViewer from "~/components/Ui/AI/UiMarkdownViewer/UiMarkdownViewer.vue";
 

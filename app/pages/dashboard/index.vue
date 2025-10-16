@@ -7,8 +7,8 @@ import UiStatsCard from "~/components/Ui/Stats/UiStatsCard.vue";
 import UiWidgetContainer from "~/components/Ui/Stats/UiWidgetContainer.vue";
 
 // Charts
-import UiChartLine from "~/components/Ui/Charts/UiChartLine.vue";
-import UiChartBar from "~/components/Ui/Charts/UiChartBar.vue";
+import UiChartLine from "~/components/Ui/Charts/UiChartLine/UiChartLine.vue";
+import UiChartBar from "~/components/Ui/Charts/UiChartBar/UiChartBar.vue";
 import UiChartDonut from "~/components/Ui/Charts/UiChartDonut.vue";
 
 // Forms
@@ -17,15 +17,15 @@ import UiSelectAsync from "~/components/Ui/Form/UiSelectAsync.vue";
 import UiTagInput from "~/components/Ui/Form/UiTagInput.vue";
 
 // Feedback
-import UiToastAdvanced from "~/components/Ui/Feedback/UiToastAdvanced.vue";
+import UiToastAdvanced from "~/components/Ui/Feedback/UiToastAdvanced/UiToastAdvanced.vue";
 import UiNotificationDrawer from "~/components/Ui/Feedback/UiNotificationDrawer.vue";
 import UiCommandPalette from "~/components/Ui/Nav/UiCommandPalette.vue";
 
-import UiBreadcrumb from "~/components/Ui/Nav/UiBreadcrumb.vue";
-import UiPagination from "~/components/Ui/Nav/UiPagination.vue";
-import UiProgressBar from "~/components/Ui/Data/UiProgressBar.vue";
-import UiTimeline from "~/components/Ui/Data/UiTimeline.vue";
-import UiConfirmDialog from "~/components/Ui/Feedback/UiConfirmDialog.vue";
+import UiBreadcrumb from "~/components/Ui/Nav/UiBreadcrumb/UiBreadcrumb.vue";
+import UiPagination from "~/components/Ui/Nav/UiPagination/UiPagination.vue";
+import UiProgressBar from "~/components/Ui/Data/UiProgressBar/UiProgressBar.vue";
+import UiTimeline from "~/components/Ui/Data/UiTimeline/UiTimeline.vue";
+import UiConfirmDialog from "~/components/Ui/Feedback/UiConfirmDialog/UiConfirmDialog.vue";
 
 definePageMeta({
   middleware: "auth",

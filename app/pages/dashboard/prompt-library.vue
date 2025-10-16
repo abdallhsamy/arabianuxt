@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import PromptItem from "~/components/Ui/AI/PromptItem.vue";
+import PromptItem from "~/components/Ui/AI/PromptItem/PromptItem.vue";
 
 definePageMeta({
   middleware: "auth",

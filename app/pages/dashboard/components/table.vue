@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import UiTable, { type TableColumn } from "~/components/Ui/Data/UiTable.vue";
+import UiTable from "~/components/Ui/Data/UiTable/UiTable.vue";
+import type { TableColumn } from "~/components/Ui/Data/UiTable/UiTable.type";
 
 definePageMeta({
   middleware: "auth",
