@@ -1,12 +1,7 @@
 <script setup lang="ts">
-export interface TimelineEvent {
-  title: string;
-  description?: string;
-  time?: string;
-  color?: string;
-}
+import type { UiTimelineProps } from "./UiTimeline.type";
 
-defineProps<{ events: TimelineEvent[] }>();
+defineProps<UiTimelineProps>();
 </script>
 
 <template>
