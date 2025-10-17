@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import type {
+  UiSearchPanelProps,
+  UiSearchPanelEmits,
+  SearchItem,
+} from "./UiSearchPanel.type";
 
-export interface SearchItem {
-  id: string;
-  title: string;
-  category?: string;
-}
-
-const props = defineProps<{ modelValue: boolean; items: SearchItem[] }>();
-const emit = defineEmits<{ (e: "update:modelValue", v: boolean): void }>();
+const props = defineProps<UiSearchPanelProps>();
+const emit = defineEmits<UiSearchPanelEmits>();
 
 const query = ref("");
 const filtered = ref<SearchItem[]>(props.items);
@@ -42,9 +41,9 @@ watch(query, () => {
             class="px-2 py-1 hover:bg-white/10 cursor-pointer rounded-md text-gray-300"
           >
             {{ i.title }}
-            <span v-if="i.category" class="text-gray-500 text-xs ms-2"
-              >({{ i.category }})</span
-            >
+            <span v-if="i.category" class="text-gray-500 text-xs ms-2">
+              ({{ i.category }})
+            </span>
           </li>
         </ul>
       </div>
@@ -57,6 +56,7 @@ watch(query, () => {
 .fade-leave-active {
   transition: opacity 0.25s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
