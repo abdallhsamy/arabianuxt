@@ -1,20 +1,13 @@
 <script setup lang="ts">
-export interface Avatar {
-  id: string;
-  name: string;
-  image?: string;
-}
+import {
+  UiUserAvatarGroupDefaults,
+  type UiUserAvatarGroupProps,
+} from "./UiUserAvatarGroup.type";
 
-export interface UiUserAvatarGroupProps {
-  users: Avatar[];
-  max?: number;
-  size?: number;
-}
-
-const props = withDefaults(defineProps<UiUserAvatarGroupProps>(), {
-  max: 5,
-  size: 36,
-});
+const props = withDefaults(
+  defineProps<UiUserAvatarGroupProps>(),
+  UiUserAvatarGroupDefaults
+);
 </script>
 
 <template>
