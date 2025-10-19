@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { computed } from "vue";
-export interface UiProgressCircleProps {
-  value: number;
-  size?: number;
-  stroke?: number;
-}
-const props = withDefaults(defineProps<UiProgressCircleProps>(), {
-  size: 120,
-  stroke: 10,
-});
+import {
+  UiProgressCircleDefaults,
+  type UiProgressCircleProps,
+} from "./UiProgressCircle.type";
+
+const props = withDefaults(
+  defineProps<UiProgressCircleProps>(),
+  UiProgressCircleDefaults
+);
+
 const r = computed(() => (props.size - props.stroke) / 2);
 const C = computed(() => 2 * Math.PI * r.value);
 const dash = computed(() => `${(props.value / 100) * C.value} ${C.value}`);
