@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const confirmDialogSchema: PlaygroundSchema = {
-  component: "Ui/Feedback/UiConfirmDialog.vue",
+  component: "Ui/Feedback/UiConfirmDialog/UiConfirmDialog.vue",
   title: "Confirm Dialog",
   props: [
     { key: "title", type: "string", default: "Confirm Action" },

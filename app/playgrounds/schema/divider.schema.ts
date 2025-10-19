@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const dividerSchema: PlaygroundSchema = {
-  component: "Ui/Display/UiDivider.vue",
+  component: "Ui/Display/UiDivider/UiDivider.vue",
   title: "Divider",
   props: [
     { key: "label", type: "string", default: "" },

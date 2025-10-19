@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const breadcrumbSchema: PlaygroundSchema = {
-  component: "Ui/Nav/UiBreadcrumb.vue",
+  component: "Ui/Nav/UiBreadcrumb/UiBreadcrumb.vue",
   title: "Breadcrumb",
   props: [
     {

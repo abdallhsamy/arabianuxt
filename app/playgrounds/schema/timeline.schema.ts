@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const timelineSchema: PlaygroundSchema = {
-  component: "Ui/Data/UiTimeline.vue",
+  component: "Ui/Data/UiTimeline/UiTimeline.vue",
   title: "Timeline",
   props: [
     {

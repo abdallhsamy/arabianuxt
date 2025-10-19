@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const textareaSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiTextarea.vue",
+  component: "Ui/Form/UiTextarea/UiTextarea.vue",
   title: "Textarea",
   props: [
     { key: "modelValue", type: "string", default: "Sample text content" },

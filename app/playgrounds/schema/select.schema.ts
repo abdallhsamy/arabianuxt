@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const selectSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiSelect.vue",
+  component: "Ui/Form/UiSelect/UiSelect.vue",
   title: "Select",
   props: [
     { key: "modelValue", type: "string", default: "" },

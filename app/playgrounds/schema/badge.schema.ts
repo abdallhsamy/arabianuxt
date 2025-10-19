@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const badgeSchema: PlaygroundSchema = {
-  component: "Ui/Display/UiBadge.vue",
+  component: "Ui/Display/UiBadge/UiBadge.vue",
   title: "Badge",
   props: [
     { key: "label", type: "string", default: "Badge" },

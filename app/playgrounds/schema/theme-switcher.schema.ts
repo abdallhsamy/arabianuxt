@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const themeSwitcherSchema: PlaygroundSchema = {
-  component: "Ui/Layout/UiThemeSwitcher.vue",
+  component: "Ui/Layout/UiThemeSwitcher/UiThemeSwitcher.vue",
   title: "Theme Switcher",
   props: [
     { key: "modelValue", type: "string", default: "dark" },

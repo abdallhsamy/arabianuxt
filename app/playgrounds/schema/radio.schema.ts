@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const radioSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiRadio.vue",
+  component: "Ui/Form/UiRadio/UiRadio.vue",
   title: "Radio",
   props: [
     { key: "modelValue", type: "string", default: "option1" },

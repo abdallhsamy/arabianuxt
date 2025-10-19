@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const emptyStateSchema: PlaygroundSchema = {
-  component: "Ui/Display/UiEmptyState.vue",
+  component: "Ui/Display/UiEmptyState/UiEmptyState.vue",
   title: "Empty State",
   props: [
     { key: "title", type: "string", default: "No data found" },

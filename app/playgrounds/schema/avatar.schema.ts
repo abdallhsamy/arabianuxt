@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const avatarSchema: PlaygroundSchema = {
-  component: "Ui/Core/UiAvatar.vue",
+  component: "Ui/Core/UiAvatar/UiAvatar.vue",
   title: "Avatar",
   props: [
     { key: "name", type: "string", default: "John Doe" },

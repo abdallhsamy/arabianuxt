@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const ratingSchema: PlaygroundSchema = {
-  component: "Ui/Core/UiRating.vue",
+  component: "Ui/Core/UiRating/UiRating.vue",
   title: "Rating",
   props: [
     { key: "modelValue", type: "number", default: 3 },

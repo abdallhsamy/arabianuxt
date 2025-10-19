@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const checkboxSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiCheckbox.vue",
+  component: "Ui/Form/UiCheckbox/UiCheckbox.vue",
   title: "Checkbox",
   props: [
     { key: "modelValue", type: "boolean", default: false },

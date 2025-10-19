@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const paginationSchema: PlaygroundSchema = {
-  component: "Ui/Nav/UiPagination.vue",
+  component: "Ui/Nav/UiPagination/UiPagination.vue",
   title: "Pagination",
   props: [
     { key: "currentPage", type: "number", default: 1 },

@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const progressBarSchema: PlaygroundSchema = {
-  component: "Ui/Data/UiProgressBar.vue",
+  component: "Ui/Data/UiProgressBar/UiProgressBar.vue",
   title: "Progress Bar",
   props: [
     { key: "value", type: "number", default: 65 },

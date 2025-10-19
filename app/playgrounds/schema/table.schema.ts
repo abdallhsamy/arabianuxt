@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const tableSchema: PlaygroundSchema = {
-  component: "Ui/Data/UiTable.vue",
+  component: "Ui/Data/UiTable/UiTable.vue",
   title: "Table",
   props: [
     {
