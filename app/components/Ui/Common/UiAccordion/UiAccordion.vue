@@ -2,7 +2,6 @@
 /* eslint-disable vue/no-v-html */
 import { ref, computed } from "vue";
 import { ChevronDown } from "lucide-vue-next";
-import DOMPurify from "dompurify";
 import type { UiAccordionProps, AccordionItem } from "./UiAccordion.type";
 import { UiAccordionOrientations, UiAccordionColors } from "./UiAccordion.type";
 
@@ -41,7 +40,27 @@ const colorClass = computed(() => colors[props.color]);
 const sanitizeContent = (item: AccordionItem) => {
   const content =
     typeof item.content === "function" ? item.content() : item.content;
-  return DOMPurify.sanitize(content);
+
+  // Only sanitize on client side to avoid SSR issues
+  if (process.client) {
+    try {
+      // Use dynamic import for client-side sanitization
+      import("dompurify")
+        .then(({ default: DOMPurify }) => {
+          return DOMPurify.sanitize(content);
+        })
+        .catch(() => {
+          // Fallback if DOMPurify fails to load
+          return content;
+        });
+    } catch (error) {
+      console.warn("Failed to sanitize content:", error);
+      return content;
+    }
+  }
+
+  // Return content as-is for server-side rendering
+  return content;
 };
 </script>
 
