@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AvailableLocale, LanguageDirection } from "~~/i18n/config";
-import UiToaster from "~/components/Ui/UiToaster/UiToaster.vue";
+import UiToaster from "~/components/Ui/Common/UiToaster/UiToaster.vue";
 
 const headMeta = useLocaleHead({
   dir: true,
