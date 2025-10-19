@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-
-export interface UiProgressBarProps {
-  value: number;
-  max?: number;
-  color?: string;
-  showLabel?: boolean;
-}
+import type { UiProgressBarProps } from "./UiProgressBar.type";
 
 const props = withDefaults(defineProps<UiProgressBarProps>(), {
   max: 100,
