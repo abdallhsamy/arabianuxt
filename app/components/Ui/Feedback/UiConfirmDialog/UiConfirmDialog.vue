@@ -1,14 +1,12 @@
 <script setup lang="ts">
-const props = defineProps<{
-  modelValue: boolean;
-  title?: string;
-  message?: string;
-}>();
+import type {
+  UiConfirmDialogProps,
+  UiConfirmDialogEmits,
+} from "./UiConfirmDialog.type";
 
-const emit = defineEmits<{
-  (e: "update:modelValue", v: boolean): void;
-  (e: "confirm"): void;
-}>();
+defineProps<UiConfirmDialogProps>();
+
+const emit = defineEmits<UiConfirmDialogEmits>();
 
 const close = (): void => emit("update:modelValue", false);
 const confirm = (): void => {
@@ -20,7 +18,7 @@ const confirm = (): void => {
 <template>
   <transition name="fade">
     <div
-      v-if="props.modelValue"
+      v-if="modelValue"
       class="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm"
       @click.self="close"
     >
@@ -28,10 +26,10 @@ const confirm = (): void => {
         class="bg-white/10 backdrop-blur-xl rounded-xl p-6 w-full max-w-md border border-white/20 shadow-xl"
       >
         <h3 class="text-lg font-semibold text-gray-100 mb-2">
-          {{ props.title || "Confirm Action" }}
+          {{ title || "Confirm Action" }}
         </h3>
         <p class="text-gray-300 mb-6">
-          {{ props.message || "Are you sure you want to proceed?" }}
+          {{ message || "Are you sure you want to proceed?" }}
         </p>
         <div class="flex justify-end gap-3">
           <button
@@ -57,6 +55,7 @@ const confirm = (): void => {
 .fade-leave-active {
   transition: opacity 0.25s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
