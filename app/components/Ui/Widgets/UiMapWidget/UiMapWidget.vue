@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { UiMapWidgetDefaults, type UiMapWidgetProps } from "./UiMapWidget.type";
 
-export interface UiMapWidgetProps {
-  lat: number;
-  lng: number;
-  zoom?: number;
-  height?: string;
-}
-
-const props = withDefaults(defineProps<UiMapWidgetProps>(), {
-  zoom: 13,
-  height: "300px",
-});
+const props = withDefaults(
+  defineProps<UiMapWidgetProps>(),
+  UiMapWidgetDefaults
+);
 
 const mapEl = ref<HTMLDivElement>();
 onMounted(async () => {
