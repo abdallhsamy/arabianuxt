@@ -1,16 +1,15 @@
 <script setup lang="ts">
-// ref removed as it was unused
+import {
+  type UiKanbanBoardProps,
+  type UiKanbanBoardEmits,
+  type KanbanTask,
+  KanbanTaskStatus,
+} from "./UiKanbanBoard.type";
 
-export interface KanbanTask {
-  id: string;
-  title: string;
-  status: "todo" | "progress" | "done";
-}
+const props = defineProps<UiKanbanBoardProps>();
+const emit = defineEmits<UiKanbanBoardEmits>();
 
-const props = defineProps<{ modelValue: KanbanTask[] }>();
-const emit = defineEmits<{ (e: "update:modelValue", v: KanbanTask[]): void }>();
-
-const columns = ["todo", "progress", "done"] as const;
+const columns = Object.values(KanbanTaskStatus);
 
 const moveTask = (id: string, newStatus: KanbanTask["status"]) => {
   const tasks = props.modelValue.map(t =>
