@@ -40,48 +40,54 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
     import("~/components/Ui/Common/UiAccordion/UiAccordion.vue"),
   "Ui/Common/UiAlert/UiAlert.vue": () =>
     import("~/components/Ui/Common/UiAlert/UiAlert.vue"),
-  "Ui/Core/UiAvatar.vue": () => import("~/components/Ui/Core/UiAvatar.vue"),
-  "Ui/Display/UiBadge.vue": () => import("~/components/Ui/Display/UiBadge.vue"),
-  "Ui/Nav/UiBreadcrumb.vue": () =>
-    import("~/components/Ui/Nav/UiBreadcrumb.vue"),
+  "Ui/Core/UiAvatar/UiAvatar.vue": () =>
+    import("~/components/Ui/Core/UiAvatar/UiAvatar.vue"),
+  "Ui/Display/UiBadge/UiBadge.vue": () =>
+    import("~/components/Ui/Display/UiBadge/UiBadge.vue"),
+  "Ui/Nav/UiBreadcrumb/UiBreadcrumb.vue": () =>
+    import("~/components/Ui/Nav/UiBreadcrumb/UiBreadcrumb.vue"),
   "Ui/Common/UiButton/UiButton.vue": () =>
     import("~/components/Ui/Common/UiButton/UiButton.vue"),
   "Ui/Common/UiCard/UiCard.vue": () =>
     import("~/components/Ui/Common/UiCard/UiCard.vue"),
   "Ui/Charts/UiChartArea.vue": () =>
     import("~/components/Ui/Charts/UiChartArea.vue"),
-  "Ui/Charts/UiChartBar.vue": () =>
-    import("~/components/Ui/Charts/UiChartBar.vue"),
+  "Ui/Charts/UiChartBar/UiChartBar.vue": () =>
+    import("~/components/Ui/Charts/UiChartBar/UiChartBar.vue"),
   "Ui/Charts/UiChartPie.vue": () =>
     import("~/components/Ui/Charts/UiChartPie.vue"),
-  "Ui/Form/UiCheckbox.vue": () => import("~/components/Ui/Form/UiCheckbox.vue"),
-  "Ui/Feedback/UiConfirmDialog.vue": () =>
-    import("~/components/Ui/Feedback/UiConfirmDialog.vue"),
+  "Ui/Form/UiCheckbox/UiCheckbox.vue": () =>
+    import("~/components/Ui/Form/UiCheckbox/UiCheckbox.vue"),
+  "Ui/Feedback/UiConfirmDialog/UiConfirmDialog.vue": () =>
+    import("~/components/Ui/Feedback/UiConfirmDialog/UiConfirmDialog.vue"),
   "Ui/Form/UiDatePicker.vue": () =>
     import("~/components/Ui/Form/UiDatePicker.vue"),
-  "Ui/Display/UiDivider.vue": () =>
-    import("~/components/Ui/Display/UiDivider.vue"),
+  "Ui/Display/UiDivider/UiDivider.vue": () =>
+    import("~/components/Ui/Display/UiDivider/UiDivider.vue"),
   "Ui/Common/UiDropdown/UiDropdown.vue": () =>
     import("~/components/Ui/Common/UiDropdown/UiDropdown.vue"),
-  "Ui/Display/UiEmptyState.vue": () =>
-    import("~/components/Ui/Display/UiEmptyState.vue"),
+  "Ui/Display/UiEmptyState/UiEmptyState.vue": () =>
+    import("~/components/Ui/Display/UiEmptyState/UiEmptyState.vue"),
   "Ui/Form/UiFileUpload.vue": () =>
     import("~/components/Ui/Form/UiFileUpload.vue"),
   "Ui/Form/UiInput/UiInput.vue": () =>
     import("~/components/Ui/Form/UiInput/UiInput.vue"),
-  "Ui/Display/UiLoaderSpinner.vue": () =>
-    import("~/components/Ui/Display/UiLoaderSpinner.vue"),
+  "Ui/Display/UiLoaderSpinner/UiLoaderSpinner.vue": () =>
+    import("~/components/Ui/Display/UiLoaderSpinner/UiLoaderSpinner.vue"),
   "Ui/Common/UiModal/UiModal.vue": () =>
     import("~/components/Ui/Common/UiModal/UiModal.vue"),
-  "Ui/Nav/UiPagination.vue": () =>
-    import("~/components/Ui/Nav/UiPagination.vue"),
-  "Ui/Data/UiProgressBar.vue": () =>
-    import("~/components/Ui/Data/UiProgressBar.vue"),
-  "Ui/Form/UiRadio.vue": () => import("~/components/Ui/Form/UiRadio.vue"),
-  "Ui/Core/UiRating.vue": () => import("~/components/Ui/Core/UiRating.vue"),
+  "Ui/Nav/UiPagination/UiPagination.vue": () =>
+    import("~/components/Ui/Nav/UiPagination/UiPagination.vue"),
+  "Ui/Data/UiProgressBar/UiProgressBar.vue": () =>
+    import("~/components/Ui/Data/UiProgressBar/UiProgressBar.vue"),
+  "Ui/Form/UiRadio/UiRadio.vue": () =>
+    import("~/components/Ui/Form/UiRadio/UiRadio.vue"),
+  "Ui/Core/UiRating/UiRating.vue": () =>
+    import("~/components/Ui/Core/UiRating/UiRating.vue"),
   "Ui/Editor/UiRichEditor.vue": () =>
     import("~/components/Ui/Editor/UiRichEditor.vue"),
-  "Ui/Form/UiSelect.vue": () => import("~/components/Ui/Form/UiSelect.vue"),
+  "Ui/Form/UiSelect/UiSelect.vue": () =>
+    import("~/components/Ui/Form/UiSelect/UiSelect.vue"),
   "Ui/Feedback/UiSkeleton.vue": () =>
     import("~/components/Ui/Feedback/UiSkeleton.vue"),
   "Ui/Form/UiSlider.vue": () => import("~/components/Ui/Form/UiSlider.vue"),
@@ -89,14 +95,17 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
     import("~/components/Ui/Common/UiStepper/UiStepper.vue"),
   "Ui/Common/UiSwitch/UiSwitch.vue": () =>
     import("~/components/Ui/Common/UiSwitch/UiSwitch.vue"),
-  "Ui/Data/UiTable.vue": () => import("~/components/Ui/Data/UiTable.vue"),
+  "Ui/Data/UiTable/UiTable.vue": () =>
+    import("~/components/Ui/Data/UiTable/UiTable.vue"),
   "Ui/Common/UiTabs/UiTabs.vue": () =>
     import("~/components/Ui/Common/UiTabs/UiTabs.vue"),
   "Ui/Form/UiTagInput.vue": () => import("~/components/Ui/Form/UiTagInput.vue"),
-  "Ui/Form/UiTextarea.vue": () => import("~/components/Ui/Form/UiTextarea.vue"),
-  "Ui/Layout/UiThemeSwitcher.vue": () =>
-    import("~/components/Ui/Layout/UiThemeSwitcher.vue"),
-  "Ui/Data/UiTimeline.vue": () => import("~/components/Ui/Data/UiTimeline.vue"),
+  "Ui/Form/UiTextarea/UiTextarea.vue": () =>
+    import("~/components/Ui/Form/UiTextarea/UiTextarea.vue"),
+  "Ui/Layout/UiThemeSwitcher/UiThemeSwitcher.vue": () =>
+    import("~/components/Ui/Layout/UiThemeSwitcher/UiThemeSwitcher.vue"),
+  "Ui/Data/UiTimeline/UiTimeline.vue": () =>
+    import("~/components/Ui/Data/UiTimeline/UiTimeline.vue"),
   "Ui/Common/UiTooltip/UiTooltip.vue": () =>
     import("~/components/Ui/Common/UiTooltip/UiTooltip.vue"),
 };
@@ -257,9 +266,9 @@ const codeSnippet = computed(() => {
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <template v-for="field in schema.props" :key="field.key">
           <div v-if="field.type === 'string'" class="flex flex-col">
-            <label class="text-gray-400 text-sm mb-1">{{
-              field.label || field.key
-            }}</label>
+            <label class="text-gray-400 text-sm mb-1">
+              {{ field.label || field.key }}
+            </label>
             <textarea
               v-if="typeof values[field.key] === 'object'"
               :value="JSON.stringify(values[field.key], null, 2)"
@@ -286,9 +295,9 @@ const codeSnippet = computed(() => {
             <label>{{ field.label || field.key }}</label>
           </div>
           <div v-else-if="field.type === 'enum'" class="flex flex-col">
-            <label class="text-gray-400 text-sm mb-1">{{
-              field.label || field.key
-            }}</label>
+            <label class="text-gray-400 text-sm mb-1">
+              {{ field.label || field.key }}
+            </label>
             <select
               v-model="values[field.key]"
               class="rounded-lg bg-white/10 border border-white/10 px-3 py-1.5 text-sm text-white focus:ring-1 ring-fuchsia-500/50 focus:outline-none"
@@ -332,8 +341,9 @@ const codeSnippet = computed(() => {
         <p class="text-gray-400 text-sm mb-2">Generated Code:</p>
         <pre
           class="bg-black/40 border border-white/10 rounded-xl text-gray-200 text-xs text-left p-3 overflow-x-auto select-all"
-          >{{ codeSnippet }}</pre
         >
+          {{ codeSnippet }}
+        </pre>
       </div>
     </div>
   </div>
