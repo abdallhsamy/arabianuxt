@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import UiBadge from "~/components/Ui/Display/UiBadge.vue";
-import UiEmptyState from "~/components/Ui/Display/UiEmptyState.vue";
-import UiLoaderSpinner from "~/components/Ui/Display/UiLoaderSpinner.vue";
-import UiDivider from "~/components/Ui/Layout/UiDivider.vue";
+import UiBadge from "~/components/Ui/Display/UiBadge/UiBadge.vue";
+import UiEmptyState from "~/components/Ui/Display/UiEmptyState/UiEmptyState.vue";
+import UiLoaderSpinner from "~/components/Ui/Display/UiLoaderSpinner/UiLoaderSpinner.vue";
+import UiDivider from "~/components/Ui/Display/UiDivider/UiDivider.vue";
 
 definePageMeta({
   middleware: "auth",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import GradientCard from "~/components/Ui/Common/GradientCard.vue";
-import DataTable from "~/components/Ui/Common/DataTable.vue";
+import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
+import DataTable from "~/components/Ui/Common/DataTable/DataTable.vue";
 
 definePageMeta({
   middleware: "auth",
@@ -175,6 +175,7 @@ const exportCsv = (): void => {
   padding: 0.6rem 0.9rem;
   transition: all 0.25s ease;
 }
+
 .input-dark:focus {
   outline: none;
   border-color: rgba(236, 72, 153, 0.4);

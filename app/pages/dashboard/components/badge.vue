@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Check, AlertCircle, Bell, Star } from "lucide-vue-next";
-import UiBadge from "~/components/Ui/Display/UiBadge.vue";
+import UiBadge from "~/components/Ui/Display/UiBadge/UiBadge.vue";
 
 definePageMeta({
   middleware: "auth",

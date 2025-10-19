@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiSelect from "~/components/Ui/Form/UiSelect.vue";
+import UiSelect from "~/components/Ui/Form/UiSelect/UiSelect.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 

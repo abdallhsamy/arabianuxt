@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiTextarea from "~/components/Ui/Form/UiTextarea.vue";
+import UiTextarea from "~/components/Ui/Form/UiTextarea/UiTextarea.vue";
 import { ref } from "vue";
 
 definePageMeta({

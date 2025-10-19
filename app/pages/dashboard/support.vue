@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import GradientCard from "~/components/Ui/Common/GradientCard.vue";
-import DataTable from "~/components/Ui/Common/DataTable.vue";
+import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
+import DataTable from "~/components/Ui/Common/DataTable/DataTable.vue";
 import TicketModal from "~/components/Ui/Support/TicketModal.vue";
 import { Clock } from "lucide-vue-next";
 import { useI18n } from "vue-i18n";
@@ -174,7 +174,8 @@ const badgePriority = (p: Ticket["priority"]): string =>
           <div
             class="text-right text-gray-300 flex items-center gap-1 justify-end"
           >
-            <Clock class="w-4 h-4 text-indigo-300" /> {{ row.createdAt }}
+            <Clock class="w-4 h-4 text-indigo-300" />
+            {{ row.createdAt }}
           </div>
         </template>
       </DataTable>
@@ -201,6 +202,7 @@ const badgePriority = (p: Ticket["priority"]): string =>
   padding: 0.6rem 0.9rem;
   transition: all 0.25s ease;
 }
+
 .input-dark:focus {
   outline: none;
   border-color: rgba(236, 72, 153, 0.4);

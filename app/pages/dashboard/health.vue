@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import MetricMini from "~/components/Ui/Charts/MetricMini.vue";
-import GradientCard from "~/components/Ui/Common/GradientCard.vue";
 import { ref } from "vue";
+import MetricMini from "~/components/Ui/Charts/MetricMini.vue";
+import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
 
 definePageMeta({
   middleware: "auth",

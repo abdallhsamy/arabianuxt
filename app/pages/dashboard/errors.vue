@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import GradientCard from "~/components/Ui/Common/GradientCard.vue";
+import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
 
 definePageMeta({
   middleware: "auth",
@@ -94,6 +94,7 @@ const toggle = (e: Err) => (e.open = !e.open);
 .fade-leave-active {
   transition: all 0.3s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

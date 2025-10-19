@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import GradientCard from "~/components/Ui/Common/GradientCard.vue";
-import DataTable from "~/components/Ui/Common/DataTable.vue";
+import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
+import DataTable from "~/components/Ui/Common/DataTable/DataTable.vue";
 
 definePageMeta({
   middleware: "auth",

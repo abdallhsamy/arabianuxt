@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import UiAvatar from "~/components/Ui/Core/UiAvatar.vue";
-import UiBadgeStatus from "~/components/Ui/Core/UiBadgeStatus.vue";
-import UiRating from "~/components/Ui/Core/UiRating.vue";
-import UiGridLayout from "~/components/Ui/Layout/UiGridLayout.vue";
-import UiSectionHeader from "~/components/Ui/Layout/UiSectionHeader.vue";
-import UiContainer from "~/components/Ui/Layout/UiContainer.vue";
+import UiAvatar from "~/components/Ui/Core/UiAvatar/UiAvatar.vue";
+import UiBadgeStatus from "~/components/Ui/Core/UiBadgeStatus/UiBadgeStatus.vue";
+import UiRating from "~/components/Ui/Core/UiRating/UiRating.vue";
+import UiGridLayout from "~/components/Ui/Layout/UiGridLayout/UiGridLayout.vue";
+import UiSectionHeader from "~/components/Ui/Layout/UiSectionHeader/UiSectionHeader.vue";
+import UiContainer from "~/components/Ui/Layout/UiContainer/UiContainer.vue";
 import UiDiffSideBySide from "~/components/Ui/Dev/UiDiffSideBySide.vue";
 import UiPromptHistory from "~/components/Ui/Dev/UiPromptHistory.vue";
 import UiAgentCard from "~/components/Ui/Dev/UiAgentCard.vue";

@@ -3,11 +3,11 @@ import { reactive } from "vue";
 
 import UiFormField from "~/components/Ui/Form/UiFormField.vue";
 import UiInput from "~/components/Ui/Form/UiInput/UiInput.vue";
-import UiTextarea from "~/components/Ui/Form/UiTextarea.vue";
-import UiSelect from "~/components/Ui/Form/UiSelect.vue";
+import UiTextarea from "~/components/Ui/Form/UiTextarea/UiTextarea.vue";
+import UiSelect from "~/components/Ui/Form/UiSelect/UiSelect.vue";
 import UiSelectMulti from "~/components/Ui/Form/UiSelectMulti.vue";
-import UiCheckbox from "~/components/Ui/Form/UiCheckbox.vue";
-import UiRadio from "~/components/Ui/Form/UiRadio.vue";
+import UiCheckbox from "~/components/Ui/Form/UiCheckbox/UiCheckbox.vue";
+import UiRadio from "~/components/Ui/Form/UiRadio/UiRadio.vue";
 import UiSwitch from "~/components/Ui/Form/UiSwitch.vue";
 import UiDatePicker from "~/components/Ui/Form/UiDatePicker.vue";
 import UiSlider from "~/components/Ui/Form/UiSlider.vue";

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import GradientCard from "~/components/Ui/Common/GradientCard.vue";
+import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
 
 definePageMeta({
   middleware: "auth",
@@ -81,6 +81,7 @@ onUnmounted(() => {
   border-radius: 0.75rem;
   padding: 0.6rem 0.9rem;
 }
+
 .input-dark:focus {
   outline: none;
   border-color: rgba(236, 72, 153, 0.4);

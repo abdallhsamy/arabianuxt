@@ -3,8 +3,8 @@ import { ref } from "vue";
 import UiNotificationsPanel, {
   type Notice,
 } from "~/components/Ui/Feedback/UiNotificationsPanel.vue";
-import UiSettingsDrawer from "~/components/Ui/Layout/UiSettingsDrawer.vue";
-import UiThemeSwitcher from "~/components/Ui/Layout/UiThemeSwitcher.vue";
+import UiSettingsDrawer from "~/components/Ui/Layout/UiSettingsDrawer/UiSettingsDrawer.vue";
+import UiThemeSwitcher from "~/components/Ui/Layout/UiThemeSwitcher/UiThemeSwitcher.vue";
 
 definePageMeta({
   middleware: "auth",
