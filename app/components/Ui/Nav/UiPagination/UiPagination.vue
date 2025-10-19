@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
-
-export interface UiPaginationProps {
-  page: number;
-  total: number;
-  perPage: number;
-}
+import type { UiPaginationProps, UiPaginationEmits } from "./UiPagination.type";
 
 const props = defineProps<UiPaginationProps>();
-const emit = defineEmits<{ (e: "update:page", v: number): void }>();
+const emit = defineEmits<UiPaginationEmits>();
 
 const totalPages = computed(() => Math.ceil(props.total / props.perPage));
 const pages = computed(() =>
