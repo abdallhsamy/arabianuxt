@@ -1,21 +1,20 @@
 <script setup lang="ts">
-export interface UiAgentCardProps {
-  name: string;
-  description: string;
-  avatar?: string;
-  model?: string;
-  active?: boolean;
-}
+import type { UiAgentCardProps } from "./UiAgentCard.type";
 
-const props = defineProps<UiAgentCardProps>();
+defineProps<UiAgentCardProps>();
 </script>
 
 <template>
   <div
     class="flex items-start gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
-    :class="{ 'ring-2 ring-fuchsia-500/50': props.active }"
+    :class="{ 'ring-2 ring-fuchsia-500/50': active }"
   >
-    <img v-if="avatar" :src="avatar" class="w-12 h-12 rounded-full" />
+    <img
+      v-if="avatar"
+      :src="avatar"
+      class="w-12 h-12 rounded-full"
+      :alt="name"
+    />
     <div>
       <h4 class="text-gray-100 font-semibold flex items-center gap-2">
         {{ name }}
