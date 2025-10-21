@@ -1,8 +1,6 @@
 <script setup lang="ts">
-export interface UiWidgetContainerProps {
-  title?: string;
-  subtitle?: string;
-}
+import type { UiWidgetContainerProps } from "./UiWidgetContainer.type";
+
 const props = withDefaults(defineProps<UiWidgetContainerProps>(), {});
 </script>
 
