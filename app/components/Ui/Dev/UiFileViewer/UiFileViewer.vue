@@ -1,41 +1,38 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import UiJsonInspector from "~/components/Ui/Dev/UiJsonInspector.vue";
+import UiJsonInspector from "~/components/Ui/Dev/UiJsonInspector/UiJsonInspector.vue";
+import type { UiFileViewerProps, UiFileViewerKind } from "./UiFileViewer.type";
+import {
+  UiFileViewerKinds,
+  UiFileViewerDefaultValues,
+  UiFileViewerImageExtensions,
+  UiFileViewerPdfExtensions,
+  UiFileViewerMimeTypes,
+} from "./UiFileViewer.type";
 
-type Kind = "auto" | "text" | "code" | "image" | "pdf" | "json";
+const props = withDefaults(defineProps<UiFileViewerProps>(), {
+  kind: UiFileViewerDefaultValues.Kind,
+  src: UiFileViewerDefaultValues.Src,
+  code: UiFileViewerDefaultValues.Code,
+  lang: UiFileViewerDefaultValues.Lang,
+  filename: UiFileViewerDefaultValues.Filename,
+});
 
-const props = withDefaults(
-  defineProps<{
-    kind?: Kind;
-    src?: string; // for image/pdf
-    code?: string; // for text/code
-    lang?: string; // for code highlight hint
-    json?: unknown; // for JSON
-    filename?: string;
-  }>(),
-  {
-    kind: "auto",
-    src: "",
-    code: "",
-    lang: "plaintext",
-    filename: "file.txt",
-  }
-);
-
-const detectKind = computed<Kind>(() => {
-  if (props.kind !== "auto") return props.kind;
-  if (props.json != null) return "json";
+const detectKind = computed<UiFileViewerKind>(() => {
+  if (props.kind !== UiFileViewerKinds.Auto) return props.kind;
+  if (props.json != null) return UiFileViewerKinds.Json;
   if (props.src) {
-    if (/\.(png|jpg|jpeg|gif|webp|svg)$/i.test(props.src)) return "image";
-    if (/\.(pdf)$/i.test(props.src)) return "pdf";
+    if (UiFileViewerImageExtensions.test(props.src))
+      return UiFileViewerKinds.Image;
+    if (UiFileViewerPdfExtensions.test(props.src)) return UiFileViewerKinds.Pdf;
   }
-  if (props.code) return "code";
-  return "text";
+  if (props.code) return UiFileViewerKinds.Code;
+  return UiFileViewerKinds.Text;
 });
 
 const onCopy = async (): Promise<void> => {
   const text =
-    detectKind.value === "json"
+    detectKind.value === UiFileViewerKinds.Json
       ? JSON.stringify(props.json, null, 2)
       : props.code;
   if (!text) return;
@@ -44,15 +41,15 @@ const onCopy = async (): Promise<void> => {
 
 const onDownload = (): void => {
   const blob =
-    detectKind.value === "json"
+    detectKind.value === UiFileViewerKinds.Json
       ? new Blob([JSON.stringify(props.json, null, 2)], {
-          type: "application/json",
+          type: UiFileViewerMimeTypes.Json,
         })
-      : new Blob([props.code || ""], { type: "text/plain" });
+      : new Blob([props.code || ""], { type: UiFileViewerMimeTypes.Text });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = props.filename || "download.txt";
+  a.download = props.filename || UiFileViewerDefaultValues.DownloadFilename;
   a.click();
   URL.revokeObjectURL(url);
 };
@@ -84,24 +81,27 @@ const onDownload = (): void => {
 
     <!-- JSON -->
     <UiJsonInspector
-      v-if="detectKind === 'json'"
+      v-if="detectKind === UiFileViewerKinds.Json"
       :value="json"
       class="max-h-[480px] overflow-auto p-3"
     />
 
     <!-- Code/Text -->
     <pre
-      v-else-if="detectKind === 'code' || detectKind === 'text'"
+      v-else-if="
+        detectKind === UiFileViewerKinds.Code ||
+        detectKind === UiFileViewerKinds.Text
+      "
       class="p-4 text-sm text-gray-100 overflow-auto"
     ><code :class="lang">{{ code }}</code></pre>
 
     <!-- Image -->
-    <div v-else-if="detectKind === 'image'" class="p-2">
+    <div v-else-if="detectKind === UiFileViewerKinds.Image" class="p-2">
       <img :src="src" alt="" class="block w-full rounded-lg" />
     </div>
 
     <!-- PDF -->
-    <div v-else-if="detectKind === 'pdf'" class="h-[560px]">
+    <div v-else-if="detectKind === UiFileViewerKinds.Pdf" class="h-[560px]">
       <iframe :src="src" class="w-full h-full" title="PDF" />
     </div>
 
