@@ -1,40 +1,41 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
-export interface Command {
-  id: string;
-  title: string;
-  hint?: string;
-  run: () => void;
-}
-export interface UiCommandPaletteProps {
-  modelValue: boolean;
-  commands: Command[];
-  placeholder?: string;
-}
+import type {
+  UiCommandPaletteProps,
+  UiCommandPaletteEmits,
+} from "./UiCommandPalette.type";
+import { UiCommandPaletteKeyboardKeys } from "./UiCommandPalette.type";
+
 const props = withDefaults(defineProps<UiCommandPaletteProps>(), {
   placeholder: "Type a command…",
 });
-const emit = defineEmits<{ (e: "update:modelValue", v: boolean): void }>();
+
+const emit = defineEmits<UiCommandPaletteEmits>();
+
 const q = ref("");
 const idx = ref(0);
+
 const close = (): void => emit("update:modelValue", false);
+
 const filtered = computed(() =>
   props.commands.filter(c =>
     c.title.toLowerCase().includes(q.value.toLowerCase())
   )
 );
+
 const onKey = (e: KeyboardEvent): void => {
   if (!props.modelValue) return;
-  if (e.key === "Escape") close();
-  else if (e.key === "ArrowDown") {
+  if (e.key === UiCommandPaletteKeyboardKeys.Escape) close();
+  else if (e.key === UiCommandPaletteKeyboardKeys.ArrowDown) {
     idx.value = Math.min(idx.value + 1, filtered.value.length - 1);
-  } else if (e.key === "ArrowUp") {
+  } else if (e.key === UiCommandPaletteKeyboardKeys.ArrowUp) {
     idx.value = Math.max(idx.value - 1, 0);
-  } else if (e.key === "Enter") {
+  } else if (e.key === UiCommandPaletteKeyboardKeys.Enter) {
     filtered.value[idx.value]?.run();
     close();
   }
 };
+
 onMounted(() => document.addEventListener("keydown", onKey));
 onBeforeUnmount(() => document.removeEventListener("keydown", onKey));
 </script>
