@@ -7,27 +7,29 @@ import {
   Globe2,
 } from "lucide-vue-next";
 import moment from "moment-hijri"; // Umm al-Qura-based conversion
+import type {
+  UiDatePickerProps,
+  UiDatePickerEmits,
+  UiDatePickerCell,
+} from "./UiDatePicker.type";
+import {
+  UiDatePickerSizes,
+  UiDatePickerDefaultValues,
+} from "./UiDatePicker.type";
 
-export interface UiDatePickerProps {
-  modelValue: Date | null;
-  label?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  size?: "sm" | "md" | "lg";
-  supportHijri?: boolean;
-}
+const UI_DATE_PICKER_GRID_SIZE = 42;
+const UI_DATE_PICKER_HIJRI_FORMAT = "iD-iM-iYYYY";
+const UI_DATE_PICKER_HIJRI_DISPLAY_FORMAT = "iD iMMMM iYYYY";
+const UI_DATE_PICKER_HIJRI_MONTH_FORMAT = "iMMMM iYYYY";
 
 const props = withDefaults(defineProps<UiDatePickerProps>(), {
-  modelValue: null,
-  size: "md",
-  disabled: false,
-  supportHijri: true,
+  modelValue: UiDatePickerDefaultValues.ModelValue,
+  size: UiDatePickerDefaultValues.Size,
+  disabled: UiDatePickerDefaultValues.Disabled,
+  supportHijri: UiDatePickerDefaultValues.SupportHijri,
 });
 
-const emit = defineEmits<{
-  (e: "update:modelValue", v: Date | null): void;
-  (e: "update:hijri", v: string | null): void;
-}>();
+const emit = defineEmits<UiDatePickerEmits>();
 
 // State
 const isOpen = ref(false);
@@ -42,13 +44,23 @@ watch(
   }
 );
 
+const UiDatePickerWeekdays = [
+  "Su",
+  "Mo",
+  "Tu",
+  "We",
+  "Th",
+  "Fr",
+  "Sa",
+] as const;
+
 // Size map
 const s = computed(
   () =>
     ({
-      sm: "h-9 text-sm",
-      md: "h-11 text-sm",
-      lg: "h-12 text-base",
+      [UiDatePickerSizes.Small]: "h-9 text-sm",
+      [UiDatePickerSizes.Medium]: "h-11 text-sm",
+      [UiDatePickerSizes.Large]: "h-12 text-base",
     })[props.size]
 );
 
@@ -56,7 +68,7 @@ const s = computed(
 const monthName = computed(() => {
   if (isHijri.value) {
     const m = moment(currentView.value).iDate(1);
-    return `${m.format("iMMMM iYYYY")} AH`;
+    return `${m.format(UI_DATE_PICKER_HIJRI_MONTH_FORMAT)} AH`;
   }
   return currentView.value.toLocaleString("default", {
     month: "long",
@@ -65,8 +77,7 @@ const monthName = computed(() => {
 });
 
 // Build 6x7 grid for the visible month
-type Cell = { date: Date; inMonth: boolean; label: number };
-const monthDays = computed<Cell[]>(() => {
+const monthDays = computed<UiDatePickerCell[]>(() => {
   if (isHijri.value) {
     const base = moment(currentView.value);
     const hYear = base.iYear();
@@ -84,8 +95,8 @@ const monthDays = computed<Cell[]>(() => {
     // First visible day (Sunday of the first week shown)
     const firstCell = startH.clone().subtract(offset, "days");
 
-    const cells: Cell[] = [];
-    for (let i = 0; i < 42; i++) {
+    const cells: UiDatePickerCell[] = [];
+    for (let i = 0; i < UI_DATE_PICKER_GRID_SIZE; i++) {
       const m = firstCell.clone().add(i, "days");
       cells.push({
         date: m.toDate(),
@@ -101,8 +112,8 @@ const monthDays = computed<Cell[]>(() => {
     const offset = start.getDay();
     const firstCell = new Date(y, m, 1 - offset);
 
-    const cells: Cell[] = [];
-    for (let i = 0; i < 42; i++) {
+    const cells: UiDatePickerCell[] = [];
+    for (let i = 0; i < UI_DATE_PICKER_GRID_SIZE; i++) {
       const d = new Date(
         firstCell.getFullYear(),
         firstCell.getMonth(),
@@ -122,7 +133,7 @@ const monthDays = computed<Cell[]>(() => {
 const displayText = computed(() => {
   if (!selected.value) return props.placeholder || "Select date";
   if (isHijri.value) {
-    return `${moment(selected.value).format("iD iMMMM iYYYY")} AH`;
+    return `${moment(selected.value).format(UI_DATE_PICKER_HIJRI_DISPLAY_FORMAT)} AH`;
   }
   return selected.value.toLocaleDateString(undefined, {
     day: "numeric",
@@ -162,7 +173,7 @@ const selectDate = (d: Date): void => {
   selected.value = d;
   emit("update:modelValue", d);
   const h = moment(d);
-  emit("update:hijri", h.format("iD-iM-iYYYY")); // e.g., "10-9-1447"
+  emit("update:hijri", h.format(UI_DATE_PICKER_HIJRI_FORMAT)); // e.g., "10-9-1447"
   isOpen.value = false;
 };
 
@@ -235,11 +246,7 @@ onBeforeUnmount(() => document.removeEventListener("click", onDoc));
         <div
           class="grid grid-cols-7 gap-1 text-center text-xs text-gray-400 mb-1"
         >
-          <span
-            v-for="d in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']"
-            :key="d"
-            >{{ d }}</span
-          >
+          <span v-for="d in UiDatePickerWeekdays" :key="d">{{ d }}</span>
         </div>
 
         <!-- Days -->
@@ -291,6 +298,7 @@ onBeforeUnmount(() => document.removeEventListener("click", onDoc));
 .fade-leave-active {
   transition: all 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
