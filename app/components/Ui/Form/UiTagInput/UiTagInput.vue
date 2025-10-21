@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
-export interface UiTagInputProps {
-  modelValue: string[];
-  placeholder?: string;
-}
+import type { UiTagInputProps, UiTagInputEmits } from "./UiTagInput.type";
+
 const props = withDefaults(defineProps<UiTagInputProps>(), {
   placeholder: "Add tag…",
 });
-const emit = defineEmits<{ (e: "update:modelValue", v: string[]): void }>();
+
+const emit = defineEmits<UiTagInputEmits>();
+
 const text = ref("");
+
 const add = (): void => {
   const v = text.value.trim();
   if (!v) return;
@@ -16,6 +17,7 @@ const add = (): void => {
   emit("update:modelValue", set);
   text.value = "";
 };
+
 const remove = (tag: string): void =>
   emit(
     "update:modelValue",
@@ -28,7 +30,7 @@ const remove = (tag: string): void =>
     class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-2 flex items-center gap-2 flex-wrap"
   >
     <span
-      v-for="t in props.modelValue"
+      v-for="t in modelValue"
       :key="t"
       class="text-xs rounded-md border border-white/10 bg-white/10 px-2 py-0.5 text-gray-100"
     >
@@ -39,7 +41,7 @@ const remove = (tag: string): void =>
     </span>
     <input
       v-model="text"
-      :placeholder="props.placeholder"
+      :placeholder="placeholder"
       class="flex-1 bg-transparent outline-none text-gray-100"
       @keydown.enter.prevent="add"
     />
