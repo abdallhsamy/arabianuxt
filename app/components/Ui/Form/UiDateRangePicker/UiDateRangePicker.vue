@@ -1,26 +1,39 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import moment from "moment-hijri";
+import type { UiDateRangePickerRangeValue } from "./UiDateRangePicker.type";
+import { UiDateRangePickerDefaultValues } from "./UiDateRangePicker.type";
 
-export interface RangeValue {
-  start: string;
-  end: string;
-}
+const UiDateRangePickerFormats = {
+  Hijri: "iYYYY/iMM/iDD",
+  Gregorian: "YYYY-MM-DD",
+} as const;
 
-const modelValue = defineModel<RangeValue | null>();
-const showHijri = ref(false);
+const UI_DATE_RANGE_PICKER_SEPARATOR = " → ";
+
+const modelValue = defineModel<UiDateRangePickerRangeValue | null>();
+
+const showHijri = ref<boolean>(UiDateRangePickerDefaultValues.ShowHijri);
 
 const formatted = computed(() => {
-  if (!modelValue.value) return "Select range";
-  const f = showHijri.value ? "iYYYY/iMM/iDD" : "YYYY-MM-DD";
-  return `${moment(modelValue.value.start).format(f)} → ${moment(modelValue.value.end).format(f)}`;
+  if (!modelValue.value) {
+    return "Select range";
+  }
+
+  const f = showHijri.value
+    ? UiDateRangePickerFormats.Hijri
+    : UiDateRangePickerFormats.Gregorian;
+  return `${moment(modelValue.value.start).format(f)}${UI_DATE_RANGE_PICKER_SEPARATOR}${moment(modelValue.value.end).format(f)}`;
 });
 
 const pick = (): void => {
   const today = moment();
   modelValue.value = {
     start: today.format(),
-    end: today.clone().add(7, "days").format(),
+    end: today
+      .clone()
+      .add(UiDateRangePickerDefaultValues.DefaultDays, "days")
+      .format(),
   };
 };
 </script>
