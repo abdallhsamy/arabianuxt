@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import type { AvatarUploadEmits } from "./AvatarUpload.type";
 
-const emit = defineEmits<{ (e: "change", file: File | null): void }>();
+const emit = defineEmits<AvatarUploadEmits>();
 
 const preview = ref<string | null>(null);
+
 const onSelect = (e: Event): void => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
