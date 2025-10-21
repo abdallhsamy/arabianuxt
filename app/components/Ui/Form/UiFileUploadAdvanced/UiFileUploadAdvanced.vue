@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import type {
+  UiFileUploadAdvancedUploadedFile,
+  UiFileUploadAdvancedEmits,
+} from "./UiFileUploadAdvanced.type";
+import { UiFileUploadAdvancedDefaultValues } from "./UiFileUploadAdvanced.type";
 
-export interface UploadedFile {
-  id: string;
-  name: string;
-  size: number;
-  progress: number;
-  preview?: string;
-}
+const UI_FILE_UPLOAD_ADVANCED_FILE_SIZE_UNIT = "KB";
 
-const emit = defineEmits<{ (e: "files", files: File[]): void }>();
+const UI_FILE_UPLOAD_ADVANCED_BYTES_PER_KB = 1024;
 
-const files = ref<UploadedFile[]>([]);
+const emit = defineEmits<UiFileUploadAdvancedEmits>();
+
+const files = ref<UiFileUploadAdvancedUploadedFile[]>([]);
 const dragging = ref(false);
 const fileInput = ref<HTMLInputElement>();
 
@@ -22,7 +23,7 @@ const handleFiles = (fileList: FileList | null) => {
     id: crypto.randomUUID(),
     name: f.name,
     size: f.size,
-    progress: 0,
+    progress: UiFileUploadAdvancedDefaultValues.Progress,
   }));
   emit("files", arr);
 };
@@ -64,7 +65,10 @@ const handleFiles = (fileList: FileList | null) => {
         class="flex justify-between items-center text-sm text-gray-300 bg-white/5 rounded px-3 py-2"
       >
         <span class="truncate max-w-[70%]">{{ f.name }}</span>
-        <span class="text-gray-500">{{ (f.size / 1024).toFixed(1) }} KB</span>
+        <span class="text-gray-500">
+          {{ (f.size / UI_FILE_UPLOAD_ADVANCED_BYTES_PER_KB).toFixed(1) }}
+          {{ UI_FILE_UPLOAD_ADVANCED_FILE_SIZE_UNIT }}
+        </span>
       </div>
     </div>
   </div>
