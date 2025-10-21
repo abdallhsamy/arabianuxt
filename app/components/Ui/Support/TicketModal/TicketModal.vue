@@ -1,44 +1,51 @@
 <script setup lang="ts">
 import { ref, nextTick } from "vue";
 import { Send, MessageSquare, X } from "lucide-vue-next";
+import type {
+  TicketModalProps,
+  TicketModalEmits,
+  TicketModalMessage,
+} from "./TicketModal.type";
+import {
+  TicketModalMessageFrom,
+  TicketModalDefaultValues,
+} from "./TicketModal.type";
 
-type Msg = { id: string; from: "user" | "agent"; text: string; time: string };
+const props = defineProps<TicketModalProps>();
 
-const props = defineProps<{
-  open: boolean;
-  ticketId: string;
-  subject: string;
-  initialMessages?: Msg[];
-}>();
+const emit = defineEmits<TicketModalEmits>();
 
-const emit = defineEmits<{
-  (e: "update:open", v: boolean): void;
-}>();
+const messages = ref<TicketModalMessage[]>(
+  props.initialMessages ?? TicketModalDefaultValues.InitialMessages
+);
 
-const messages = ref<Msg[]>(props.initialMessages ?? []);
 const input = ref("");
+
+const TICKET_MODAL_AGENT_DELAY = 600;
 
 const close = (): void => emit("update:open", false);
 
 const send = async (): Promise<void> => {
   const v = input.value.trim();
-  if (!v) return;
+  if (!v) {
+    return;
+  }
   messages.value.push({
     id: crypto.randomUUID?.() ?? String(Date.now()),
-    from: "user",
+    from: TicketModalMessageFrom.User,
     text: v,
-    time: "now",
+    time: TicketModalDefaultValues.Time,
   });
   input.value = "";
   await nextTick();
   setTimeout(() => {
     messages.value.push({
       id: crypto.randomUUID?.() ?? String(Date.now()),
-      from: "agent",
+      from: TicketModalMessageFrom.Agent,
       text: "Thanks! We are looking into it.",
-      time: "now",
+      time: TicketModalDefaultValues.Time,
     });
-  }, 600);
+  }, TICKET_MODAL_AGENT_DELAY);
 };
 </script>
 
@@ -70,12 +77,16 @@ const send = async (): Promise<void> => {
               v-for="m in messages"
               :key="m.id"
               class="flex"
-              :class="m.from === 'user' ? 'justify-end' : 'justify-start'"
+              :class="
+                m.from === TicketModalMessageFrom.User
+                  ? 'justify-end'
+                  : 'justify-start'
+              "
             >
               <div
                 class="rounded-xl px-3 py-2 text-sm max-w-[80%] border"
                 :class="
-                  m.from === 'user'
+                  m.from === TicketModalMessageFrom.User
                     ? 'bg-gradient-to-r from-indigo-500/30 to-fuchsia-500/30 text-white border-white/10'
                     : 'bg-white/5 text-gray-200 border-white/10'
                 "
@@ -109,15 +120,18 @@ const send = async (): Promise<void> => {
   initial-value: 0deg;
   inherits: false;
 }
+
 @keyframes rotate-gradient {
   to {
     --angle: 360deg;
   }
 }
+
 .animate-rotate-gradient {
   background-size: 200% 200%;
   animation: rotate-gradient 12s linear infinite;
 }
+
 .input-dark {
   background-color: rgba(25, 27, 33, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -126,6 +140,7 @@ const send = async (): Promise<void> => {
   padding: 0.6rem 0.9rem;
   transition: all 0.25s ease;
 }
+
 .input-dark:focus {
   outline: none;
   border-color: rgba(236, 72, 153, 0.4);
