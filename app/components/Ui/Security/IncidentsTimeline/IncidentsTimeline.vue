@@ -8,27 +8,21 @@ import {
   LogIn,
   LogOut,
 } from "lucide-vue-next";
+import type {
+  IncidentsTimelineProps,
+  IncidentsTimelineIncident,
+  IncidentsTimelineSeverity,
+} from "./IncidentsTimeline.type";
+import {
+  IncidentsTimelineSeverities,
+  IncidentsTimelineDefaultValues,
+} from "./IncidentsTimeline.type";
 
-type Severity = "critical" | "warning" | "info";
+const props = withDefaults(defineProps<IncidentsTimelineProps>(), {
+  isLive: IncidentsTimelineDefaultValues.IsLive,
+});
 
-interface Incident {
-  id: string;
-  time: string;
-  message: string;
-  ip: string;
-  location: string;
-  severity: Severity;
-  icon: Component;
-}
-
-const props = withDefaults(
-  defineProps<{
-    isLive?: boolean;
-  }>(),
-  { isLive: true }
-);
-
-const incidents = ref<Incident[]>([]);
+const incidents = ref<IncidentsTimelineIncident[]>([]);
 let interval: NodeJS.Timeout | null = null;
 
 const now = (): string =>
@@ -37,19 +31,23 @@ const now = (): string =>
 const pick = <T,>(arr: T[]): T | undefined =>
   arr[Math.floor(Math.random() * arr.length)];
 
-const generateIncident = (): Incident => {
-  const severities: Severity[] = ["critical", "warning", "info"];
-  const severity = pick(severities) || "info";
+const generateIncident = (): IncidentsTimelineIncident => {
+  const severities: IncidentsTimelineSeverity[] = [
+    IncidentsTimelineSeverities.Critical,
+    IncidentsTimelineSeverities.Warning,
+    IncidentsTimelineSeverities.Info,
+  ];
+  const severity = pick(severities) || IncidentsTimelineSeverities.Info;
   const pools = {
-    critical: [
+    [IncidentsTimelineSeverities.Critical]: [
       { message: "Multiple failed login attempts detected", icon: ShieldAlert },
       { message: "Suspicious access blocked by firewall", icon: ShieldAlert },
     ],
-    warning: [
+    [IncidentsTimelineSeverities.Warning]: [
       { message: "Unusual device login", icon: AlertTriangle },
       { message: "Password changed", icon: AlertTriangle },
     ],
-    info: [
+    [IncidentsTimelineSeverities.Info]: [
       { message: "Successful login", icon: LogIn },
       { message: "User logged out", icon: LogOut },
       { message: "Location verified", icon: Globe },
@@ -62,6 +60,7 @@ const generateIncident = (): Incident => {
     message: "Unknown incident",
     icon: ShieldAlert,
   }) as { message: string; icon: Component };
+
   const locs = [
     "Riyadh, SA",
     "Cairo, EG",
@@ -93,13 +92,17 @@ const start = (): void => {
   interval = setInterval(() => {
     if (!props.isLive) return;
     incidents.value.unshift(generateIncident());
-    if (incidents.value.length > 20) incidents.value.pop();
-  }, 3000);
+    if (incidents.value.length > IncidentsTimelineDefaultValues.MaxIncidents)
+      incidents.value.pop();
+  }, IncidentsTimelineDefaultValues.IntervalDelay);
 };
 
 onMounted(() => {
   // seed a few rows instantly
-  incidents.value = Array.from({ length: 6 }, () => generateIncident());
+  incidents.value = Array.from(
+    { length: IncidentsTimelineDefaultValues.InitialIncidents },
+    () => generateIncident()
+  );
   start();
 });
 
@@ -118,11 +121,14 @@ watch(
   }
 );
 
-const chipClasses = (sev: Severity): string =>
+const chipClasses = (sev: IncidentsTimelineSeverity): string =>
   ({
-    critical: "bg-rose-500/15 text-rose-400 border border-rose-400/30",
-    warning: "bg-amber-400/15 text-amber-300 border border-amber-300/30",
-    info: "bg-cyan-400/15 text-cyan-300 border border-cyan-300/30",
+    [IncidentsTimelineSeverities.Critical]:
+      "bg-rose-500/15 text-rose-400 border border-rose-400/30",
+    [IncidentsTimelineSeverities.Warning]:
+      "bg-amber-400/15 text-amber-300 border border-amber-300/30",
+    [IncidentsTimelineSeverities.Info]:
+      "bg-cyan-400/15 text-cyan-300 border border-cyan-300/30",
   })[sev];
 </script>
 
@@ -164,9 +170,9 @@ const chipClasses = (sev: Severity): string =>
               :is="row.icon"
               class="w-5 h-5"
               :class="
-                row.severity === 'critical'
+                row.severity === IncidentsTimelineSeverities.Critical
                   ? 'text-rose-400'
-                  : row.severity === 'warning'
+                  : row.severity === IncidentsTimelineSeverities.Warning
                     ? 'text-amber-300'
                     : 'text-cyan-300'
               "
@@ -188,9 +194,9 @@ const chipClasses = (sev: Severity): string =>
               <span
                 class="w-1.5 h-1.5 rounded-full"
                 :class="
-                  row.severity === 'critical'
+                  row.severity === IncidentsTimelineSeverities.Critical
                     ? 'bg-rose-400'
-                    : row.severity === 'warning'
+                    : row.severity === IncidentsTimelineSeverities.Warning
                       ? 'bg-amber-300'
                       : 'bg-cyan-300'
                 "
@@ -214,11 +220,13 @@ const chipClasses = (sev: Severity): string =>
   initial-value: 0deg;
   inherits: false;
 }
+
 @keyframes rotate-gradient {
   to {
     --angle: 360deg;
   }
 }
+
 .animate-rotate-gradient {
   background-size: 200% 200%;
   animation: rotate-gradient 14s linear infinite;
@@ -230,14 +238,17 @@ const chipClasses = (sev: Severity): string =>
   transform: translateY(-6px);
   filter: blur(4px);
 }
+
 .fade-list-enter-active {
   transition: all 280ms ease;
 }
+
 .fade-list-leave-to {
   opacity: 0;
   transform: translateY(6px);
   filter: blur(4px);
 }
+
 .fade-list-leave-active {
   transition: all 220ms ease;
 }
