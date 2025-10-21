@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import type { UiChartRadarProps } from "./UiChartRadar.type";
 
 Chart.register(
   RadarController,
@@ -20,11 +21,6 @@ Chart.register(
   Tooltip,
   Legend
 );
-
-export interface UiChartRadarProps {
-  labels: string[];
-  datasets: { label: string; data: number[]; color?: string }[];
-}
 
 const props = defineProps<UiChartRadarProps>();
 const canvas = ref<HTMLCanvasElement>();
