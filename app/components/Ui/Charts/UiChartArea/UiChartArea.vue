@@ -12,6 +12,12 @@ import {
   Filler,
 } from "chart.js";
 import { useChartTheme } from "~/composables/useChartTheme";
+import type { UiChartAreaProps } from "./UiChartArea.type";
+import {
+  UiChartAreaChartType,
+  UiChartAreaDefaultValues,
+  UiChartAreaGradientStops,
+} from "./UiChartArea.type";
 
 Chart.register(
   LineController,
@@ -23,35 +29,35 @@ Chart.register(
   Filler
 );
 
-export interface UiChartAreaProps {
-  labels: string[];
-  datasets: { label: string; data: number[]; color?: string }[];
-}
-
 const props = defineProps<UiChartAreaProps>();
 const canvas = ref<HTMLCanvasElement>();
-// chart variable removed as it was unused
 
 onMounted(() => {
   const ctx = canvas.value?.getContext("2d");
   if (!ctx) return;
   const options: ChartOptions<"line"> = useChartTheme();
   new Chart(ctx, {
-    type: "line",
+    type: UiChartAreaChartType,
     data: {
       labels: props.labels,
       datasets: props.datasets.map(d => ({
         label: d.label,
         data: d.data,
-        fill: true,
-        borderColor: d.color ?? "#a855f7",
+        fill: UiChartAreaDefaultValues.Fill,
+        borderColor: d.color ?? UiChartAreaDefaultValues.Color,
         backgroundColor: (ctx: Chart.ChartContext) => {
           const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 250);
-          gradient.addColorStop(0, `${d.color ?? "#a855f7"}55`);
-          gradient.addColorStop(1, "transparent");
+          gradient.addColorStop(
+            UiChartAreaGradientStops.Start,
+            `${d.color ?? UiChartAreaDefaultValues.Color}${UiChartAreaGradientStops.StartOpacity}`
+          );
+          gradient.addColorStop(
+            UiChartAreaGradientStops.End,
+            UiChartAreaGradientStops.EndOpacity
+          );
           return gradient;
         },
-        tension: 0.4,
+        tension: UiChartAreaDefaultValues.Tension,
       })),
     },
     options,
