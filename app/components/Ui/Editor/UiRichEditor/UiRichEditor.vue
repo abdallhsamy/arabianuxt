@@ -7,6 +7,23 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Typography from "@tiptap/extension-typography";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { useI18n } from "vue-i18n";
+import type {
+  UiRichEditorProps,
+  UiRichEditorEmits,
+  CommandItem,
+  UiRichEditorAiAction,
+  UiRichEditorTone,
+  UiRichEditorLength,
+  UiRichEditorLanguage,
+} from "./UiRichEditor.type";
+import {
+  UiRichEditorDefaultValues,
+  UiRichEditorSlashPosition,
+  UiRichEditorAiPanelPosition,
+  UiRichEditorMaxTextLength,
+  UiRichEditorAiDelay,
+  UiRichEditorToolbarButtons,
+} from "./UiRichEditor.type";
 
 const { t } = useI18n();
 
@@ -19,53 +36,14 @@ import css from "highlight.js/lib/languages/css";
 const lowlight = createLowlight();
 lowlight.register({ javascript, html, css });
 
-// ---------- Types ----------
-type AiAction =
-  | "rewrite"
-  | "shorten"
-  | "expand"
-  | "tone"
-  | "summarize"
-  | "bullets"
-  | "fix-grammar"
-  | "translate"
-  | "title"
-  | "continue";
-
-type Tone =
-  | "neutral"
-  | "professional"
-  | "friendly"
-  | "formal"
-  | "casual"
-  | "confident"
-  | "apologetic";
-
-type Length = "short" | "medium" | "long";
-type Language = "English" | "Arabic" | "French" | "German" | "Spanish";
-
-export interface UiRichEditorProps {
-  modelValue?: string;
-  placeholder?: string;
-  editable?: boolean;
-  autofocus?: boolean;
-  aiHandler?: (req: {
-    action: AiAction;
-    text: string;
-    tone?: Tone;
-    length?: Length;
-    language?: Language;
-  }) => Promise<string>;
-}
-
 const props = withDefaults(defineProps<UiRichEditorProps>(), {
-  modelValue: "",
-  placeholder: "Type “/” for commands or use ✨ AI",
-  editable: true,
-  autofocus: false,
+  modelValue: UiRichEditorDefaultValues.ModelValue,
+  placeholder: UiRichEditorDefaultValues.Placeholder,
+  editable: UiRichEditorDefaultValues.Editable,
+  autofocus: UiRichEditorDefaultValues.Autofocus,
 });
 
-const emit = defineEmits<{ (e: "update:modelValue", v: string): void }>();
+const emit = defineEmits<UiRichEditorEmits>();
 
 // ---------- Editor ----------
 const editor = ref<Editor | null>(null);
@@ -83,7 +61,7 @@ onMounted(() => {
     editable: props.editable,
     autofocus: props.autofocus,
     onUpdate: ({ editor }) => emit("update:modelValue", editor.getHTML()),
-    onTransaction: ({ editor }) => detectSlash(editor),
+    onTransaction: ({ editor }) => detectSlash(editor as Editor),
   });
 });
 onBeforeUnmount(() => editor.value?.destroy());
@@ -93,12 +71,6 @@ const isActive = (name: string) => !!editor.value?.isActive(name);
 const runCmd = (fn: () => void) => fn();
 
 // ---------- Slash Menu ----------
-interface CommandItem {
-  label: string;
-  description: string;
-  action: (e: Editor) => void;
-}
-
 const showSlash = ref(false);
 const slashPos = ref({ x: 0, y: 0 });
 const slashQuery = ref("");
@@ -202,8 +174,8 @@ const detectSlash = (e: Editor) => {
       if (el) {
         const rect = el.getBoundingClientRect();
         slashPos.value = {
-          x: rect.left + 40,
-          y: rect.top + window.scrollY + 24,
+          x: rect.left + UiRichEditorSlashPosition.X,
+          y: rect.top + window.scrollY + UiRichEditorSlashPosition.Y,
         };
       }
     });
@@ -226,13 +198,13 @@ const pickSlash = (cmd: CommandItem) => {
 // ---------- AI Panel ----------
 const aiOpen = ref(false);
 const aiLoading = ref(false);
-const aiAction = ref<AiAction>("rewrite");
-const aiTone = ref<Tone>("neutral");
-const aiLength = ref<Length>("medium");
-const aiLanguage = ref<Language>("English");
+const aiAction = ref<UiRichEditorAiAction>("rewrite");
+const aiTone = ref<UiRichEditorTone>("neutral");
+const aiLength = ref<UiRichEditorLength>("medium");
+const aiLanguage = ref<UiRichEditorLanguage>("English");
 const aiResult = ref("");
 
-const openAiPanel = (action: AiAction, _e?: Editor) => {
+const openAiPanel = (action: UiRichEditorAiAction, _e?: Editor) => {
   aiAction.value = action;
   aiOpen.value = true;
   aiResult.value = "";
@@ -243,8 +215,8 @@ const openAiPanel = (action: AiAction, _e?: Editor) => {
     if (el) {
       const rect = el.getBoundingClientRect();
       aiPopupPos.value = {
-        x: rect.right - 340,
-        y: rect.top + window.scrollY + 20,
+        x: rect.right - UiRichEditorAiPanelPosition.X,
+        y: rect.top + window.scrollY + UiRichEditorAiPanelPosition.Y,
       };
     }
   });
@@ -269,7 +241,7 @@ const runAi = async () => {
     sel.text.trim() ||
     editor.value.state.doc
       .textBetween(0, editor.value.state.doc.content.size, "\n")
-      .slice(0, 2000);
+      .slice(0, UiRichEditorMaxTextLength);
   aiLoading.value = true;
   try {
     const handler = props.aiHandler ?? mockAiHandler;
@@ -317,13 +289,13 @@ const copyToClipboard = async () => {
 };
 
 const mockAiHandler = async (req: {
-  action: AiAction;
+  action: UiRichEditorAiAction;
   text: string;
-  tone?: Tone;
-  length?: Length;
-  language?: Language;
+  tone?: UiRichEditorTone;
+  length?: UiRichEditorLength;
+  language?: UiRichEditorLanguage;
 }) => {
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise(r => setTimeout(r, UiRichEditorAiDelay));
   return `[${req.action}] ${req.text}`;
 };
 
@@ -340,58 +312,36 @@ const escapeHtml = (s: string) =>
       class="flex flex-wrap items-center gap-2 p-2 border-b border-white/10 bg-white/5"
     >
       <button
-        v-for="btn in [
-          {
-            name: 'bold',
-            icon: 'B',
-            cmd: () => editor?.chain().focus().toggleBold().run(),
+        v-for="btn in UiRichEditorToolbarButtons.map(b => ({
+          name: b.name,
+          icon: b.icon,
+          cmd: () => {
+            switch (b.name) {
+              case 'bold':
+                return editor?.chain().focus().toggleBold().run();
+              case 'italic':
+                return editor?.chain().focus().toggleItalic().run();
+              case 'underline':
+                return editor?.chain().focus().toggleUnderline().run();
+              case 'strike':
+                return editor?.chain().focus().toggleStrike().run();
+              case 'bulletList':
+                return editor?.chain().focus().toggleBulletList().run();
+              case 'orderedList':
+                return editor?.chain().focus().toggleOrderedList().run();
+              case 'blockquote':
+                return editor?.chain().focus().toggleBlockquote().run();
+              case 'codeBlock':
+                return editor?.chain().focus().toggleCodeBlock().run();
+              case 'undo':
+                return editor?.chain().focus().undo().run();
+              case 'redo':
+                return editor?.chain().focus().redo().run();
+              default:
+                return;
+            }
           },
-          {
-            name: 'italic',
-            icon: 'I',
-            cmd: () => editor?.chain().focus().toggleItalic().run(),
-          },
-          {
-            name: 'underline',
-            icon: 'U',
-            cmd: () => editor?.chain().focus().toggleUnderline().run(),
-          },
-          {
-            name: 'strike',
-            icon: 'S',
-            cmd: () => editor?.chain().focus().toggleStrike().run(),
-          },
-          {
-            name: 'bulletList',
-            icon: '•',
-            cmd: () => editor?.chain().focus().toggleBulletList().run(),
-          },
-          {
-            name: 'orderedList',
-            icon: '1.',
-            cmd: () => editor?.chain().focus().toggleOrderedList().run(),
-          },
-          {
-            name: 'blockquote',
-            icon: '❝',
-            cmd: () => editor?.chain().focus().toggleBlockquote().run(),
-          },
-          {
-            name: 'codeBlock',
-            icon: '</>',
-            cmd: () => editor?.chain().focus().toggleCodeBlock().run(),
-          },
-          {
-            name: 'undo',
-            icon: '↺',
-            cmd: () => editor?.chain().focus().undo().run(),
-          },
-          {
-            name: 'redo',
-            icon: '↻',
-            cmd: () => editor?.chain().focus().redo().run(),
-          },
-        ]"
+        }))"
         :key="btn.name"
         @click="runCmd(btn.cmd)"
         class="px-2 py-1 rounded text-sm font-medium transition"
@@ -567,16 +517,19 @@ const escapeHtml = (s: string) =>
 .prose p {
   margin: 0 0 0.5rem;
 }
+
 .prose pre {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   overflow-x: auto;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.15s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
