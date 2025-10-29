@@ -7,7 +7,6 @@ import type {
 } from "./UiLogConsole.type";
 import {
   UiLogConsoleLogLevels,
-  UiLogConsoleMessages,
   UiLogConsoleDefaultValues,
 } from "./UiLogConsole.type";
 
@@ -92,9 +91,7 @@ const toggle = (lvl: UiLogConsoleLogLevel): void => {
         >
         <span class="text-gray-200">{{ log.message }}</span>
       </div>
-      <div v-if="!show.length" class="p-4 text-gray-500 text-sm">
-        {{ UiLogConsoleMessages.NoLogsText }}
-      </div>
+      <div v-if="!show.length" class="p-4 text-gray-500 text-sm">No Logs</div>
     </div>
   </div>
 </template>

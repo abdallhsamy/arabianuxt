@@ -3,10 +3,9 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 import UiFileViewer from "~/components/Ui/Dev/UiFileViewer/UiFileViewer.vue";
 import UiJsonInspector from "~/components/Ui/Dev/UiJsonInspector/UiJsonInspector.vue";
 import UiDiffViewer from "~/components/Ui/Dev/UiDiffViewer/UiDiffViewer.vue";
-import UiLogConsole, {
-  type UiLogConsoleLogItem,
-} from "~/components/Ui/Dev/UiLogConsole/UiLogConsole.vue";
+import UiLogConsole from "~/components/Ui/Dev/UiLogConsole/UiLogConsole.vue";
 import UiTerminalShell from "~/components/Ui/Dev/UiTerminalShell.vue";
+import type { UiLogConsoleLogItem } from "~/components/Ui/Dev/UiLogConsole/UiLogConsole.type";
 
 definePageMeta({
   middleware: "auth",
