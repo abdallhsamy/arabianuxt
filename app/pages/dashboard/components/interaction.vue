@@ -4,7 +4,7 @@ import UiFileUploadAdvanced from "~/components/Ui/Form/UiFileUploadAdvanced/UiFi
 import UiDateRangePicker from "~/components/Ui/Form/UiDateRangePicker/UiDateRangePicker.vue";
 import UiSearchPanel from "~/components/Ui/Nav/UiSearchPanel/UiSearchPanel.vue";
 import UiChatDock from "~/components/Ui/Assist/UiChatDock/UiChatDock.vue";
-import UiTooltip from "~/components/Ui/Feedback/UiTooltip.vue";
+import UiTooltip from "~/components/Ui/Common/UiTooltip/UiTooltip.vue";
 
 definePageMeta({
   middleware: "auth",
@@ -54,10 +54,11 @@ const items = [
     <UiTooltip
       class="ms-4"
       :text="t('pages.componentInteraction.tooltipExample')"
-      ><span class="underline cursor-help">{{
-        t("pages.componentInteraction.hoverMe")
-      }}</span></UiTooltip
     >
+      <span class="underline cursor-help">
+        {{ t("pages.componentInteraction.hoverMe") }}
+      </span>
+    </UiTooltip>
 
     <UiSearchPanel v-model="searchOpen" :items="items" />
     <UiChatDock />

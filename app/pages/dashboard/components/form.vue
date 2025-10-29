@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { reactive } from "vue";
-
 import UiFormField from "~/components/Ui/Form/UiFormField/UiFormField.vue";
 import UiInput from "~/components/Ui/Form/UiInput/UiInput.vue";
 import UiTextarea from "~/components/Ui/Form/UiTextarea/UiTextarea.vue";
@@ -8,7 +7,7 @@ import UiSelect from "~/components/Ui/Form/UiSelect/UiSelect.vue";
 import UiSelectMulti from "~/components/Ui/Form/UiSelectMulti/UiSelectMulti.vue";
 import UiCheckbox from "~/components/Ui/Form/UiCheckbox/UiCheckbox.vue";
 import UiRadio from "~/components/Ui/Form/UiRadio/UiRadio.vue";
-import UiSwitch from "~/components/Ui/Form/UiSwitch/UiSwitch.vue";
+import UiSwitch from "~/components/Ui/Common/UiSwitch/UiSwitch.vue";
 import UiDatePicker from "~/components/Ui/Form/UiDatePicker/UiDatePicker.vue";
 import UiSlider from "~/components/Ui/Form/UiSlider/UiSlider.vue";
 
