@@ -1,15 +1,10 @@
 <script setup lang="ts">
-export interface UiStatsCardProps {
-  label: string;
-  value: string | number;
-  delta?: number;
-  hint?: string;
-}
+import { UiStatsCardDefaults, type UiStatsCardProps } from "./UiStatsCard.type";
 
-const props = withDefaults(defineProps<UiStatsCardProps>(), {
-  delta: 0,
-  hint: "",
-});
+const props = withDefaults(
+  defineProps<UiStatsCardProps>(),
+  UiStatsCardDefaults
+);
 </script>
 
 <template>
