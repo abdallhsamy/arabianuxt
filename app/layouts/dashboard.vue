@@ -3,6 +3,7 @@ import Sidebar from "~/components/Layout/Sidebar/Sidebar.vue";
 import Topbar from "~/components/Layout/Topbar/Topbar.vue";
 import { useI18n } from "vue-i18n";
 import { LanguageDirections } from "~~/i18n/config";
+import UiChatFloating from "~/components/Ui/Chat/UiChatFloating/UiChatFloating.vue";
 
 const route = useRoute();
 const { locale, t } = useI18n();
