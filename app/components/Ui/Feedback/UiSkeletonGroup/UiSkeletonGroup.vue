@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref, watch, nextTick } from "vue";
+import type {
+  UiSkeletonGroupProps,
+  UiSkeletonGroupEmits,
+} from "./UiSkeletonGroup.type";
+import { UiSkeletonGroupDefaultValues } from "./UiSkeletonGroup.type";
 
-export interface UiSkeletonGroupProps {
-  loading: boolean;
-  fadeDuration?: number;
-}
-
-const props = withDefaults(defineProps<UiSkeletonGroupProps>(), {
-  fadeDuration: 350,
-});
+const props = withDefaults(
+  defineProps<UiSkeletonGroupProps>(),
+  UiSkeletonGroupDefaultValues
+);
 
 const isVisible = ref(props.loading);
 
@@ -28,7 +29,7 @@ watch(
   { immediate: true }
 );
 
-const emit = defineEmits<{ (e: "loaded"): void }>();
+const emit = defineEmits<UiSkeletonGroupEmits>();
 
 watch(isVisible, v => {
   if (!v) emit("loaded");
@@ -67,6 +68,7 @@ watch(isVisible, v => {
 .fade-leave-active {
   transition: opacity 0.35s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
