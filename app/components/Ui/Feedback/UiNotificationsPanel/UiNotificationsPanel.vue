@@ -1,26 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import type {
+  UiNotificationsPanelProps,
+  UiNotificationsPanelEmits,
+} from "./UiNotificationsPanel.type";
 
-export interface Notice {
-  id: string;
-  title: string;
-  body?: string;
-  time?: string;
-  read?: boolean;
-}
+const props = defineProps<UiNotificationsPanelProps>();
 
-const props = defineProps<{
-  modelValue: boolean;
-  items: Notice[];
-  title?: string;
-}>();
-
-const emit = defineEmits<{
-  (e: "update:modelValue", v: boolean): void;
-  (e: "select", v: Notice): void;
-  (e: "mark-all-read"): void;
-  (e: "clear-all"): void;
-}>();
+const emit = defineEmits<UiNotificationsPanelEmits>();
 
 const close = (): void => emit("update:modelValue", false);
 
