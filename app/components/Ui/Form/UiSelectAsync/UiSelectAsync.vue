@@ -1,30 +1,31 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-export interface Option {
-  label: string;
-  value: string | number;
-}
-export interface UiSelectAsyncProps {
-  modelValue: string | number | null;
-  fetcher: (q: string) => Promise<Option[]>;
-  placeholder?: string;
-}
-const props = withDefaults(defineProps<UiSelectAsyncProps>(), {
-  placeholder: "Search…",
-});
-const emit = defineEmits<{
-  (e: "update:modelValue", v: string | number | null): void;
-}>();
+import type {
+  UiSelectAsyncProps,
+  UiSelectAsyncEmits,
+  UiSelectAsyncOption,
+} from "./UiSelectAsync.type";
+import { UiSelectAsyncDefaultValues } from "./UiSelectAsync.type";
+
+const props = withDefaults(
+  defineProps<UiSelectAsyncProps>(),
+  UiSelectAsyncDefaultValues
+);
+
+const emit = defineEmits<UiSelectAsyncEmits>();
+
 const q = ref("");
 const open = ref(false);
 const loading = ref(false);
-const options = ref<Option[]>([]);
+const options = ref<UiSelectAsyncOption[]>([]);
+
 watch(q, async v => {
   loading.value = true;
   options.value = await props.fetcher(v);
   loading.value = false;
 });
-const choose = (opt: Option): void => {
+
+const choose = (opt: UiSelectAsyncOption): void => {
   emit("update:modelValue", opt.value);
   open.value = false;
 };
