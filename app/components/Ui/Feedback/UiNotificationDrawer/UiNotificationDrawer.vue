@@ -1,18 +1,17 @@
 <script setup lang="ts">
-export interface Notice {
-  id: string;
-  title: string;
-  body?: string;
-  time?: string;
-}
-export interface UiNotificationDrawerProps {
-  modelValue: boolean;
-  items?: Notice[];
-}
-const props = withDefaults(defineProps<UiNotificationDrawerProps>(), {
-  items: () => [],
-});
-const emit = defineEmits<{ (e: "update:modelValue", v: boolean): void }>();
+import type {
+  UiNotificationDrawerProps,
+  UiNotificationDrawerEmits,
+} from "./UiNotificationDrawer.type";
+import { UiNotificationDrawerDefaultValues } from "./UiNotificationDrawer.type";
+
+const props = withDefaults(
+  defineProps<UiNotificationDrawerProps>(),
+  UiNotificationDrawerDefaultValues
+);
+
+const emit = defineEmits<UiNotificationDrawerEmits>();
+
 const close = (): void => emit("update:modelValue", false);
 </script>
 
