@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { Chart, PieController, ArcElement, Tooltip, Legend } from "chart.js";
+import type { UiChartPieProps } from "./UiChartPie.type";
 
 Chart.register(PieController, ArcElement, Tooltip, Legend);
-
-export interface UiChartPieProps {
-  labels: string[];
-  values: number[];
-  colors?: string[];
-}
 
 const props = defineProps<UiChartPieProps>();
 const canvas = ref<HTMLCanvasElement>();
