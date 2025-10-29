@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import UiFileViewer from "~/components/Ui/Dev/UiFileViewer.vue";
-import UiJsonInspector from "~/components/Ui/Dev/UiJsonInspector.vue";
-import UiDiffViewer from "~/components/Ui/Dev/UiDiffViewer.vue";
+import UiFileViewer from "~/components/Ui/Dev/UiFileViewer/UiFileViewer.vue";
+import UiJsonInspector from "~/components/Ui/Dev/UiJsonInspector/UiJsonInspector.vue";
+import UiDiffViewer from "~/components/Ui/Dev/UiDiffViewer/UiDiffViewer.vue";
 import UiLogConsole, {
-  type LogItem,
-} from "~/components/Ui/Dev/UiLogConsole.vue";
+  type UiLogConsoleLogItem,
+} from "~/components/Ui/Dev/UiLogConsole/UiLogConsole.vue";
 import UiTerminalShell from "~/components/Ui/Dev/UiTerminalShell.vue";
 
 definePageMeta({
@@ -15,8 +15,11 @@ definePageMeta({
 
 const { t } = useI18n();
 
-const logs = ref<LogItem[]>([]);
-const pushLog = (level: LogItem["level"], message: string): void => {
+const logs = ref<UiLogConsoleLogItem[]>([]);
+const pushLog = (
+  level: UiLogConsoleLogItem["level"],
+  message: string
+): void => {
   logs.value = [
     ...logs.value,
     { id: crypto.randomUUID(), ts: Date.now(), level, message },

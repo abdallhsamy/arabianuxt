@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const sliderSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiSlider.vue",
+  component: "Ui/Form/UiSlider/UiSlider.vue",
   title: "Slider",
   props: [
     { key: "modelValue", type: "number", default: 50 },

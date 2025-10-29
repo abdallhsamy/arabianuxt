@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const fileUploadSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiFileUpload.vue",
+  component: "Ui/Form/UiFileUpload/UiFileUpload.vue",
   title: "File Upload",
   props: [
     { key: "accept", type: "string", default: "image/*" },

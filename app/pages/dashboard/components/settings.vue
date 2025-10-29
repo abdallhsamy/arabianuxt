@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import UiNotificationsPanel, {
   type Notice,
-} from "~/components/Ui/Feedback/UiNotificationsPanel.vue";
+} from "~/components/Ui/Feedback/UiNotificationsPanel/UiNotificationsPanel.vue";
 import UiSettingsDrawer from "~/components/Ui/Layout/UiSettingsDrawer/UiSettingsDrawer.vue";
 import UiThemeSwitcher from "~/components/Ui/Layout/UiThemeSwitcher/UiThemeSwitcher.vue";
 

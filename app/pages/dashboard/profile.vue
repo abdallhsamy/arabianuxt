@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import AvatarUpload from "~/components/Ui/User/AvatarUpload.vue";
+import AvatarUpload from "~/components/Ui/User/AvatarUpload/AvatarUpload.vue";
 
 definePageMeta({
   middleware: "auth",

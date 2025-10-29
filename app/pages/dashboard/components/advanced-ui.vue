@@ -5,10 +5,10 @@ import UiRating from "~/components/Ui/Core/UiRating/UiRating.vue";
 import UiGridLayout from "~/components/Ui/Layout/UiGridLayout/UiGridLayout.vue";
 import UiSectionHeader from "~/components/Ui/Layout/UiSectionHeader/UiSectionHeader.vue";
 import UiContainer from "~/components/Ui/Layout/UiContainer/UiContainer.vue";
-import UiDiffSideBySide from "~/components/Ui/Dev/UiDiffSideBySide.vue";
-import UiPromptHistory from "~/components/Ui/Dev/UiPromptHistory.vue";
-import UiAgentCard from "~/components/Ui/Dev/UiAgentCard.vue";
-import UiApiConsole from "~/components/Ui/Dev/UiApiConsole.vue";
+import UiDiffSideBySide from "~/components/Ui/Dev/UiDiffSideBySide/UiDiffSideBySide.vue";
+import UiPromptHistory from "~/components/Ui/Dev/UiPromptHistory/UiPromptHistory.vue";
+import UiAgentCard from "~/components/Ui/Dev/UiAgentCard/UiAgentCard.vue";
+import UiApiConsole from "~/components/Ui/Dev/UiApiConsole/UiApiConsole.vue";
 
 import { ref } from "vue";
 

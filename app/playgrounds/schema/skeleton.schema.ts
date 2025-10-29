@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const skeletonSchema: PlaygroundSchema = {
-  component: "Ui/Feedback/UiSkeleton.vue",
+  component: "Ui/Feedback/UiSkeleton/UiSkeleton.vue",
   title: "Skeleton",
   props: [
     {

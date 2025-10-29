@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import IncidentsTimeline from "~/components/Ui/Security/IncidentsTimeline.vue";
+import IncidentsTimeline from "~/components/Ui/Security/IncidentsTimeline/IncidentsTimeline.vue";
 import { ref, onMounted, nextTick, onUnmounted } from "vue";
 import Chart from "chart.js/auto";
 import { Activity, PieChart, Clock, Zap } from "lucide-vue-next";

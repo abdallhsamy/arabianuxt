@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const richEditorSchema: PlaygroundSchema = {
-  component: "Ui/Editor/UiRichEditor.vue",
+  component: "Ui/Editor/UiRichEditor/UiRichEditor.vue",
   title: "Rich Editor",
   props: [
     {

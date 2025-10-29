@@ -50,26 +50,26 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
     import("~/components/Ui/Common/UiButton/UiButton.vue"),
   "Ui/Common/UiCard/UiCard.vue": () =>
     import("~/components/Ui/Common/UiCard/UiCard.vue"),
-  "Ui/Charts/UiChartArea.vue": () =>
-    import("~/components/Ui/Charts/UiChartArea.vue"),
+  "Ui/Charts/UiChartArea/UiChartArea.vue": () =>
+    import("~/components/Ui/Charts/UiChartArea/UiChartArea.vue"),
   "Ui/Charts/UiChartBar/UiChartBar.vue": () =>
     import("~/components/Ui/Charts/UiChartBar/UiChartBar.vue"),
-  "Ui/Charts/UiChartPie.vue": () =>
-    import("~/components/Ui/Charts/UiChartPie.vue"),
+  "Ui/Charts/UiChartPie/UiChartPie.vue": () =>
+    import("~/components/Ui/Charts/UiChartPie/UiChartPie.vue"),
   "Ui/Form/UiCheckbox/UiCheckbox.vue": () =>
     import("~/components/Ui/Form/UiCheckbox/UiCheckbox.vue"),
   "Ui/Feedback/UiConfirmDialog/UiConfirmDialog.vue": () =>
     import("~/components/Ui/Feedback/UiConfirmDialog/UiConfirmDialog.vue"),
-  "Ui/Form/UiDatePicker.vue": () =>
-    import("~/components/Ui/Form/UiDatePicker.vue"),
+  "Ui/Form/UiDatePicker/UiDatePicker.vue": () =>
+    import("~/components/Ui/Form/UiDatePicker/UiDatePicker.vue"),
   "Ui/Display/UiDivider/UiDivider.vue": () =>
     import("~/components/Ui/Display/UiDivider/UiDivider.vue"),
   "Ui/Common/UiDropdown/UiDropdown.vue": () =>
     import("~/components/Ui/Common/UiDropdown/UiDropdown.vue"),
   "Ui/Display/UiEmptyState/UiEmptyState.vue": () =>
     import("~/components/Ui/Display/UiEmptyState/UiEmptyState.vue"),
-  "Ui/Form/UiFileUpload.vue": () =>
-    import("~/components/Ui/Form/UiFileUpload.vue"),
+  "Ui/Form/UiFileUpload/UiFileUpload.vue": () =>
+    import("~/components/Ui/Form/UiFileUpload/UiFileUpload.vue"),
   "Ui/Form/UiInput/UiInput.vue": () =>
     import("~/components/Ui/Form/UiInput/UiInput.vue"),
   "Ui/Display/UiLoaderSpinner/UiLoaderSpinner.vue": () =>
@@ -84,13 +84,14 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
     import("~/components/Ui/Form/UiRadio/UiRadio.vue"),
   "Ui/Core/UiRating/UiRating.vue": () =>
     import("~/components/Ui/Core/UiRating/UiRating.vue"),
-  "Ui/Editor/UiRichEditor.vue": () =>
-    import("~/components/Ui/Editor/UiRichEditor.vue"),
+  "Ui/Editor/UiRichEditor/UiRichEditor.vue": () =>
+    import("~/components/Ui/Editor/UiRichEditor/UiRichEditor.vue"),
   "Ui/Form/UiSelect/UiSelect.vue": () =>
     import("~/components/Ui/Form/UiSelect/UiSelect.vue"),
-  "Ui/Feedback/UiSkeleton.vue": () =>
-    import("~/components/Ui/Feedback/UiSkeleton.vue"),
-  "Ui/Form/UiSlider.vue": () => import("~/components/Ui/Form/UiSlider.vue"),
+  "Ui/Feedback/UiSkeleton/UiSkeleton.vue": () =>
+    import("~/components/Ui/Feedback/UiSkeleton/UiSkeleton.vue"),
+  "Ui/Form/UiSlider/UiSlider.vue": () =>
+    import("~/components/Ui/Form/UiSlider/UiSlider.vue"),
   "Ui/Common/UiStepper/UiStepper.vue": () =>
     import("~/components/Ui/Common/UiStepper/UiStepper.vue"),
   "Ui/Common/UiSwitch/UiSwitch.vue": () =>
@@ -99,7 +100,8 @@ const componentMap: Record<string, () => Promise<{ default: Component }>> = {
     import("~/components/Ui/Data/UiTable/UiTable.vue"),
   "Ui/Common/UiTabs/UiTabs.vue": () =>
     import("~/components/Ui/Common/UiTabs/UiTabs.vue"),
-  "Ui/Form/UiTagInput.vue": () => import("~/components/Ui/Form/UiTagInput.vue"),
+  "Ui/Form/UiTagInput/UiTagInput.vue": () =>
+    import("~/components/Ui/Form/UiTagInput/UiTagInput.vue"),
   "Ui/Form/UiTextarea/UiTextarea.vue": () =>
     import("~/components/Ui/Form/UiTextarea/UiTextarea.vue"),
   "Ui/Layout/UiThemeSwitcher/UiThemeSwitcher.vue": () =>

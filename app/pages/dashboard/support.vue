@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
 import DataTable from "~/components/Ui/Common/DataTable/DataTable.vue";
-import TicketModal from "~/components/Ui/Support/TicketModal.vue";
+import TicketModal from "~/components/Ui/Support/TicketModal/TicketModal.vue";
 import { Clock } from "lucide-vue-next";
 import { useI18n } from "vue-i18n";
 

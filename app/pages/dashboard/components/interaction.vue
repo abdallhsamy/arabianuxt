@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import UiFileUploadAdvanced from "~/components/Ui/Form/UiFileUploadAdvanced.vue";
-import UiDateRangePicker from "~/components/Ui/Form/UiDateRangePicker.vue";
+import UiFileUploadAdvanced from "~/components/Ui/Form/UiFileUploadAdvanced/UiFileUploadAdvanced.vue";
+import UiDateRangePicker from "~/components/Ui/Form/UiDateRangePicker/UiDateRangePicker.vue";
 import UiSearchPanel from "~/components/Ui/Nav/UiSearchPanel/UiSearchPanel.vue";
 import UiChatDock from "~/components/Ui/Assist/UiChatDock/UiChatDock.vue";
 import UiTooltip from "~/components/Ui/Feedback/UiTooltip.vue";

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import UiChartArea from "~/components/Ui/Charts/UiChartArea.vue";
+import UiChartArea from "~/components/Ui/Charts/UiChartArea/UiChartArea.vue";
 import UiChartBar from "~/components/Ui/Charts/UiChartBar/UiChartBar.vue";
-import UiChartPie from "~/components/Ui/Charts/UiChartPie.vue";
-import UiChartRadar from "~/components/Ui/Charts/UiChartRadar.vue";
-import UiStatsOverview from "~/components/Ui/Charts/UiStatsOverview.vue";
+import UiChartPie from "~/components/Ui/Charts/UiChartPie/UiChartPie.vue";
+import UiChartRadar from "~/components/Ui/Charts/UiChartRadar/UiChartRadar.vue";
+import UiStatsOverview from "~/components/Ui/Charts/UiStatsOverview/UiStatsOverview.vue";
 
 definePageMeta({
   middleware: "auth",

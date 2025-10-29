@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const chartPieSchema: PlaygroundSchema = {
-  component: "Ui/Charts/UiChartPie.vue",
+  component: "Ui/Charts/UiChartPie/UiChartPie.vue",
   title: "Pie Chart",
   props: [
     {

@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const tagInputSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiTagInput.vue",
+  component: "Ui/Form/UiTagInput/UiTagInput.vue",
   title: "Tag Input",
   props: [
     { key: "modelValue", type: "string", default: '["tag1", "tag2"]' },

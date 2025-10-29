@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watchEffect } from "vue";
-import UiSkeleton from "~/components/Ui/Feedback/UiSkeleton.vue";
-import UiSkeletonGroup from "~/components/Ui/Feedback/UiSkeletonGroup.vue";
+import UiSkeleton from "~/components/Ui/Feedback/UiSkeleton/UiSkeleton.vue";
+import UiSkeletonGroup from "~/components/Ui/Feedback/UiSkeletonGroup/UiSkeletonGroup.vue";
 
 definePageMeta({
   middleware: "auth",

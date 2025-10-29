@@ -1,7 +1,7 @@
 import type { PlaygroundSchema } from "~/components/Ui/Playground/UiPlayground.type";
 
 export const datePickerSchema: PlaygroundSchema = {
-  component: "Ui/Form/UiDatePicker.vue",
+  component: "Ui/Form/UiDatePicker/UiDatePicker.vue",
   title: "Date Picker",
   props: [
     { key: "modelValue", type: "string", default: "" },

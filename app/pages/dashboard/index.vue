@@ -3,23 +3,23 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 // Stats
-import UiStatsCard from "~/components/Ui/Stats/UiStatsCard.vue";
-import UiWidgetContainer from "~/components/Ui/Stats/UiWidgetContainer.vue";
+import UiStatsCard from "~/components/Ui/Stats/UiStatsCard/UiStatsCard.vue";
+import UiWidgetContainer from "~/components/Ui/Stats/UiWidgetContainer/UiWidgetContainer.vue";
 
 // Charts
 import UiChartLine from "~/components/Ui/Charts/UiChartLine/UiChartLine.vue";
 import UiChartBar from "~/components/Ui/Charts/UiChartBar/UiChartBar.vue";
-import UiChartDonut from "~/components/Ui/Charts/UiChartDonut.vue";
+import UiChartDonut from "~/components/Ui/Charts/UiChartDonut/UiChartDonut.vue";
 
 // Forms
-import UiFileUpload from "~/components/Ui/Form/UiFileUpload.vue";
-import UiSelectAsync from "~/components/Ui/Form/UiSelectAsync.vue";
-import UiTagInput from "~/components/Ui/Form/UiTagInput.vue";
+import UiFileUpload from "~/components/Ui/Form/UiFileUpload/UiFileUpload.vue";
+import UiSelectAsync from "~/components/Ui/Form/UiSelectAsync/UiSelectAsync.vue";
+import UiTagInput from "~/components/Ui/Form/UiTagInput/UiTagInput.vue";
 
 // Feedback
 import UiToastAdvanced from "~/components/Ui/Feedback/UiToastAdvanced/UiToastAdvanced.vue";
-import UiNotificationDrawer from "~/components/Ui/Feedback/UiNotificationDrawer.vue";
-import UiCommandPalette from "~/components/Ui/Nav/UiCommandPalette.vue";
+import UiNotificationDrawer from "~/components/Ui/Feedback/UiNotificationDrawer/UiNotificationDrawer.vue";
+import UiCommandPalette from "~/components/Ui/Nav/UiCommandPalette/UiCommandPalette.vue";
 
 import UiBreadcrumb from "~/components/Ui/Nav/UiBreadcrumb/UiBreadcrumb.vue";
 import UiPagination from "~/components/Ui/Nav/UiPagination/UiPagination.vue";

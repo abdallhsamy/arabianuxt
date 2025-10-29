@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiRichEditor from "~/components/Ui/Editor/UiRichEditor.vue";
+import UiRichEditor from "~/components/Ui/Editor/UiRichEditor/UiRichEditor.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 

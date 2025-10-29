@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import MetricMini from "~/components/Ui/Charts/MetricMini.vue";
+import MetricMini from "~/components/Ui/Charts/MetricMini/MetricMini.vue";
 import GradientCard from "~/components/Ui/Common/GradientCard/GradientCard.vue";
 
 definePageMeta({
