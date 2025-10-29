@@ -84,7 +84,7 @@ export const UiRichEditorToolbarButtons = [
 export type CommandItem = {
   label: string;
   description: string;
-  action: (e: any) => void;
+  action: (e: never) => void;
 };
 
 export type UiRichEditorProps = {
