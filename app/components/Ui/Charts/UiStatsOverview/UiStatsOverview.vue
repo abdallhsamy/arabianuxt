@@ -1,27 +1,29 @@
 <script setup lang="ts">
-export interface StatItem {
-  label: string;
-  value: string | number;
-  icon?: string;
-  color?: "fuchsia" | "cyan" | "emerald" | "amber" | "rose";
-  change?: string;
-}
+import {
+  UiStatsOverviewColors,
+  type UiStatsOverviewProps,
+} from "./UiStatsOverview.type";
 
-const props = defineProps<{ stats: StatItem[] }>();
+defineProps<UiStatsOverviewProps>();
 </script>
 
 <template>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     <div
-      v-for="s in props.stats"
+      v-for="s in stats"
       :key="s.label"
       class="rounded-xl border border-white/10 bg-gradient-to-br p-4 backdrop-blur-xl"
       :class="{
-        'from-fuchsia-500/20 to-cyan-500/10': s.color === 'fuchsia',
-        'from-cyan-500/20 to-teal-500/10': s.color === 'cyan',
-        'from-emerald-500/20 to-green-500/10': s.color === 'emerald',
-        'from-amber-500/20 to-orange-500/10': s.color === 'amber',
-        'from-rose-500/20 to-pink-500/10': s.color === 'rose',
+        'from-fuchsia-500/20 to-cyan-500/10':
+          s.color === UiStatsOverviewColors.Fuchsia,
+        'from-cyan-500/20 to-teal-500/10':
+          s.color === UiStatsOverviewColors.Cyan,
+        'from-emerald-500/20 to-green-500/10':
+          s.color === UiStatsOverviewColors.Emerald,
+        'from-amber-500/20 to-orange-500/10':
+          s.color === UiStatsOverviewColors.Amber,
+        'from-rose-500/20 to-pink-500/10':
+          s.color === UiStatsOverviewColors.Rose,
       }"
     >
       <div class="flex justify-between items-start">
