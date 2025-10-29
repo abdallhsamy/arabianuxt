@@ -1,29 +1,20 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import type { UiSliderProps, UiSliderEmits } from "./UiSlider.type";
+import {
+  UiSliderDefaultValues,
+  UiSliderPercentageLimits,
+} from "./UiSlider.type";
 
-export interface UiSliderProps {
-  modelValue: number;
-  min?: number;
-  max?: number;
-  step?: number;
-  showValue?: boolean;
-  disabled?: boolean;
-}
+const props = withDefaults(defineProps<UiSliderProps>(), UiSliderDefaultValues);
 
-const props = withDefaults(defineProps<UiSliderProps>(), {
-  min: 0,
-  max: 100,
-  step: 1,
-  showValue: true,
-  disabled: false,
-});
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits<UiSliderEmits>();
 
 const pct = computed(() =>
   Math.max(
-    0,
+    UiSliderPercentageLimits.Min,
     Math.min(
-      100,
+      UiSliderPercentageLimits.Max,
       ((props.modelValue - props.min) / (props.max - props.min)) * 100
     )
   )
