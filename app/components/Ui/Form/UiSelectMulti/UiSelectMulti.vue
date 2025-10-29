@@ -1,31 +1,18 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { X, ChevronDown, Check, Search } from "lucide-vue-next";
+import type {
+  UiSelectMultiProps,
+  UiSelectMultiEmits,
+} from "./UiSelectMulti.type";
+import { UiSelectMultiDefaultValues } from "./UiSelectMulti.type";
 
-export interface Option {
-  label: string;
-  value: string | number;
-}
+const props = withDefaults(
+  defineProps<UiSelectMultiProps>(),
+  UiSelectMultiDefaultValues
+);
 
-export interface UiSelectMultiProps {
-  modelValue: Array<string | number> | null | undefined;
-  options: Option[];
-  label?: string;
-  placeholder?: string;
-  searchable?: boolean;
-  disabled?: boolean;
-  size?: "sm" | "md" | "lg";
-}
-
-const props = withDefaults(defineProps<UiSelectMultiProps>(), {
-  searchable: true,
-  disabled: false,
-  size: "md",
-});
-
-const emit = defineEmits<{
-  (e: "update:modelValue", v: Array<string | number>): void;
-}>();
+const emit = defineEmits<UiSelectMultiEmits>();
 
 const isOpen = ref(false);
 const search = ref("");
@@ -59,6 +46,7 @@ const filtered = computed(() =>
 const toggleOpen = (): void => {
   if (!props.disabled) isOpen.value = !isOpen.value;
 };
+
 const close = (): void => {
   isOpen.value = false;
 };
@@ -68,6 +56,7 @@ const clickOutside = (e: MouseEvent): void => {
   const t = e.target as Node;
   if (!triggerRef.value.contains(t) && !dropdownRef.value.contains(t)) close();
 };
+
 onMounted(() => document.addEventListener("click", clickOutside));
 onBeforeUnmount(() => document.removeEventListener("click", clickOutside));
 
@@ -199,6 +188,7 @@ const shouldFloat = computed<boolean>(
 .fade-leave-active {
   transition: all 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
