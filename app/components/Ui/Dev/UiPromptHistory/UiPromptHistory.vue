@@ -1,24 +1,22 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
+import type { UiPromptHistoryPrompt } from "./UiPromptHistory.type";
+import { UiPromptHistoryStorageKey } from "./UiPromptHistory.type";
 
-interface Prompt {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-  ts: number;
-}
-
-const key = "ui_prompt_history";
-const history = ref<Prompt[]>([]);
+const history = ref<UiPromptHistoryPrompt[]>([]);
 
 onMounted(() => {
-  const stored = localStorage.getItem(key);
+  const stored = localStorage.getItem(UiPromptHistoryStorageKey);
   if (stored) history.value = JSON.parse(stored);
 });
 
-watch(history, v => localStorage.setItem(key, JSON.stringify(v)), {
-  deep: true,
-});
+watch(
+  history,
+  v => localStorage.setItem(UiPromptHistoryStorageKey, JSON.stringify(v)),
+  {
+    deep: true,
+  }
+);
 
 const clear = () => (history.value = []);
 </script>
