@@ -1,25 +1,26 @@
 <script setup lang="ts">
 import { ref } from "vue";
-export interface UiFileUploadProps {
-  accept?: string;
-  multiple?: boolean;
-  maxSizeMb?: number;
-}
-const props = withDefaults(defineProps<UiFileUploadProps>(), {
-  accept: "",
-  multiple: true,
-  maxSizeMb: 10,
-});
-const emit = defineEmits<{
-  (e: "files", v: File[]): void;
-  (e: "error", v: string): void;
-}>();
+import type { UiFileUploadProps, UiFileUploadEmits } from "./UiFileUpload.type";
+import {
+  UiFileUploadDefaultValues,
+  UiFileUploadBytesPerMB,
+} from "./UiFileUpload.type";
+
+const props = withDefaults(
+  defineProps<UiFileUploadProps>(),
+  UiFileUploadDefaultValues
+);
+
+const emit = defineEmits<UiFileUploadEmits>();
+
 const hovering = ref(false);
 
 const onFiles = (list: FileList | null): void => {
   if (!list) return;
   const files = Array.from(list);
-  const tooBig = files.find(f => f.size > props.maxSizeMb * 1024 * 1024);
+  const tooBig = files.find(
+    f => f.size > props.maxSizeMb * UiFileUploadBytesPerMB
+  );
   if (tooBig) {
     emit("error", `File too big: ${tooBig.name}`);
     return;
