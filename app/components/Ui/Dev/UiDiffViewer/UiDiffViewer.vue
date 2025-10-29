@@ -1,25 +1,17 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import {
+  type UiDiffViewerProps,
+  type DiffLine,
+  UiDiffViewerLineTypes,
+  UiDiffViewerDiffSymbols,
+} from "./UiDiffViewer.type";
+import { UiDiffViewerDefaultValues } from "./UiDiffViewer.type";
 
 const props = withDefaults(
-  defineProps<{
-    before?: string;
-    after?: string;
-    showLineNumbers?: boolean;
-  }>(),
-  {
-    before: "",
-    after: "",
-    showLineNumbers: true,
-  }
+  defineProps<UiDiffViewerProps>(),
+  UiDiffViewerDefaultValues
 );
-
-type DiffLine = {
-  type: "ctx" | "add" | "del";
-  text: string;
-  a?: number;
-  b?: number;
-};
 
 // naive LCS-free line matcher (fast & simple for UI diffs)
 const diff = computed<DiffLine[]>(() => {
@@ -32,17 +24,26 @@ const diff = computed<DiffLine[]>(() => {
     bi = 1;
   while (i < a.length || j < b.length) {
     if (i < a.length && j < b.length && a[i] === b[j]) {
-      out.push({ type: "ctx", text: a[i] || "", a: ai++, b: bi++ });
+      out.push({
+        type: UiDiffViewerLineTypes.Context,
+        text: a[i] || "",
+        a: ai++,
+        b: bi++,
+      });
       i++;
       j++;
     } else if (
       j < b.length &&
       (i >= a.length || !a.slice(i, i + 3).includes(b[j] || ""))
     ) {
-      out.push({ type: "add", text: b[j] || "", b: bi++ });
+      out.push({ type: UiDiffViewerLineTypes.Add, text: b[j] || "", b: bi++ });
       j++;
     } else if (i < a.length) {
-      out.push({ type: "del", text: a[i] || "", a: ai++ });
+      out.push({
+        type: UiDiffViewerLineTypes.Delete,
+        text: a[i] || "",
+        a: ai++,
+      });
       i++;
     }
   }
@@ -72,12 +73,19 @@ const diff = computed<DiffLine[]>(() => {
           v-if="showLineNumbers"
           class="inline-block w-12 text-right pr-2 opacity-60"
         >
-          {{ d.a ?? "" }}{{ d.a != null || d.b != null ? "|" : ""
-          }}{{ d.b ?? "" }}
+          {{ d.a ?? "" }}
+          {{ d.a != null || d.b != null ? "|" : "" }}
+          {{ d.b ?? "" }}
         </span>
-        <span class="opacity-60">{{
-          d.type === "add" ? "+" : d.type === "del" ? "-" : " "
-        }}</span>
+        <span class="opacity-60">
+          {{
+            d.type === UiDiffViewerLineTypes.Add
+              ? UiDiffViewerDiffSymbols.Add
+              : d.type === UiDiffViewerLineTypes.Delete
+                ? UiDiffViewerDiffSymbols.Delete
+                : UiDiffViewerDiffSymbols.Context
+          }}
+        </span>
         <span class="ms-2">{{ d.text }}</span>
       </div>
     </div>
