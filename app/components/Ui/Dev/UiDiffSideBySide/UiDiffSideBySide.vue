@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import type { UiDiffSideBySideProps } from "./UiDiffSideBySide.type";
 
-defineProps<{ left: string; right: string }>();
+defineProps<UiDiffSideBySideProps>();
 
 const leftRef = ref<HTMLPreElement>();
 const rightRef = ref<HTMLPreElement>();
