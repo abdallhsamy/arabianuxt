@@ -1,48 +1,27 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { type UiSkeletonProps, UiSkeletonVariants } from "./UiSkeleton.type";
+import {
+  UiSkeletonDefaultValues,
+  UiSkeletonIntensityAlphas,
+} from "./UiSkeleton.type";
 
-export type SkeletonVariant =
-  | "text"
-  | "circle"
-  | "rect"
-  | "avatar"
-  | "card"
-  | "button";
-
-export type SkeletonAnimation = "shimmer" | "pulse" | false;
-
-export interface UiSkeletonProps {
-  variant?: SkeletonVariant;
-  width?: string | number;
-  height?: string | number;
-  radius?: string | number;
-  animation?: SkeletonAnimation;
-  speed?: number | string;
-  lines?: number;
-  intensity?: "subtle" | "medium" | "strong";
-}
-
-const props = withDefaults(defineProps<UiSkeletonProps>(), {
-  variant: "text",
-  width: "100%",
-  radius: undefined,
-  animation: "shimmer",
-  speed: undefined,
-  lines: 1,
-  intensity: "medium",
-});
+const props = withDefaults(
+  defineProps<UiSkeletonProps>(),
+  UiSkeletonDefaultValues
+);
 
 /* Variant-based defaults */
 const variantDefaults = computed(() => {
   switch (props.variant) {
-    case "circle":
-    case "avatar":
+    case UiSkeletonVariants.Circle:
+    case UiSkeletonVariants.Avatar:
       return { height: props.width ?? "3rem", radius: "9999px" };
-    case "button":
+    case UiSkeletonVariants.Button:
       return { height: "2.5rem", radius: "0.375rem" };
-    case "card":
+    case UiSkeletonVariants.Card:
       return { height: "10rem", radius: "0.75rem" };
-    case "rect":
+    case UiSkeletonVariants.Rect:
       return { height: props.height ?? "4rem" };
     default:
       return { height: "1rem" };
@@ -71,13 +50,13 @@ const style = computed(() => ({
 const intensityAlpha = computed(() => {
   switch (props.intensity) {
     case "subtle":
-      return 0.05;
+      return UiSkeletonIntensityAlphas.Subtle;
     case "medium":
-      return 0.1;
+      return UiSkeletonIntensityAlphas.Medium;
     case "strong":
-      return 0.2;
+      return UiSkeletonIntensityAlphas.Strong;
     default:
-      return 0.1;
+      return UiSkeletonIntensityAlphas.Medium;
   }
 });
 
@@ -120,6 +99,7 @@ const classes = computed(() => {
     background-position: 200% 0;
   }
 }
+
 .animate-skeleton-shimmer {
   background-image: linear-gradient(
     90deg,
@@ -130,6 +110,7 @@ const classes = computed(() => {
   background-size: 200% 100%;
   animation: skeleton-shimmer var(--skeleton-speed, 1.6s) infinite linear;
 }
+
 @keyframes skeleton-pulse {
   0%,
   100% {
@@ -139,6 +120,7 @@ const classes = computed(() => {
     opacity: 0.4;
   }
 }
+
 .animate-skeleton-pulse {
   animation: skeleton-pulse var(--skeleton-speed, 1.6s) ease-in-out infinite;
 }
